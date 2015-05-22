@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="bottom" >
+
+    <LinearLayout
+        android:id="@+id/llBottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:weightSum="1" >
+
+        <LinearLayout
+            android:id="@+id/llBottomMyKnot"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".25"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/imViewKnot"
+                android:layout_width="23dp"
+                android:layout_height="27dp"
+                android:background="@drawable/my_knot_icon" />
+
+            <TextView
+                android:id="@+id/tvKnot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="My knot"
+                android:textColor="#000" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#9c9c9c" />
+
+        <LinearLayout
+            android:id="@+id/llBottomVendors"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".25"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/imViewVendors"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/vendors_icon" />
+
+            <TextView
+                android:id="@+id/tvVendor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vendors"
+                android:textColor="#000" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#9c9c9c" />
+
+        <LinearLayout
+            android:id="@+id/llBottomInbox"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".25"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/imViewInbox"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/inbox_icon" />
+
+            <TextView
+                android:id="@+id/tvInbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Inbox"
+                android:textColor="#000" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#9c9c9c" />
+
+        <LinearLayout
+            android:id="@+id/llBottomInspiration"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".25"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/imViewInspiration"
+                android:layout_width="18dp"
+                android:layout_height="30dp"
+                android:background="@drawable/inspire_icon" />
+
+            <TextView
+                android:id="@+id/tvInspire"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Inspiration"
+                android:textColor="#000" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_above="@+id/llBottomBar"
+        android:background="#9c9c9c" />
+
+</RelativeLayout>
