@@ -71,6 +71,12 @@ class UserResource(ModelResource):
     def login(self, request, **kwargs):
         self.method_check(request, allowed=['post'])
         data = request.POST
+        if not data and request.body:
+            try:
+                data = self.deserialize(request, request.body, format='application/json')
+            except Exception:
+                data = eval(request.body)
+        
         username = data.get('username', '')
         password = data.get('password', '')
         
