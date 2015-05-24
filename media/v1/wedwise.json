@@ -5,7 +5,7 @@
     "description": "Move your app forward with the Uber API",
     "version": "1.0.0"
   },
-  "host": "127.0.0.1:8002",
+  "host": "wedwise.work",
   "schemes": [
     "http"
   ],
