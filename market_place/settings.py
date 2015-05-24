@@ -10,6 +10,8 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from django.conf.global_settings import MEDIA_ROOT
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -23,6 +25,12 @@ SECRET_KEY = '#y6yf6cezo#wsrj3y5qdl+u(_4whm1*^!x0blxn%r^a9^%bx8c'
 DEBUG = True
 
 TEMPLATE_DEBUG = True
+
+TEMPLATE_DIRS = (
+    os.path.join(os.path.dirname(__file__), '..','templates').replace('\\', '/'),
+)
+
+MEDIA_PATH= os.path.join(BASE_DIR, "media")
 
 ALLOWED_HOSTS = []
 
@@ -87,3 +95,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+
+TASTYPIE_DEFAULT_FORMATS = ['json']
