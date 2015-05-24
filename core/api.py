@@ -41,10 +41,10 @@ class UserResource(ModelResource):
         object_class = User
         queryset = User.objects.all()
         resource_name = 'user'
-        authorization = Authorization()
+#         authorization = Authorization()
         allowed_methods = ['get','post', 'delete', 'put']
         
-        excludes = ['password', 'is_staff', 'is_superuser']
+        excludes = ['is_staff', 'is_superuser']
         filtering = {
             'username': ALL,
         }
@@ -70,12 +70,10 @@ class UserResource(ModelResource):
 
     def login(self, request, **kwargs):
         self.method_check(request, allowed=['post'])
-
-        data = self.deserialize(request, request.raw_post_data, format=request.META.get('CONTENT_TYPE', 'application/json'))
-
+        data = request.POST
         username = data.get('username', '')
         password = data.get('password', '')
-
+        
         user = authenticate(username=username, password=password)
         if user:
             if user.is_active:
