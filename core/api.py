@@ -41,10 +41,10 @@ class UserResource(ModelResource):
         object_class = User
         queryset = User.objects.all()
         resource_name = 'user'
-#         authorization = Authorization()
+        authorization = Authorization()
         allowed_methods = ['get','post', 'delete', 'put']
         
-        excludes = ['is_staff', 'is_superuser']
+        excludes = ['is_staff', 'is_superuser', 'password']
         filtering = {
             'username': ALL,
         }
