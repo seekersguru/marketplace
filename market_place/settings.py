@@ -69,9 +69,9 @@ WSGI_APPLICATION = 'market_place.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'market2',
+        'NAME': 'marketplace',
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': 'yoku2010',
         'HOST': 'localhost',
         'PORT': '3306',
     }
