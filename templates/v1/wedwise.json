@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Uber API",
-    "description": "Move your app forward with the Uber API",
+    "title": "Wedwise API",
+    "description": "",
     "version": "1.0.0"
   },
   "host": "{{request.META.HTTP_HOST}}",
@@ -27,47 +27,52 @@
     },
     "/user/": {
       "post": {
-        "summary": "summary",
-        "description": "description",
+        "tags": [
+          "user"
+        ],
+        "summary": "Create user",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "createUser",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
         "parameters": [
           {
-            "name": "first_name",
-            "in": "formData",
-            "description": "First Name",
-            "type": "string"
-          },
-          {
-            "name": "last_name",
-            "in": "formData",
-            "description": "Last Name",
-            "type": "string"
-          },
-          {
-            "name": "username",
-            "in": "formData",
-            "description": "User Name",
-            "type": "string"
-          },
-          {
-            "name": "email",
-            "in": "formData",
-            "description": "Email",
-            "type": "string"
-          },
-          {
-            "name": "password",
-            "in": "formData",
-            "description": "Password",
-            "type": "string"
+            "in": "body",
+            "name": "body",
+            "description": "Created user object",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "201": {
-            "description": "User Added"
+          "default": {
+            "description": "successful operation"
           }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "properties": {
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
         }
       }
     }
