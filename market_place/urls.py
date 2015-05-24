@@ -19,6 +19,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/', include(v1_api.urls)),
     url(r'^test-api/$', TemplateView.as_view(template_name='index.html')),
+    url(r'^wedwise-apis/$', TemplateView.as_view(template_name='v1/wedwise.json')),
 #     url(r'^media/(?P<path>.*)', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve',{'document_root': MEDIA_PATH}),
 #     url(r'^api/', include(category_resource.urls)),
