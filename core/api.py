@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.conf.urls import url
-from core.models import Category, Vendor, UserMember, VendorField, Fields
+from core.models import Category, Vendor, VendorUser, VendorField, Fields
 
 
 class CategoryResource(ModelResource):
@@ -106,13 +106,13 @@ class UserResource(ModelResource):
         else:
             return self.create_response(request, { 'success': False }, HttpUnauthorized)
                 
-class UserMemberResource(ModelResource):
+class VendorUserResource(ModelResource):
     user = fields.ForeignKey(UserResource, 'user')
     vendor = fields.ForeignKey(VendorResource, 'vendor')
     
     class Meta:
-        queryset = UserMember.objects.all()
-        resource_name = 'usermember'
+        queryset = VendorUser.objects.all()
+        resource_name = 'vendoruser'
         
 
 class FieldsResource(ModelResource):

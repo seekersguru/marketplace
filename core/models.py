@@ -1,10 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
+from Crypto.Random.random import choice
 
 class Category(models.Model):
     name = models.CharField(max_length=250)
-#     key = models.CharField(max_length=250)
-#     image = models.ImageField()
+    key = models.CharField(max_length=250)
+    image = models.ImageField(upload_to='media/vendor_image/')
 
     def __unicode__(self):
         return self.name 
@@ -15,16 +16,17 @@ class Vendor(models.Model):
     contact_number = models.CharField(max_length=50)    
     address = models.TextField()
     email = models.EmailField()
-    users = models.ManyToManyField(User, through='UserMember', related_name='people')
+    category = models.ForeignKey(Category)
     
     def __unicode__(self):
         return self.name    
 
 
-class UserMember(models.Model):
-    user = models.ForeignKey(User)
+class VendorUser(models.Model):
+    CHOICES_VENDOR_ROLE=[('Owner', 'Owner'), ('Admin','Admin'), ('Reception','Reception')]
     vendor = models.ForeignKey(Vendor)
-    role = models.CharField(max_length=100)
+    user = models.ForeignKey(User)
+    role = models.CharField(max_length=100, choice=CHOICES_VENDOR_ROLE)
     
     def __unicode__(self):
         return "%s belong to vendor %s (as %s)" % (self.user, self.vendor, self.role)

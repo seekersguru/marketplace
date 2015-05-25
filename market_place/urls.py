@@ -3,7 +3,7 @@ from django.contrib import admin
 from settings import MEDIA_PATH
 
 from tastypie.api import Api
-from core.api import CategoryResource, UserResource, VendorResource, VendorFieldResource, UserMemberResource, FieldsResource
+from core.api import CategoryResource, UserResource, VendorResource, VendorFieldResource, VendorUserResource, FieldsResource
 from django.views.generic import TemplateView
 
 v1_api = Api(api_name='v1')
@@ -11,7 +11,7 @@ v1_api.register(UserResource())
 v1_api.register(CategoryResource())
 v1_api.register(VendorResource())
 v1_api.register(VendorFieldResource())
-v1_api.register(UserMemberResource())
+v1_api.register(VendorUserResource())
 v1_api.register(FieldsResource())
 # category_resource = CategoryResource()
 
