@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from Crypto.Random.random import choice
+
 
 class Category(models.Model):
     name = models.CharField(max_length=250)
@@ -26,7 +26,7 @@ class VendorUser(models.Model):
     CHOICES_VENDOR_ROLE=[('Owner', 'Owner'), ('Admin','Admin'), ('Reception','Reception')]
     vendor = models.ForeignKey(Vendor)
     user = models.ForeignKey(User)
-    role = models.CharField(max_length=100, choice=CHOICES_VENDOR_ROLE)
+    role = models.CharField(max_length=100, choices=CHOICES_VENDOR_ROLE)
     
     def __unicode__(self):
         return "%s belong to vendor %s (as %s)" % (self.user, self.vendor, self.role)

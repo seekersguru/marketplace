@@ -17,6 +17,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(max_length=250)),
+                ('key', models.CharField(max_length=250)),
+                ('image', models.ImageField(upload_to=b'media/vendor_image/')),
             ],
             options={
             },
@@ -36,17 +38,6 @@ class Migration(migrations.Migration):
             bases=(models.Model,),
         ),
         migrations.CreateModel(
-            name='UserMember',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('role', models.CharField(max_length=100)),
-                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
-            ],
-            options={
-            },
-            bases=(models.Model,),
-        ),
-        migrations.CreateModel(
             name='Vendor',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
@@ -54,7 +45,7 @@ class Migration(migrations.Migration):
                 ('contact_number', models.CharField(max_length=50)),
                 ('address', models.TextField()),
                 ('email', models.EmailField(max_length=75)),
-                ('users', models.ManyToManyField(related_name=b'people', through='core.UserMember', to=settings.AUTH_USER_MODEL)),
+                ('category', models.ForeignKey(to='core.Category')),
             ],
             options={
             },
@@ -64,16 +55,23 @@ class Migration(migrations.Migration):
             name='VendorField',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('fields', models.ForeignKey(to='core.Fields', null=True)),
                 ('vendor', models.ForeignKey(related_name=b'membership', to='core.Vendor')),
             ],
             options={
             },
             bases=(models.Model,),
         ),
-        migrations.AddField(
-            model_name='usermember',
-            name='vendor',
-            field=models.ForeignKey(to='core.Vendor'),
-            preserve_default=True,
+        migrations.CreateModel(
+            name='VendorUser',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('role', models.CharField(max_length=100, choices=[(b'Owner', b'Owner'), (b'Admin', b'Admin'), (b'Reception', b'Reception')])),
+                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
+                ('vendor', models.ForeignKey(to='core.Vendor')),
+            ],
+            options={
+            },
+            bases=(models.Model,),
         ),
     ]
