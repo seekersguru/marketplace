@@ -3,3 +3,4 @@
 server
 .project
 .pydevproject
+market_place/database_settings.py
