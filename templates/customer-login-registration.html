@@ -1,0 +1,42 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static %}
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />{% endblock %}
+
+{% block coltype %}colMS{% endblock %}
+
+{% block bodyclass %}{{ block.super }} dashboard{% endblock %}
+
+{# {% block breadcrumbs %}{% endblock %} #}
+
+{% block content %}
+<div id="content-main">
+
+  <div id='header'>
+    <div class="swagger-ui-wrap">
+      <a id="logo" href="http://{{request.META.HTTP_HOST}}/">Wedwise</a>
+    </div>
+  </div>
+
+  <div id="message-bar" class="swagger-ui-wrap">&nbsp;
+
+  </div>
+  <div id="swagger-ui-container" class="swagger-ui-wrap">
+    
+    <ul>
+    <li><strong>Login | Register screen</strong></li>
+    <li><img src="/media/images/designs/customer_login_register/SIGN UP_FB_GMail.jpg"><br/><br/><br/></li>
+    <li><strong>When signup with fb or g+ , email and passowrd will be saved and in session but rest details will be asked , or we can autofill readonly email, contacts </strong></li>
+    <li> <img src="/media/images/designs/customer_login_register/SIGN UP-Without-email.jpg"><br/><br/><br/></li>
+    <li><strong>When normal sign up. </strong></li>
+    <li> <img src="/media/images/designs/customer_login_register/SIGN UP.jpg"><br/><br/><br/></li>
+     <li><strong>Login Screen </strong></li>
+    <li> <img src="/media/images/designs/customer_login_register/lgoin.jpg"><br/><br/><br/></li>
+    <li><strong>Forgot Password and rest password same, but pick input boxes  and buttons from above. </strong></li>
+    <li> <img src="/media/images/designs/customer_login_register/forgot-password.jpg"></li>
+  </ul>
+  </div>
+</div>
+{% endblock %}
+</body>
+</html>
