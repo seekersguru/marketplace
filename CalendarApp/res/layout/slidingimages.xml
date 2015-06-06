@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f1f1f1"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp" >
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/back"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:text="Back"
+            android:textColor="#fff"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:layout_width="90dp"
+            android:layout_height="65dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/logo"
+            android:contentDescription="@string/open" />
+
+        <Button
+            android:id="@+id/btnContactUs"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/contactus" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#9c9c9c" />
+
+    <!--
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:layout_gravity="top" />
+
+    <com.viewpagerindicator.CirclePageIndicator
+        android:id="@+id/indicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    -->
+
+    <com.calendar.util.HorizontalListView
+        android:id="@+id/lvSlidingImages"
+        android:layout_width="match_parent"
+        android:layout_height="180dp" >
+    </com.calendar.util.HorizontalListView>
+
+      <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="left|center_vertical"
+        android:singleLine="true"
+        android:textColor="#000"
+        android:textSize="18sp" />
+    
+    <TextView
+        android:id="@+id/img_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp"
+        android:gravity="left|top"
+        android:maxLength="620"
+        android:singleLine="false"
+        android:textColor="#000"
+        android:textSize="16sp" />
+
+</LinearLayout>
