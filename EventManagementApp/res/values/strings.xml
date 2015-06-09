@@ -20,8 +20,8 @@
     <string name="title_messages">Messages</string>
     <string name="title_friends">Friends</string>
     <string name="title_home">Home</string>
-    
-  <!--   
+    <string name="txtForgotPassword">Forgot Password?</string>
+    <!--
     Calendar
     <string name="customize">Customize</string>
     <string name="show_dialog">Show Dialog</string>
@@ -50,5 +50,7 @@
         <item>Oct</item>
         <item>Nov</item>
         <item>DEC</item>
-    </string-array> -->
+    </string-array>
+    -->
+
 </resources>

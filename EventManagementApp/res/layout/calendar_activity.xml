@@ -16,12 +16,12 @@
 
         <Button
             android:id="@+id/btnBack"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="21dp"
+            android:layout_height="22dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:background="@drawable/arrow_back" />
+            android:background="@drawable/arrow_back_orange" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -39,7 +39,8 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:background="@drawable/mail_icon" />
+            android:background="@drawable/mail_icon"
+            android:visibility="gone" />
     </RelativeLayout>
 
     <LinearLayout
@@ -87,18 +88,11 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:background="#EDECEA"
+        android:background="#fff"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:weightSum="1" >
-
-        <!--
-     android:paddingBottom="8dp"
-        android:paddingLeft="12dp"
-        android:paddingRight="12dp"
-        android:paddingTop="8dp"
-        -->
-
+<!-- #EDECEA -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"

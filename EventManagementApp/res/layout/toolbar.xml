@@ -19,11 +19,11 @@
 
         <Button
             android:id="@+id/btnBack"
-            android:layout_width="21dp"
-            android:layout_height="22dp"
+            android:layout_width="@dimen/btnBackWidth"
+            android:layout_height="@dimen/btnBackHeight"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="@dimen/marginleftBackButton"
             android:background="@drawable/back_arrow_header" />
 
         <TextView
@@ -31,11 +31,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="@dimen/marginleftToolbarText"
             android:layout_toRightOf="@+id/btnBack"
             android:singleLine="true"
             android:textColor="#ffffff"
-            android:textSize="18dp" />
+            android:textSize="@dimen/textSizeMedium" />
     </RelativeLayout>
     <!--
     android:popupTheme="@android:style/ThemeOverlay.Material.Light"
@@ -48,10 +48,10 @@
 
     <ImageView
         android:id="@+id/imView"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="@dimen/menuIconDimension"
+        android:layout_height="@dimen/menuIconDimension"
         android:layout_gravity="end"
-        android:layout_marginRight="5dp"
+        android:layout_marginRight="@dimen/marginleftBackButton"
         android:background="@drawable/menu_icon"
         android:visibility="gone" />
 

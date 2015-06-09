@@ -24,10 +24,10 @@
                 android:layout_marginLeft="15dp" >
 
                 <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="20dp"
+                    android:layout_height="25dp"
                     android:layout_centerInParent="true"
-                    android:background="@drawable/arrow_left_roboto" />
+                    android:background="@drawable/left_arrow" />
             </RelativeLayout>
 
             <TextView
@@ -46,10 +46,10 @@
                 android:layout_marginRight="15dp" >
 
                 <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="20dp"
+                    android:layout_height="25dp"
                     android:layout_centerInParent="true"
-                    android:background="@drawable/arrow_right_roboto" />
+                    android:background="@drawable/right_arrow" />
             </RelativeLayout>
         </RelativeLayout>
 

@@ -47,11 +47,18 @@
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@style/FullBleedTheme"
+            android:windowSoftInputMode="adjustResize" >
         </activity>
         <activity
             android:name=".ForgotPasswordActivity"
             android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".MessageTabActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTabTheme" >
         </activity>
         <!--
              <meta-data

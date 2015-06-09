@@ -21,7 +21,7 @@
         <item name="android:textColorPrimary">@color/myTextPrimaryColor</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
         <item name="android:windowBackground">@color/myWindowBackground</item>
-    </style>
+    </style>
     -->
 
     <style name="MyTheme" parent="@android:style/Theme.Material.Light.DarkActionBar">
@@ -35,12 +35,12 @@
         <item name="android:colorPrimaryDark">#1976D2</item>
         <!--
          colorAccent is used as the default value for colorControlActivated
-         which is used to tint widgets
+         which is used to tint widgets
         -->
         <item name="android:colorAccent">#FF4081</item>
         <!--
          You can also set colorControlNormal, colorControlActivated
-         colorControlHighlight and colorSwitchThumbNormal.
+         colorControlHighlight and colorSwitchThumbNormal.
         -->
     </style>
 
@@ -148,19 +148,19 @@
         <item name="android:padding">5dp</item>
     </style>
 
-    <style name="CaldroidDefaultDarkSquareCell" parent="CaldroidDefaultDarkCell" />
+    <style name="CaldroidDefaultDarkSquareCell" parent="CaldroidDefaultDarkCell" />
     -->
 
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
+            backward-compatibility can go here.
         -->
     </style>
 
@@ -177,6 +177,11 @@
     <style name="ToolBarStyle" parent="">
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
         <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+    </style>
+
+    <style name="AppTabTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/ColorPrimary</item>
+        <item name="colorPrimaryDark">@color/ColorPrimaryDark</item>
     </style>
 
 </resources>

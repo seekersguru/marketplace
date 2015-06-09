@@ -2,6 +2,7 @@ package com.eventmanagementapp.calendar;
 
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -10,7 +11,10 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 
+import com.eventmanagementapp.LoginSignUpActivity;
+import com.eventmanagementapp.MessageTabActivity;
 import com.eventmanagementapp.R;
+import com.eventmanagementapp.RegistrationSignUpActivity;
 
 /**
  * Shows off the most basic usage
@@ -19,7 +23,7 @@ public class CalendarActivity extends FragmentActivity implements OnClickListene
 {
 
 	MFCalendarView mf;
-	Button btnBack,btnAdd,btnCalendar,btnMessage,btnBid,btnMenu;
+	Button btnBack,btnAdd,btnMessage;//,btnCalendar,btnMessage,btnBid,btnMenu;
 	Button btnBidTopbar;
 
 	//	@Override
@@ -47,20 +51,27 @@ public class CalendarActivity extends FragmentActivity implements OnClickListene
 		btnBack=(Button) findViewById(R.id.btnBack);
 		btnBidTopbar=(Button) findViewById(R.id.btnBidTopbar);
 		btnAdd=(Button) findViewById(R.id.btnAdd);
-		btnCalendar=(Button) findViewById(R.id.btnCalendar);
+		/*btnCalendar=(Button) findViewById(R.id.btnCalendar);
 		btnMessage=(Button) findViewById(R.id.btnMessage);
 		btnBid=(Button) findViewById(R.id.btnBid);
-		btnMenu=(Button) findViewById(R.id.btnMenu);
+		btnMenu=(Button) findViewById(R.id.btnMenu);*/
 		btnBack.setOnClickListener(this);
-		btnCalendar.setOnClickListener(this);
+		/*btnCalendar.setOnClickListener(this);
 		btnMessage.setOnClickListener(this);
 		btnBid.setOnClickListener(this);
-		btnMenu.setOnClickListener(this);
-		/*btnCalendar.setSelected(true);
-		btnMessage.setFocusable(false);
-		btnBid.setSelected(false);
-		btnMenu.setSelected(false);*/
-		btnCalendar.performClick();
+		btnMenu.setOnClickListener(this);*/
+		
+//		btnCalendar.performClick();
+		btnMessage=(Button) findViewById(R.id.btnMessage);
+		btnMessage.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent myIntent=new Intent(CalendarActivity.this,MessageTabActivity.class);
+				startActivity(myIntent);	
+				overridePendingTransition(R.anim.right_in, R.anim.left_out);	
+			}
+		});
 
 		mf.setOnCalendarViewListener(new onMFCalendarViewListener() {
 
@@ -122,7 +133,7 @@ public class CalendarActivity extends FragmentActivity implements OnClickListene
 			finish();	
 			overridePendingTransition(R.anim.right_in, R.anim.right_out);
 		}
-		else if(v.getId()==R.id.btnCalendar)
+		/*else if(v.getId()==R.id.btnCalendar)
 		{
 			btnMessage.setSelected(false);
 			btnBid.setSelected(false);
@@ -149,7 +160,7 @@ public class CalendarActivity extends FragmentActivity implements OnClickListene
 			btnMessage.setSelected(false);
 			btnBid.setSelected(false);
 			btnMenu.setSelected(true);
-		}
+		}*/
 	}
 }                                                   
 /*public class CalendarActivity extends FragmentActivity{

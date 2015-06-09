@@ -19,24 +19,24 @@ public class ForgotPasswordActivity extends FragmentActivity{
 	Toolbar toolbar;
 	EditText etEmailAddress,etPassword;
 
-	@Override
-	public void onWindowFocusChanged(boolean hasFocus) {
-		super.onWindowFocusChanged(hasFocus);
-		if (hasFocus) {
-			getWindow().getDecorView().setSystemUiVisibility(
-					View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-					| View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-					| View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-					| View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-					| View.SYSTEM_UI_FLAG_FULLSCREEN
-					| View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-		}
-	}
+//	@Override
+//	public void onWindowFocusChanged(boolean hasFocus) {
+//		super.onWindowFocusChanged(hasFocus);
+//		if (hasFocus) {
+//			getWindow().getDecorView().setSystemUiVisibility(
+//					View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+//					| View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+//					| View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+//					| View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+//					| View.SYSTEM_UI_FLAG_FULLSCREEN
+//					| View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+//		}
+//	}
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-		setTheme(android.R.style.Theme_Holo_Light_NoActionBar_TranslucentDecor);
+//		setTheme(android.R.style.Theme_Holo_Light_NoActionBar_TranslucentDecor);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.forgotpassword);	
 		toolbar=(Toolbar) findViewById(R.id.toolbar);
