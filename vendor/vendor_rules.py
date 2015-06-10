@@ -13,7 +13,10 @@ MIN_LENGTH="min_length"
 MAX_LENGTH= "max_length"
 TYPE = "type"
 VALIDATIONS = "validations"
-def widget_input(label,name,required,min_len , max_len ,validations=[]):
+HELP_TEXT="help_text"
+def widget_input(label,name,required,min_len , max_len 
+                 ,validations=[],
+                 help_text=""):
     return  {   
                 LABEL : label,
                 NAME:name,
@@ -21,7 +24,8 @@ def widget_input(label,name,required,min_len , max_len ,validations=[]):
                 MIN_LENGTH:min_len,
                 MAX_LENGTH:max_len,
                 TYPE:"input",
-                VALIDATIONS:validations
+                VALIDATIONS:validations, 
+                HELP_TEXT:help_text
             }
 
 banquet_rule=\
