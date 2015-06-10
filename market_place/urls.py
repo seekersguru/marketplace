@@ -29,7 +29,7 @@ urlpatterns = [
         'core.views.add_banquet', name='add_banquet'),
                
      url(r'^banquets/$',
-        'core.views.banquets', name='banquets'),        
+        'vendor.views.banquets', name='banquets'),        
 
     ## Designs = customer registration flow
     url(r'^customer-login-registration/$', TemplateView.as_view(template_name='customer-login-registration.html')),
