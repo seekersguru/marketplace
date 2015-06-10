@@ -1,0 +1,215 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static %}
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />{% endblock %}
+
+{% block coltype %}colMS{% endblock %}
+
+{% block bodyclass %}{{ block.super }} dashboard{% endblock %}
+
+{# {% block breadcrumbs %}{% endblock %} #}
+
+{% block content %}
+
+
+
+
+
+
+<form enctype="multipart/form-data" action="" method="post" id="user_form">
+	{% if message %}
+    <p class="alert alert-info" role="{{message_class}}">
+      {{message}}
+    </p>
+    {% endif %}
+      <div class="col-sm-9 form-fields">
+        <div class="panel panel-default form-panel">
+          <a href="#" class="form-expand">
+            <span class="glyphicon glyphicon-resize-horizontal "></span>
+          </a>
+          <div class="panel-body">
+			<fieldset class="module aligned wide">
+				<div class="form-row form-group field-username  {% if field.error%}has-error{% endif%}">
+			        <div class="widget_type__textinput">
+		                <label class="required" for="id_username">Username:</label>
+		                  <input class="form-control required" id="id_username"
+		                   maxlength="30" name="username" type="text">
+                <p class="help-block">
+                  Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only.
+                </p>
+              <p class="help-block error">This field is required.</p>
+        </div>
+      
+    
+</div>
+
+
+      
+    
+  
+    
+      
+        
+<div class="form-row form-group field-password1">
+    
+      
+        <div class="widget_type__passwordinput">
+          
+            
+            
+              
+                <label class="required" for="id_password1">Password:</label>
+              
+            
+              
+                
+                  <input class="form-control required" id="id_password1" name="password1" type="password">
+                
+              
+
+              
+
+              
+          
+        </div>
+      
+    
+</div>
+
+
+      
+    
+  
+    
+      
+        
+<div class="form-row form-group field-password2">
+    
+      
+        <div class="widget_type__passwordinput">
+          
+            
+            
+              
+                <label class="required" for="id_password2">Password confirmation:</label>
+              
+            
+              
+                
+                  <input class="form-control required" id="id_password2" name="password2" type="password">
+                
+              
+
+              
+
+              
+                <p class="help-block">
+                  Enter the same password as above, for verification.
+                </p>
+              
+          
+        </div>
+      
+    
+</div>
+
+
+      
+    
+  
+</fieldset>
+
+
+            
+            
+
+            
+<script type="text/javascript">document.getElementById("id_username").focus();</script>
+
+
+            
+            
+            
+
+            
+
+            
+                <script type="text/javascript">
+                    (function($) {
+                        $(document).ready(function() {
+                            $('form#user_form :input:visible:enabled:first').focus()
+                        });
+                    })(django.jQuery);
+                </script>
+            
+
+            
+            
+<script type="text/javascript">
+(function($) {
+    var field;
+
+
+})(django.jQuery);
+</script>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3 form-buttons">
+        <div data-spy="affix" data-offset-top="125" class="affix-top">
+          
+
+          
+            
+          
+
+          
+
+<div class="submit-row list-group">
+  
+    <button type="submit" title="Save" class="list-group-item active" name="_save">
+      <span class="glyphicon glyphicon-floppy-disk"></span>
+      <span class="text">Save</span>
+    </button>
+  
+
+  
+
+  
+    <button type="submit" class="list-group-item" title="Save and add another" name="_addanother">
+      <span class="glyphicon glyphicon-plus"></span>
+      <span class="text">Save and add another</span>
+    </button>
+  
+
+  
+    <button type="submit" class="list-group-item" title="Save and continue editing" name="_continue">
+      <span class="glyphicon glyphicon-pencil"></span>
+      <span class="text">Save and continue editing</span>
+    </button>
+  
+
+  
+</div>
+        </div>
+      </div>
+    </form>
+
+
+
+
+
+
+
+
+
+{% for key,sections in rules.iteritems  %}
+
+<br/> {{sections}}
+{% endfor %}
+
+</div>
+{% endblock %}
+</body>
+</html>

@@ -5,7 +5,22 @@
 from core.forms import BanquetForm
 from django.template.response import TemplateResponse
 from core.models import Banquet
-["name","area","plotno","city","pincode"]
+
+
+from vendor.vendor_rules import banquet_rule
+from django.views.decorators.csrf import csrf_exempt
+@csrf_exempt
+def banquets(request):
+    
+    return TemplateResponse (request,'banquets.html',
+                             {"rules":banquet_rule ,
+                             "message":"Some Message on the top ",
+                             "message_class":""
+                            }
+                             )
+
+
+
 def add_banquet(request):
     if request.method == 'GET':
         form = BanquetForm()
