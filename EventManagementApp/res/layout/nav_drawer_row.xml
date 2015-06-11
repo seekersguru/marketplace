@@ -1,26 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="45dp"
-    android:clickable="true" 
-    android:padding="5dp">
+    android:layout_height="wrap_content"
+    android:clickable="true" >
 
-    <ImageView
-        android:id="@+id/imViewMenuIcon"
-        android:layout_width="30dp"
-        android:layout_height="28dp"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="10dp" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@+id/imViewMenuIcon"
-        android:textColor="#000000"
-        android:textSize="16sp"
-        android:layout_centerVertical="true"
-        android:textStyle="bold" />
+        <ImageView
+            android:id="@+id/imViewMenuIcon"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/heightAlbumImage"
+            android:background="@drawable/img1" />
+
+        <TextView
+            android:id="@+id/tvCategoryName"
+            android:layout_width="@dimen/widthAlbumtextView"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/paddingLeftEditText"
+            android:textColor="#ffffff"
+            android:background="#F05543"
+            android:gravity="center"
+            android:text="Ankur paliwal"
+            android:layout_gravity="right|bottom"
+            android:textSize="@dimen/textSizeMedium" />
+    </FrameLayout>
 
 </RelativeLayout>

@@ -216,7 +216,7 @@ public class CalendarAdapter extends BaseAdapter {
 		llTemp.setVisibility(View.VISIBLE);*/
 
 		//MultiSelection
-		rlTemp.setBackgroundColor(Color.parseColor("#F16959"));
+		rlTemp.setBackgroundColor(Color.parseColor("#F05543"));
 		TextView tv=(TextView)view.findViewById(R.id.rlContainer).findViewById(R.id.tvDate);
 		tv.setTextColor(Color.parseColor("#ffffff"));
 

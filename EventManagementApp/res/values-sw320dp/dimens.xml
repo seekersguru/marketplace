@@ -6,8 +6,7 @@
 
     <!--
          Per the design guidelines, navigation drawers should be between 240dp and 320dp:
-         https://developer.android.com/design/patterns/navigation-drawer.html
-    -->
+         https://developer.android.com/design/patterns/navigation-drawer.html    -->
     <dimen name="navigation_drawer_width">240dp</dimen>
     <dimen name="toolbar_elevation">4dp</dimen>
 
@@ -50,11 +49,31 @@
     <dimen name="marginTopSignupButton">30dp</dimen>
     <dimen name="marginTopEditTextFields">5dp</dimen>
 
+    <!-- Calendar Screen -->
+    <dimen name="arrowNavigationWidth">12dp</dimen>
+    <dimen name="arrowNavigationHeight">20dp</dimen>
+
     <!-- Message Tab Activity -->
     <dimen name="buttonMessageWidth">33dp</dimen>
     <dimen name="buttonMessageHeight">26dp</dimen>
     <dimen name="dimenBottomBarIcons">30dp</dimen>
     <dimen name="bottomBarHeight">50dp</dimen>
     <dimen name="bottomBarDividerHeight">5dp</dimen>
+    <dimen name="attachmentIconHeight">18dp</dimen>
+    <dimen name="attachmentIconWidth">20dp</dimen>
+    <dimen name="paddingListItem">8dp</dimen>
+
+    <!-- Message Chat Screen -->
+    <dimen name="overflowMenuIconWidth">5dp</dimen>
+    <dimen name="overflowMenuIconHeight">22dp</dimen>
+    <dimen name="attachmentBlackIconHeight">22dp</dimen>
+    <dimen name="attachmentBlackIconWidth">24dp</dimen>
+    <dimen name="sendmessageIconHeight">20dp</dimen>
+    <dimen name="sendmessageIconWidth">22dp</dimen>
+    <dimen name="circleSendButtonBg">35dp</dimen>
+
+    <!-- Album Screen Activity -->
+    <dimen name="heightAlbumImage">200dp</dimen>
+    <dimen name="widthAlbumtextView">120dp</dimen>
 
 </resources>

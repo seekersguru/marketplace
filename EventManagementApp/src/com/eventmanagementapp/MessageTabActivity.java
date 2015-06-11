@@ -1,69 +1,63 @@
 package com.eventmanagementapp;
 
-import android.content.Context;
+import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
 import android.widget.Button;
 
 import com.eventmanagementapp.tab.SlidingTabLayout;
 import com.eventmanagementapp.tab.ViewPagerAdapter;
-import com.eventmanagementapp.util.SystemBarTintManager;
 
+/**
+ * Created by Edwin on 15/02/2015.
+ */
+public class MessageTabActivity extends FragmentActivity {
 
-public class MessageTabActivity extends ActionBarActivity{
+	// Declaring Your View and Variables
 
-	Context mContext;
 	Toolbar toolbar;
-	Button btnBack;
-
-	//	Toolbar toolbar;
 	ViewPager pager;
 	ViewPagerAdapter adapter;
 	SlidingTabLayout tabs;
 	CharSequence Titles[]={"Bid","Book","Message"};
 	int Numboftabs =3;
+	Button btnBack;
 
-	@Override
-	protected void onCreate(Bundle arg0) {
-		super.onCreate(arg0);
-//		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.messagetabactivity);	
-		mContext=MessageTabActivity.this;
-		/*// create our manager instance after the content view is set
-		SystemBarTintManager tintManager = new SystemBarTintManager(this);
-		// enable status bar tint
-		tintManager.setStatusBarTintEnabled(true);
-		// enable navigation bar tint
-		tintManager.setNavigationBarTintEnabled(true);
-		tintManager.setStatusBarAlpha(0.0f);
-		tintManager.setNavigationBarAlpha(0.0f);*/
-		toolbar=(Toolbar) findViewById(R.id.toolbar);
-//		btnBack=(Button) toolbar.findViewById(R.id.btnBack);
-//		btnBack=(Button) toolbar.findViewById(R.id.btnBack);
-//		btnBack.setBackgroundResource(R.drawable.arrow_back_orange);
-//		btnBack.setOnClickListener(new OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				finish();	
-//				overridePendingTransition(R.anim.right_in, R.anim.right_out);
-//			}
-//		});
-
-
-
+	@SuppressLint("NewApi") @Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		//		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.messagetabactivity);
 		// Creating The Toolbar and setting it as the Toolbar for the activity
 
-		toolbar = (Toolbar) findViewById(R.id.toolbar);
-//		toolbar.setVisibility(View.GONE);
-		setSupportActionBar(toolbar);
+		toolbar = (Toolbar) findViewById(R.id.tool_bar);
+		toolbar.setVisibility(View.GONE);
+		ActionBar actionBar = getActionBar();
+		actionBar.setDisplayShowHomeEnabled(false);
+		actionBar.setDisplayShowTitleEnabled(false);
+		LayoutInflater mInflater = LayoutInflater.from(this);
 
+		View mCustomView = mInflater.inflate(R.layout.customactionbarview, null);
+		actionBar.setCustomView(mCustomView);
+		btnBack=(Button) mCustomView.findViewById(R.id.btnBack);
+		actionBar.setDisplayShowCustomEnabled(true);
 
+		btnBack.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				finish();		
+				overridePendingTransition(R.anim.right_in, R.anim.right_out);
+			}
+		});
 		// Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
 		adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs);
 
@@ -83,9 +77,40 @@ public class MessageTabActivity extends ActionBarActivity{
 			}
 		});
 
-
-
+		// Setting the ViewPager For the SlidingTabsLayout
+		tabs.setViewPager(pager);
+		pager.setCurrentItem(2);
 	}
+
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.menu_main, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		MenuItem item= menu.findItem(R.id.action_settings);
+		item.setVisible(false);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
+
+		//noinspection SimplifiableIfStatement
+		if (id == R.id.action_settings) {
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
 	@Override
 	public void onBackPressed() {
 		super.onBackPressed();

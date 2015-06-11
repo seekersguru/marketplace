@@ -23,7 +23,7 @@ public class CalendarActivity extends FragmentActivity implements OnClickListene
 {
 
 	MFCalendarView mf;
-	Button btnBack,btnAdd,btnMessage;//,btnCalendar,btnMessage,btnBid,btnMenu;
+	Button btnBack,btnAdd,btnMail;//,btnCalendar,btnMessage,btnBid,btnMenu;
 	Button btnBidTopbar;
 
 	//	@Override
@@ -43,7 +43,7 @@ public class CalendarActivity extends FragmentActivity implements OnClickListene
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setTheme(android.R.style.Theme_Holo_Light_NoActionBar_Fullscreen);
+//		setTheme(android.R.style.Theme_Holo_Light_NoActionBar_Fullscreen);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.calendar_activity);
 
@@ -62,8 +62,8 @@ public class CalendarActivity extends FragmentActivity implements OnClickListene
 		btnMenu.setOnClickListener(this);*/
 		
 //		btnCalendar.performClick();
-		btnMessage=(Button) findViewById(R.id.btnMessage);
-		btnMessage.setOnClickListener(new OnClickListener() {
+		btnMail=(Button) findViewById(R.id.btnMail);
+		btnMail.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {

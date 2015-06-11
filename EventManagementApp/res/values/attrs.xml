@@ -47,5 +47,5 @@
             <enum name="saturday" value="7" />
         </attr>
     </declare-styleable>
-
+    
 </resources>

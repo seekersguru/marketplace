@@ -127,6 +127,7 @@ TextWatcher{
 		CustomFonts.setFontOfButton(mContext,btnPasswordReset,"fonts/GothamRnd-Book_0.otf");
 		CustomFonts.setFontOfTextView(mContext,tvLogin,"fonts/GothamRnd-Book_0.otf");
 		CustomFonts.setFontOfTextView(mContext,tvForgotPassword,"fonts/GothamRnd-Book_0.otf");
+		etEmailAddress.addTextChangedListener(this);
 		etPassword.addTextChangedListener(this);
 		etBrideName.addTextChangedListener(this);
 		etGroomName.addTextChangedListener(this);
@@ -259,7 +260,6 @@ TextWatcher{
 	public void afterTextChanged(Editable s) {
 		if(llFields.getVisibility()==View.VISIBLE)
 		{
-
 			if(btnSignIn.getText().toString().equalsIgnoreCase("Log In"))
 			{
 				if(etEmailAddress.getText().toString().trim().equals("") || etPassword.getText().toString().trim().equals(""))

@@ -12,6 +12,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.eventmanagementapp.Activities.CustomerAlbumsActivity;
 import com.eventmanagementapp.util.CustomFonts;
 
 //import com.google.android.gms.common.ConnectionResult;
@@ -104,6 +105,16 @@ OnConnectionFailedListener*/ {
 				//				startActivity(new Intent(LoginSignUpActivity.this,LoginActivity.class));
 				Intent myIntent=new Intent(LoginSignUpActivity.this,RegistrationSignUpActivity.class);
 				myIntent.putExtra("type","login");
+				startActivity(myIntent);
+				overridePendingTransition(R.anim.right_in, R.anim.left_out);
+			}
+		});
+
+		btnGoogleLogin.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent myIntent=new Intent(LoginSignUpActivity.this,CustomerAlbumsActivity.class);
 				startActivity(myIntent);
 				overridePendingTransition(R.anim.right_in, R.anim.left_out);
 			}

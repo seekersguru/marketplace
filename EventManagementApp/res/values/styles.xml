@@ -12,6 +12,7 @@
         <item name="android:windowBackground">@color/windowBackground</item>
         <item name="android:logo">@android:color/transparent</item>
     </style>
+    
 
     <!--
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
@@ -179,9 +180,9 @@
         <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
     </style>
 
-    <style name="AppTabTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <!-- <style name="AppTabTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/ColorPrimary</item>
         <item name="colorPrimaryDark">@color/ColorPrimaryDark</item>
-    </style>
+    </style> -->
 
 </resources>

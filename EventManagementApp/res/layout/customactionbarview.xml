@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:gravity="center_vertical" >
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="@dimen/btnBackWidth"
+            android:layout_height="@dimen/btnBackHeight"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/marginleftBackButton"
+            android:background="@drawable/back_orange" />
+
+        <TextView
+            android:id="@+id/tvToolBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/marginleftToolbarText"
+            android:layout_toRightOf="@+id/btnBack"
+            android:singleLine="true"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/textSizeMedium" />
+
+        <ImageView
+            android:id="@+id/imViewOverflowMenuicon"
+            android:layout_width="@dimen/overflowMenuIconWidth"
+            android:layout_height="@dimen/overflowMenuIconHeight"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+           
+            android:background="@drawable/overflow_menu"
+            android:visibility="invisible" />
+    </RelativeLayout>
+
+</LinearLayout>

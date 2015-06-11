@@ -24,8 +24,8 @@
                 android:layout_marginLeft="15dp" >
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="25dp"
+                    android:layout_width="@dimen/arrowNavigationWidth"
+                    android:layout_height="@dimen/arrowNavigationHeight"
                     android:layout_centerInParent="true"
                     android:background="@drawable/left_arrow" />
             </RelativeLayout>
@@ -46,8 +46,8 @@
                 android:layout_marginRight="15dp" >
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="25dp"
+                    android:layout_width="@dimen/arrowNavigationWidth"
+                    android:layout_height="@dimen/arrowNavigationHeight"
                     android:layout_centerInParent="true"
                     android:background="@drawable/right_arrow" />
             </RelativeLayout>

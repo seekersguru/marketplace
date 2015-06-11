@@ -57,9 +57,17 @@
         </activity>
         <activity
             android:name=".MessageTabActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTabTheme" >
+            android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name="com.eventmanagementapp.Activities.MessageChatActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.eventmanagementapp.Activities.CustomerAlbumsActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+
         <!--
              <meta-data
             android:name="com.google.android.gms.version"

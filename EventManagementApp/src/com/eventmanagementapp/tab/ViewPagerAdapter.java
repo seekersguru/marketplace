@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 /**
- * Created by Edwin on 15/02/2015.
  */
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
@@ -32,16 +31,17 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             Tab1 tab1 = new Tab1();
             return tab1;
         }
-        else if(position == 1)            // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
+        else if(position == 1) // if the position is 0 we are returning the First tab
         {
             Tab2 tab2 = new Tab2();
             return tab2;
         }
-        else
+        else             // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
         {
-        	Tab3 tab3 = new Tab3();
+            Tab3 tab3 = new Tab3();
             return tab3;
         }
+
     }
 
     // This method return the titles for the Tabs in the Tab Strip
