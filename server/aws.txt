@@ -1,2 +1,1 @@
-host for api server : 52.74.207.194
-key pair : wedwise.pem
+ssh -i wedwise.pem ubuntu@52.74.207.194
