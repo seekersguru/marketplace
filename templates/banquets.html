@@ -1,0 +1,100 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static %}
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />{% endblock %}
+
+{% block coltype %}colMS{% endblock %}
+
+{% block bodyclass %}{{ block.super }} dashboard{% endblock %}
+
+{# {% block breadcrumbs %}{% endblock %} #}
+
+{% block content %}
+
+
+
+
+
+
+<form enctype="multipart/form-data" action="" method="post" id="user_form">
+	{% if message %}
+    <p class="alert alert-info" role="{{message_class}}">
+      {{message}}
+    </p>
+    {% endif %}
+      <div class="col-sm-9 form-fields">
+        <div class="panel panel-default form-panel">
+          <a href="#" class="form-expand">
+            <span class="glyphicon glyphicon-resize-horizontal "></span>
+          </a>
+          <div class="panel-body">
+          {% for section in rules %}
+          <h2 id="timeline" class="h3">{{section.label}}</h2>
+          	{% for field in section.fields %}
+			<fieldset class="module aligned wide">
+				
+				<div class="form-row form-group field-{{field.name}}  {% if field.error%}has-error{% endif %}">
+			        <div class="widget_type__textinput">
+		                <label class="required" for="id_{{field.name}}">{{field.label}}:</label>
+		                {%ifequal field.type "input"%}
+		                  <input class="form-control required" id="id_{{field.name}}"
+		                   maxlength="30" name="{{field.name}}" type="text">
+		                {% endifequal %}   
+		                {%ifequal field.type "select"%}   
+		                   <select class="form-control required" id="id_{{field.name}}" name="{{field.name}}">
+		                   			{% for choice in field.choices  %}
+									<option value="{{choice.0}}" >{{choice.1}}</option>
+									{% endfor %}
+								</select>
+						{% endifequal %}
+		     
+ 
+					     {%ifequal field.type "checkbox"%}
+					     {% for choice in field.choices %}
+					     <p>
+					     <input type="checkbox" name="field.name" value="{{choice.0}}">{{choice.1}}
+					     </p>
+					     {% endfor %}
+					     {% endifequal %}
+		     
+		                   
+			                <p class="help-block">
+			                  {{field.help_text}}
+			                </p>
+			              {% if field.error%}<p class="help-block error">This field is required.</p>{% endif %}
+					</div>
+				</div>
+				
+			</fieldset>
+			
+			{% endfor %}
+			<hr/>
+			{% endfor %}
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-sm-3 form-buttons">
+        <div data-spy="affix" data-offset-top="125" class="affix-top">
+		<div class="submit-row list-group">
+		    <button type="submit" title="Save" class="list-group-item active" name="_save">
+		      <span class="glyphicon glyphicon-floppy-disk"></span>
+		      <span class="text">Save</span>
+		    </button>
+		  
+		    <!--  button type="submit" class="list-group-item" title="Save and add another" name="_addanother">
+		      <span class="glyphicon glyphicon-plus"></span>
+		      <span class="text">Save and add another</span>
+		    </button>
+		    <button type="submit" class="list-group-item" title="Save and continue editing" name="_continue">
+		      <span class="glyphicon glyphicon-pencil"></span>
+		      <span class="text">Save and continue editing</span>
+		    </button-->
+		</div>
+        </div>
+      </div>
+    </form>
+    
+{% endblock %}
+</body>
+</html>

@@ -1,6 +1,17 @@
+
 from django.db import models
 from django.contrib.auth.models import User
 
+#Here create Banquet Model
+class Banquet(models.Model):
+    name = models.CharField(max_length=250)
+    plotno = models.IntegerField()
+    area = models.CharField(max_length=250)
+    city = models.CharField(max_length=250)
+    pincode = models.IntegerField()
+ 
+    def __unicode__(self):
+        return self.name
 
 class Category(models.Model):
     name = models.CharField(max_length=250)
