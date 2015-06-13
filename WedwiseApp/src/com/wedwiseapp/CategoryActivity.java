@@ -1,4 +1,4 @@
-package com.wedwiseapp;
+/*package com.wedwiseapp;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -31,3 +31,4 @@ public class CategoryActivity extends Activity {
 		});
 	}
 }
+*/

@@ -1,7 +1,6 @@
 package com.wedwiseapp.login;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -16,7 +15,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.wedwiseapp.CategoryActivity;
 import com.wedwiseapp.R;
 import com.wedwiseapp.util.CustomFonts;
 import com.wedwiseapp.util.SystemBarTintManager;
@@ -149,7 +147,7 @@ public class SignUpActivity extends FragmentActivity implements TextWatcher{
 				{
 
 				}
-				startActivity(new Intent(SignUpActivity.this, CategoryActivity.class));
+//				startActivity(new Intent(SignUpActivity.this, CategoryActivity.class));
 				overridePendingTransition(R.anim.right_in, R.anim.left_out);
 			}
 		});
