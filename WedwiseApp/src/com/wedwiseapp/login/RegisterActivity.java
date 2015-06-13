@@ -12,7 +12,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.wedwiseapp.R;
+import com.example.wedwiseapp.R;
 
 public class RegisterActivity extends FragmentActivity {
 	Button btnFBLogin,btnGoogleLogin,btnSignUp,btnLogin;

@@ -11,6 +11,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
+import com.example.wedwiseapp.R;
+
 public class SubListCategoryActivity extends FragmentActivity {
 	ListView lvSubCategory;
 	VendorListByCategory adapterSubList;

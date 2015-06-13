@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
 
+import com.example.wedwiseapp.R;
 import com.wedwiseapp.login.RegisterActivity;
 import com.wedwiseapp.util.PreferenceUtil;
 

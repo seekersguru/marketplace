@@ -15,7 +15,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.wedwiseapp.R;
+import com.example.wedwiseapp.R;
 import com.wedwiseapp.util.CustomFonts;
 import com.wedwiseapp.util.SystemBarTintManager;
 

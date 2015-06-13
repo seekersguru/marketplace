@@ -1,9 +1,5 @@
 package com.wedwiseapp.login;
 
-import com.wedwiseapp.R;
-import com.wedwiseapp.util.CustomFonts;
-import com.wedwiseapp.util.SystemBarTintManager;
-
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -17,6 +13,10 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.wedwiseapp.R;
+import com.wedwiseapp.util.CustomFonts;
+import com.wedwiseapp.util.SystemBarTintManager;
 
 public class LoginActivity extends FragmentActivity implements TextWatcher{
 
