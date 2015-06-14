@@ -1,0 +1,303 @@
+<div class="row marketing">
+<button type="button" ng-click="addItem()" class="btn btn-sm btn-success">
+              <i class="glyphicon glyphicon-plus">
+              </i> Add Order
+  </button>
+
+ <table st-table="orderCollection" class="table table-striped">
+
+  <thead>
+
+  <tr>
+    <th rowspan="2">Name</th>
+    <th colspan="3">Type</th>
+    <th colspan="3">Shift</th>
+    <th colspan="2">People</th>
+    <th colspan="2">price</th>
+    <th  colspan="4">Menu</th>
+    <th colspan="2">Action</th>
+  
+  </tr>
+  
+  <tr>
+    <th>Veg</th>
+    <th>Non Veg</th>
+    <th>jainokey</th>
+    <th>Morning</th>
+    <th>Evening</th>
+    <th>Night</th>
+    <th>Min</th>
+    <th>Max</th>
+    <th>Quoted</th>
+    <th>Min</th>
+    <th>Name</th>
+    <th>Quantity</th>
+    <th>Options</th>
+    <th>Example</th>
+    <!-- <th>View</th> -->
+    <th>Edit</th>
+    <th>Delete</th>
+  </tr>
+ 
+  </thead>
+  <tbody>
+  <tr ng-repeat="(key,row) in orderCollection">
+
+    <td>{{row.name}}</td>
+  
+    <td>
+         <span ng-show="row.type == 'Veg'" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+ 
+         <span ng-hide="row.type == 'Veg'" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+
+     </td>
+
+    <td>
+         <span ng-show="row.type == 'Non Veg'" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+
+         <span ng-hide="row.type == 'Non Veg'" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+    </td>
+   
+    <td>
+         <span ng-show="row.type == 'Jainokey'" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+
+         <span ng-hide="row.type == 'Jainokey'" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+
+    </td>
+
+    <td>
+
+         <span ng-show="row.shift.indexOf('Morning')> -1" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+ 
+         <span ng-hide="row.shift.indexOf('Morning') > -1 " class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+
+    </td>
+   
+    <td>
+         <span ng-show="row.shift.indexOf('Evening')> -1" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+ 
+         <span ng-hide="row.shift.indexOf('Evening') > -1" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+
+    </td>
+    <td>
+         <span ng-show="row.shift.indexOf('Night')> -1" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+ 
+         <span ng-hide="row.shift.indexOf('Night')> -1" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+
+    </td>
+
+    <td>{{row.minpeople}}</td>
+    <td>{{row.maxpeople}}</td>
+
+    <td>{{row.quoatedprice |  currency:"&#8377;"}}</td>
+    <td>{{row.minprice |  currency:"&#8377;"}}</td>
+      <td colspan="4">
+        <table class="table">
+        <tbody>
+          <tr ng-repeat="menu in row.menus | filter:{status:true}">
+            <td>{{menu.name}}</td>
+            <td> <span class="badge">{{menu.quantity}} </span></td>
+            <td>
+              <p ng-repeat="(key,option) in menu.options" >
+              {{ $index+1 }}) {{ option }}
+              </p>
+            </td>
+            <td>{{menu.example}}</td>
+          </tr>
+        </tbody>  
+        </table>
+    </td>
+    <!-- <td>
+            <button type="button" ng-click="viewItem(row)" class="btn btn-sm btn-success">
+              <i class="glyphicon glyphicon-eye-open">
+              </i> View
+            </button>
+
+    </td> -->
+    <td>
+            <button type="button" ng-click="editItem(key)" class="btn btn-sm btn-warning">
+              <i class="glyphicon glyphicon-pencil">
+              </i> Edit
+            </button>
+
+    </td>
+    <td>
+        <button type="button" ng-click="removeItem(row,key)" class="btn btn-sm btn-danger">
+              <i class="glyphicon glyphicon-remove-circle">
+              </i> Delete
+            </button>
+    </td>
+  </tr>
+  <tr ng-hide="orderCollection" class="danger"><td colspan="17"> No data Found ;(</td></tr>
+  </tbody>
+</table>
+
+</div>
+
+
+
+        <!-- this is template for delete order functionality -->
+ <script type="text/ng-template" id="deleteOrder.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Delete <b> <i>"{{ item.name}}" </i></b> !</h3>
+        </div>
+        <div class="modal-body">
+            You Really Want to delete the selected Item <b> <i>"{{ item.name}}" </i></b> .
+        </div>
+    
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="delete()">Delete</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+
+        <!-- this is template for add order functionality -->
+ <script type="text/ng-template" id="addOrder.html">
+        <div class="modal-header">
+            <h3 class="modal-title" ng-hide="edit">Add New Order <strong>"{{ order.name}}"</strong> !</h3>
+            <h3 class="modal-title" ng-show="edit">Edit  Order <strong>"{{ order.name}}"</strong> !</h3>
+        </div>
+        <div class="modal-body">
+        <form class="form-horizontal" novalidate  name="orderform" role="form'
+        " enctype= 'multipart/form-data'>
+          <div class="form-group  has-feedback" ng-class="{'has-error':orderform.name.$dirty && orderform.name.$error.required,'has-success':orderform.name.$valid}">
+            <label class="control-label col-sm-3" for="name">Name</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" ng-model="order.name" required id="name" aria-describedby="nameStatus" name="name">
+              <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="orderform.name.$valid"></span>
+              <span id="nameStatus" class="sr-only">(success)</span>
+            </div>
+          </div>
+
+          <div class="form-group has-feedback" ng-class="{'has-error':orderform.type.$dirty && orderform.type.$error.required,'has-success':orderform.type.$valid}">
+            <label class="control-label col-sm-3" for="type">Type</label>
+            <div class="col-sm-9">
+              
+              <select class="form-control" ng-model="order.type" required name="type">
+              <option ng-repeat="food in foodType" value="{{food}}"> {{ food}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group  has-feedback" ng-class="{0:'has-error',1:'has-success'}[order.shift.length]">
+            <label class="control-label col-sm-3" for="type">Shift</label>
+            <div class="col-sm-9">
+              <div  ng-repeat="shift in shiftType">
+                <div class="checkbox">
+                <label>
+                     <input type="checkbox" 
+                            id="checkboxSuccess"
+                            ng-model="shiftcheck"
+                            name="selectedShifts"
+                            value="{{shift}}"
+                            ng-checked="order.shift.indexOf(shift) > -1"
+                            ng-click="toggleSelection(shift)">
+                    {{shift}}
+                    </label>
+                  </div>
+                </div>
+                <p ng-show="order.shift.length == 0"  class="text-danger"> Please select at least One Shift !</p>
+              </div>
+          </div>
+
+          <div class="form-group  has-feedback" ng-class="{'has-error':orderform.minpeople.$dirty && (orderform.minpeople.$error.required || orderform.minpeople.$invalid),'has-success':orderform.minpeople.$valid}">
+            <label class="control-label col-sm-3" for="minpeople">Min People</label>
+            <div class="col-sm-9">
+              <input type="number" class="form-control" id="minpeople" aria-describedby="minpeopleStatus"  name="minpeople" ng-pattern="integerval" required ng-model="order.minpeople">
+              <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="orderform.minpeople.$valid"></span>
+              <span id="minpeopleStatus" class="sr-only">(success)</span>
+            
+              <p ng-show="orderform.minpeople.$dirty && orderform.minpeople.$invalid" class="text-danger">Hey! No letters, buddy! Write only positive Numeric Value :)</p>
+            
+            </div>
+          </div>
+
+          <div class="form-group has-feedback" ng-class="{'has-error':orderform.maxpeople.$dirty &&(orderform.maxpeople.$error.required || orderform.maxpeople.$invalid),'has-success':orderform.maxpeople.$valid}">
+            <label class="control-label col-sm-3" for="maxpeople">Max People</label>
+            <div class="col-sm-9">
+              <input type="number" class="form-control" id="maxpeople" name="maxpeople" aria-describedby="maxpeopleStatus" ng-pattern="integerval" required ng-model="order.maxpeople">
+              <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="orderform.maxpeople.$valid"></span>
+              <span id="maxpeopleStatus" class="sr-only">(success)</span>
+              <p ng-show="orderform.maxpeople.$dirty && orderform.maxpeople.$invalid" class="text-danger">Hey! No letters, buddy! Write only positive Numeric Value :)</p>
+
+            </div>
+          </div>
+
+          <div class="form-group  has-feedback" ng-class="{'has-error':orderform.quoatedprice.$dirty && (orderform.quoatedprice.$error.required || orderform.quoatedprice.$invalid),'has-success':orderform.quoatedprice.$valid}">
+            <label class="control-label col-sm-3" for="quoatedprice">Quoated Price</label>
+            <div class="col-sm-9">
+              <input type="number" class="form-control" id="quoatedprice" name="quoatedprice" aria-describedby="quoatedpriceStatus" ng-pattern="integerval" required ng-model="order.quoatedprice">
+              <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="orderform.quoatedprice.$valid"></span>
+              <span id="quoatedpriceStatus" class="sr-only">(success)</span>
+              <p ng-show="orderform.quoatedprice.$dirty && orderform.quoatedprice.$invalid" class="text-danger">Hey! No letters, buddy! Write only positive Numeric Value :)</p>
+            </div>
+          </div>
+
+          <div class="form-group  as has-feedback" ng-class="{'has-error':orderform.minprice.$dirty && (orderform.minprice.$error.required || orderform.minprice.$invalid),'has-success':orderform.minprice.$valid}">
+            <label class="control-label col-sm-3" for="minprice">Min Price</label>
+            <div class="col-sm-9">
+              <input type="number" class="form-control" id="minprice" aria-describedby="minpriceStatus" name="minprice" ng-pattern="integerval" required ng-model="order.minprice">
+              <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="orderform.minprice.$valid"></span>
+              <span id="minpriceStatus" class="sr-only">(success)</span>
+              <p ng-show="orderform.minprice.$dirty && orderform.minprice.$invalid" class="text-danger">Hey! No letters, buddy! Write only positive Numeric Value :)</p>
+            </div>
+          </div>
+
+           <div class="form-group has-feedback">
+            <label class="control-label col-sm-3" for="menu">Shift</label>
+            <div class="col-sm-9">
+              <table class="table">
+              <thead>
+              <tr ng-show="order.menu.length == 0" class="danger text-danger"><th colspan="4"> <p >Please Select Atleast One Menu Item !</p></th colspan="4"></tr>
+              <tr> <th>Menu </th><th>Quantity</th><th>Options</th><th>Example</th></tr>
+              </thead>
+              <tbody>
+              <tr ng-repeat="(key,menu) in menusType">
+               <td>
+               <div class="checkbox">
+                <label>
+                  <input type="checkbox"
+                         ng-model="order.menus[key].status"
+                         name="selectedMenus"
+                         value="{{menu}}"
+                         ng-checked="order.menu.indexOf(menu) > -1 "
+                         ng-click="toggleMenuSelection(menu)"
+                         />
+                     {{menu}}
+                    </label>
+                  </div>
+               </td>
+               <td>
+                <div class=""  ng-class="{1:'has-danger',0:'has-success'}[orderform.menus[key].quantity.$dirty && orderform.menus[key].quantity.$error.required]">
+                  <input type="number" ng-disabled="!order.menus[key].status" class="form-control input-sm" min="2" ng-min="2" max="10" ng-max="10" ng-model="order.menus[key].quantity" value="2" name="order.menus[key].quantity">
+                </div>
+               </td>
+               <td>
+                  <div class="form-group"  ng-repeat="i in getNumber(order.menus[key].quantity) track by $index" ng-class="{'has-error':orderform.menus[key].options[$index].$dirty && (orderform.menus[key].options[$index].$error.required || orderform.menus[key].options[$index].$invalid),'has-success':orderform.menus[key].options[$index].$valid}">
+                      <input type="text" required class="form-control input-sm" name="options[$index]" ng-model="order.menus[key]['options'][$index]" ng-disabled="!order.menus[key].status"/>
+
+
+                    </div>
+               </td>
+               <td>
+               <textarea class="form-control" ng-disabled="!order.menus[key].status" ng-model="order.menus[key].example" name="example">
+
+               </textarea>
+
+               </td>
+               </tr>
+
+              </tbody>
+              </table>
+              </div>
+          </div>
+
+        </form>
+        </div>
+    
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-hide="edit" ng-click="add()"> Add</button>
+            <button class="btn btn-primary" ng-show="edit" ng-click="edit()"> Edit</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>

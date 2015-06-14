@@ -2,17 +2,17 @@ DATABASES = {
 
     'default': {
 
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.sqlite3',
 
-        'NAME': 'marketplace',
+        'NAME': 'marketplace'
 
-        'USER': 'root',
+        # 'USER': 'root',
 
-        'PASSWORD': '12345',
+        # 'PASSWORD': 'root',
 
-        'HOST': 'localhost',
+        # 'HOST': 'localhost',
 
-        'PORT': '3306',
+        # 'PORT': '3306',
 
     }
 

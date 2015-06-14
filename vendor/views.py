@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.template.response import TemplateResponse
 from django.views.decorators.csrf import csrf_exempt
 from vendor.vendor_rules import banquet_rule
+#import static url form setting
+from market_place.settings import STATIC_URL
 def vendor_validation(request,vendor_rule):
     request_post=dict(request.POST)
         ## TOD : What the ... , why we need to import to avoid 
@@ -39,6 +41,7 @@ def banquets(request):
     return TemplateResponse (request,'banquets.html',
                              {"rules":banquet_rule_copy ,
                              "message":"Some Message on the top ",
-                             "message_class":""
+                             "message_class":"",
+                             'static_url' : STATIC_URL
                             }
                              )
