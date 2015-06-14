@@ -11,79 +11,30 @@ angular.module('marriageSettingsApp')
   .factory('Orders', function Order($log) {
     
     //list of order which we have save by users
-    var orderCollection=[
-			{ 
-				'name':'rituraj',
-				'type':'Veg',
-				'shift':['Morning','Evening'],
-				'minpeople':100,
-				'maxpeople':200,
-		    'quoatedprice':100000,
-		    'minprice':10000,
-		    'menus':[
-		    					{
-		    						'name':'name',
-		    						'quantity':2,
-		    						'options':['paneer pakoda','allo pakoda'],
-		    						'example':'test',
-		    						'status':true
-		    					},{
-		    						'name':'name',
-		    						'quantity':2,
-		    						'options':['paneer pakoda','allo pakoda'],
-		    						'example':'test',
-		    						'status':true
-		    					}
-
-
-		  				]
-
-				},
-  	    {
-				
-				'name':'Swati',
-				'type':'Veg',
-				'shift':['Evening'],
-				'minpeople':50,
-				'maxpeople':2000,
-		    'quoatedprice':100000,
-		    'minprice':10000,
-		    'menus':[
-		    					{
-		    						'name':'name',
-		    						'quantity':2,
-		    						'options':['paneer pakoda','allo pakoda'],
-		    						'example':'test',
-		    						'status':true
-		    					},
-		    					{
-		    						'name':'name',
-		    						'quantity':2,
-		    						'options':['paneer pakoda','allo pakoda'],
-		    						'example':'test'
-		    					}
-		  			]
-			}
-	];
+    var orderCollection=packages;
    var packagecontainer=$("#packages");
     return {
       getorders: function() {
         packagecontainer.val(JSON.stringify(orderCollection));
+        // $("#user_form").submit();
         return orderCollection;
       },
       removeOrder:function(index){
       	$log.info(index);
         packagecontainer.val(JSON.stringify(orderCollection));
+        $("#user_form").submit();
       	 orderCollection.splice(index,1);
       },
       addOrder:function(order){
       	$log.info(order);
       	 orderCollection.push(order);
          packagecontainer.val(JSON.stringify(orderCollection));
+         $("#user_form").submit();
       },
      editOrder:function(order){
       	$log.info(order);
         packagecontainer.val(JSON.stringify(orderCollection));
+        $("#user_form").submit();
       }
     };
 

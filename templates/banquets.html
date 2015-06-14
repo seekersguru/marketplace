@@ -85,6 +85,64 @@
 		      <span class="glyphicon glyphicon-floppy-disk"></span>
 		      <span class="text">Save</span>
 		    </button>
+
+
+<script type="text/javascript">
+	var packages=[
+			{ 
+				'name':'rituraj',
+				'type':'Veg',
+				'shift':['Morning','Evening'],
+				'minpeople':100,
+				'maxpeople':200,
+		    'quoatedprice':100000,
+		    'minprice':10000,
+		    'menus':[
+		    					{
+		    						'name':'name',
+		    						'quantity':2,
+		    						'options':['paneer pakoda','allo pakoda'],
+		    						'example':'test',
+		    						'status':true
+		    					},{
+		    						'name':'name',
+		    						'quantity':2,
+		    						'options':['paneer pakoda','allo pakoda'],
+		    						'example':'test',
+		    						'status':true
+		    					}
+
+
+		  				]
+
+				},
+  	    {
+				
+				'name':'Swati',
+				'type':'Veg',
+				'shift':['Evening'],
+				'minpeople':50,
+				'maxpeople':2000,
+		    'quoatedprice':100000,
+		    'minprice':10000,
+		    'menus':[
+		    					{
+		    						'name':'name',
+		    						'quantity':2,
+		    						'options':['paneer pakoda','allo pakoda'],
+		    						'example':'test',
+		    						'status':true
+		    					},
+		    					{
+		    						'name':'name',
+		    						'quantity':2,
+		    						'options':['paneer pakoda','allo pakoda'],
+		    						'example':'test'
+		    					}
+		  			]
+			}
+	];
+</script>
 		  
 		    <!--  button type="submit" class="list-group-item" title="Save and add another" name="_addanother">
 		      <span class="glyphicon glyphicon-plus"></span>
@@ -100,5 +158,6 @@
     </form>
     
 {% endblock %}
+
 </body>
 </html>
