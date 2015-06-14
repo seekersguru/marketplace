@@ -65,21 +65,25 @@ angular.module('marriageSettingsApp')
 		  			]
 			}
 	];
-
+   var packagecontainer=$("#packages");
     return {
       getorders: function() {
+        packagecontainer.val(JSON.stringify(orderCollection));
         return orderCollection;
       },
       removeOrder:function(index){
       	$log.info(index);
+        packagecontainer.val(JSON.stringify(orderCollection));
       	 orderCollection.splice(index,1);
       },
       addOrder:function(order){
       	$log.info(order);
       	 orderCollection.push(order);
+         packagecontainer.val(JSON.stringify(orderCollection));
       },
      editOrder:function(order){
       	$log.info(order);
+        packagecontainer.val(JSON.stringify(orderCollection));
       }
     };
 
@@ -93,6 +97,7 @@ angular.module('marriageSettingsApp')
       'Karma'
     ];
 
+    $("#packages").prependTo('#user_form');
     //list of order which we have save by users
     $scope.orderCollection=Orders.getorders();
     //type of menus 

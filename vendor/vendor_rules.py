@@ -187,25 +187,7 @@ banquet_rule=\
         ]
      },
      
-     {
-        LABEL:"MENU/Veg Package1(Lunch/Dinner)",
-        FIELDS:[
-                widget_input("Drinks","drinks",True,2,1000,[],"Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."),
-                widget_input("Starters","starters",True,2,700),
-                widget_input("Salads","salads",True,2,700),
-                widget_input("Soups","soups",True,2,700),
-                widget_input("Breads","breads",True,2,700),
-                widget_input("Main Courses","maincourses",True,2,700),
-                widget_input("Dal","dal",True,2,700),
-                widget_input("Rice","rice",True,2,700),
-                widget_input("Raita","raita",True,2,700),
-                widget_input("Desert","desert",True,2,70),
-                widget_input("Live Stations","livestations",True,2,70),
-                widget_choice("Valet Parking","valetparking",True,choices=YES_NO_CHOICES, widget_type=SELECT_TYPE),
-               
-        ]
-    },
-]
+    ]
 
 
 

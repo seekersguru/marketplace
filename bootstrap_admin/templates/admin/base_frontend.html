@@ -144,9 +144,30 @@
             </ol>
           {% endblock %}
 
+          {% block messages %}
+            {% if messages %}
+                {% for message in messages %}
+                  <div role="alert" class="messagelist alert alert-{% if message.tags == 'info' %}success{% else %}{{ message.tags }}{% endif %} fade in">
+                    <button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">{% trans "Close" %}</span></button>
+                    {{ message|capfirst }}
+                  </div>
+                {% endfor %}
+            {% endif %}
+          {% endblock messages %}
 
+          {% block content %}
+            {% block object-tools %}{% endblock %}
+            {{ content }}
+            
+          {% endblock %}
+
+<input type="hidden" value="" id="packages">
 <div ng-app="marriageSettingsApp">
-<div ng-view=""></div>
+
+<div ng-view="">
+  
+</div>
+
 </div>
         </div>
       {% endblock content_container %}
@@ -157,6 +178,9 @@
 <script type="text/javascript">
     var static_url="/static/bootstrap_admin/";
 </script>
+
+
+  <script type="text/javascript" src="{% static "admin/js/jquery.js" %}"></script>
   <script src="{% static 'bootstrap_admin/js/bootstrap.min.js' %}"></script>
   <script src="{% static 'bootstrap_admin/js/base.js' %}"></script>
   <script src="{% static 'bootstrap_admin/js/angular/angular.min.js' %}"></script>
