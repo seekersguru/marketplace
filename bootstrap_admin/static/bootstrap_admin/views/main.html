@@ -4,7 +4,7 @@
 <p>
 <button type="button" ng-click="addItem()" class="btn btn-sm btn-success">
               <i class="glyphicon glyphicon-plus">
-              </i> Add Order
+              </i> Add Food Package 
   </button>
 </p>
  <table st-table="orderCollection" class="table table-striped">
@@ -25,7 +25,7 @@
   <tr>
     <th>Veg</th>
     <th>Non Veg</th>
-    <th>jainokey</th>
+    <th>Jain Only</th>
     <th>Morning</th>
     <th>Evening</th>
     <th>Night</th>
@@ -63,9 +63,9 @@
     </td>
    
     <td>
-         <span ng-show="row.type == 'Jainokey'" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+         <span ng-show="row.type == 'Jain only'" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
 
-         <span ng-hide="row.type == 'Jainokey'" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+         <span ng-hide="row.type == 'Jain only'" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 
     </td>
 

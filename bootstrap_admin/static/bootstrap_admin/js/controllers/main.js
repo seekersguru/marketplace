@@ -70,7 +70,7 @@ angular.module('marriageSettingsApp')
     $scope.foodType=[
 			'Veg',
 			'Non Veg',
-			'Jainokey'
+			'Jain only'
 			];
 
 		// type of shift		
