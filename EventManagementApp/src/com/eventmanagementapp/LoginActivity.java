@@ -1,4 +1,4 @@
-package com.eventmanagementapp;
+/*package com.eventmanagementapp;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -203,3 +203,4 @@ public class LoginActivity extends FragmentActivity implements TextWatcher{
 		overridePendingTransition(R.anim.right_in, R.anim.right_out);
 	}
 }
+*/

@@ -6,7 +6,7 @@
     <ImageView
         android:id="@+id/category"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" 
+        android:layout_height="match_parent"
         android:scaleType="fitXY" />
 
     <TextView
@@ -18,9 +18,10 @@
         android:background="#f16959"
         android:gravity="center"
         android:textColor="#fff" />
-    
+
     <ImageView
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
 </RelativeLayout>

@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
 
-import com.example.wedwiseapp.R;
+import com.wedwiseapp.login.LoginSignUpActivity;
 import com.wedwiseapp.login.RegisterActivity;
 import com.wedwiseapp.util.PreferenceUtil;
 
@@ -51,8 +51,11 @@ public class Splash extends Activity {
 			handler.postDelayed(new Runnable() {
 				@Override
 				public void run() {
-					Intent intent = new Intent(context, RegisterActivity.class);
-					startActivity(intent);
+					
+					
+					Intent myIntent=new Intent(context,VendorCategoryHome.class);
+					startActivity(myIntent);
+					overridePendingTransition(R.anim.right_in, R.anim.left_out);
 					finish();
 				}
 			}, 2000);

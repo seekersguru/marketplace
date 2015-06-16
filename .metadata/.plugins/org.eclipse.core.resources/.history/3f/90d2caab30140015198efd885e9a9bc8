@@ -1,0 +1,36 @@
+package com.wedwise.tab;
+
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.TextView;
+
+import com.wedwiseapp.R;
+
+public class BidBookCreateActivity extends FragmentActivity{
+
+	TextView tvTitle;
+	Button btnBitIt;
+	Spinner spTimeSlot,spPerPlate,spMinPerson;
+
+	@Override
+	protected void onCreate(Bundle arg0) {
+		super.onCreate(arg0);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.bid_book_create);
+		tvTitle=(TextView) findViewById(R.id.tvTitle);
+		btnBitIt=(Button) findViewById(R.id.btnBitIt);
+		if(getIntent().getExtras().getString("type").equals("bid"))
+		{
+			tvTitle.setText("Create Bid");
+			btnBitIt.setText("BID IT");
+		}
+		else if(getIntent().getExtras().getString("type").equals("book"))
+		{
+			tvTitle.setText("Create Book");
+			btnBitIt.setText("BOOK IT");
+		}
+	}
+}

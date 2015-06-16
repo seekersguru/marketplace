@@ -6,7 +6,7 @@
 
     <!--
          Per the design guidelines, navigation drawers should be between 240dp and 320dp:
-         https://developer.android.com/design/patterns/navigation-drawer.html
+         https://developer.android.com/design/patterns/navigation-drawer.html
     -->
     <dimen name="navigation_drawer_width">240dp</dimen>
     <dimen name="toolbar_elevation">4dp</dimen>
@@ -37,7 +37,7 @@
     <dimen name="buttonSignUpHeight">45dp</dimen>
 
     <!-- Registration -->
-    <dimen name="marginTopScrollView">100dp</dimen>
+    <dimen name="marginTopScrollView">30dp</dimen>
     <dimen name="marginLeftRightllFields">10dp</dimen>
     <dimen name="editTextHeight">50dp</dimen>
     <dimen name="viewSeparatorHeight">1dp</dimen>
@@ -75,5 +75,17 @@
     <!-- Album Screen Activity -->
     <dimen name="heightAlbumImage">200dp</dimen>
     <dimen name="widthAlbumtextView">120dp</dimen>
+
+    <!-- Bid Book Message Tab -->
+    <dimen name="marginTopCreateButton">10dp</dimen>
+    <dimen name="marginTopListView">15dp</dimen>
+    <dimen name="heigthCreateButton">50dp</dimen>
+
+    <!-- bid-book_detail page -->
+
+    <dimen name="heightLocationIcon">30dp</dimen>
+    <dimen name="widthLocationIcon">23dp</dimen>
+    
+    <dimen  name="heightTextView">50dp</dimen>
 
 </resources>

@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <!--
+         Per the design guidelines, navigation drawers should be between 240dp and 320dp:
+         https://developer.android.com/design/patterns/navigation-drawer.html
+
+
+
+
+    -->
+    <!-- LoginSignUpActivity -->
+
+
+    <!-- TextSizes -->
+    <dimen name="textSizeNormal">15sp</dimen>
+    <dimen name="textSizeMedium">18sp</dimen>
+    <dimen name="textSizeLarge">22sp</dimen>
+    <!-- LoginSignUpActivity -->
+    <dimen name="btnBackHeight">20dp</dimen>
+    <dimen name="btnBackWidth">21dp</dimen>
+    <dimen name="marginleftBackButton">5dp</dimen>
+    <dimen name="marginleftToolbarText">10dp</dimen>
+    <dimen name="menuIconDimension">30dp</dimen>
+    <dimen name="marginTopToolBar">30dp</dimen>
+    <dimen name="buttonheightFbLogin">47dp</dimen>
+    <dimen name="marginTopSocialSiteLoginLayout">25dp</dimen>
+    <dimen name="marginTopGoogleLoginButton">20dp</dimen>
+    <dimen name="buttonSignUpWidth">130dp</dimen>
+    <dimen name="buttonSignUpHeight">45dp</dimen>
+
+    <!-- Registration -->
+    <dimen name="marginTopScrollView">80dp</dimen>
+    <dimen name="marginLeftRightllFields">10dp</dimen>
+    <dimen name="editTextHeight">50dp</dimen>
+    <dimen name="viewSeparatorHeight">1dp</dimen>
+    <dimen name="paddingLeftEditText">5dp</dimen>
+    <dimen name="buttonHeightSignIn">50dp</dimen>
+    <dimen name="marginTopBUttonSignIn">30dp</dimen>
+
+    <!-- LoginActivity -->
+
+    <dimen name="marginTopEditTextFields">5dp</dimen>
+
+    <!-- Message Tab Activity -->
+    <dimen name="buttonMessageWidth">33dp</dimen>
+    <dimen name="buttonMessageHeight">26dp</dimen>
+    <dimen name="dimenBottomBarIcons">30dp</dimen>
+    <dimen name="bottomBarHeight">50dp</dimen>
+    <dimen name="bottomBarDividerHeight">5dp</dimen>
+
+</resources>

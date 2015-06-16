@@ -117,16 +117,16 @@ TextWatcher{
 			//			etGroomName.setVisibility(View.VISIBLE);
 			//			etArea.setVisibility(View.VISIBLE);
 		}
-		CustomFonts.setFontOfEditText(mContext, etEmailAddress,"fonts/GothamRnd-Book_0.otf");
-		CustomFonts.setFontOfEditText(mContext, etPassword,"fonts/GothamRnd-Book_0.otf");
-		CustomFonts.setFontOfEditText(mContext, etBrideName,"fonts/GothamRnd-Book_0.otf");
-		CustomFonts.setFontOfEditText(mContext, etGroomName,"fonts/GothamRnd-Book_0.otf");
-		CustomFonts.setFontOfEditText(mContext, etArea,"fonts/GothamRnd-Book_0.otf");
-		CustomFonts.setFontOfEditText(mContext, etPasswordReset,"fonts/GothamRnd-Book_0.otf");
-		CustomFonts.setFontOfButton(mContext,btnSignIn,"fonts/GothamRnd-Book_0.otf");
-		CustomFonts.setFontOfButton(mContext,btnPasswordReset,"fonts/GothamRnd-Book_0.otf");
-		CustomFonts.setFontOfTextView(mContext,tvLogin,"fonts/GothamRnd-Book_0.otf");
-		CustomFonts.setFontOfTextView(mContext,tvForgotPassword,"fonts/GothamRnd-Book_0.otf");
+		CustomFonts.setFontOfEditText(mContext, etEmailAddress,"fonts/gotham_rounded.ttf");
+		CustomFonts.setFontOfEditText(mContext, etPassword,"fonts/gotham_rounded.ttf");
+		CustomFonts.setFontOfEditText(mContext, etBrideName,"fonts/gotham_rounded.ttf");
+		CustomFonts.setFontOfEditText(mContext, etGroomName,"fonts/gotham_rounded.ttf");
+		CustomFonts.setFontOfEditText(mContext, etArea,"fonts/gotham_rounded.ttf");
+		CustomFonts.setFontOfEditText(mContext, etPasswordReset,"fonts/gotham_rounded.ttf");
+		CustomFonts.setFontOfButton(mContext,btnSignIn,"fonts/gotham_rounded.ttf");
+		CustomFonts.setFontOfButton(mContext,btnPasswordReset,"fonts/gotham_rounded.ttf");
+		CustomFonts.setFontOfTextView(mContext,tvLogin,"fonts/gotham_rounded.ttf");
+		CustomFonts.setFontOfTextView(mContext,tvForgotPassword,"fonts/gotham_rounded.ttf");
 		etEmailAddress.addTextChangedListener(this);
 		etPassword.addTextChangedListener(this);
 		etBrideName.addTextChangedListener(this);

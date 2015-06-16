@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff" >
+
+    <!-- #F0EEEF -->
+
+    <RelativeLayout
+        android:id="@+id/rlTopBar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#fff" >
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="21dp"
+            android:layout_height="22dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/back_orange" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="WEDwise"
+            android:textColor="#ffffff"
+            android:textSize="22sp"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btnBidTopbar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/bid"
+            android:visibility="gone" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/bottomBarDividerHeight"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/divider_bottom_bar" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/llIndicators"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_below="@+id/rlTopBar"
+                android:layout_marginTop="15dp"
+                android:background="#fff"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="gone" >
+
+                <!--
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="15dp"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/bid_mark_rect_oval" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:text="Bid &amp; Block"
+            android:textColor="#000"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="15dp"
+            android:layout_marginLeft="30dp"
+            android:background="@drawable/message_mark_rest_oval" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:text="Message"
+            android:textColor="#000"
+            android:textSize="15sp" />
+                -->
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llBottomBarParent"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/bottomBarHeight"
+                android:layout_alignParentBottom="true"
+                android:background="#F0EEEF"
+                android:orientation="vertical" >
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/bottomBarDividerHeight"
+                    android:background="@drawable/divider_bottom_bar" />
+
+                <LinearLayout
+                    android:id="@+id/llBottomBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#00000000"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="1" >
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight=".25"
+                        android:gravity="center" >
+
+                        <Button
+                            android:id="@+id/btnMail"
+                            android:layout_width="@dimen/buttonMessageWidth"
+                            android:layout_height="@dimen/buttonMessageHeight"
+                            android:layout_gravity="center"
+                            android:background="@drawable/mail" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight=".25"
+                        android:gravity="center" >
+
+                        <Button
+                            android:id="@+id/btnHome"
+                            android:layout_width="@dimen/dimenBottomBarIcons"
+                            android:layout_height="@dimen/dimenBottomBarIcons"
+                            android:layout_gravity="center"
+                            android:background="@drawable/home" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight=".25"
+                        android:gravity="center" >
+
+                        <Button
+                            android:id="@+id/btnLike"
+                            android:layout_width="@dimen/dimenBottomBarIcons"
+                            android:layout_height="@dimen/dimenBottomBarIcons"
+                            android:layout_gravity="center"
+                            android:background="@drawable/like" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight=".25"
+                        android:gravity="center" >
+
+                        <Button
+                            android:id="@+id/btnMenu"
+                            android:layout_width="@dimen/dimenBottomBarIcons"
+                            android:layout_height="@dimen/buttonMessageHeight"
+                            android:layout_gravity="center"
+                            android:background="@drawable/menu" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llCalendarHolder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/llIndicators"
+                android:layout_marginTop="15dp"
+                android:background="#ffffffff"
+                android:orientation="vertical" >
+
+                <!-- android:layout_above="@+id/llBottomBar" -->
+
+                <com.wedwise.calendar.MFCalendarView
+                    android:id="@+id/mFCalendarView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+                </com.wedwise.calendar.MFCalendarView>
+
+                <!-- android:layout_marginTop="30dp" -->
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:background="#ffffff" >
+
+                <!--
+                android:layout_above="@+id/llBottomBarParent"
+                android:layout_below="@+id/llCalendarHolder"
+                -->
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:background="#EDECEA" >
+
+                    <Button
+                        android:id="@+id/btnAdd"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="end|center_vertical"
+                        android:layout_marginRight="30dp"
+                        android:background="@drawable/add_icon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left|center_vertical"
+                        android:layout_marginLeft="30dp"
+                        android:text="TODAY"
+                        android:textColor="#C8C7C5"
+                        android:textSize="16sp" />
+                </FrameLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

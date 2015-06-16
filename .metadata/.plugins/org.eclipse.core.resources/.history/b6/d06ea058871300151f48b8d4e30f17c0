@@ -1,0 +1,53 @@
+package com.wedwiseapp;
+
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.view.View;
+import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
+
+import com.wedwise.adapter.FavAdapter;
+
+public class FavListActivity extends FragmentActivity {
+	ListView favList;
+	FavAdapter adapterSubList;
+	Context mContext;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		mContext = FavListActivity.this;
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.favorite);
+
+		idInitialization();
+	}
+
+	private void idInitialization() {
+		favList = (ListView) findViewById(R.id.favList);
+
+		adapterSubList = new FavAdapter(mContext);
+		favList.setAdapter(adapterSubList);
+		favList.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View viewChild,
+					int position, long arg3) {
+
+				startActivity(new Intent(getBaseContext(),
+						VendorDetailsActivity.class));
+			}
+		});
+	}
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		super.onBackPressed();
+		overridePendingTransition(R.anim.right_in, R.anim.right_out);
+	}
+	
+}

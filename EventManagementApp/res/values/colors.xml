@@ -35,6 +35,7 @@
     <color name="ColorPrimaryDark">#00695C</color>
     <color name="tabsScrollColor">#F2685A</color>
     <color name="blackColor">#000000</color>
+    <color name="appbackgroundcolor">#F1EFF0</color>
     <color name="darkGreyColor">#555555</color>
     <color name="lightGreyColor">#c0c0c0</color>
     <color name="bottombargreycolor">#F1EFF0</color>

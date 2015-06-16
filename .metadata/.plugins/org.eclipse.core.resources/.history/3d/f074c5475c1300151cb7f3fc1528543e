@@ -1,0 +1,43 @@
+package com.wedwiseapp;
+
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.view.View;
+import android.view.Window;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.TextView;
+
+import com.eventmanagementapp.R;
+
+public class VendorDetailsPageMapPopup extends FragmentActivity{
+
+	Button btnBack;
+	TextView tvPlace,tvAddress,tvPlaceBottom,tvAddressBottom;
+	
+	@Override
+	protected void onCreate(Bundle arg0) {
+		super.onCreate(arg0);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.vendor_detail_page_map_popup_page);
+		btnBack=(Button) findViewById(R.id.btnBack);
+		tvPlace=(TextView) findViewById(R.id.tvPlace);		
+		tvAddress=(TextView) findViewById(R.id.tvAddress);	
+		tvPlaceBottom=(TextView) findViewById(R.id.tvPlaceBottom);
+		tvAddressBottom=(TextView) findViewById(R.id.tvAddressBottom);
+		btnBack.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				finish();		
+				overridePendingTransition(R.anim.right_in, R.anim.right_out);
+			}
+		});
+	}
+	
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		overridePendingTransition(R.anim.right_in, R.anim.right_out);
+	}
+}

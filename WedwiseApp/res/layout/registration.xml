@@ -16,7 +16,7 @@
         android:id="@+id/svMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/toolBar"
+        android:layout_below="@+id/toolbar"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/marginTopScrollView"
         android:fillViewport="false"
@@ -147,6 +147,23 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/viewSeparatorHeight"
+                        android:background="#EEECED" />
+
+                    <EditText
+                        android:id="@+id/etContactNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/editTextHeight"
+                        android:background="#ffffff"
+                        android:hint="Contact Number"
+                        android:paddingLeft="@dimen/paddingLeftEditText"
+                        android:singleLine="true"
+                        android:inputType="phone"
+                        android:textColor="#000"
+                        android:textSize="@dimen/textSizeLarge" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/viewSeparatorHeight"
                         android:background="#5C5858" />
                 </LinearLayout>
                 <!-- </LinearLayout> -->
@@ -154,10 +171,13 @@
                 <View
                     android:layout_width="@dimen/viewSeparatorHeight"
                     android:layout_height="match_parent"
-                    android:layout_alignBottom="@+id/llFields"
+                    android:background="#5C5858" />
+
+                <!--
+                     android:layout_alignBottom="@+id/llFields"
                     android:layout_alignTop="@+id/llFields"
                     android:layout_toRightOf="@+id/llFields"
-                    android:background="#5C5858" />
+                -->
 
                 <Button
                     android:id="@+id/btnSignIn"
@@ -207,20 +227,5 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
-    <!--
-         <TextView
-        android:id="@+id/tvBottomBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/svMenu"
-        android:layout_marginTop="@dimen/marginLeftRightllFields"
-        android:background="@drawable/textview_background_semitransparent"
-        android:gravity="center"
-        android:padding="@dimen/marginLeftRightllFields"
-        android:singleLine="false"
-        android:textColor="#ffffff"
-        android:textSize="@dimen/textSizeNormal" />
-    -->
 
 </RelativeLayout>

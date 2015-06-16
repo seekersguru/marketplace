@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="com.eventmanagementapp.R"/>
+<fullyQualifiedTypeName name="com.example.wedwiseapp.R"/>
+<fullyQualifiedTypeName name="com.wedwiseapp.login.LoginSignUpActivity"/>
+<fullyQualifiedTypeName name="com.wedwise.adapter.MessagesListAdapter"/>
+<fullyQualifiedTypeName name="com.wedwise.chat.MessageChatActivity"/>
+<fullyQualifiedTypeName name="com.wedwiseapp.login.RegisterActivity"/>
+<fullyQualifiedTypeName name="android.webkit.ConsoleMessage.MessageLevel"/>
+<fullyQualifiedTypeName name="com.wedwise.tab.MessageTab"/>
+<fullyQualifiedTypeName name="android.app.DatePickerDialog"/>
+<fullyQualifiedTypeName name="java.text.DateFormat.Field"/>
+<fullyQualifiedTypeName name="com.wedwiseapp.R.style"/>
+<fullyQualifiedTypeName name="android.content.res.Resources"/>
+<fullyQualifiedTypeName name="android.widget.DatePicker"/>
+<fullyQualifiedTypeName name="android.widget.TimePicker"/>
+<fullyQualifiedTypeName name="java.lang.reflect.Field"/>
+<fullyQualifiedTypeName name="android.widget.Toast"/>
+<fullyQualifiedTypeName name="com.wedwiseapp.R.id"/>
+<fullyQualifiedTypeName name="com.wedwiseapp.util.CustomFonts"/>
+<fullyQualifiedTypeName name="android.app.Activity"/>
+<fullyQualifiedTypeName name="com.eventmanagementapp.Activities.VendorDetailsPageMapPopup"/>
+<fullyQualifiedTypeName name="com.eventmanagementapp.Activities.CustomerAlbumsActivity"/>
+<fullyQualifiedTypeName name="com.eventmanagementapp.Activities.BidBookDetailsScreenActivity"/>
+<fullyQualifiedTypeName name="com.wedwiseapp.VendorDetailsActivity"/>
+<fullyQualifiedTypeName name="com.wedwiseapp.VendorDetailsPageMapPopup"/>
+<fullyQualifiedTypeName name="com.wedwise.calendar.CalendarActivity"/>
+<fullyQualifiedTypeName name="android.widget.AdapterView.OnItemClickListener"/>
+<fullyQualifiedTypeName name="com.wedwiseapp.VendorCategoryHome"/>
+<fullyQualifiedTypeName name="com.wedwiseapp.FavListActivity"/>
+<fullyQualifiedTypeName name="android.widget.ImageView"/>
+<fullyQualifiedTypeName name="com.wedwise.tab.MessageTabActivity"/>
+<fullyQualifiedTypeName name="android.support.v4.app.FragmentActivity"/>
+<fullyQualifiedTypeName name="android.R"/>
+<fullyQualifiedTypeName name="android.R.layout"/>
+<fullyQualifiedTypeName name="com.wedwiseapp.R"/>
+<fullyQualifiedTypeName name="android.widget.TextView"/>
+<fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
+<fullyQualifiedTypeName name="com.wedwise.adapter.SpinnerAdapter"/>
+<fullyQualifiedTypeName name="com.wedwise.tab.BidBookCreateActivity"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+</qualifiedTypeNameHistroy>

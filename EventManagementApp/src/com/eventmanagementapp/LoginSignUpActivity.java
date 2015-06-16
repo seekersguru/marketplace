@@ -12,7 +12,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.eventmanagementapp.Activities.CustomerAlbumsActivity;
+import com.eventmanagementapp.Activities.BidBookDetailsScreenActivity;
 import com.eventmanagementapp.util.CustomFonts;
 
 //import com.google.android.gms.common.ConnectionResult;
@@ -114,7 +114,7 @@ OnConnectionFailedListener*/ {
 
 			@Override
 			public void onClick(View v) {
-				Intent myIntent=new Intent(LoginSignUpActivity.this,CustomerAlbumsActivity.class);
+				Intent myIntent=new Intent(LoginSignUpActivity.this,BidBookDetailsScreenActivity.class);
 				startActivity(myIntent);
 				overridePendingTransition(R.anim.right_in, R.anim.left_out);
 			}

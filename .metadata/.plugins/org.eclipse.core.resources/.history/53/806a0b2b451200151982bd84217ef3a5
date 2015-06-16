@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:background="#fff">
+
+    <ListView
+        android:id="@+id/lvMessages"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="#f1f1f1"
+        android:dividerHeight="1dp" >
+    </ListView>
+
+</RelativeLayout>

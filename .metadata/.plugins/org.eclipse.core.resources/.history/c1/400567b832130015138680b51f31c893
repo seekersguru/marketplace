@@ -1,0 +1,239 @@
+package com.wedwise.calendar;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Calendar;
+
+import android.content.Intent;
+import android.content.res.Resources;
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.LinearLayout;
+import android.widget.NumberPicker;
+import android.widget.TimePicker;
+
+import com.wedwise.tab.MessageTabActivity;
+import com.wedwiseapp.R;
+
+/**
+ * Shows off the most basic usage
+ */
+public class CalendarActivity extends FragmentActivity implements OnClickListener
+{
+
+	MFCalendarView mf;
+	Button btnBack,btnMail;
+
+	TimePicker tpScheduleVisit;
+	Resources system;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		//		setTheme(android.R.style.Theme_Holo_Light_NoActionBar_Fullscreen);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.calendar_activity);
+		Calendar today = Calendar.getInstance();
+		
+		mf = (MFCalendarView) findViewById(R.id.mFCalendarView);
+		btnBack=(Button) findViewById(R.id.btnBack);
+		tpScheduleVisit=(TimePicker) findViewById(R.id.tpScheduleVisit);
+		
+		
+		try {
+            Field datePickerFields[] = tpScheduleVisit.getClass().getDeclaredFields();
+            for (Field field : datePickerFields) {
+                if ("mSpinners".equals(field.getName())) {
+                    field.setAccessible(true);
+                    Object spinnersObj = new Object();
+                    spinnersObj = field.get(tpScheduleVisit);
+                    LinearLayout mSpinners = (LinearLayout) spinnersObj;
+                    tpScheduleVisit = (TimePicker) mSpinners.getChildAt(0);
+                    /*dayPicker = (NumberPicker) mSpinners.getChildAt(1);
+                    yearPicker = (NumberPicker) mSpinners.getChildAt(2);*/
+//                    setDividerColor(tpScheduleVisit);
+//                    setDividerColor(dayPicker);
+//                    setDividerColor(yearPicker);
+                    break;
+                }
+            }
+        } catch (Exception ex) {
+           // Log.v(TAG, &quot;Unable to change date dialog style.&quot;);
+        }
+		
+/*		dpScheduleVisit.init( today.get(Calendar.YEAR), 
+				today.get(Calendar.MONTH), 
+				today.get(Calendar.DAY_OF_MONTH), 
+				new OnDateChangedListener(){
+
+			@Override
+			public void onDateChanged(DatePicker view, 
+					int year, int monthOfYear,int dayOfMonth) {
+				Toast.makeText(getApplicationContext(), 
+						"onDateChanged\n"+
+								"Year: " + year + "\n" +
+								"Month of Year: " + monthOfYear + "\n" +
+								"Day of Month: " + dayOfMonth, Toast.LENGTH_SHORT).show();
+
+				 info.setText(
+	        "Year: " + year + "\n" +
+	        "Month of Year: " + monthOfYear + "\n" +
+	        "Day of Month: " + dayOfMonth);
+
+			}});*/
+		
+		
+		
+		//		btnBidTopbar=(Button) findViewById(R.id.btnBidTopbar);
+		//		btnAdd=(Button) findViewById(R.id.btnAdd);
+		/*btnCalendar=(Button) findViewById(R.id.btnCalendar);
+		btnMessage=(Button) findViewById(R.id.btnMessage);
+		btnBid=(Button) findViewById(R.id.btnBid);
+		btnMenu=(Button) findViewById(R.id.btnMenu);*/
+		btnBack.setOnClickListener(this);
+		/*btnCalendar.setOnClickListener(this);
+		btnMessage.setOnClickListener(this);
+		btnBid.setOnClickListener(this);
+		btnMenu.setOnClickListener(this);*/
+
+		//		btnCalendar.performClick();
+		btnMail=(Button) findViewById(R.id.btnMail);
+		btnMail.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent myIntent=new Intent(CalendarActivity.this,MessageTabActivity.class);
+				startActivity(myIntent);	
+				overridePendingTransition(R.anim.right_in, R.anim.left_out);	
+			}
+		});
+
+		mf.setOnCalendarViewListener(new onMFCalendarViewListener() {
+
+			@Override
+			public void onDisplayedMonthChanged(int month, int year, String monthStr) {
+
+				StringBuffer bf = new StringBuffer()
+				.append(" month:")
+				.append(month)
+				.append(" year:")
+				.append(year)
+				.append(" monthStr: ")
+				.append(monthStr);
+				//				
+				//				Toast.makeText(CalendarActivity.this,  bf.toString(),
+				//						Toast.LENGTH_SHORT).show();
+				//				
+			}
+
+			@Override
+			public void onDateChanged(String date) {
+
+				//				Toast.makeText(CalendarActivity.this, "onDateChanged:" + date, 
+				//						Toast.LENGTH_SHORT).show();
+			}
+		});
+
+		/**
+		 * you can set calendar date anytime
+		 * */
+		//mf.setDate("2014-02-19");
+
+
+		/**
+		 * calendar events samples 
+		 * */
+		ArrayList<String> eventDays = new ArrayList<String>();
+		eventDays.add("2014-02-25");
+		eventDays.add(Util.getTomorrow());
+		eventDays.add(Util.getCurrentDate());
+
+
+		mf.setEvents(eventDays);
+
+		Log.e("","locale:" + Util.getLocale());
+	}
+
+
+	/*private void setDividerColor(TimePicker picker) {
+        Field[] numberPickerFields = DatePicker.class.getDeclaredFields();
+        for (Field field : numberPickerFields) {
+            if (field.getName().equals("mSelectionDivider")) {
+                field.setAccessible(true);
+                try {
+                    field.set(picker, getResources().getDrawable(R.drawable.divider));
+                } catch (IllegalArgumentException e) {
+                    Log.v("CalendarActivity", "Illegal Argument Exception");
+                    e.printStackTrace();
+                } catch (Resources.NotFoundException e) {
+                    Log.v("CalendarActivity", "Resources NotFound");
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    Log.v("CalendarActivity", "Illegal Access Exception");
+                    e.printStackTrace();
+                }
+                break;
+            }
+        }
+    }*/
+	
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		overridePendingTransition(R.anim.right_in, R.anim.right_out);
+	}
+
+	@Override
+	public void onClick(View v) {
+		if(v.getId()==R.id.btnBack)
+		{
+			finish();	
+			overridePendingTransition(R.anim.right_in, R.anim.right_out);
+		}
+		/*else if(v.getId()==R.id.btnCalendar)
+		{
+			btnMessage.setSelected(false);
+			btnBid.setSelected(false);
+			btnMenu.setSelected(false);
+			btnCalendar.setSelected(true);
+		}
+		else if(v.getId()==R.id.btnMessage)
+		{
+			btnCalendar.setSelected(false);
+			btnBid.setSelected(false);
+			btnMenu.setSelected(false);
+			btnMessage.setSelected(true);
+		}
+		else if(v.getId()==R.id.btnBid)
+		{
+			btnCalendar.setSelected(false);
+			btnMessage.setSelected(false);
+			btnMenu.setSelected(false);
+			btnBid.setSelected(true);
+		}
+		else if(v.getId()==R.id.btnMenu)
+		{
+			btnCalendar.setSelected(false);
+			btnMessage.setSelected(false);
+			btnBid.setSelected(false);
+			btnMenu.setSelected(true);
+		}*/
+	}
+}                                                   
+/*public class CalendarActivity extends FragmentActivity{
+
+	@Override
+	protected void onCreate(Bundle arg0) {
+		super.onCreate(arg0);
+		setTheme(android.R.style.Theme_Holo_Light_NoActionBar_TranslucentDecor);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.calendar_activity);
+
+	}*/
+//}

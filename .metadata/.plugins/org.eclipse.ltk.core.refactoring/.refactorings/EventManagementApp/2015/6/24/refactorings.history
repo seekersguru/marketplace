@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;EventManagementApp/res/drawable-hdpi/arrow@180.png&apos; to &apos;arrow_down.png&apos;" description="Rename resource &apos;arrow@180.png&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="res/drawable-hdpi/arrow@180.png" name="arrow_down.png" stamp="1434174533898" updateReferences="true"/>
+</session>

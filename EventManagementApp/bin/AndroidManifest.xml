@@ -45,12 +45,12 @@
             android:name="com.eventmanagementapp.calendar.CalendarActivity"
             android:screenOrientation="portrait" >
         </activity>
-        <activity
+     <!--    <activity
             android:name=".LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/FullBleedTheme"
             android:windowSoftInputMode="adjustResize" >
-        </activity>
+        </activity> -->
         <activity
             android:name=".ForgotPasswordActivity"
             android:screenOrientation="portrait" >
@@ -64,9 +64,18 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.eventmanagementapp.Activities.CustomerAlbumsActivity"
+            android:name="com.eventmanagementapp.Activities.VendorCategoryHome"
             android:screenOrientation="portrait" >
         </activity>
+        
+         <activity
+            android:name="com.eventmanagementapp.Activities.BidBookDetailsScreenActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- <activity
+            android:name="com.eventmanagementapp.Activities.VendorDetailsPageMapPopup"
+            android:screenOrientation="portrait" >
+        </activity> -->
 
         <!--
              <meta-data

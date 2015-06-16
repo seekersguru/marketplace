@@ -16,7 +16,7 @@
         android:id="@+id/svMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/toolBar"
+        android:layout_below="@+id/toolbar"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/marginTopScrollView"
         android:fillViewport="false"
@@ -106,9 +106,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/editTextHeight"
                         android:background="#ffffff"
-                        android:hint="Bride Name"
+                        android:hint="Mobile Number"
                         android:paddingLeft="@dimen/paddingLeftEditText"
                         android:singleLine="true"
+                        android:inputType="phone"
                         android:textColor="#000"
                         android:textSize="@dimen/textSizeLarge" />
 
@@ -122,7 +123,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/editTextHeight"
                         android:background="#ffffff"
-                        android:hint="Groom Name"
+                        android:hint="Address"
                         android:paddingLeft="@dimen/paddingLeftEditText"
                         android:singleLine="true"
                         android:textColor="#000"
@@ -138,11 +139,30 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/editTextHeight"
                         android:background="#ffffff"
-                        android:hint="Area where looking to marry"
+                        android:hint="Services"
                         android:paddingLeft="@dimen/paddingLeftEditText"
                         android:singleLine="true"
                         android:textColor="#000"
                         android:textSize="@dimen/textSizeLarge" />
+                    
+                    
+                     <!-- <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/viewSeparatorHeight"
+                        android:background="#EEECED" />
+                    
+                    
+                    <EditText
+                        android:id="@+id/etContactNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/editTextHeight"
+                        android:background="#ffffff"
+                        android:hint="Area where looking to marry"
+                        android:paddingLeft="@dimen/paddingLeftEditText"
+                        android:singleLine="true"
+                        android:textColor="#000"
+                        android:textSize="@dimen/textSizeLarge" /> -->
+                    
 
                     <View
                         android:layout_width="match_parent"
