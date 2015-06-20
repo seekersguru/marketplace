@@ -48,9 +48,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'tastypie',
-    'core',
-
+    'api',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -61,6 +59,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'api.api_middleware.ApiMiddleware'
 )
 
 ROOT_URLCONF = 'market_place.urls'
