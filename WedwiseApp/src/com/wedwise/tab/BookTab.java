@@ -8,16 +8,16 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 
 import com.wedwise.adapter.MessagesListAdapter;
-import com.wedwise.chat.MessageChatActivity;
 import com.wedwiseapp.R;
+import com.wedwiseapp.util.CustomFonts;
 
 /**
  */
@@ -27,7 +27,7 @@ public class BookTab extends Fragment {
 	ArrayList<String> listMessages;
 	MessagesListAdapter adapterMessageList;
 	Button btnCreateBook;
-	
+
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -51,6 +51,7 @@ public class BookTab extends Fragment {
 		listMessages.add("James Moore");
 		listMessages.add("James Moore");
 		listMessages.add("James Moore");
+		//		CustomFonts.setFontOfButton(getActivity(),btnCreateBook,"fonts/GothamRnd-Light.otf");
 		adapterMessageList=new MessagesListAdapter(getActivity(), listMessages);
 		lvBook.setAdapter(adapterMessageList);
 		lvBook.setOnItemClickListener(new OnItemClickListener() {
@@ -58,12 +59,12 @@ public class BookTab extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				Intent myIntent=new Intent(getActivity(),MessageChatActivity.class);
-				/*getActivity().*/startActivity(myIntent);
-				getActivity().overridePendingTransition(R.anim.right_in, R.anim.left_out);
+				/*Intent myIntent=new Intent(getActivity(),MessageChatActivity.class);
+				getActivity().startActivity(myIntent);
+				getActivity().overridePendingTransition(R.anim.right_in, R.anim.left_out);*/
 			}
 		});
-		
+
 		btnCreateBook.setOnClickListener(new OnClickListener() {
 
 			@Override

@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rlCalendar_DateCellPatrent"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="#fff" >
 
     <RelativeLayout
         android:id="@+id/rlContainer"
@@ -16,6 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
+            android:text="13"
             android:textColor="#000"
             android:textSize="13sp" />
 
@@ -25,11 +27,21 @@
             android:layout_height="20dp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="0dp"
+            android:background="@drawable/notification_date_bg"
             android:gravity="center"
-            android:textColor="#ffffff"
-            android:textSize="10sp"
             android:text="45"
-            android:background="@drawable/notification_date_bg" />
+            android:textColor="#ffffff"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/tvPeekDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvDate"
+            android:layout_centerHorizontal="true"
+            android:text="Peek date"
+            android:textColor="#000"
+            android:textSize="10sp" />
 
         <LinearLayout
             android:id="@+id/llSelectedDateBorder"

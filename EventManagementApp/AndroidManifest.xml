@@ -21,7 +21,7 @@
 
         <!-- android:theme="@android:style/Theme.Holo.Light.NoActionBar.TranslucentDecor" -->
         <activity
-            android:name="LoginSignUpActivity"
+            android:name=".Splash"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -29,6 +29,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="LoginSignUpActivity"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="HomeActivity"
@@ -45,12 +49,14 @@
             android:name="com.eventmanagementapp.calendar.CalendarActivity"
             android:screenOrientation="portrait" >
         </activity>
-     <!--    <activity
+        <!--
+        <activity
             android:name=".LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/FullBleedTheme"
             android:windowSoftInputMode="adjustResize" >
-        </activity> -->
+        </activity>
+        -->
         <activity
             android:name=".ForgotPasswordActivity"
             android:screenOrientation="portrait" >
@@ -67,15 +73,26 @@
             android:name="com.eventmanagementapp.Activities.VendorCategoryHome"
             android:screenOrientation="portrait" >
         </activity>
-        
-         <activity
+        <activity
             android:name="com.eventmanagementapp.Activities.BidBookDetailsScreenActivity"
             android:screenOrientation="portrait" >
         </activity>
-        <!-- <activity
+        <activity
+            android:name="com.eventmanagementapp.Activities.MessageListActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.eventmanagementapp.tab.BidBookCreateActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <!--
+        <activity
             android:name="com.eventmanagementapp.Activities.VendorDetailsPageMapPopup"
             android:screenOrientation="portrait" >
-        </activity> -->
+        </activity>
+        -->
+
 
         <!--
              <meta-data

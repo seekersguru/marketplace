@@ -9,7 +9,10 @@
         android:id="@+id/category_list"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:longClickable="true" >
-	</ListView>
-	<include layout="@layout/bottombar"/>
+        android:longClickable="true"
+        android:scrollbars="none" >
+    </ListView>
+
+    <include layout="@layout/bottombar" />
+
 </LinearLayout>

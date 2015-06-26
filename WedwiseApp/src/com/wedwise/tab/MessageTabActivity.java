@@ -26,7 +26,7 @@ public class MessageTabActivity extends FragmentActivity {
 	ViewPager pager;
 	TabAdapter adapter;
 	SlidingTabLayout tabs;
-	CharSequence Titles[]={"Bid","Book","Message"};
+	CharSequence Titles[]={"Enquiry","Book","Message"};
 	int Numboftabs =3;
 	Button btnBack;
 

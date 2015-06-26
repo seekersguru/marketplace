@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.eventmanagementapp.R;
 import com.eventmanagementapp.adapter.ChatAdapter;
+import com.eventmanagementapp.util.CustomFonts;
 
 import android.app.ActionBar;
 import android.content.Context;
@@ -38,6 +39,7 @@ public class MessageChatActivity extends FragmentActivity{
 		super.onCreate(arg0);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.messagechatactivity);
+		mContext=MessageChatActivity.this;
 		toolbar=(Toolbar) findViewById(R.id.toolbar);
 		toolbar.setBackgroundColor(Color.parseColor("#ffffff"));
 		lvChatMessages=(ListView) findViewById(R.id.lvChatMessages);
@@ -59,6 +61,7 @@ public class MessageChatActivity extends FragmentActivity{
 		listChat.add("Howz everyone?");
 		listChat.add("All are fine here");
 		listChat.add("What about vacations?");
+		CustomFonts.setFontOfTextView(mContext, tvToolBar, "fonts/GothamRnd-Light.otf");
 		adapterChat=new ChatAdapter(MessageChatActivity.this,listChat);
 		lvChatMessages.setAdapter(adapterChat);
 		btnBack.setOnClickListener(new OnClickListener() {

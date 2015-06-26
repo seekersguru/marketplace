@@ -22,10 +22,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/btnCreate"
-      
         android:cacheColorHint="@android:color/transparent"
         android:divider="#f1f1f1"
-        android:dividerHeight="1dp" >
+        android:dividerHeight="1dp"
+        android:scrollbars="none" >
     </ListView>
-<!--   android:layout_marginTop="@dimen/marginTopListView" -->
+    <!-- android:layout_marginTop="@dimen/marginTopListView" -->
+
 </RelativeLayout>

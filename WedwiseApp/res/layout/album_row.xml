@@ -15,13 +15,13 @@
 
         <TextView
             android:id="@+id/tvCategoryName"
-            android:layout_width="@dimen/widthAlbumtextView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/paddingLeftEditText"
+            android:padding="@dimen/marginleftBackButton"
             android:textColor="#ffffff"
             android:background="#F05543"
             android:gravity="center"
-            android:text="Ankur paliwal"
+            android:text="Ankur Paliwal"
             android:layout_alignParentRight="true"
             android:layout_alignBottom="@+id/imViewMenuImage"
             android:textSize="@dimen/textSizeNormal" />

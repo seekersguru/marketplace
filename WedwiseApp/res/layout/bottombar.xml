@@ -29,10 +29,10 @@
 
             <Button
                 android:id="@+id/btnMail"
-                android:layout_width="@dimen/buttonMessageWidth"
-                android:layout_height="@dimen/buttonMessageHeight"
+                android:layout_width="@dimen/dimenBottomBarIcons"
+                android:layout_height="@dimen/dimenBottomBarIcons"
                 android:layout_gravity="center"
-                android:background="@drawable/mail" />
+                android:background="@drawable/mail_icon" />
         </LinearLayout>
 
         <LinearLayout
@@ -72,7 +72,7 @@
             <Button
                 android:id="@+id/btnMenu"
                 android:layout_width="@dimen/dimenBottomBarIcons"
-                android:layout_height="@dimen/buttonMessageHeight"
+                android:layout_height="@dimen/dimenBottomBarIcons"
                 android:layout_gravity="center"
                 android:background="@drawable/menu" />
         </LinearLayout>

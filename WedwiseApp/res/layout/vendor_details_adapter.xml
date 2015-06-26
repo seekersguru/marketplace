@@ -7,15 +7,16 @@
     <ImageView
         android:id="@+id/vendor"
         android:layout_width="match_parent"
-        android:layout_height="128dp" 
-        android:scaleType="fitXY"/>
-    
+        android:layout_height="128dp"
+        android:scaleType="fitXY" />
+
     <TextView
         android:id="@+id/vendor_details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textColor="#000"
-        android:textSize="17sp"
+        android:textSize="@dimen/textSizeNormal"
         android:textStyle="bold" />
+
 </RelativeLayout>

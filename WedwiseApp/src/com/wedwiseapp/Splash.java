@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
 
-import com.wedwiseapp.login.LoginSignUpActivity;
-import com.wedwiseapp.login.RegisterActivity;
 import com.wedwiseapp.util.PreferenceUtil;
 
 public class Splash extends Activity {
@@ -21,18 +19,18 @@ public class Splash extends Activity {
 		PreferenceUtil.init(this);
 
 	}
-	
+
 	@Override
 	protected void onPause() {
 		super.onPause();
 	}
-	
+
 	@Override
 	protected void onResume() {
 		super.onResume();
 		launch(this);
 	}
-	
+
 	private void launch(final Context context) {
 		Handler handler = new Handler();
 		boolean isRegistered = PreferenceUtil.getInstance().isRegistered();
@@ -40,9 +38,9 @@ public class Splash extends Activity {
 			handler.postDelayed(new Runnable() {
 				@Override
 				public void run() {
-//					Intent intent = new Intent(context, RegisterActivity.class);
-//					intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-//					startActivity(intent);
+					//					Intent intent = new Intent(context, RegisterActivity.class);
+					//					intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+					//					startActivity(intent);
 					finish();
 				}
 			}, 2000);
@@ -51,9 +49,7 @@ public class Splash extends Activity {
 			handler.postDelayed(new Runnable() {
 				@Override
 				public void run() {
-					
-					
-					Intent myIntent=new Intent(context,VendorCategoryHome.class);
+					Intent myIntent=new Intent(context,NavigationDrawerHomeActivity.class);
 					startActivity(myIntent);
 					overridePendingTransition(R.anim.right_in, R.anim.left_out);
 					finish();

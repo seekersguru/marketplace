@@ -18,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.eventmanagementapp.R;
+import com.eventmanagementapp.util.CustomFonts;
 
 public class CalendarAdapter extends BaseAdapter {
 	private Context mContext;
@@ -44,7 +45,7 @@ public class CalendarAdapter extends BaseAdapter {
 	private View previousView;
 
 	Calendar a;
-	TextView dayView,tvCount;
+	TextView dayView,tvCount,tvPeekDate;
 	Button btnDisableOverlay;
 	RelativeLayout rlContainer;
 	LinearLayout llSelectedDateBorder;
@@ -109,6 +110,7 @@ public class CalendarAdapter extends BaseAdapter {
 		}
 		dayView = (TextView) v.findViewById(R.id.tvDate);
 		tvCount=(TextView) v.findViewById(R.id.tvCount);
+		tvPeekDate=(TextView) v.findViewById(R.id.tvPeekDate);
 		btnDisableOverlay=(Button) v.findViewById(R.id.btnDisableOverlay);
 		rlContainer=(RelativeLayout) v.findViewById(R.id.rlContainer);
 		llSelectedDateBorder=(LinearLayout) v.findViewById(R.id.llSelectedDateBorder);
@@ -116,7 +118,12 @@ public class CalendarAdapter extends BaseAdapter {
 		llSelectedDateBorder.setVisibility(View.GONE);
 		rlContainer.setBackgroundColor(Color.parseColor("#ffffff"));
 
+//		CustomFonts.setFontOfTextView(mContext, dayView, "fonts/GothamRnd-Light.otf");
+//		CustomFonts.setFontOfTextView(mContext, tvCount, "fonts/GothamRnd-Light.otf");
+		dayView.setTextColor(Color.BLACK);
 		tvCount.setText("19");
+		tvCount.setVisibility(View.GONE);
+		tvPeekDate.setVisibility(View.GONE);
 		//		tvCount.setTextColor(Color.parseColor("#ffffff"));
 		//		tvCount.setBackground(mContext.getResources().getDrawable(R.drawable.notification));
 
@@ -126,51 +133,13 @@ public class CalendarAdapter extends BaseAdapter {
 		String gridvalue = separatedTime[2].replaceFirst("^0*", "");
 		// checking whether the day is in current month or not.
 		if ((Integer.parseInt(gridvalue) > 1) && (position < firstDay)) {
-			// setting offdays to white color.
-			//			dayView.setTextColor(Color.WHITE);
-			//			dayView.setClickable(false);
-			//			dayView.setFocusable(false);
-			//			v.setClickable(false);
-			//			v.setFocusable(false);
-			//			rlContainer.setBackgroundColor(Color.parseColor("#ffffff"));//setBackground(mContext.getResources().getDrawable(R.drawable.calendar_cell_white));
 			btnDisableOverlay.setVisibility(View.VISIBLE);
 			llSelectedDateBorder.setVisibility(View.GONE);
-			/*try {
-				v.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.list_item_background_disable));
-			} catch (Exception e) {
-				e.getMessage();
-			}*/
 		} else if ((Integer.parseInt(gridvalue) < 15) && (position > 28)) {
-			//			dayView.setTextColor(Color.WHITE);
-			//			dayView.setClickable(false);
-			//			dayView.setFocusable(false);
-			//			v.setClickable(false);
-			//			v.setFocusable(false);
-			//			rlContainer.setBackgroundColor(Color.parseColor("#ffffff"));//setBackground(mContext.getResources().getDrawable(R.drawable.calendar_cell_white));
 			btnDisableOverlay.setVisibility(View.VISIBLE);
 			llSelectedDateBorder.setVisibility(View.GONE);
-			//			v.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.list_item_background_disable));//setBackgroundResource(R.drawable.list_item_background_disable);
 		} else{
-			//			rlContainer.setBackgroundColor(Color.parseColor("#ECECEC"));
-			//			dayView.setClickable(false);
-			//			dayView.setFocusable(false);
-			//			v.setClickable(false);
-			//			v.setFocusable(false);             //#EEECED
-			//			rlContainer.setBackgroundColor(Color.parseColor("#ECECEC"));//setBackground(mContext.getResources().getDrawable(R.drawable.calendar_cell));
-			// setting curent month's days in blue color.
-			//			dayView.setTextColor(v.getResources().getColor(R.color.blue));
-
-			//			v.setBackgroundResource(R.drawable.list_item_background);
-			//			v.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.list_item_background));		
 		}
-
-		/*if (dayString.get(position).equals(curentDateString)) {
-			setSelected(v);
-			previousView = v;
-		} else {
-			rlContainer.setBackgroundColor(Color.parseColor("#EEECED"));
-			//			v.setBackgroundResource(R.drawable.list_item_background);
-		}*/
 		dayView.setText(gridvalue);
 
 		// create date string for comparison
@@ -184,6 +153,13 @@ public class CalendarAdapter extends BaseAdapter {
 			monthStr = "0" + monthStr;
 		}
 
+		if(date.equals("2015-06-25") || date.equals("2015-06-28") || date.equals("2015-06-30") || date.equals("2015-07-01") || date.equals("2015-07-05"))
+		{
+			rlContainer.setBackgroundColor(Color.parseColor("#BDBDBD"));//#00796B
+			tvCount.setVisibility(View.VISIBLE);
+			tvPeekDate.setVisibility(View.VISIBLE);
+		}
+
 		// show icon if date is not empty and it exists in the items array
 		//		ImageView iw = (ImageView) v.findViewById(R.id.date_icon);
 		//		if (date.length() > 0 && items != null && items.contains(date)) {
@@ -193,38 +169,19 @@ public class CalendarAdapter extends BaseAdapter {
 		//		}
 		return v;
 	}
-
+	static int count=1;
 	public View setSelected(View view) {
 		RelativeLayout rlTemp;
-//		LinearLayout llTemp;
-//		llTemp=(LinearLayout) view.findViewById(R.id.rlContainer).findViewById(R.id.llSelectedDateBorder);
 		rlTemp=(RelativeLayout) view.findViewById(R.id.rlContainer);
-		/*if (previousView != null) {
-			previousView.findViewById(R.id.rlContainer).findViewById(R.id.llSelectedDateBorder).setVisibility(View.GONE);
-			previousView.findViewById(R.id.rlContainer).setBackgroundColor(Color.parseColor("#EEECED"));
-			//Make OuterBoundary Visibility Gone
-
-
-			//			view.setBackgroundColor(Color.parseColor("#cc00cc"));
-			//setBackground(mContext.getResources().getDrawable(R.drawable.calendar_cell));
-			//			previousView.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.list_item_background));
-		}
-		previousView = rlTemp;
-		rlTemp.setBackgroundColor(Color.parseColor("#ffffff"));
-		//setBackground(mContext.getResources().getDrawable(R.drawable.calendar_cel_selectl));//setBackgroundColor(Color.parseColor("#cc00cc"));
-		//Make OuterBoundary Visible
-		llTemp.setVisibility(View.VISIBLE);*/
-
 		//MultiSelection
-		rlTemp.setBackgroundColor(Color.parseColor("#F05543"));
-		TextView tv=(TextView)view.findViewById(R.id.rlContainer).findViewById(R.id.tvDate);
-		tv.setTextColor(Color.parseColor("#ffffff"));
+		if(count==1)
+		{
+			rlTemp.setBackgroundColor(Color.parseColor("#F05543"));
+			TextView tv=(TextView)view.findViewById(R.id.rlContainer).findViewById(R.id.tvDate);
+			tv.setTextColor(Color.parseColor("#ffffff"));
+			count++;
+		}
 
-		//		llTemp.setVisibility(View.VISIBLE);
-
-		//		view.setBackgroundColor(Color.parseColor("#EEECED"));
-		//setBackground(mContext.getResources().getDrawable(R.drawable.calendar_cel_selectl));
-		//		view.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.calendar_cel_selectl));
 		return view;
 	}
 

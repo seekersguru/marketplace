@@ -2,10 +2,11 @@
 <resources>
 
     <string name="app_name">Wedwise</string>
-    <string name="open">open</string>
     <string name="nav_item_home">Home</string>
     <string name="nav_item_friends">Friends</string>
     <string name="nav_item_notifications">Messages</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
 
     <!-- navigation drawer item labels -->
     <string-array name="nav_drawer_labels">
@@ -13,14 +14,20 @@
         <item>@string/nav_item_friends</item>
         <item>@string/nav_item_notifications</item>
     </string-array>
-
     <string-array name="timeSlotArray">
         <item>Morning</item>
         <item>Noon</item>
         <item>Evening</item>
         <item>Night</item>
     </string-array>
-    
+    <string-array name="navigationlistarray">
+        <item>Banquite</item>
+        <item>Decorators</item>
+        <item>Caterors</item>
+        <item>Photography</item>
+        <item>Others</item>
+    </string-array>
+
     <!--
     Calendar
     <string name="customize">Customize</string>
@@ -50,9 +57,9 @@
         <item>Oct</item>
         <item>Nov</item>
         <item>DEC</item>
-    </string-array>
-
+    </string-array>
     -->
 
     <string name="title_activity_category">CategoryActivity</string>
-    </resources>
+
+</resources>

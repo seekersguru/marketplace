@@ -14,7 +14,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.eventmanagementapp.R;
-import com.eventmanagementapp.Activities.MessageChatActivity;
+import com.eventmanagementapp.adapter.BookListAdapter;
 import com.eventmanagementapp.adapter.MessagesListAdapter;
 
 /**
@@ -23,7 +23,7 @@ public class BookTab extends Fragment {
 
 	ListView lvBook;
 	ArrayList<String> listMessages;
-	MessagesListAdapter adapterMessageList;
+	BookListAdapter adapterMessageList;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -46,15 +46,16 @@ public class BookTab extends Fragment {
 		listMessages.add("James Moore");
 		listMessages.add("James Moore");
 		listMessages.add("James Moore");
-		adapterMessageList=new MessagesListAdapter(getActivity(), listMessages);
+		adapterMessageList=new BookListAdapter(getActivity(), listMessages);
 		lvBook.setAdapter(adapterMessageList);
 		lvBook.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				Intent myIntent=new Intent(getActivity(),MessageChatActivity.class);
-				/*getActivity().*/startActivity(myIntent);
+				Intent myIntent=new Intent(getActivity(),BidBookCreateActivity.class);
+				myIntent.putExtra("type","book");
+				getActivity().startActivity(myIntent);
 				getActivity().overridePendingTransition(R.anim.right_in, R.anim.left_out);
 			}
 		});

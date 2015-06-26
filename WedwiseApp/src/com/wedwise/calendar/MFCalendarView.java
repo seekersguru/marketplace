@@ -22,6 +22,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.wedwiseapp.R;
+import com.wedwiseapp.util.CustomFonts;
 
 public class MFCalendarView extends LinearLayout{
 
@@ -29,7 +30,6 @@ public class MFCalendarView extends LinearLayout{
 
 	private Calendar month;
 	private CalendarAdapter calendaradapter;
-
 	private Handler handler;
 	private ExpandableHeightGridView gridview;
 	private String currentSelectedDate;
@@ -78,6 +78,8 @@ public class MFCalendarView extends LinearLayout{
 		TextView title = (TextView) view.findViewById(R.id.title);
 		title.setText(android.text.format.DateFormat.format("MMMM yyyy", month));
 
+		CustomFonts.setFontOfTextView(context, title, "fonts/GothamRnd-Light.otf");
+		
 		RelativeLayout previous = (RelativeLayout) view.findViewById(R.id.previous);
 
 		previous.setOnClickListener(new OnClickListener() {

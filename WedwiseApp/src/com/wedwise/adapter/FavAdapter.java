@@ -2,15 +2,18 @@ package com.wedwise.adapter;
 
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wedwiseapp.FavData;
 import com.wedwiseapp.R;
+import com.wedwiseapp.util.CustomFonts;
 
 public class FavAdapter extends BaseAdapter {
 
@@ -18,10 +21,11 @@ public class FavAdapter extends BaseAdapter {
 	private LayoutInflater infalter;
 	private ArrayList<FavData> data = new ArrayList<FavData>();
 
-	public FavAdapter(Context c) {
+	public FavAdapter(Context c,ArrayList<FavData> data) {
 		infalter = (LayoutInflater) c
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		mContext = c;
+		this.data=data;
 	}
 
 	@Override
@@ -42,29 +46,18 @@ public class FavAdapter extends BaseAdapter {
 
 	public void addAll(ArrayList<FavData> files) {
 
-		try {
-
-			this.data.clear();
-			this.data.addAll(files);
-
-		} catch (Exception e) {
-
-		}
-
+		this.data.clear();
+		this.data.addAll(files);
 		notifyDataSetChanged();
 	}
 
 	public void add(FavData files) {
 
-		try {
-			this.data.add(files);
-		} catch (Exception e) {
-
-		}
-
+		this.data.add(files);
 		notifyDataSetChanged();
 	}
 
+	@SuppressLint("InflateParams")
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -73,25 +66,32 @@ public class FavAdapter extends BaseAdapter {
 			holder = new ViewHolder();
 
 			convertView = infalter.inflate(R.layout.favorite_item, null);
-			// holder.tvMenuTitle = (TextView) convertView;
+			holder.tvVenue = (TextView) convertView.findViewById(R.id.tvVenue);
+			holder.tvVeg_NonVeg=(TextView) convertView.findViewById(R.id.tvVeg_NonVeg);
+			holder.tvCapacity=(TextView) convertView.findViewById(R.id.tvCapacity);
+			holder.tvStartingPrice=(TextView) convertView.findViewById(R.id.tvStartingPrice);
+			holder.imViewBackground=(ImageView) convertView.findViewById(R.id.imViewBackground);
+			holder.imViewCar=(ImageView) convertView.findViewById(R.id.imViewCar);
+			holder.imViewGlass=(ImageView) convertView.findViewById(R.id.imViewGlass);
+			holder.imViewLocation=(ImageView) convertView.findViewById(R.id.imViewLocation);
+			holder.imViewHeart=(ImageView) convertView.findViewById(R.id.imViewHeart);
 
 			convertView.setTag(holder);
-
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-
-		try {
-			// holder.tvMenuTitle.setText(data.get(position).title);
-		} catch (Exception e) {
-
-		}
+//		CustomFonts.setFontOfTextView(mContext,holder.tvVenue,"fonts/GothamRnd-Light.otf");
+//		CustomFonts.setFontOfTextView(mContext,holder.tvVeg_NonVeg,"fonts/GothamRnd-Light.otf");
+//		CustomFonts.setFontOfTextView(mContext,holder.tvCapacity,"fonts/GothamRnd-Light.otf");
+//		CustomFonts.setFontOfTextView(mContext,holder.tvStartingPrice,"fonts/GothamRnd-Light.otf");
+//		CustomFonts.setFontOfTextView(mContext,holder.tvVenue,"fonts/GothamRnd-Light.otf");
 
 		return convertView;
 	}
 
 	public class ViewHolder {
-		TextView tvMenuTitle;
+		ImageView imViewBackground,imViewCar,imViewGlass,imViewLocation,imViewHeart;
+		TextView tvVenue,tvVeg_NonVeg,tvCapacity,tvStartingPrice;
 	}
 
 }

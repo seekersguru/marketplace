@@ -26,7 +26,9 @@
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/marginleftBackButton"
+            android:layout_toRightOf="@+id/btnBack"
             android:text="Schedule Visit"
             android:textColor="#000"
             android:textSize="@dimen/textSizeLarge"
@@ -39,7 +41,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:background="@drawable/bid"
+            android:background="@drawable/leads_icon"
             android:visibility="gone" />
 
         <View
@@ -49,93 +51,13 @@
             android:background="@drawable/divider_bottom_bar" />
     </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/llBottomBarParent"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/bottomBarHeight"
-        android:layout_alignParentBottom="true"
-        android:background="#F0EEEF"
-        android:orientation="vertical" >
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/bottomBarDividerHeight"
-            android:background="@drawable/divider_bottom_bar" />
-
-        <LinearLayout
-            android:id="@+id/llBottomBar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#00000000"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:weightSum="1" >
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight=".25"
-                android:gravity="center" >
-
-                <Button
-                    android:id="@+id/btnMail"
-                    android:layout_width="@dimen/buttonMessageWidth"
-                    android:layout_height="@dimen/buttonMessageHeight"
-                    android:layout_gravity="center"
-                    android:background="@drawable/mail" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight=".25"
-                android:gravity="center" >
-
-                <Button
-                    android:id="@+id/btnHome"
-                    android:layout_width="@dimen/dimenBottomBarIcons"
-                    android:layout_height="@dimen/dimenBottomBarIcons"
-                    android:layout_gravity="center"
-                    android:background="@drawable/home" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight=".25"
-                android:gravity="center" >
-
-                <Button
-                    android:id="@+id/btnLike"
-                    android:layout_width="@dimen/dimenBottomBarIcons"
-                    android:layout_height="@dimen/dimenBottomBarIcons"
-                    android:layout_gravity="center"
-                    android:background="@drawable/like" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight=".25"
-                android:gravity="center" >
-
-                <Button
-                    android:id="@+id/btnMenu"
-                    android:layout_width="@dimen/dimenBottomBarIcons"
-                    android:layout_height="@dimen/buttonMessageHeight"
-                    android:layout_gravity="center"
-                    android:background="@drawable/menu" />
-            </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
-
     <ScrollView
         android:id="@+id/svCalendar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rlTopBar"
-        android:layout_marginBottom="@dimen/bottomBarHeight"
-        android:layout_marginTop="15dp"
+        android:layout_marginBottom="@dimen/marginLeftRightllFields"
+        android:layout_marginTop="@dimen/paddingLeftEditText1"
         android:fillViewport="true" >
 
         <LinearLayout

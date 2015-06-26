@@ -68,6 +68,7 @@
             android:background="@drawable/divider_bottom_bar" />
     </RelativeLayout>
 
+    <!--
     <RelativeLayout
         android:id="@+id/rlBottomBar"
         android:layout_width="match_parent"
@@ -155,13 +156,15 @@
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
+    -->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/rlBottomBar"
         android:layout_below="@+id/rlTopBar"
         android:background="@color/appbackgroundcolor" >
+
+        <!-- android:layout_above="@+id/rlBottomBar" -->
 
         <ScrollView
             android:layout_width="match_parent"
@@ -199,7 +202,7 @@
                         android:gravity="center"
                         android:singleLine="false"
                         android:text="Sarinaka Junction,Andheri Kurla Road,Andheri East,Mumbai,400702"
-                        android:textColor="#C0C0C0"
+                        android:textColor="#999999"
                         android:textSize="@dimen/textSizeNormal" />
 
                     <TextView
@@ -213,7 +216,7 @@
                         android:maxLength="15"
                         android:singleLine="true"
                         android:text="9314851230"
-                        android:textColor="#C0C0C0"
+                        android:textColor="#999999"
                         android:textSize="@dimen/textSizeMedium" />
 
                     <Button
@@ -252,7 +255,7 @@
                             android:layout_weight=".5"
                             android:gravity="center"
                             android:text="Event Date"
-                            android:textColor="#c0c0c0" />
+                            android:textColor="#999999" />
 
                         <TextView
                             android:id="@+id/tvEventDate"
@@ -282,7 +285,7 @@
                             android:layout_weight=".5"
                             android:gravity="center"
                             android:text="Time Slot"
-                            android:textColor="#c0c0c0" />
+                            android:textColor="#999999" />
 
                         <TextView
                             android:id="@+id/tvTimeSlot"
@@ -312,7 +315,7 @@
                             android:layout_weight=".5"
                             android:gravity="center"
                             android:text="Package"
-                            android:textColor="#c0c0c0" />
+                            android:textColor="#999999" />
 
                         <TextView
                             android:id="@+id/tvPackage"
@@ -342,7 +345,7 @@
                             android:layout_weight=".5"
                             android:gravity="center"
                             android:text="Quoted Price"
-                            android:textColor="#c0c0c0" />
+                            android:textColor="#999999" />
 
                         <TextView
                             android:id="@+id/tvQuotdPrice"
@@ -372,7 +375,7 @@
                             android:layout_weight=".5"
                             android:gravity="center"
                             android:text="Bid Price"
-                            android:textColor="#c0c0c0" />
+                            android:textColor="#999999" />
 
                         <TextView
                             android:id="@+id/tvBidPrice"
@@ -384,19 +387,17 @@
                             android:textColor="#000" />
                     </LinearLayout>
 
-                    
                     <View
                         android:id="@+id/viewSeparator_Divider"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/viewSeparatorHeight"
                         android:background="@drawable/divider" />
-                    
-                    
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:layout_marginTop="@dimen/marginTopBUttonSignIn"
+                        android:orientation="horizontal"
                         android:weightSum="1" >
 
                         <LinearLayout
@@ -418,6 +419,7 @@
                                     android:background="@drawable/correct" />
 
                                 <TextView
+                                    android:id="@+id/tvAccept"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Accept"
@@ -445,6 +447,7 @@
                                     android:background="@drawable/cross" />
 
                                 <TextView
+                                    android:id="@+id/tvReject"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Reject"
@@ -472,6 +475,7 @@
                                     android:background="@drawable/rebid" />
 
                                 <TextView
+                                    android:id="@+id/tvRebid"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Rebid"
@@ -499,6 +503,7 @@
                                     android:background="@drawable/pending" />
 
                                 <TextView
+                                    android:id="@+id/tvPending"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Pending"

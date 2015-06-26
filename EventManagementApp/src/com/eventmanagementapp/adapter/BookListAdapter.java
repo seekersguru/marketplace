@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.eventmanagementapp.R;
+import com.eventmanagementapp.util.CustomFonts;
 
 public class BookListAdapter extends BaseAdapter{
 
@@ -48,6 +49,9 @@ public class BookListAdapter extends BaseAdapter{
 		TextView tvSubject=(TextView) listItem.findViewById(R.id.tvSubject);
 		TextView tvDescription=(TextView) listItem.findViewById(R.id.tvDescription);
 		ImageView imViewAtttachment=(ImageView) listItem.findViewById(R.id.imViewAttachment);
+//		CustomFonts.setFontOfTextView(mContext,tvDate,"fonts/GothamRnd-Light.otf");
+//		CustomFonts.setFontOfTextView(mContext,tvSubject,"fonts/GothamRnd-Light.otf");
+//		CustomFonts.setFontOfTextView(mContext,tvDescription,"fonts/GothamRnd-Light.otf");
 		tvContactName.setText(listMessages.get(position));
 		return listItem;
 	}

@@ -32,11 +32,12 @@
             android:id="@+id/pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/bottomBarHeight"
+           
             android:layout_weight="1" >
+        <!--  android:layout_marginBottom="@dimen/bottomBarHeight" -->
         </android.support.v4.view.ViewPager>
     </LinearLayout>
-
+<!-- 
     <LinearLayout
         android:id="@+id/llBottomBarParent"
         android:layout_width="match_parent"
@@ -116,7 +117,7 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-
+ -->
 </RelativeLayout>
 <!--
 <?xml version="1.0" encoding="utf-8"?>
