@@ -1,12 +1,17 @@
 from django.template.response import TemplateResponse
 from urls import patterns
 def index(request):
+
     return TemplateResponse(request,'api/api_index.html',
                 {"patterns":patterns})
 
 
 ########## Customer Login Registration
 def customer_registration(request):
+    print 1111
+    from customer.models import Customer
+    import pdb;pdb.set_trace()
+    fields = {}
     print getdoc(globals()[getframeinfo(currentframe()).function])
     return TemplateResponse(request,'api/api.html',{})
 def customer_login(request):
@@ -20,14 +25,6 @@ def customer_forgot_password(request):
 def customer_reset_password(request):
     return TemplateResponse(request,'api/api.html',{})
 def customer_bg_image_login_registration(request):
-    return TemplateResponse(request,'api/api.html',{})
-def customer_registration(request):
-    return TemplateResponse(request,'api/api.html',{})
-def customer_registration(request):
-    return TemplateResponse(request,'api/api.html',{})
-def customer_registration(request):
-    return TemplateResponse(request,'api/api.html',{})
-def customer_registration(request):
     return TemplateResponse(request,'api/api.html',{})
 
 
