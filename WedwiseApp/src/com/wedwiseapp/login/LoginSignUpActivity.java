@@ -1,7 +1,9 @@
 package com.wedwiseapp.login;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.Toolbar;
@@ -14,7 +16,6 @@ import android.widget.TextView;
 
 import com.wedwiseapp.R;
 import com.wedwiseapp.VendorCategoryHome;
-import com.wedwiseapp.VendorDetailsPageMapPopup;
 import com.wedwiseapp.util.CustomFonts;
 
 //import com.google.android.gms.common.ConnectionResult;
@@ -24,6 +25,7 @@ import com.wedwiseapp.util.CustomFonts;
 //import com.google.android.gms.plus.Plus;
 //import com.google.android.gms.plus.model.people.Person;
 
+@TargetApi(Build.VERSION_CODES.KITKAT)
 public class LoginSignUpActivity extends FragmentActivity  /*implements ConnectionCallbacks,
 OnConnectionFailedListener*/ {
 
@@ -78,10 +80,10 @@ OnConnectionFailedListener*/ {
 		tvToolBar=(TextView)toolbar.findViewById(R.id.tvToolBar);
 		tvToolBar.setText("Log In or Sign Up");
 		btnBack.setVisibility(View.VISIBLE);
-		CustomFonts.setFontOfButton(mContext, btnSignUp,"fonts/GothamRnd-Book_0.otf");
-		CustomFonts.setFontOfButton(mContext, btnLogin,"fonts/GothamRnd-Book_0.otf");
-		//		CustomFonts.setFontOfTextView(mContext, tvToolBar,"fonts/GothamRnd-Light.otf");
-		CustomFonts.setFontOfTextView(mContext, tvBottomBar,"fonts/GothamRnd-Book_0.otf");
+//		CustomFonts.setFontOfButton(mContext, btnSignUp,"fonts/GothamRnd-Light.otf");
+//		CustomFonts.setFontOfButton(mContext, btnLogin,"fonts/GothamRnd-Light.otf");
+//		CustomFonts.setFontOfTextView(mContext, tvToolBar,"fonts/GothamRnd-Light.otf");
+//		CustomFonts.setFontOfTextView(mContext, tvBottomBar,"fonts/GothamRnd-Light.otf");
 		btnBack.setOnClickListener(new OnClickListener() {
 
 			@Override

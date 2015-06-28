@@ -14,7 +14,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.eventmanagementapp.R;
-import com.eventmanagementapp.Activities.MessageChatActivity;
+import com.eventmanagementapp.Activities.BidBookDetailsScreenActivity;
+import com.eventmanagementapp.adapter.BookListAdapter;
 import com.eventmanagementapp.adapter.MessagesListAdapter;
 
 /**
@@ -23,7 +24,7 @@ public class BidTab extends Fragment {
 
 	ListView lvBid;
 	ArrayList<String> listMessages;
-	MessagesListAdapter adapterMessageList;
+	BookListAdapter adapterMessageList;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -46,16 +47,19 @@ public class BidTab extends Fragment {
 		listMessages.add("James Moore");
 		listMessages.add("James Moore");
 		listMessages.add("James Moore");
-		adapterMessageList=new MessagesListAdapter(getActivity(), listMessages);
+		adapterMessageList=new BookListAdapter(getActivity(), listMessages);
 		lvBid.setAdapter(adapterMessageList);
 		lvBid.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				Intent myIntent=new Intent(getActivity(),MessageChatActivity.class);
-				/*getActivity().*/startActivity(myIntent);
+				Intent myIntent=new Intent(getActivity(),BidBookDetailsScreenActivity.class);
+				startActivity(myIntent);
 				getActivity().overridePendingTransition(R.anim.right_in, R.anim.left_out);
+				/*Intent myIntent=new Intent(getActivity(),MessageChatActivity.class);
+				getActivity().startActivity(myIntent);
+				getActivity().overridePendingTransition(R.anim.right_in, R.anim.left_out);*/
 			}
 		});
 	}

@@ -117,16 +117,17 @@ TextWatcher{
 			//			etGroomName.setVisibility(View.VISIBLE);
 			//			etArea.setVisibility(View.VISIBLE);
 		}
-		CustomFonts.setFontOfEditText(mContext, etEmailAddress,"fonts/gotham_rounded.ttf");
-		CustomFonts.setFontOfEditText(mContext, etPassword,"fonts/gotham_rounded.ttf");
-		CustomFonts.setFontOfEditText(mContext, etBrideName,"fonts/gotham_rounded.ttf");
-		CustomFonts.setFontOfEditText(mContext, etGroomName,"fonts/gotham_rounded.ttf");
-		CustomFonts.setFontOfEditText(mContext, etArea,"fonts/gotham_rounded.ttf");
-		CustomFonts.setFontOfEditText(mContext, etPasswordReset,"fonts/gotham_rounded.ttf");
-		CustomFonts.setFontOfButton(mContext,btnSignIn,"fonts/gotham_rounded.ttf");
-		CustomFonts.setFontOfButton(mContext,btnPasswordReset,"fonts/gotham_rounded.ttf");
-		CustomFonts.setFontOfTextView(mContext,tvLogin,"fonts/gotham_rounded.ttf");
-		CustomFonts.setFontOfTextView(mContext,tvForgotPassword,"fonts/gotham_rounded.ttf");
+//		CustomFonts.setFontOfEditText(mContext, etEmailAddress,"fonts/GothamRnd-Light.otf");
+//		CustomFonts.setFontOfEditText(mContext, etPassword,"fonts/GothamRnd-Light.otf");
+//		CustomFonts.setFontOfEditText(mContext, etBrideName,"fonts/GothamRnd-Light.otf");
+//		CustomFonts.setFontOfEditText(mContext, etGroomName,"fonts/GothamRnd-Light.otf");
+//		CustomFonts.setFontOfEditText(mContext, etArea,"fonts/GothamRnd-Light.otf");
+//		CustomFonts.setFontOfEditText(mContext, etPasswordReset,"fonts/GothamRnd-Light.otf");
+//		CustomFonts.setFontOfButton(mContext,btnSignIn,"fonts/GothamRnd-Light.otf");
+//		CustomFonts.setFontOfButton(mContext,btnPasswordReset,"fonts/GothamRnd-Light.otf");
+//		CustomFonts.setFontOfTextView(mContext,tvLogin,"fonts/GothamRnd-Light.otf");
+//		CustomFonts.setFontOfTextView(mContext,tvForgotPassword,"fonts/GothamRnd-Light.otf");
+//		CustomFonts.setFontOfTextView(mContext,tvToolBar,"fonts/GothamRnd-Light.otf");
 		etEmailAddress.addTextChangedListener(this);
 		etPassword.addTextChangedListener(this);
 		etBrideName.addTextChangedListener(this);

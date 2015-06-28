@@ -13,99 +13,75 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.PopupMenu;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 
 import com.wedwise.adapter.AlbumAdapter;
 import com.wedwise.tab.MessageTabActivity;
 import com.wedwiseapp.login.LoginSignUpActivity;
+import com.wedwiseapp.login.RegisterActivity;
 
-public class VendorCategoryHome extends Activity implements OnMenuItemClickListener{
+public class VendorCategoryHome extends Activity implements
+OnMenuItemClickListener {
 
-	Button btnBack,btnViewOverFlow;
-	//	RecyclerView listRecyclerView;
+	// Button btnBack;
+	// RecyclerView listRecyclerView;
 	ListView lvAlbums;
 	AlbumAdapter adapterAlbum;
 	ArrayList<String> listItems;
-	Button btnMail;
+	Button btnHome, btnMenu;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.vendorcategoryhome);
-		btnBack=(Button) findViewById(R.id.btnBack);
-		lvAlbums=(ListView) findViewById(R.id.lvAlbums);
-		btnMail=(Button) findViewById(R.id.btnMail);
-		btnViewOverFlow=(Button) findViewById(R.id.btnViewOverFlow);
-		/*listRecyclerView.setHasFixedSize(true);
-		LinearLayoutManager llm = new LinearLayoutManager(this);
-		llm.setOrientation(LinearLayoutManager.VERTICAL);
-		listRecyclerView.setLayoutManager(llm);*/
-		//		listRecyclerView.setItemAnimator(new DefaultItemAnimator());
-		/*
-		 mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-		 */
-		listItems=new ArrayList<String>();
+		lvAlbums = (ListView) findViewById(R.id.lvAlbums);
+		btnHome = (Button) findViewById(R.id.btnMail);
+		btnMenu = (Button) findViewById(R.id.btnMenu);
+
+		listItems = new ArrayList<String>();
 		listItems.add("BANQUITE");
-		listItems.add("DECORATORS");
-		listItems.add("CATERERS");
 		listItems.add("PHOTOGRAPHY");
+		listItems.add("CATERERS");
+		listItems.add("DECORATORS");
 		listItems.add("OTHERS");
-		
-		btnViewOverFlow.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View  view) {
-				PopupMenu popupMenu = new PopupMenu(VendorCategoryHome.this, view);
-				popupMenu.setOnMenuItemClickListener(VendorCategoryHome.this);
-				popupMenu.inflate(R.menu.popup_menu);
-				popupMenu.show();
-			}
-		});
-		btnMail.setOnClickListener(new OnClickListener() {
+
+
+		btnMenu.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				Intent myIntent=new Intent(VendorCategoryHome.this,MessageTabActivity.class);
-				startActivity(myIntent);	
-				overridePendingTransition(R.anim.right_in, R.anim.left_out);	
+				Intent myIntent = new Intent(VendorCategoryHome.this,
+						LoginSignUpActivity.class);
+				startActivity(myIntent);
+
+				overridePendingTransition(R.anim.right_in, R.anim.left_out);
 			}
 		});
-		/*ObjectDrawerItem item1=new ObjectDrawerItem(R.drawable.img1, "BANQUITE");
-		listItems.add(item1);
-		ObjectDrawerItem item2=new
-				ObjectDrawerItem(R.drawable.img2, "DECORATORS");
-		listItems.add(item2); ObjectDrawerItem item3=new
-				ObjectDrawerItem(R.drawable.img3, "CATERERS");
-		listItems.add(item3); ObjectDrawerItem item4=new
-				ObjectDrawerItem(R.drawable.img4, "PHOTOGRAPHY");
-		listItems.add(item4); ObjectDrawerItem item5=new
-				ObjectDrawerItem(R.drawable.img5, "OTHERS");
-		listItems.add(item5);*/
 
-		adapterAlbum=new AlbumAdapter(VendorCategoryHome.this, listItems);
+		btnHome.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent myIntent = new Intent(VendorCategoryHome.this,
+						MessageTabActivity.class);
+				startActivity(myIntent);
+				overridePendingTransition(R.anim.right_in, R.anim.left_out);
+			}
+		});
+
+		adapterAlbum = new AlbumAdapter(VendorCategoryHome.this, listItems);
 		lvAlbums.setAdapter(adapterAlbum);
 
 		lvAlbums.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position,
-					long id) {
-				Intent myIntent=new Intent(VendorCategoryHome.this,FavListActivity.class);
-				startActivity(myIntent);	
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				Intent myIntent = new Intent(VendorCategoryHome.this,
+						FavListActivity.class);
+				startActivity(myIntent);
 				overridePendingTransition(R.anim.right_in, R.anim.left_out);
-			}
-		});
-		//		listRecyclerView.seto
-		btnBack.setVisibility(View.GONE);
-		btnBack.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				finish();
-				overridePendingTransition(R.anim.right_in, R.anim.right_out);
 			}
 		});
 	}
@@ -121,10 +97,11 @@ public class VendorCategoryHome extends Activity implements OnMenuItemClickListe
 		switch (item.getItemId()) {
 		case R.id.login:
 
-			Intent myIntent=new Intent(VendorCategoryHome.this,LoginSignUpActivity.class);
-			startActivity(myIntent);	
+			Intent myIntent = new Intent(VendorCategoryHome.this,
+					LoginSignUpActivity.class);
+			startActivity(myIntent);
 			overridePendingTransition(R.anim.right_in, R.anim.left_out);
-			
+
 			break;
 		}
 		return true;

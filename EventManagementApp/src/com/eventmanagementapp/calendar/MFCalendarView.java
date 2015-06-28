@@ -84,6 +84,7 @@ public class MFCalendarView extends LinearLayout{
 
 			@Override
 			public void onClick(View v) {
+				CalendarAdapter.count=1;
 				setPreviousMonth();
 				refreshCalendar();
 			}
@@ -95,6 +96,7 @@ public class MFCalendarView extends LinearLayout{
 			@Override
 			public void onClick(View v) {
 				setNextMonth();
+				CalendarAdapter.count=1;
 				refreshCalendar();
 			}
 		});

@@ -30,7 +30,7 @@ public class CalendarActivity extends FragmentActivity implements OnClickListene
 {
 
 	MFCalendarView mf;
-	Button btnBack,btnMail,btnSchedule;
+	Button btnBack,btnSchedule;
 	TextView tvTitle,tvScheduledDate;
 	TimePicker tpScheduleVisit;
 	Resources system;
@@ -51,22 +51,10 @@ public class CalendarActivity extends FragmentActivity implements OnClickListene
 		btnBack.setOnClickListener(this);
 		btnSchedule.setOnClickListener(this);
 
-		//		btnCalendar.performClick();
-		btnMail=(Button) findViewById(R.id.btnMail);
-		btnMail.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent myIntent=new Intent(CalendarActivity.this,MessageTabActivity.class);
-				startActivity(myIntent);	
-				overridePendingTransition(R.anim.right_in, R.anim.left_out);	
-			}
-		});
-
-		CustomFonts.setFontOfTextView(CalendarActivity.this,tvTitle,"fonts/gotham_rounded.ttf");
-		CustomFonts.setFontOfButton(CalendarActivity.this,btnSchedule,"fonts/gotham_rounded.ttf");
-		CustomFonts.setFontOfTextView(CalendarActivity.this,tvScheduledDate,"fonts/gotham_rounded.ttf");
-		
+//		CustomFonts.setFontOfTextView(CalendarActivity.this,tvTitle,"fonts/GothamRnd-Book_0.otf");
+//		CustomFonts.setFontOfButton(CalendarActivity.this,btnSchedule,"fonts/GothamRnd-Light.otf");
+//		CustomFonts.setFontOfTextView(CalendarActivity.this,tvScheduledDate,"fonts/GothamRnd-Light.otf");
+//		
 		set_timepicker_text_colour();
 		mf.setOnCalendarViewListener(new onMFCalendarViewListener() {
 
@@ -143,14 +131,12 @@ public class CalendarActivity extends FragmentActivity implements OnClickListene
 				((Paint)wheelpaint_field.get(number_picker)).setColor(color);
 				((EditText)child).setTextColor(color);
 
-
-
 				Field field2=number_picker.getClass().getDeclaredField("mSelectionDivider");
 
 				if (field2.getName().equals("mSelectionDivider")) {
 					field2.setAccessible(true);
 					try {
-						field2.set(number_picker, getResources().getDrawable(R.drawable.divider));
+						field2.set(number_picker, getResources().getDrawable(R.drawable.divider_orange));
 
 					}catch (Exception e) {
 						Toast.makeText(getApplicationContext(), e.getMessage(),1000).show();

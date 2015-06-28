@@ -1,7 +1,10 @@
 package com.eventmanagementapp.calendar;
 
 import java.util.ArrayList;
-
+import java.util.Calendar;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -10,11 +13,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.TextView;
 
-import com.eventmanagementapp.LoginSignUpActivity;
 import com.eventmanagementapp.MessageTabActivity;
 import com.eventmanagementapp.R;
-import com.eventmanagementapp.RegistrationSignUpActivity;
+import com.eventmanagementapp.Activities.MessageListActivity;
+import com.eventmanagementapp.dialogs.FilterDialog;
+import com.eventmanagementapp.interfaces.INotify;
 
 /**
  * Shows off the most basic usage
@@ -23,34 +29,36 @@ public class CalendarActivity extends FragmentActivity implements OnClickListene
 {
 
 	MFCalendarView mf;
-	Button btnBack,btnAdd,btnMail;//,btnCalendar,btnMessage,btnBid,btnMenu;
-	Button btnBidTopbar;
-
-	//	@Override
-	//	public void onWindowFocusChanged(boolean hasFocus) {
-	//		super.onWindowFocusChanged(hasFocus);
-	//		if (hasFocus) {
-	//			getWindow().getDecorView().setSystemUiVisibility(
-	//					View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-	//					| View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-	//					| View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-	//					| View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-	//					| View.SYSTEM_UI_FLAG_FULLSCREEN
-	//					| View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-	//		}
-	//	}
+	Button btnBack,btnSelecteDate,btnFilter,btnCalendar,btnMail,btnLeads,
+	btnChange,btnClearAll;//,btnCalendar,btnMessage,btnBid,btnMenu;
+	private Calendar calendar;
+	private int year, month, day;
+	DatePickerDialog dpDialog;
+	Context mContext;
+	TextView tvFilterCriteria,tvFilterFirst;//,tvFilterSecond;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-//		setTheme(android.R.style.Theme_Holo_Light_NoActionBar_Fullscreen);
+		//		setTheme(android.R.style.Theme_Holo_Light_NoActionBar_Fullscreen);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.calendar_activity);
-
+		mContext=CalendarActivity.this;
 		mf = (MFCalendarView) findViewById(R.id.mFCalendarView);
+
 		btnBack=(Button) findViewById(R.id.btnBack);
-		btnBidTopbar=(Button) findViewById(R.id.btnBidTopbar);
-		btnAdd=(Button) findViewById(R.id.btnAdd);
+		btnSelecteDate=(Button) findViewById(R.id.btnSelecteDate);
+		btnFilter=(Button) findViewById(R.id.btnFilter);
+		btnChange=(Button) findViewById(R.id.btnChange);
+		btnClearAll=(Button) findViewById(R.id.btnClearAll);
+		tvFilterFirst=(TextView) findViewById(R.id.tvFilterFirst);
+		//		tvFilterSecond=(TextView) findViewById(R.id.tvFilterSecond);
+		tvFilterCriteria=(TextView) findViewById(R.id.tvFilterCriteria);
+		tvFilterFirst.setVisibility(View.GONE);
+		//		tvFilterSecond.setVisibility(View.GONE);
+		btnChange.setVisibility(View.GONE);
+		btnClearAll.setVisibility(View.GONE);
+		tvFilterCriteria.setVisibility(View.GONE);
 		/*btnCalendar=(Button) findViewById(R.id.btnCalendar);
 		btnMessage=(Button) findViewById(R.id.btnMessage);
 		btnBid=(Button) findViewById(R.id.btnBid);
@@ -60,21 +68,70 @@ public class CalendarActivity extends FragmentActivity implements OnClickListene
 		btnMessage.setOnClickListener(this);
 		btnBid.setOnClickListener(this);
 		btnMenu.setOnClickListener(this);*/
-		
-//		btnCalendar.performClick();
-		btnMail=(Button) findViewById(R.id.btnMail);
+		//		btnCalendar.performClick();
+		calendar = Calendar.getInstance();
+		year = calendar.get(Calendar.YEAR);
+		month = calendar.get(Calendar.MONTH);
+		day = calendar.get(Calendar.DAY_OF_MONTH);
+		btnLeads=(Button) findViewById(R.id.btnLeads);
+		btnCalendar=(Button) findViewById(R.id.btnCalendar);
+		btnMail=(Button)findViewById(R.id.btnMail);
 		btnMail.setOnClickListener(new OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
-				Intent myIntent=new Intent(CalendarActivity.this,MessageTabActivity.class);
+				Intent myIntent=new Intent(CalendarActivity.this,MessageListActivity.class);
 				startActivity(myIntent);	
 				overridePendingTransition(R.anim.right_in, R.anim.left_out);	
 			}
 		});
+		btnLeads.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent myIntent=new Intent(mContext,MessageTabActivity.class);
+				startActivity(myIntent);
+				overridePendingTransition(R.anim.right_in, R.anim.left_out);		
+			}
+		});
+
+		btnSelecteDate.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				showDialog(999);
+			}
+		});
+
+		btnChange.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				FilterDialog dialog = new FilterDialog();
+				dialog.newInstance(CalendarActivity.this, iNotify);
+				dialog.show(getSupportFragmentManager(),"Test");
+			}
+		});
+
+		btnClearAll.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				btnChange.setVisibility(View.GONE);
+				btnClearAll.setVisibility(View.GONE);
+				tvFilterFirst.setVisibility(View.GONE);
+				tvFilterCriteria.setVisibility(View.GONE);
+			}
+		});
+		btnFilter.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				FilterDialog dialog = new FilterDialog();
+				//				dialog.getActivity().requestWindowFeature(Window.FEATURE_NO_TITLE);
+				//				dialog.getActivity().setTheme(android.R.style.Theme_Translucent);
+				dialog.newInstance(CalendarActivity.this, iNotify);
+				dialog.show(getSupportFragmentManager(),"Test");
+			}
+		});
 
 		mf.setOnCalendarViewListener(new onMFCalendarViewListener() {
-
 			@Override
 			public void onDisplayedMonthChanged(int month, int year, String monthStr) {
 
@@ -85,17 +142,10 @@ public class CalendarActivity extends FragmentActivity implements OnClickListene
 				.append(year)
 				.append(" monthStr: ")
 				.append(monthStr);
-				//				
-				//				Toast.makeText(CalendarActivity.this,  bf.toString(),
-				//						Toast.LENGTH_SHORT).show();
-				//				
 			}
 
 			@Override
 			public void onDateChanged(String date) {
-
-				//				Toast.makeText(CalendarActivity.this, "onDateChanged:" + date, 
-				//						Toast.LENGTH_SHORT).show();
 			}
 		});
 
@@ -119,6 +169,48 @@ public class CalendarActivity extends FragmentActivity implements OnClickListene
 		Log.e("","locale:" + Util.getLocale());
 	}
 
+	INotify iNotify=new INotify() {
+		@Override
+		public void yes() {
+			tvFilterFirst.setVisibility(View.VISIBLE);
+			//			tvFilterSecond.setVisibility(View.VISIBLE);
+			tvFilterCriteria.setVisibility(View.VISIBLE);
+			btnChange.setVisibility(View.VISIBLE);
+			btnClearAll.setVisibility(View.VISIBLE);
+		}
+
+		@Override
+		public void no() {
+		}
+	};
+
+	@Override
+	protected Dialog onCreateDialog(int id) {
+		// TODO Auto-generated method stub
+		if (id == 999) {
+			dpDialog=new DatePickerDialog(this, myDateListener, year, month, day);
+			dpDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+			//			dpDialog.setTitle("");
+			return dpDialog;
+		}
+		return null;
+	}
+
+	private DatePickerDialog.OnDateSetListener myDateListener = new DatePickerDialog.OnDateSetListener() {
+		@Override
+		public void onDateSet(DatePicker arg0, int year, int month, int day) {
+			showDate(year, month+1, day);
+		}
+	};
+
+	private void showDate(int year, int month, int day) {
+		StringBuilder dateString=new StringBuilder().append(year).append("-")
+				.append(month).append("-").append(day);
+		mf.setDate(dateString.toString());
+		//		Toast.makeText(getApplicationContext(), dateString.toString(),1000).show();
+		//		etDate.setText(new StringBuilder().append(day).append("/")
+		//				.append(month).append("/").append(year));
+	}
 
 	@Override
 	public void onBackPressed() {

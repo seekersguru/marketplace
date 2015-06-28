@@ -3,45 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
-    tools:context=".calendar.CalendarActivity" >
-
-    <!-- #F0EEEF -->
-
-    <RelativeLayout
-        android:id="@+id/rlTopBar"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#fff" >
-
-        <Button
-            android:id="@+id/btnBack"
-            android:layout_width="21dp"
-            android:layout_height="22dp"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/back_orange" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="WEDwise"
-            android:textColor="#ffffff"
-            android:textSize="22sp"
-            android:visibility="gone" />
-
-        <Button
-            android:id="@+id/btnViewOverFlow"
-            android:layout_width="@dimen/overflowMenuIconWidth"
-            android:layout_height="@dimen/overflowMenuIconHeight"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/marginLeftRightllFields"
-            android:background="@drawable/overflow_menu"
-            android:visibility="visible" />
-    </RelativeLayout>
+    android:background="#ffffff" >
 
     <LinearLayout
         android:id="@+id/llBottomBarParent"
@@ -53,8 +15,8 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/bottomBarDividerHeight"
-            android:background="@drawable/divider_bottom_bar" />
+            android:layout_height="2dp"
+            android:background="#9c9c9c" />
 
         <LinearLayout
             android:id="@+id/llBottomBar"
@@ -76,7 +38,7 @@
                     android:layout_width="@dimen/buttonMessageWidth"
                     android:layout_height="@dimen/buttonMessageHeight"
                     android:layout_gravity="center"
-                    android:background="@drawable/mail" />
+                    android:background="@drawable/mail__" />
             </LinearLayout>
 
             <LinearLayout
@@ -116,7 +78,7 @@
                 <Button
                     android:id="@+id/btnMenu"
                     android:layout_width="@dimen/dimenBottomBarIcons"
-                    android:layout_height="@dimen/buttonMessageHeight"
+                    android:layout_height="@dimen/dimenBottomBarIcons"
                     android:layout_gravity="center"
                     android:background="@drawable/menu" />
             </LinearLayout>

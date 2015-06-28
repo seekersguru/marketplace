@@ -1,5 +1,7 @@
 package com.wedwiseapp.views;
 
+import com.wedwiseapp.util.Utils;
+
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.TextView;
@@ -28,7 +30,12 @@ public class CTextView extends TextView {
 
 	public void init() {
 		if (!isInEditMode()) {
-			// setTypeface(Utils.getNormal(getContext()));
+			try {
+				setTypeface(Utils.getNormal(getContext()));
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
 		}
 	}
 

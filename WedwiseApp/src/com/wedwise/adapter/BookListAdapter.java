@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wedwiseapp.R;
+import com.wedwiseapp.util.CustomFonts;
 
 public class BookListAdapter extends BaseAdapter{
 
@@ -51,6 +52,10 @@ public class BookListAdapter extends BaseAdapter{
 		TextView tvDescription=(TextView) listItem.findViewById(R.id.tvDescription);
 		ImageView imViewAtttachment=(ImageView) listItem.findViewById(R.id.imViewAttachment);
 		tvContactName.setText(listMessages.get(position));
+//		CustomFonts.setFontOfTextView(mContext,tvContactName,"fonts/GothamRnd-Light.otf");
+//		CustomFonts.setFontOfTextView(mContext,tvDate,"fonts/GothamRnd-Light.otf");
+//		CustomFonts.setFontOfTextView(mContext,tvSubject,"fonts/GothamRnd-Light.otf");
+//		CustomFonts.setFontOfTextView(mContext,tvDescription,"fonts/GothamRnd-Light.otf");
 		return listItem;
 	}
 

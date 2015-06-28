@@ -1,4 +1,4 @@
-package com.wedwiseapp.login;
+/*package com.wedwiseapp.login;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -100,16 +100,16 @@ public class SignUpActivity extends FragmentActivity implements TextWatcher{
 			//			etGroomName.setVisibility(View.VISIBLE);
 			//			etArea.setVisibility(View.VISIBLE);
 		}
-		CustomFonts.setFontOfEditText(mContext, etEmailAddress,"fonts/GothamRnd-Book_0.otf");
-		CustomFonts.setFontOfEditText(mContext, etPassword,"fonts/GothamRnd-Book_0.otf");
-		CustomFonts.setFontOfEditText(mContext, etBrideName,"fonts/GothamRnd-Book_0.otf");
-		CustomFonts.setFontOfEditText(mContext, etGroomName,"fonts/GothamRnd-Book_0.otf");
-		CustomFonts.setFontOfEditText(mContext, etArea,"fonts/GothamRnd-Book_0.otf");
-		CustomFonts.setFontOfEditText(mContext, etPasswordReset,"fonts/GothamRnd-Book_0.otf");
-		CustomFonts.setFontOfButton(mContext,btnSignIn,"fonts/GothamRnd-Book_0.otf");
-		CustomFonts.setFontOfButton(mContext,btnPasswordReset,"fonts/GothamRnd-Book_0.otf");
-		CustomFonts.setFontOfTextView(mContext,tvLogin,"fonts/GothamRnd-Book_0.otf");
-		CustomFonts.setFontOfTextView(mContext,tvForgotPassword,"fonts/GothamRnd-Book_0.otf");
+		CustomFonts.setFontOfEditText(mContext, etEmailAddress,"fonts/GothamRnd-Light.otf");
+		CustomFonts.setFontOfEditText(mContext, etPassword,"fonts/GothamRnd-Light.otf");
+		CustomFonts.setFontOfEditText(mContext, etBrideName,"fonts/GothamRnd-Light.otf");
+		CustomFonts.setFontOfEditText(mContext, etGroomName,"fonts/GothamRnd-Light.otf");
+		CustomFonts.setFontOfEditText(mContext, etArea,"fonts/GothamRnd-Light.otf");
+		CustomFonts.setFontOfEditText(mContext, etPasswordReset,"fonts/GothamRnd-Light.otf");
+		CustomFonts.setFontOfButton(mContext,btnSignIn,"fonts/GothamRnd-Light.otf");
+		CustomFonts.setFontOfButton(mContext,btnPasswordReset,"fonts/GothamRnd-Light.otf");
+		CustomFonts.setFontOfTextView(mContext,tvLogin,"fonts/GothamRnd-Light.otf");
+		CustomFonts.setFontOfTextView(mContext,tvForgotPassword,"fonts/GothamRnd-Light.otf");
 		etPassword.addTextChangedListener(this);
 		etBrideName.addTextChangedListener(this);
 		etGroomName.addTextChangedListener(this);
@@ -284,3 +284,4 @@ public class SignUpActivity extends FragmentActivity implements TextWatcher{
 		}
 	}
 }
+*/

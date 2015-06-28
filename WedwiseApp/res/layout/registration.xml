@@ -78,7 +78,7 @@
                         android:paddingLeft="@dimen/paddingLeftEditText"
                         android:singleLine="true"
                         android:textColor="#000"
-                        android:textSize="@dimen/textSizeLarge" />
+                        android:textSize="@dimen/textSizeMedium" />
 
                     <View
                         android:layout_width="match_parent"
@@ -94,7 +94,7 @@
                         android:paddingLeft="@dimen/paddingLeftEditText"
                         android:singleLine="true"
                         android:textColor="#000"
-                        android:textSize="@dimen/textSizeLarge" />
+                        android:textSize="@dimen/textSizeMedium" />
 
                     <View
                         android:layout_width="match_parent"
@@ -110,7 +110,7 @@
                         android:paddingLeft="@dimen/paddingLeftEditText"
                         android:singleLine="true"
                         android:textColor="#000"
-                        android:textSize="@dimen/textSizeLarge" />
+                        android:textSize="@dimen/textSizeMedium" />
 
                     <View
                         android:layout_width="match_parent"
@@ -126,7 +126,7 @@
                         android:paddingLeft="@dimen/paddingLeftEditText"
                         android:singleLine="true"
                         android:textColor="#000"
-                        android:textSize="@dimen/textSizeLarge" />
+                        android:textSize="@dimen/textSizeMedium" />
 
                     <View
                         android:layout_width="match_parent"
@@ -142,7 +142,7 @@
                         android:paddingLeft="@dimen/paddingLeftEditText"
                         android:singleLine="true"
                         android:textColor="#000"
-                        android:textSize="@dimen/textSizeLarge" />
+                        android:textSize="@dimen/textSizeMedium" />
 
                     <View
                         android:layout_width="match_parent"
@@ -155,11 +155,11 @@
                         android:layout_height="@dimen/editTextHeight"
                         android:background="#ffffff"
                         android:hint="Contact Number"
+                        android:inputType="phone"
                         android:paddingLeft="@dimen/paddingLeftEditText"
                         android:singleLine="true"
-                        android:inputType="phone"
                         android:textColor="#000"
-                        android:textSize="@dimen/textSizeLarge" />
+                        android:textSize="@dimen/textSizeMedium" />
 
                     <View
                         android:layout_width="match_parent"
@@ -173,11 +173,6 @@
                     android:layout_height="match_parent"
                     android:background="#5C5858" />
 
-                <!--
-                     android:layout_alignBottom="@+id/llFields"
-                    android:layout_alignTop="@+id/llFields"
-                    android:layout_toRightOf="@+id/llFields"
-                -->
 
                 <Button
                     android:id="@+id/btnSignIn"
@@ -211,7 +206,7 @@
                     android:paddingLeft="@dimen/paddingLeftEditText"
                     android:singleLine="true"
                     android:textColor="#000"
-                    android:textSize="@dimen/textSizeLarge" />
+                    android:textSize="@dimen/textSizeMedium" />
 
                 <Button
                     android:id="@+id/btnPasswordReset"

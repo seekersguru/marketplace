@@ -6,7 +6,7 @@
 
     <!--
          Per the design guidelines, navigation drawers should be between 240dp and 320dp:
-         https://developer.android.com/design/patterns/navigation-drawer.html
+         https://developer.android.com/design/patterns/navigation-drawer.html
     -->
     <dimen name="navigation_drawer_width">240dp</dimen>
     <dimen name="toolbar_elevation">4dp</dimen>
@@ -35,6 +35,7 @@
     <dimen name="marginTopGoogleLoginButton">20dp</dimen>
     <dimen name="buttonSignUpWidth">130dp</dimen>
     <dimen name="buttonSignUpHeight">45dp</dimen>
+    <dimen name="bottomBarHeight">80dp</dimen>
 
     <!-- Registration -->
     <dimen name="marginTopScrollView">30dp</dimen>
@@ -53,11 +54,16 @@
     <!-- Calendar Screen -->
     <dimen name="arrowNavigationWidth">15dp</dimen>
     <dimen name="arrowNavigationHeight">20dp</dimen>
+    <dimen name="heightFilterIcon">50dp</dimen>
+    <dimen name="widthFilterIcon">40dp</dimen>
+    <dimen name="heightbtnSelectDateIcon">30dp</dimen>
+    <dimen name="widthbtnSelectDateIcon">23dp</dimen>
 
     <!-- Message Tab Activity -->
     <dimen name="buttonMessageWidth">33dp</dimen>
-    <dimen name="buttonMessageHeight">26dp</dimen>
+    <dimen name="buttonMessageHeight">35dp</dimen>
     <dimen name="dimenBottomBarIcons">30dp</dimen>
+    <dimen name="heightMenuIcon">27dp</dimen>
     <dimen name="bottomBarHeight">50dp</dimen>
     <dimen name="bottomBarDividerHeight">5dp</dimen>
     <dimen name="attachmentIconHeight">18dp</dimen>
@@ -71,9 +77,26 @@
     <dimen name="sendmessageIconHeight">20dp</dimen>
     <dimen name="sendmessageIconWidth">22dp</dimen>
     <dimen name="circleSendButtonBg">35dp</dimen>
-
+    <!-- Chat Adapter -->
+    <dimen name="heightChatBox">95dp</dimen>
     <!-- Album Screen Activity -->
     <dimen name="heightAlbumImage">350dp</dimen>
     <dimen name="widthAlbumtextView">200dp</dimen>
 
+    <!-- FilterDialog -->
+    <dimen name="widthFilterSubmitButton">150dp</dimen>
+    <dimen name="heightwidthFilterSubmitButton">80dp</dimen>
+ <dimen name="marginTopButtonBtnSubmit">30dp</dimen>
+    
+    <!-- bid book crete -->
+    <dimen name="editTextWidth">150dp</dimen>
+    <dimen name="editTextHeightBidBookCreate">40dp</dimen>
+    <dimen name="widthSpinnerperplate">90dp</dimen>
+    <dimen name="heightSpinnerperplate">35dp</dimen>
+    <dimen name="widthButtonBidIt">100dp</dimen>
+    <dimen name="heightButtonBidIt">40dp</dimen>
+    <dimen name="widthSpinnerTimeSlot">160dp</dimen>
+    <dimen name="marginTopllFields">10dp</dimen>
+    <dimen name="marginTopbtnSchedule">50dp</dimen>
+    
 </resources>

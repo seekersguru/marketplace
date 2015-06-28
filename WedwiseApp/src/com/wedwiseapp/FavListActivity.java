@@ -1,55 +1,168 @@
 package com.wedwiseapp;
 
+import java.util.ArrayList;
+
+import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SearchView;
+import android.widget.SearchView.OnCloseListener;
 
 import com.wedwise.adapter.FavAdapter;
+import com.wedwise.adapter.SpinnerAdapter;
 
+@SuppressLint("InflateParams")
 public class FavListActivity extends FragmentActivity {
 	ListView favList;
 	FavAdapter adapterSubList;
 	Context mContext;
+	Button btnBack,btnMenu,btnSearch;//,btnSpinnerOpen;
+	ArrayList<FavData> data;
+	SearchView searchView;
+//	Spinner spSwitchCategory;
+	ArrayList<String> listCategory;
+	SpinnerAdapter  adapterSpinner;
+	ImageView imViewCategoryType;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		mContext = FavListActivity.this;
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		//		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.favorite);
 
 		idInitialization();
 	}
 
 	private void idInitialization() {
+//		spSwitchCategory=(Spinner) findViewById(R.id.spSwitchCategory);
 		favList = (ListView) findViewById(R.id.favList);
-
-		adapterSubList = new FavAdapter(mContext);
+		listCategory=new ArrayList<String>();
+		data=new ArrayList<FavData>();
+		adapterSubList = new FavAdapter(mContext,data);
 		favList.setAdapter(adapterSubList);
+
+		ActionBar actionBar = getActionBar();
+		actionBar.setDisplayShowHomeEnabled(false);
+		actionBar.setDisplayShowTitleEnabled(false);
+		LayoutInflater mInflater = LayoutInflater.from(this);
+
+		View mCustomView = mInflater.inflate(R.layout.customactionbarview, null);
+		actionBar.setCustomView(mCustomView);
+		btnBack=(Button) mCustomView.findViewById(R.id.btnBack);
+		searchView=(SearchView) mCustomView.findViewById(R.id.searchView);
+		btnSearch=(Button) mCustomView.findViewById(R.id.btnSeacrh);
+		imViewCategoryType=(ImageView) mCustomView.findViewById(R.id.imViewCategoryType);
+//		btnSpinnerOpen=(Button) findViewById(R.id.btnSpinnerOpen);
+		btnSearch.setVisibility(View.VISIBLE);
+		imViewCategoryType.setVisibility(View.VISIBLE);
+		actionBar.setDisplayShowCustomEnabled(true);
+
+		listCategory.add("BANQUITE");
+		listCategory.add("PHOTOGRAPHY");
+		listCategory.add("CATERERS");
+		listCategory.add("DECORATORS");
+		listCategory.add("OTHERS");
+		adapterSpinner=new SpinnerAdapter(FavListActivity.this, listCategory);
+		//		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+		//				android.R.layout.simple_spinner_item, listCategory);
+		//		dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+//		spSwitchCategory.setAdapter(adapterSpinner);
+		/*btnSpinnerOpen.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				spSwitchCategory.performClick();				
+			}
+		});*/
+		btnSearch.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				btnSearch.setVisibility(View.INVISIBLE);
+				searchView.setVisibility(View.VISIBLE);
+				searchView.setIconified(false);
+				searchView.setBackgroundColor(Color.TRANSPARENT);
+				searchView.requestFocus();
+				int searchPlateId = searchView.getContext().getResources().getIdentifier("android:id/search_plate", null, null);
+				searchView.findViewById(searchPlateId).setBackgroundColor(Color.parseColor("#d3d3d3"));
+				searchView.performClick();
+			}
+		});
+
+//		spSwitchCategory.setOnItemSelectedListener(new OnItemSelectedListener() {
+//
+//			@Override
+//			public void onItemSelected(AdapterView<?> parent, View view,
+//					int position, long id) {
+//
+//			}
+//
+//			@Override
+//			public void onNothingSelected(AdapterView<?> parent) {
+//			}
+//		});
+		searchView.setOnCloseListener(new OnCloseListener() {
+
+			@Override
+			public boolean onClose() {
+
+				btnSearch.setVisibility(View.VISIBLE);
+				searchView.setVisibility(View.INVISIBLE);
+				//				searchView.setIconified(true);
+				return false;
+			}
+		});
+		btnBack.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				finish();		
+				overridePendingTransition(R.anim.right_in, R.anim.right_out);
+			}
+		});
+
 		favList.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View viewChild,
 					int position, long arg3) {
 
-				Intent myIntent=new Intent(FavListActivity.this,VendorDetailsActivity.class);
+				Intent myIntent = new Intent(FavListActivity.this,
+						VendorDetailsActivity.class);
 				startActivity(myIntent);
 				overridePendingTransition(R.anim.right_in, R.anim.left_out);
 			}
 		});
+		/*btnMenu.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent myIntent = new Intent(FavListActivity.this,
+						LoginSignUpActivity.class);
+				startActivity(myIntent);
+
+				overridePendingTransition(R.anim.right_in, R.anim.left_out);
+			}
+		});*/
 	}
-	
+
 	@Override
 	public void onBackPressed() {
 		// TODO Auto-generated method stub
 		super.onBackPressed();
 		overridePendingTransition(R.anim.right_in, R.anim.right_out);
 	}
-	
+
 }

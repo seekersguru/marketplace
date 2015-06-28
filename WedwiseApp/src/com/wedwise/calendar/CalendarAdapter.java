@@ -18,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.wedwiseapp.R;
+import com.wedwiseapp.util.CustomFonts;
 
 public class CalendarAdapter extends BaseAdapter {
 	private Context mContext;
@@ -116,6 +117,9 @@ public class CalendarAdapter extends BaseAdapter {
 		llSelectedDateBorder.setVisibility(View.GONE);
 		rlContainer.setBackgroundColor(Color.parseColor("#ffffff"));
 
+//		CustomFonts.setFontOfTextView(mContext, dayView, "fonts/GothamRnd-Light.otf");
+//		CustomFonts.setFontOfTextView(mContext, tvCount, "fonts/GothamRnd-Light.otf");
+
 		tvCount.setText("19");
 		//		tvCount.setTextColor(Color.parseColor("#ffffff"));
 		//		tvCount.setBackground(mContext.getResources().getDrawable(R.drawable.notification));
@@ -196,8 +200,8 @@ public class CalendarAdapter extends BaseAdapter {
 
 	public View setSelected(View view) {
 		RelativeLayout rlTemp;
-//		LinearLayout llTemp;
-//		llTemp=(LinearLayout) view.findViewById(R.id.rlContainer).findViewById(R.id.llSelectedDateBorder);
+		//		LinearLayout llTemp;
+		//		llTemp=(LinearLayout) view.findViewById(R.id.rlContainer).findViewById(R.id.llSelectedDateBorder);
 		rlTemp=(RelativeLayout) view.findViewById(R.id.rlContainer);
 		/*if (previousView != null) {
 			previousView.findViewById(R.id.rlContainer).findViewById(R.id.llSelectedDateBorder).setVisibility(View.GONE);
@@ -218,7 +222,7 @@ public class CalendarAdapter extends BaseAdapter {
 		//MultiSelection
 		rlTemp.setBackgroundColor(Color.parseColor("#F05543"));
 		TextView tv=(TextView)view.findViewById(R.id.rlContainer).findViewById(R.id.tvDate);
-		tv.setTextColor(Color.parseColor("#ffffff"));
+//		tv.setTextColor(Color.parseColor("#ffffff"));
 
 		//		llTemp.setVisibility(View.VISIBLE);
 

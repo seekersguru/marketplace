@@ -21,6 +21,8 @@
     <string name="title_friends">Friends</string>
     <string name="title_home">Home</string>
     <string name="txtForgotPassword">Forgot Password?</string>
+   <string name="txtClearAll"><u>Clear All</u></string>
+    
     <!--
     Calendar
     <string name="customize">Customize</string>

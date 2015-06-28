@@ -76,10 +76,10 @@ OnConnectionFailedListener*/ {
 		tvToolBar=(TextView)toolbar.findViewById(R.id.tvToolBar);
 		tvToolBar.setText("Log In or Sign Up");
 		btnBack.setVisibility(View.GONE);
-		CustomFonts.setFontOfButton(mContext, btnSignUp,"fonts/GothamRnd-Book_0.otf");
-		CustomFonts.setFontOfButton(mContext, btnLogin,"fonts/GothamRnd-Book_0.otf");
-		//		CustomFonts.setFontOfTextView(mContext, tvToolBar,"fonts/GothamRnd-Light.otf");
-		CustomFonts.setFontOfTextView(mContext, tvBottomBar,"fonts/GothamRnd-Book_0.otf");
+//		CustomFonts.setFontOfButton(mContext, btnSignUp,"fonts/GothamRnd-Light.otf");
+//		CustomFonts.setFontOfButton(mContext, btnLogin,"fonts/GothamRnd-Light.otf");
+//		CustomFonts.setFontOfTextView(mContext, tvToolBar,"fonts/GothamRnd-Light.otf");
+//		CustomFonts.setFontOfTextView(mContext, tvBottomBar,"fonts/GothamRnd-Light.otf");
 		btnBack.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -114,9 +114,9 @@ OnConnectionFailedListener*/ {
 
 			@Override
 			public void onClick(View v) {
-				Intent myIntent=new Intent(LoginSignUpActivity.this,BidBookDetailsScreenActivity.class);
+				/*Intent myIntent=new Intent(LoginSignUpActivity.this,BidBookDetailsScreenActivity.class);
 				startActivity(myIntent);
-				overridePendingTransition(R.anim.right_in, R.anim.left_out);
+				overridePendingTransition(R.anim.right_in, R.anim.left_out);*/
 			}
 		});
 
