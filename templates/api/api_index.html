@@ -8,10 +8,19 @@
 
 <ul>
 
-{% for pattern in patterns %}
+{% for pat_name,pattern in patterns.iteritems %}
 <li>
-<a href="{{pattern}}">{{pattern}}</a>
+<form method="{{pattern.type}}" action="{{pat_name}}/">
 
+<a href="{{pat_name}}">{{pat_name}}<br/></a>
+{% for param in pattern.params %}
+	{{param}}:<input type="text" name='{{param}}'>
+{% endfor %}
+
+{% if pattern.params %}
+<input type="submit">
+{% endif %}
+</form>
 </li>
 {% endfor %}
 

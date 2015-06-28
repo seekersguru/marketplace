@@ -1,19 +1,29 @@
 from django.template.response import TemplateResponse
 from urls import patterns
+from django.views.decorators.csrf import csrf_exempt
+from collections import OrderedDict
+def check_basic_validations(pattern_name,request):
+    return
+    import pdb;pdb.set_trace()
+
+
 def index(request):
-
+    lst=[ (k,v) for k,v in patterns.iteritems()]
+    lst=OrderedDict(sorted(lst, key= lambda e:e[1]['order']))
+    import pdb;pdb.set_trace()
     return TemplateResponse(request,'api/api_index.html',
-                {"patterns":patterns})
-
+                {"patterns":lst})
 
 ########## Customer Login Registration
+@csrf_exempt
 def customer_registration(request):
-    print 1111
+    check_basic_validations("customer_registration",request,)
     from customer.models import Customer
-    import pdb;pdb.set_trace()
-    fields = {}
-    print getdoc(globals()[getframeinfo(currentframe()).function])
-    return TemplateResponse(request,'api/api.html',{})
+    res={}
+    if request.method=="POST":
+        res=Customer.create(request)
+    
+    return TemplateResponse(request,'api/api.html',{"res":res})
 def customer_login(request):
     return TemplateResponse(request,'api/api.html',{})
 def customer_registration_login_fb(request):
