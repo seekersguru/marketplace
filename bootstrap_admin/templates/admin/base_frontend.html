@@ -7,9 +7,14 @@
 
   {% block bootstrap_admin_css %}
     <link rel="stylesheet" type="text/css" href="{% static 'bootstrap_admin/css/bootstrap.min.css' %}" />
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap_admin/css/jjsonviewer.css' %}" />
+
   {% endblock bootstrap_admin_css %}
 
   <link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static 'admin/css/base.css' %}{% endblock %}" />
+
+
 
 {% block extrastyle %}{% endblock %}
 
@@ -23,11 +28,17 @@
 {% block jquery %}
   <script type="text/javascript" src="{% static "admin/js/jquery.js" %}"></script>
   <script type="text/javascript" src="{% static "admin/js/jquery.init.js" %}"></script>
+  
+  <script type="text/javascript" src="{% static 'bootstrap_admin/js/jjsonviewer.js' %}"></script>
 {% endblock jquery %}
   <script>
     (function ($) {
       $(document).ready(function(){
         $("#overlay").delay(600).fadeOut(500);
+        {% block extradomready%} {%endblock%}
+        
+        
+        
       });
     })(django.jQuery);
   </script>

@@ -2,28 +2,48 @@ from django.template.response import TemplateResponse
 from urls import patterns
 from django.views.decorators.csrf import csrf_exempt
 from collections import OrderedDict
-def check_basic_validations(pattern_name,request):
-    return
-    import pdb;pdb.set_trace()
 
+from api.utils import get_error as ge , get_success as gs
+import json
+from django.http import HttpResponse
+
+
+def check_basic_validations(pattern_name,request,req_type):
+    required=patterns[pattern_name].get("required_params",None)
+    if req_type =="POST":
+        data=request.POST
+    elif req_type =="GET":
+        data=request.GET
+    req_missing=[]
+    for each in required:
+        if not data.get(each):
+            req_missing.append(each)
+            
+    if req_missing:
+        return ge("POST",data,"required fields missing",
+                  json_data=req_missing)    
+
+def response(request,res):
+    return  HttpResponse(json.dumps(res), content_type="application/json")
+    #return TemplateResponse(request,'api/api.html',{"res":res})
 
 def index(request):
     lst=[ (k,v) for k,v in patterns.iteritems()]
     lst=OrderedDict(sorted(lst, key= lambda e:e[1]['order']))
-    import pdb;pdb.set_trace()
     return TemplateResponse(request,'api/api_index.html',
                 {"patterns":lst})
 
 ########## Customer Login Registration
 @csrf_exempt
 def customer_registration(request):
-    check_basic_validations("customer_registration",request,)
+    invalid=check_basic_validations("customer_registration",request,"POST")
+    if invalid:return response(request,invalid) 
     from customer.models import Customer
     res={}
     if request.method=="POST":
         res=Customer.create(request)
     
-    return TemplateResponse(request,'api/api.html',{"res":res})
+    
 def customer_login(request):
     return TemplateResponse(request,'api/api.html',{})
 def customer_registration_login_fb(request):

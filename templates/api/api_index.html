@@ -4,27 +4,56 @@
 {% block coltype %}colMS{% endblock %}
 {% block bodyclass %}{{ block.super }} dashboard{% endblock %}
 {# {% block breadcrumbs %}{% endblock %} #}
+{% block extradomready %}
+$('form').submit(function() { // catch the form's submit event
+    $.ajax({ // create an AJAX call...
+        data: $(this).serialize(), // get the form data
+        type: $(this).attr('method'), // GET or POST
+        url: $(this).attr('action'), // the file to call
+        success: function(response) { // on success..
+        	rsp=JSON.stringify(response);
+        	$("pre").remove()
+			$("#"+$(this)[0].url.replace("/","") ).prepend("<pre>"+rsp+"</pre>");
+        },
+		error: function(jqXHR,error, errorThrown) {  
+		     if(jqXHR.status&&jqXHR.status==500){
+		          alert(jqXHR.responseText); 
+		     }else{
+		         alert("Something went wrong, its not even 500!! ");
+		     }
+		}
+    });
+    return false; // cancel original event to prevent form submitting
+});
+{% endblock %}
+
 {% block content %}
 
 <ul>
 
 {% for pat_name,pattern in patterns.iteritems %}
 <li>
-<form method="{{pattern.type}}" action="{{pat_name}}/">
+<h5>{{pat_name}}<h5/>
+<form id='{{pat_name}}' method="{{pattern.type}}" class="form-inline" action="{{pat_name}}/">
 
-<a href="{{pat_name}}">{{pat_name}}<br/></a>
+
+
 {% for param in pattern.params %}
-	{{param}}:<input type="text" name='{{param}}'>
+<div class="form-group">
+	<input type="text" name='{{param}}' placeholder='{{param}}'>
+</div>
 {% endfor %}
 
 {% if pattern.params %}
 <input type="submit">
 {% endif %}
 </form>
+<hr/>
 </li>
 {% endfor %}
 
 <ul/>
 
-    
+
+
 {% endblock %}

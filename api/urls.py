@@ -4,13 +4,15 @@ urlpatterns = [
 	## Home page for apis 
     url(r'^$','api.views.index', name='api_index'),
 ]
+
 patterns = {##"customer_login_registration",
 	
 		"customer_registration":
 	 		{
 				"type":"POST",
 				"order":1,
-	 			"params":["email","password","groom_name","bride_name","contact_number"]
+	 			"params":["email","password","groom_name","bride_name","contact_number"],
+	 			"required_params":["email","password","groom_name","bride_name","contact_number"]
 		 	},
 		"customer_login":
 			{
