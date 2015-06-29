@@ -1,3 +1,6 @@
+def req_dict(request_method):
+    return dict([(e,request_method.get(e)) for e in request_method])
+
 def get_error(request_type,
               request_data,
               message,error_fields=None):

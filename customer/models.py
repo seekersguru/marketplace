@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from api.utils import get_error as ge , get_success as gs
+from api.utils import get_error as ge , get_success as gs ,req_dict
 # Create your models here.
 from django.db import transaction
 """
@@ -38,11 +38,11 @@ class Customer(models.Model):
         
         user = User.objects.filter(username=email)
         if user:
-            return ge("POST",dict(request.POST),"email already exists", error_fields=['email'])
+            return ge("POST",req_dict(request.POST),"email already exists", error_fields=['email'])
 
 
         if len(password)<3:
-            return ge("POST",dict(request.POST),"password too short", error_fields=['password']) 
+            return ge("POST",req_dict(request.POST),"password too short", error_fields=['password']) 
  
         # As we using transactions, no need to error handle. 
         # In case of error all will revert
@@ -54,7 +54,7 @@ class Customer(models.Model):
         # do something with the book
         customer.save()
         
-        return gs("POST",dict(request.POST),{"identifier":customer.identifier})
+        return gs("POST",req_dict(request.POST),{"identifier":customer.identifier})
     
          
 
