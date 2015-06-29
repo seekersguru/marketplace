@@ -11,8 +11,7 @@ $('form').submit(function() { // catch the form's submit event
         type: $(this).attr('method'), // GET or POST
         url: $(this).attr('action'), // the file to call
         success: function(response) { // on success..
-        	rsp=JSON.stringify(response);
-        	alert(rsp);
+        	rsp=JSON.stringify(response,null,4);
         	$("pre").remove()
 			$("#"+$(this)[0].url.replace("/","") ).prepend("<pre>"+rsp+"</pre>");
         },
@@ -36,7 +35,7 @@ $('form').submit(function() { // catch the form's submit event
 
 
 
-<h4>/api/{{pat_name}}/ ( {{pattern.type}})<h4/>
+<h4>/{{pat_name}}/ ( {{pattern.type}})<h4/>
 
 
 
