@@ -22,15 +22,20 @@ class Customer(models.Model):
     @transaction.atomic # @Nishant see if its effect speed @Amit dash 
     def create(cls,
                request, 
-               email, 
-               password, 
-               groom_name,
-               bride_name,):
+               ):
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        groom_name = request.POST.get('groom_name')
+        bride_name = request.POST.get('bride_name')
+        contact_number = request.POST.get('contact_number')
+        
+ 
         user = User.objects.filter(username=email)
         if user:
             return ge("POST",
                       dict(request.POST),
-                      "email already exists"
+                      "email already exists",
+                      error_fields=['email']
                       )
         
         # do something with the book

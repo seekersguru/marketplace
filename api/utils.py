@@ -1,11 +1,11 @@
 def get_error(request_type,
               request_data,
-              message,json_data=None):
+              message,error_fields=None):
     return {"result":"error",
             "message":message,
             "request_type":request_type,
             "request_data":request_data,
-            "json":json_data
+            "error_fields":error_fields
             }
     
 def get_success(request_type,request_data,json_data):

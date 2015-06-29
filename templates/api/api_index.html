@@ -12,17 +12,18 @@ $('form').submit(function() { // catch the form's submit event
         url: $(this).attr('action'), // the file to call
         success: function(response) { // on success..
         	rsp=JSON.stringify(response,null,4);
-        	$("pre").remove()
+        	$("pre").remove();
         	if (response["result"]=="error"){
-        		stl="style='color:red;'"
+        		stl="style='height:200px;color:red;'"
         	}else{
-        		stl="style='color:green;'"
+        		stl="style='height:200px;color:green;'"
         	}
 			$("#"+$(this)[0].url.replace("/","") ).prepend("<pre "+stl +">"+rsp+"</pre>");
         },
 		error: function(jqXHR,error, errorThrown) {  
 		     if(jqXHR.status&&jqXHR.status==500){
-		          $("#"+$(this)[0].url.replace("/","") ).prepend("<pre style='color:red'>"+jqXHR.responseText+"</pre>");
+		     		$("pre").remove();
+		          $("#"+$(this)[0].url.replace("/","") ).prepend("<pre style='height:200px;color:red'>"+jqXHR.responseText+"</pre>");
 		     }else{
 		         alert("Something went wrong, its not even 500!! ");
 		     }
@@ -58,7 +59,11 @@ $('form').submit(function() { // catch the form's submit event
     </div>
 
 {% endfor %}
-
+<style type='text/css'>
+.pre{
+	height:200px;
+}
+</style>
 </form>
 <hr/>
 <div class='main-header'></div>

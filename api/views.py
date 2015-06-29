@@ -21,7 +21,7 @@ def check_basic_validations(pattern_name,request,req_type):
             
     if req_missing:
         return ge("POST",data,"required fields missing",
-                  json_data=req_missing)    
+                  error_fields=req_missing)    
 
 def response(request,res):
     return  HttpResponse(json.dumps(res), content_type="application/json")
@@ -41,7 +41,7 @@ def customer_registration(request):
     from customer.models import Customer
     res={}
     if request.method=="POST":
-        res=Customer.create(request)
+        return response(request,Customer.create(request))
     
     
 def customer_login(request):
