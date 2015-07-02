@@ -4,27 +4,7 @@ from api.utils import get_error as ge , get_success as gs ,req_dict
 
 from django.db import models
 from django.contrib.auth.models import User
-def mode_require(request,):
-    """Will make mode require from android and ios,
-    Also if request says image_type is mandatory , checks that as well
-    """
-    #Another common operation , mode is required.
-    mode=request.POST.get("mode")
-    if mode not in ["android","ios"]:
-        return {"error":
-                response(request,ge("POST",dict(request.POST),"mode can be android or ios only",
-                  error_fields=["mode"]))
-                } 
-    #Another common operation where mode is required ++ 
-    
-    image_type=request.POST.get("image_type","None")
-    if image_type:
-        if mode == "android" and image_type not in ALLOWED_ANDRIOD_IMAGE_TYPE:
-            ## TODO Severe error 
-            return  {"error":response(request,ge("POST",dict(request.POST),",".join(ALLOWED_ANDRIOD_IMAGE_TYPE) +"allowed",
-                      error_fields=["mode"]))
-                     }
-    return {"success":{"mode":mode,"image_type":image_type}}
+from api.utils import mode_require
 
 class Category(models.Model):
     name = models.CharField(max_length=250)

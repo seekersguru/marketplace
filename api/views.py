@@ -2,10 +2,10 @@ from django.template.response import TemplateResponse
 from api.urls import patterns
 from django.views.decorators.csrf import csrf_exempt
 from collections import OrderedDict
+from utils import response
 
 from api.utils import get_error as ge , get_success as gs
-import json
-from django.http import HttpResponse
+import utils
 from customer.models import Customer
 from vendor.models import Category
 def check_basic_validations(pattern_name,request,req_type):
@@ -23,8 +23,6 @@ def check_basic_validations(pattern_name,request,req_type):
         return ge("POST",data,"required fields missing",
                   error_fields=req_missing)    
 
-def response(request,res):
-    return  HttpResponse(json.dumps(res), content_type="application/json")
     #return TemplateResponse(request,'api/api.html',{"res":res})
 
 def index(request):
@@ -59,8 +57,7 @@ def customer_forgot_password(request):
     return TemplateResponse(request,'api/api.html',{})
 def customer_reset_password(request):
     return TemplateResponse(request,'api/api.html',{})
-def customer_bg_image_login_registration(request):
-    return TemplateResponse(request,'api/api.html',{})
+
 
 
 ########## Customer vendor listing detail
@@ -70,6 +67,14 @@ def customer_vendor_category_or_home(request):
         invalid=check_basic_validations("customer_vendor_category_or_home",request,"POST")
         if invalid:return response(request,invalid) 
         return response(request,Category.get_categories(request))
+
+@csrf_exempt
+def customer_bg_image_login_registration(request):
+    invalid=check_basic_validations("customer_bg_image_login_registration",request,"POST")
+    if invalid:return response(request,invalid)
+    return response(request,utils.get_bg_images_login(request))
+
+
 def customer_vendor_list_and_search(request):
     return TemplateResponse(request,'api/api.html',{})
 def customer_vendor_detail(request):
