@@ -6,7 +6,7 @@ from collections import OrderedDict
 from api.utils import get_error as ge , get_success as gs
 import json
 from django.http import HttpResponse
-
+from customer.models import Customer
 
 def check_basic_validations(pattern_name,request,req_type):
     required=patterns[pattern_name].get("required_params",None)
@@ -36,16 +36,21 @@ def index(request):
 ########## Customer Login Registration
 @csrf_exempt
 def customer_registration(request):
+    #TODO Put all in decorators  with csrf 
     invalid=check_basic_validations("customer_registration",request,"POST")
     if invalid:return response(request,invalid) 
-    from customer.models import Customer
+    
     res={}
     if request.method=="POST":
         return response(request,Customer.create(request))
-    
-    
+
+@csrf_exempt
 def customer_login(request):
-    return TemplateResponse(request,'api/api.html',{})
+    #TODO Put all in decorators  with csrf 
+    invalid=check_basic_validations("customer_login",request,"POST")
+    if invalid:return response(request,invalid)
+    if request.method=="POST":
+        return response(request,Customer.login(request))
 def customer_registration_login_fb(request):
     return TemplateResponse(request,'api/api.html',{})
 def customer_registration_login_gmail(request):

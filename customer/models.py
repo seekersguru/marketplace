@@ -5,6 +5,7 @@ from api.utils import get_error as ge , get_success as gs ,req_dict
 from django.db import transaction
 from django import forms
 from django.core.exceptions import ValidationError
+from django.contrib.auth import authenticate
 
 """
 https://docs.djangoproject.com/en/1.8/topics/db/transactions/
@@ -28,6 +29,8 @@ class Customer(models.Model):
     gid =models.CharField(max_length=1024,default="")
     
  
+
+        
     @classmethod
     @transaction.atomic # @Nishant see if its effect speed @Amit dash 
     def create(cls,
@@ -72,3 +75,33 @@ class Customer(models.Model):
     
          
 
+    @classmethod
+    def login(cls,
+               request, 
+               ):
+        email = request.POST.get('email').strip().lower()
+        password = request.POST.get('password')
+        user = authenticate(username=email, password=password)
+        if not user:
+            return ge("POST",req_dict(request.POST),"Invalid username or password", error_fields=['email','password'])
+            
+        try:
+            customer = Customer.objects.get(user=user)
+            return gs("POST",req_dict(request.POST),{"identifier":customer.identifier})
+
+        except:
+            ## TODO Proper error handling 
+            ## Case 1: USer is Vendor 
+            ## Case 2 : User Could not register, some error user registered but problem
+            ## Critical error must be addressed TODO 
+            ## Add critical error code for such situations and normal error code for all 
+            return ge("POST",req_dict(request.POST),"User is present but problem", 
+                      error_fields=['email','password'])
+
+
+            
+            
+            
+            
+            
+            

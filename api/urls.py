@@ -18,7 +18,8 @@ patterns = {##"customer_login_registration",
 			{
 			"type":"POST",
 			"order":2,
-				"params":[]
+			"params":["email","password",],
+			"required_params":["email","password",]
 			},
 	
 		"customer_registration_login_fb":
