@@ -7,7 +7,7 @@ from utils import response
 from api.utils import get_error as ge , get_success as gs
 import utils
 from customer.models import Customer
-from vendor.models import Category, VendorLead
+from vendor.models import Category, VendorLead, Vendor
 
 def check_basic_validations(pattern_name,request,req_type):
     required=patterns[pattern_name].get("required_params",None)
@@ -49,7 +49,7 @@ def non_app_vendor_registration(request):
     if invalid:return response(request,invalid) 
     
     if request.method=="POST":
-        return response(request,Customer.create(request))
+        return response(request,Vendor.create(request))
     
 
 @csrf_exempt

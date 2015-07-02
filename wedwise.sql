@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 29, 2015 at 02:32 PM
+-- Generation Time: Jul 02, 2015 at 04:37 PM
 -- Server version: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -110,18 +110,26 @@ CREATE TABLE IF NOT EXISTS `auth_user` (
   `is_staff` tinyint(1) NOT NULL,
   `is_active` tinyint(1) NOT NULL,
   `date_joined` datetime NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `auth_user`
 --
 
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-(1, 'pbkdf2_sha256$12000$cuaKF9yaj59W$PjlRnLv7o3YJMQcDRprsBw6I5x95l9KcBLvRC4JotxI=', '2015-06-28 17:32:56', 1, 'root', '', '', 'root@gm.com', 1, 1, '2015-06-28 17:32:56'),
+(1, 'pbkdf2_sha256$12000$cuaKF9yaj59W$PjlRnLv7o3YJMQcDRprsBw6I5x95l9KcBLvRC4JotxI=', '2015-07-02 02:52:28', 1, 'root', '', '', 'root@gm.com', 1, 1, '2015-06-28 17:32:56'),
 (33, 'pbkdf2_sha256$12000$oDloHP51dspv$9EfQuvam72w6YUuiJx1vRuF2UknGM9PYjAkU9DZ89/4=', '2015-06-29 12:23:08', 0, 'nishu.ssddsaxenadd@gmail.com', '', '', 'nishu.ssddsaxenadd@gmail.com', 0, 1, '2015-06-29 12:23:08'),
 (34, 'pbkdf2_sha256$12000$4so8CYr1ZjoZ$AfAKDYEssJV4AriRvYKTxtpLVET6TvxsLQKeWdAVUmI=', '2015-06-29 12:23:15', 0, 'nishu.ssddccsaxenadd@gmail.com', '', '', 'nishu.ssddccsaxenadd@gmail.com', 0, 1, '2015-06-29 12:23:15'),
 (36, 'pbkdf2_sha256$12000$vYLn0RovmxZ2$C413Fadg3roT61m6hrSyB0tKRt6BMuqDwumOb0vVRIE=', '2015-06-29 12:27:29', 0, 'nishu.ssddssccsaxenadd@gmail.com', '', '', 'nishu.ssddssccsaxenadd@gmail.com', 0, 1, '2015-06-29 12:27:29'),
-(37, 'pbkdf2_sha256$12000$8and7zrmxA5F$3CJ1MT9Q/iBtG748KlksEKL+yr0t3rcJUDPFAa0vrlo=', '2015-06-29 12:27:55', 0, 'nishu.ssddsaasccsaxenadd@gmail.com', '', '', 'nishu.ssddsaasccsaxenadd@gmail.com', 0, 1, '2015-06-29 12:27:55');
+(37, 'pbkdf2_sha256$12000$8and7zrmxA5F$3CJ1MT9Q/iBtG748KlksEKL+yr0t3rcJUDPFAa0vrlo=', '2015-06-29 12:27:55', 0, 'nishu.ssddsaasccsaxenadd@gmail.com', '', '', 'nishu.ssddsaasccsaxenadd@gmail.com', 0, 1, '2015-06-29 12:27:55'),
+(38, 'pbkdf2_sha256$12000$q5otyl6THn9M$HGGZ51TMZz2nUHaWbWKVpkICjgTHjhDQKVRxdLUC5rg=', '2015-06-29 19:27:35', 0, 'ccc', '', '', 'ccc', 0, 1, '2015-06-29 19:27:35'),
+(39, 'pbkdf2_sha256$12000$sslW5NPT3Tj6$DmEow6xvpNKgn5jQ6jBQMW2nOp4omXyrcbCNgMaVsRM=', '2015-06-29 19:33:14', 0, 'sss@gm.com', '', '', 'sss@gm.com', 0, 1, '2015-06-29 19:33:14'),
+(40, 'pbkdf2_sha256$12000$3TwAwKy1jn4j$NuxepPZyRtNj423TLWBt6vMhkkGwCEvQf0haHJq6WgE=', '2015-06-29 19:33:42', 0, 'ssss@gm.com', '', '', 'ssss@gm.com', 0, 1, '2015-06-29 19:33:42'),
+(41, 'pbkdf2_sha256$12000$Zg9ysvG1pPpi$ETrbzb24eJN9KJZ+fN0r28MEwy6e+FGIVXDxdm4CaeU=', '2015-07-02 00:37:30', 0, 'ss@gm.com', '', '', 'ss@gm.com', 0, 1, '2015-07-02 00:37:30'),
+(42, 'pbkdf2_sha256$12000$4IEcdRrYQ5dJ$ILxs0ogNsF28Tv1upo3CZQ1GtLuZ2I6aJv5751pycA8=', '2015-07-02 00:38:07', 0, 'ssdd@gm.com', '', '', 'ssdd@gm.com', 0, 1, '2015-07-02 00:38:07'),
+(43, 'pbkdf2_sha256$12000$uq3NySYsPx0X$lO3FOnH0leoDG0uwBlkMjfgshPedIUvBCp4a8bIK4go=', '2015-07-02 00:41:32', 0, 'ssdsssd@gm.com', '', '', 'ssdsssd@gm.com', 0, 1, '2015-07-02 00:41:32'),
+(44, 'pbkdf2_sha256$12000$MJ7UfTL70mxz$b/waH1CcompA3KIG6nD63+nUCyTrogRo0sa/w3q4Hjg=', '2015-07-02 01:53:52', 0, 'nishu.saxena@gmail.com', '', '', 'nishu.saxena@gmail.com', 0, 1, '2015-07-02 01:53:52'),
+(51, 'pbkdf2_sha256$12000$lSZPyS6AQ74C$QWiBmj8unoST+7rJuGsEpAhWnFibaqwH0+uWOj5gi94=', '2015-07-02 14:36:43', 0, 'nishusaxena@gmail.com', '', '', 'nishusaxena@gmail.com', 0, 1, '2015-07-02 14:36:43');
 
 -- --------------------------------------------------------
 
@@ -171,7 +179,14 @@ INSERT INTO `customer_customer` (`user_id`, `groom_name`, `bride_name`, `contact
 (33, 'NNN', 'NNNN', 'NNN', '', '', 'nishu.ssddsaxenadd@gmail.com:xHGJ4LD08HTnP3WhxmVbMvoWoOU'),
 (34, 'NNN', 'NNNN', 'NNN', '', '', 'nishu.ssddccsaxenadd@gmail.com:Y2_s_jOreXqApMsUkNonFAFMfFg'),
 (36, 'NNN', 'NNNN', 'NNN', '', '', 'nishu.ssddssccsaxenadd@gmail.com:9g4VS6bAJPrVuc3STRhHN9wgxGQ'),
-(37, 'NNN', 'NNNN', 'NNN', '', '', 'nishu.ssddsaasccsaxenadd@gmail.com:3exXQeUXm62CcKsHpj4f2gY_fDg');
+(37, 'NNN', 'NNNN', 'NNN', '', '', 'nishu.ssddsaasccsaxenadd@gmail.com:3exXQeUXm62CcKsHpj4f2gY_fDg'),
+(38, 'ccc', 'ccc', 'ccccc', '', '', 'ccc:edgWvDKUo5izxVWTjZHvl0U9pXA'),
+(39, '`msmsm', 'mmm', 'mmmm', '', '', 'sss@gm.com:Bjp_Ul4oDb0iA0JeNc87F25vyZg'),
+(40, '`msmsm', 'mmm', 'mmmm', '', '', 'ssss@gm.com:ru3h8HnRLJFqE9F8Mj03WkDYdHY'),
+(41, 'ss', 'ss', '01010101010', '', '', 'ss@gm.com:WBivtuTuZ5JaF-fl-eghfzgG_nk'),
+(42, 'ss', 'ss', '01010101010', '', '', 'ssdd@gm.com:be5saLWEkx5-hZoTN9lIdb0nL7w'),
+(43, 'ss', 'ss', '9010101010', '', '', 'ssdsssd@gm.com:HUVFpvfSfvlT6ph7w_ybJ5utPv8'),
+(44, 'Nishant', 'HP', '9032092000', '', '', 'nishu.saxena@gmail.com:-aXxfMHFNWGP9SY6d6DStZ0qDnY');
 
 -- --------------------------------------------------------
 
@@ -230,7 +245,7 @@ CREATE TABLE IF NOT EXISTS `django_migrations` (
   `app` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `applied` datetime NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `django_migrations`
@@ -245,7 +260,12 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (6, 'vendor', '0001_initial', '2015-06-28 17:31:59'),
 (7, 'customer', '0002_auto_20150629_1300', '2015-06-29 07:32:28'),
 (8, 'customer', '0003_auto_20150629_1301', '2015-06-29 07:32:28'),
-(9, 'customer', '0004_auto_20150629_1301', '2015-06-29 07:32:29');
+(9, 'customer', '0004_auto_20150629_1301', '2015-06-29 07:32:29'),
+(10, 'vendor', '0002_auto_20150702_1849', '2015-07-02 13:19:48'),
+(11, 'vendor', '0003_vendorlead_name', '2015-07-02 13:19:49'),
+(12, 'vendor', '0004_auto_20150702_1850', '2015-07-02 13:20:46'),
+(13, 'vendor', '0005_auto_20150702_1920', '2015-07-02 13:50:15'),
+(14, 'vendor', '0006_vendor_identifier', '2015-07-02 14:36:28');
 
 -- --------------------------------------------------------
 
@@ -259,6 +279,13 @@ CREATE TABLE IF NOT EXISTS `django_session` (
   `expire_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `django_session`
+--
+
+INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
+('q4ui5k158ykuh1fx0mqfd1e16r6cqsye', 'NzQyYWZhNzhlNmFiZmM5ZDZlOWRhMmNiZjczNDQ3NGFmNGMzZjJlMDp7Il9hdXRoX3VzZXJfaGFzaCI6IjhjZDlhNjRjNzQzODE0YTBkYjVlYmUyNDllMDIzYzU4OWQzNWUxODMiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOjF9', '2015-07-16 02:52:28');
+
 -- --------------------------------------------------------
 
 --
@@ -270,7 +297,18 @@ CREATE TABLE IF NOT EXISTS `vendor_category` (
   `name` varchar(250) NOT NULL,
   `key` varchar(250) NOT NULL,
   `image` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `vendor_category`
+--
+
+INSERT INTO `vendor_category` (`id`, `name`, `key`, `image`) VALUES
+(1, 'Banquets', 'banquets', ''),
+(2, 'Catereres', 'caterers', ''),
+(3, 'Decorators', 'decorators', ''),
+(4, 'Photographers', 'photographers', ''),
+(5, 'Others', 'others', '');
 
 -- --------------------------------------------------------
 
@@ -286,8 +324,16 @@ CREATE TABLE IF NOT EXISTS `vendor_vendor` (
   `email` varchar(75) NOT NULL,
   `role` varchar(100) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `vendor_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `vendor_type_id` int(11),
+  `identifier` varchar(512) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `vendor_vendor`
+--
+
+INSERT INTO `vendor_vendor` (`id`, `name`, `contact_number`, `address`, `email`, `role`, `user_id`, `vendor_type_id`, `identifier`) VALUES
+(1, 'Nishant .Saxena', '9032092000', 'Dharam Kran Road', '', '', 51, 1, 'nishusaxena@gmail.com:qfTWg0bJkKk1E_WMxN7uH_PbYOw');
 
 -- --------------------------------------------------------
 
@@ -298,10 +344,19 @@ CREATE TABLE IF NOT EXISTS `vendor_vendor` (
 CREATE TABLE IF NOT EXISTS `vendor_vendorlead` (
   `id` int(11) NOT NULL,
   `email` varchar(75) NOT NULL,
-  `name` varchar(250) NOT NULL,
-  `contact_number` varchar(20) NOT NULL,
-  `category_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `address` varchar(512) NOT NULL,
+  `mobile` varchar(11) NOT NULL,
+  `services` varchar(512) NOT NULL,
+  `name` varchar(100)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `vendor_vendorlead`
+--
+
+INSERT INTO `vendor_vendorlead` (`id`, `email`, `address`, `mobile`, `services`, `name`) VALUES
+(1, 'cc@gm.com', 'cc', '9090909090', 'cc', 'cc'),
+(2, 'ccaa@gm.com', 'cc', '9090909090', 'cc', 'cc');
 
 --
 -- Indexes for dumped tables
@@ -383,13 +438,13 @@ ALTER TABLE `vendor_category`
 -- Indexes for table `vendor_vendor`
 --
 ALTER TABLE `vendor_vendor`
-  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `user_id` (`user_id`), ADD KEY `vendor_vendor_96b1f972` (`vendor_id`);
+  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `user_id` (`user_id`), ADD KEY `vendor_vendor_96b1f972` (`vendor_type_id`);
 
 --
 -- Indexes for table `vendor_vendorlead`
 --
 ALTER TABLE `vendor_vendorlead`
-  ADD PRIMARY KEY (`id`), ADD KEY `vendor_vendorlead_b583a629` (`category_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -414,7 +469,7 @@ ALTER TABLE `auth_permission`
 -- AUTO_INCREMENT for table `auth_user`
 --
 ALTER TABLE `auth_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=52;
 --
 -- AUTO_INCREMENT for table `auth_user_groups`
 --
@@ -439,22 +494,22 @@ ALTER TABLE `django_content_type`
 -- AUTO_INCREMENT for table `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `vendor_category`
 --
 ALTER TABLE `vendor_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `vendor_vendor`
 --
 ALTER TABLE `vendor_vendor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `vendor_vendorlead`
 --
 ALTER TABLE `vendor_vendorlead`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- Constraints for dumped tables
 --
@@ -504,13 +559,7 @@ ADD CONSTRAINT `django_admin_log_user_id_1c5f563_fk_auth_user_id` FOREIGN KEY (`
 --
 ALTER TABLE `vendor_vendor`
 ADD CONSTRAINT `vendor_vendor_user_id_73675de7_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`),
-ADD CONSTRAINT `vendor_vendor_vendor_id_2d440570_fk_vendor_category_id` FOREIGN KEY (`vendor_id`) REFERENCES `vendor_category` (`id`);
-
---
--- Constraints for table `vendor_vendorlead`
---
-ALTER TABLE `vendor_vendorlead`
-ADD CONSTRAINT `vendor_vendorlead_category_id_7271f24a_fk_vendor_category_id` FOREIGN KEY (`category_id`) REFERENCES `vendor_category` (`id`);
+ADD CONSTRAINT `vendor_vendor_vendor_type_id_6f6c99e_fk_vendor_category_id` FOREIGN KEY (`vendor_type_id`) REFERENCES `vendor_category` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

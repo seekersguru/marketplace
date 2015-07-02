@@ -8,7 +8,8 @@ from api.utils import mode_require
 from django import forms
 from django.core.exceptions import ValidationError
 from django.db import transaction
-
+from django.core.signing import Signer
+signer = Signer()
 
 class Category(models.Model):
     name = models.CharField(max_length=250)
@@ -54,6 +55,7 @@ class Vendor(models.Model):
     address = models.TextField()
     email = models.EmailField()
     role = models.CharField(max_length=100, choices=CHOICES_VENDOR_ROLE)
+    identifier = models.CharField(max_length=512)
 
     def __unicode__(self):
         return "%s belong to vendor %s (as %s)" % (self.user, self.vendor, self.role)
@@ -65,8 +67,8 @@ class Vendor(models.Model):
                ):
         email = request.POST.get('email').strip().lower()
         password = request.POST.get('password')
-        vendor_type = request.POST.get('groom_name')
-        name = request.POST.get('bride_name')
+        vendor_type = request.POST.get('vendor_type')
+        name = request.POST.get('name')
         contact_number = request.POST.get('contact_number').strip()
         address = request.POST.get('address').strip()
         
@@ -100,7 +102,7 @@ class Vendor(models.Model):
                  address=address,
                  identifier=signer.sign(email))
         # do something with the book
-        customer.save()
+        vendor.save()
         
         return gs("POST",req_dict(request.POST),{"identifier":vendor.identifier})
 
