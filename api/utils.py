@@ -1,3 +1,8 @@
+ALLOWED_ANDRIOD_IMAGE_TYPE=["drawable-hdpi", "drawable-xhdpi", "drawable-xxhdpi","drawable-xxxhdpi",]
+ALLOWED_IOS_IMAGE_TYPE=["2x", "3x",]
+from utils import ALLOWED_ANDRIOD_IMAGE_TYPE,ALLOWED_IOS_IMAGE_TYPE
+
+
 def req_dict(request_method):
     return dict([(e,request_method.get(e)) for e in request_method])
 

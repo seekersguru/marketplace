@@ -1,5 +1,5 @@
 from django.template.response import TemplateResponse
-from urls import patterns
+from api.urls import patterns
 from django.views.decorators.csrf import csrf_exempt
 from collections import OrderedDict
 
@@ -7,7 +7,7 @@ from api.utils import get_error as ge , get_success as gs
 import json
 from django.http import HttpResponse
 from customer.models import Customer
-
+from vendor.models import Category
 def check_basic_validations(pattern_name,request,req_type):
     required=patterns[pattern_name].get("required_params",None)
     if req_type =="POST":
@@ -64,8 +64,12 @@ def customer_bg_image_login_registration(request):
 
 
 ########## Customer vendor listing detail
+@csrf_exempt
 def customer_vendor_category_or_home(request):
-    return TemplateResponse(request,'api/api.html',{})
+        #TODO Put all in decorators  with csrf 
+        invalid=check_basic_validations("customer_vendor_category_or_home",request,"POST")
+        if invalid:return response(request,invalid) 
+        return response(request,Category.get_categories(request))
 def customer_vendor_list_and_search(request):
     return TemplateResponse(request,'api/api.html',{})
 def customer_vendor_detail(request):

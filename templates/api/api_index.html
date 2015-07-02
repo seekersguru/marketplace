@@ -1,4 +1,5 @@
 {% extends "admin/base_site_frontend.html" %}
+{% load util_filters %}
 {% load i18n admin_static %}
 {% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />{% endblock %}
 {% block coltype %}colMS{% endblock %}
@@ -37,37 +38,45 @@ $('form').submit(function() { // catch the form's submit event
 
 {% for pat_name,pattern in patterns.iteritems %}
 
-
+{% if pattern.params %}  
 <form role="form"  method="{{pattern.type}}" id='{{pat_name}}' class="form-horizontal" role="form" action="{{pat_name}}/">
     <div class="form-group"> 
     <h4>/{{pat_name}}/ ( {{pattern.type}})<h4/>  
-    {% if pattern.params %}     
+    
+       
       <div class="col-sm-offset-2 col-sm-10">
         <button type="submit" class="btn btn-default">Submit</button>
       </div>
-	{% endif %}
+	
     </div>
 
 
 {% for param in pattern.params %}
 
+
+
     <div class="form-group">
       <label class="control-label col-sm-2" for="{{param}}">{{param}}:</label>
       <div class="col-sm-10">
         <input  class="form-control" name="{{param}}" placeholder="{{param}}">
+        {% if  pattern.help|get_dictionary_value:param   %}
+        <p class="help-block">{{ pattern.help|get_dictionary_value:param |safe}} </p>
+        {% endif %}
       </div>
     </div>
 
+{% endfor %}
+</form>
+<hr/>
+<div class='main-header'></div>
+
+{% endif %}
 {% endfor %}
 <style type='text/css'>
 .pre{
 	height:200px;
 }
 </style>
-</form>
-<hr/>
-<div class='main-header'></div>
-{% endfor %}
 
 
 

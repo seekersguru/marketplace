@@ -1,5 +1,6 @@
 from django.conf.urls import url
 from collections import OrderedDict
+from utils import ALLOWED_ANDRIOD_IMAGE_TYPE,ALLOWED_IOS_IMAGE_TYPE
 urlpatterns = [
 	## Home page for apis 
     url(r'^$','api.views.index', name='api_index'),
@@ -64,7 +65,11 @@ patterns = {##"customer_login_registration",
 	 		{
 				"type":"POST",
 				"order":8,
-	 			"params":[]
+	 			"params":["mode","image_type"],
+	 			"required_params":["mode","image_type"],
+	 			"help":{"mode":"Possible values 'android' or 'ios'",
+						"image_type":"For android allowed: " + str(ALLOWED_ANDRIOD_IMAGE_TYPE)\
+						+ "<br/>For ios allowed :"+str(ALLOWED_IOS_IMAGE_TYPE)}
 		 	},
 		 
 		"customer_vendor_list_and_search":
