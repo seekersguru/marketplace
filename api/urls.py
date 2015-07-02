@@ -5,7 +5,7 @@ urlpatterns = [
 	## Home page for apis 
     url(r'^$','api.views.index', name='api_index'),
 ]
-
+from vendor.models import VENDOR_TYPES
 patterns = {##"customer_login_registration",
 	
 		"customer_registration":
@@ -23,8 +23,7 @@ patterns = {##"customer_login_registration",
 	 			"params":["email" ,"password" ,"vendor_type" ,"name","contact_number","address"],
 	 			"required_params":["email" ,"password" ,"vendor_type" ,"name","contact_number","address"],
 	 			# Better pick from DB
-	 			"selects":{"vendor_type":[("banquets","Banquets"),("caterers","Caterers"),("decorators","Decorators")
-										,("photographers","Photographers"),("others","Others")]}
+	 			"selects":{"vendor_type":VENDOR_TYPES}
 		 	},
 		"customer_login":
 			{
@@ -38,7 +37,7 @@ patterns = {##"customer_login_registration",
 			{
 				"type":"POST",
 				"order":3,
-		 		"params":[]
+		 		"	params":[]
 			 },
 
 		"customer_registration_login_gmail":
@@ -88,10 +87,17 @@ patterns = {##"customer_login_registration",
 		 	},
 		 
 		"customer_vendor_list_and_search":
-			{
+	 		{
 				"type":"POST",
-				"order":9,
-	 			"params":[]
+				"order":8,
+	 			"params":["mode","image_type","vendor_type","page_no"],
+	 			"required_params":["mode","image_type","vendor_type"],
+	 			"help":{"mode":"Possible values 'android' or 'ios'",
+						"image_type":"For android allowed: " + str(ALLOWED_ANDRIOD_IMAGE_TYPE)\
+						+ "<br/>For ios allowed :"+str(ALLOWED_IOS_IMAGE_TYPE)}, 
+	 			# Better pick from DB
+	 			"selects":{"vendor_type":VENDOR_TYPES}
+
 		 	},
 		"customer_vendor_detail":
 		 	{

@@ -11,6 +11,8 @@ from django.db import transaction
 from django.core.signing import Signer
 signer = Signer()
 
+VENDOR_TYPES=[("banquets","Banquets"),("caterers","Caterers"),("decorators","Decorators")
+                                        ,("photographers","Photographers"),("others","Others")]
 class Category(models.Model):
     name = models.CharField(max_length=250)
     key = models.CharField(max_length=250)
@@ -56,12 +58,22 @@ class Vendor(models.Model):
     email = models.EmailField()
     role = models.CharField(max_length=100, choices=CHOICES_VENDOR_ROLE)
     identifier = models.CharField(max_length=512)
+    dynamic_info = models.TextField()
+    
+    @classmethod
+    def get_listing(self,request):
+        mode = request.POST.get('mode').strip().lower()
+        image_type = request.POST.get('image_type').strip().lower()
+        vendor_type = request.POST.get('vendor_type').strip().lower()
+        page_no = request.POST.get('page_no',1)
+        search_param= request.POST.get('search_param',"")
+        
+
 
     def __unicode__(self):
         return "%s belong to vendor %s (as %s)" % (self.user, self.vendor, self.role)
     @classmethod
     @transaction.atomic # @Nishant see if its effect speed @Amit dash 
-
     def create(cls,
                request, 
                ):

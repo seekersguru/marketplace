@@ -84,9 +84,13 @@ def customer_bg_image_login_registration(request):
     if invalid:return response(request,invalid)
     return response(request,utils.get_bg_images_login(request))
 
-
+@csrf_exempt
 def customer_vendor_list_and_search(request):
-    return TemplateResponse(request,'api/api.html',{})
+    #TODO Put all in decorators  with csrf 
+    invalid=check_basic_validations("customer_vendor_list_and_search",request,"POST")
+    if invalid:return response(request,invalid) 
+    return response(request,Vendor.get_listing(request))
+
 def customer_vendor_detail(request):
     return TemplateResponse(request,'api/api.html',{})
 

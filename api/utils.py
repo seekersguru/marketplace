@@ -35,15 +35,18 @@ def get_error(request_type,
             "message":message,
             "request_type":request_type,
             "request_data":request_data,
-            "error_fields":error_fields
+            "error_fields":error_fields,
+            "json":0
             }
     
 def get_success(request_type,request_data,json_data):
     return {
+            "message":0,
             "request_type":request_type,
             "request_data":request_data,
             "result":"success",
             "json":json_data,
+            "error_fields":[]
             }
 
 gs,ge=get_success, get_error

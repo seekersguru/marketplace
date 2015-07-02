@@ -4,6 +4,12 @@ from django.views.decorators.csrf import csrf_exempt
 from vendor.vendor_rules import banquet_rule
 #import static url form setting
 from market_place.settings import STATIC_URL
+
+from django.forms import ModelForm
+from vendor.models import Vendor
+class VendorForm(ModelForm):
+    class Meta:
+        model = Vendor
 def vendor_validation(request,vendor_rule):
     request_post=dict(request.POST)
         ## TOD : What the ... , why we need to import to avoid 
@@ -30,18 +36,38 @@ def vendor_validation(request,vendor_rule):
     return vendor_rule_copy 
 
 
+def add_vendor(request):
+
+    if request.method == "POST":
+        form = VendorForm(request.POST)
+        if form.is_valid():
+
+            # commit=False means the form doesn't save at this time.
+            # commit defaults to True which means it normally saves.
+            model_instance = form.save(commit=False)
+            model_instance.timestamp = timezone.now()
+            model_instance.save()
+            return redirect('victory')
+    else:
+        form = VendorForm()
+
+    return render(request, "my_template.html", {'form': form})
 
 @csrf_exempt
-def banquets(request):
+def vendors(request):
     banquet_rule_copy=banquet_rule[:]
     if request.method =="POST":
         banquet_rule_copy=vendor_validation(request, banquet_rule_copy)
     
+
+    add_vendor_form = VendorForm()
+
     
     return TemplateResponse (request,'banquets.html',
                              {"rules":banquet_rule_copy ,
                              "message":"Some Message on the top ",
                              "message_class":"",
-                             'static_url' : STATIC_URL
+                             'static_url' : STATIC_URL,
+                             "add_vendor_form":add_vendor_form
                             }
                              )
