@@ -3,6 +3,9 @@ from django.contrib.auth.models import User
 from api.utils import get_error as ge , get_success as gs ,req_dict
 # Create your models here.
 from django.db import transaction
+from django import forms
+from django.core.exceptions import ValidationError
+
 """
 https://docs.djangoproject.com/en/1.8/topics/db/transactions/
 Atomicity is the defining property of database transactions. atomic allows us to create a block of code within 
@@ -34,16 +37,27 @@ class Customer(models.Model):
         password = request.POST.get('password')
         groom_name = request.POST.get('groom_name')
         bride_name = request.POST.get('bride_name')
-        contact_number = request.POST.get('contact_number')
+        contact_number = request.POST.get('contact_number').strip()
         
+
+        f = forms.EmailField()
+        try:
+            f.clean(email)
+        except ValidationError:
+            return ge("POST",req_dict(request.POST),"Invalid email", error_fields=['email']) 
+ 
+        if len(password)<3:
+            return ge("POST",req_dict(request.POST),"Password too short", error_fields=['password']) 
         user = User.objects.filter(username=email)
         if user:
-            return ge("POST",req_dict(request.POST),"email already exists", error_fields=['email'])
-
-
-        if len(password)<3:
-            return ge("POST",req_dict(request.POST),"password too short", error_fields=['password']) 
+            return ge("POST",req_dict(request.POST),"Email already exists", error_fields=['email'])
  
+        if not contact_number.isdigit() :
+            return ge("POST",req_dict(request.POST),"Invalid mobile number", error_fields=['contact_number'])
+
+        if len(str(int(contact_number))) not in [10,11]:
+            return ge("POST",req_dict(request.POST),"Mobile number should be of 10/11 digits", error_fields=['contact_number'])
+            
         # As we using transactions, no need to error handle. 
         # In case of error all will revert
         user = User.objects.create_user(email, email, password)
