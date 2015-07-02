@@ -7,7 +7,8 @@ from utils import response
 from api.utils import get_error as ge , get_success as gs
 import utils
 from customer.models import Customer
-from vendor.models import Category
+from vendor.models import Category, VendorLead
+
 def check_basic_validations(pattern_name,request,req_type):
     required=patterns[pattern_name].get("required_params",None)
     if req_type =="POST":
@@ -94,8 +95,15 @@ def customer_create_book(request):
 
 
 ########## vendor_login_registration
+@csrf_exempt
 def vendor_lead(request):
-    return TemplateResponse(request,'api/api.html',{})
+    #TODO Put all in decorators  with csrf 
+    invalid=check_basic_validations("vendor_lead",request,"POST")
+    if invalid:return response(request,invalid) 
+    res={}
+    if request.method=="POST":
+        return response(request,VendorLead.create(request))
+
 def vendor_login(request):
     return TemplateResponse(request,'api/api.html',{})
 def vendor_registration_login_fb(request):

@@ -129,10 +129,11 @@ patterns = {##"customer_login_registration",
 	##"vendor_login_registration",
 	
 	 	"vendor_lead":
-	 		{
-				"order":16,
+			{
+				"order":18,
 				"type":"POST",
-	 			"params":[]
+	 			"params":["email","name","mobile","address","services"],
+	 			"required_params":["email","name","mobile","address","services"],
 		 	},
 		"vendor_login":
 			{
