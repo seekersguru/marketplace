@@ -50,7 +50,6 @@ $('form').submit(function() { // catch the form's submit event
 	
     </div>
 
-
 {% for param in pattern.params %}
 
 
@@ -58,8 +57,19 @@ $('form').submit(function() { // catch the form's submit event
     <div class="form-group">
       <label class="control-label col-sm-2" for="{{param}}">{{param}}:</label>
       <div class="col-sm-10">
-        <input  class="form-control" name="{{param}}" placeholder="{{param}}">
+		{% if pattern.selects|get_dictionary_value:param %}
+		<select class="form-control" name="{{param}}">
+		{%for each in pattern.selects|get_dictionary_value:param %}
+		<option value='{{each.0}}'>{{each.1}}</option>
+		{%endfor%}
+		</select>
+			
+		{% else %}
+		<input  class="form-control" name="{{param}}" placeholder="{{param}}">
+		{% endif %}
+
         {% if  pattern.help|get_dictionary_value:param   %}
+
         <p class="help-block">{{ pattern.help|get_dictionary_value:param |safe}} </p>
         {% endif %}
       </div>

@@ -39,9 +39,18 @@ def customer_registration(request):
     invalid=check_basic_validations("customer_registration",request,"POST")
     if invalid:return response(request,invalid) 
     
-    res={}
     if request.method=="POST":
         return response(request,Customer.create(request))
+
+@csrf_exempt
+def non_app_vendor_registration(request):
+    #TODO Put all in decorators  with csrf 
+    invalid=check_basic_validations("non_app_vendor_registration",request,"POST")
+    if invalid:return response(request,invalid) 
+    
+    if request.method=="POST":
+        return response(request,Customer.create(request))
+    
 
 @csrf_exempt
 def customer_login(request):

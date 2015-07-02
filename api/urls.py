@@ -15,6 +15,17 @@ patterns = {##"customer_login_registration",
 	 			"params":["email","password","groom_name","bride_name","contact_number"],
 	 			"required_params":["email","password","groom_name","bride_name","contact_number"]
 		 	},
+		"non_app_vendor_registration":
+	 		{#In last so can add categories and dump the json for corresponding category
+
+				"type":"POST",
+				"order":155,
+	 			"params":["email" ,"password" ,"vendor_type" ,"name","contact_number","address"],
+	 			"required_params":["email" ,"password" ,"vendor_type" ,"name","contact_number","address"],
+	 			# Better pick from DB
+	 			"selects":{"vendor_type":[("banquets","Banquets"),("caterers","Caterers"),("decorators","Decorators")
+										,("photographers","Photographers"),("others","Others")]}
+		 	},
 		"customer_login":
 			{
 			"type":"POST",

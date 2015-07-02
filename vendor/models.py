@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from api.utils import mode_require
 from django import forms
 from django.core.exceptions import ValidationError
+from django.db import transaction
 
 
 class Category(models.Model):
@@ -43,11 +44,11 @@ class Category(models.Model):
     ## Also will TODO with DATABASE entries. for all hdmi, 2x, 3x etc. have to create admin.
     
     
-    
-CHOICES_VENDOR_ROLE=[('Owner', 'Owner'), ('Admin','Admin'), ('Reception','Reception')]        
+
+CHOICES_VENDOR_ROLE=[('Admin','Admin'), ('Reception','Reception')]        
 class Vendor(models.Model):
     user = models.OneToOneField(User)
-    vendor = models.ForeignKey(Category)
+    vendor_type = models.ForeignKey(Category)
     name = models.CharField(max_length=250)
     contact_number = models.CharField(max_length=50)    
     address = models.TextField()
@@ -56,6 +57,76 @@ class Vendor(models.Model):
 
     def __unicode__(self):
         return "%s belong to vendor %s (as %s)" % (self.user, self.vendor, self.role)
+    @classmethod
+    @transaction.atomic # @Nishant see if its effect speed @Amit dash 
+
+    def create(cls,
+               request, 
+               ):
+        email = request.POST.get('email').strip().lower()
+        password = request.POST.get('password')
+        vendor_type = request.POST.get('groom_name')
+        name = request.POST.get('bride_name')
+        contact_number = request.POST.get('contact_number').strip()
+        address = request.POST.get('address').strip()
+        
+
+        f = forms.EmailField()
+        
+        try:
+            f.clean(email)
+        except ValidationError:
+            return ge("POST",req_dict(request.POST),"Invalid email", error_fields=['email']) 
+ 
+        if len(password)<3:
+            return ge("POST",req_dict(request.POST),"Password too short", error_fields=['password']) 
+        user = User.objects.filter(username=email)
+        if user:
+            return ge("POST",req_dict(request.POST),"Email already exists", error_fields=['email'])
+ 
+        if not contact_number.isdigit() :
+            return ge("POST",req_dict(request.POST),"Invalid mobile number", error_fields=['contact_number'])
+
+        if len(str(int(contact_number))) not in [10,11]:
+            return ge("POST",req_dict(request.POST),"Mobile number should be of 10/11 digits", error_fields=['contact_number'])
+            
+        # As we using transactions, no need to error handle. 
+        # In case of error all will revert
+        user = User.objects.create_user(email, email, password)
+        category = Category.objects.get(key=vendor_type)
+        vendor=Vendor(user=user,vendor_type=category,
+                 name=name,
+                 contact_number=contact_number,
+                 address=address,
+                 identifier=signer.sign(email))
+        # do something with the book
+        customer.save()
+        
+        return gs("POST",req_dict(request.POST),{"identifier":vendor.identifier})
+
+        
+    @classmethod
+    def login(cls,
+               request, 
+               ):
+        email = request.POST.get('email').strip().lower()
+        password = request.POST.get('password')
+        user = authenticate(username=email, password=password)
+        if not user:
+            return ge("POST",req_dict(request.POST),"Invalid username or password", error_fields=['email','password'])
+            
+        try:
+            vendor = Vendor.objects.get(user=user)
+            return gs("POST",req_dict(request.POST),{"identifier":vendor.identifier})
+
+        except:
+            ## TODO Proper error handling 
+            ## Case 1: USer is Vendor 
+            ## Case 2 : User Could not register, some error user registered but problem
+            ## Critical error must be addressed TODO 
+            ## Add critical error code for such situations and normal error code for all 
+            return ge("POST",req_dict(request.POST),"User is present but problem", 
+                      error_fields=['email','password'])
 
 
 class VendorLead(models.Model):
@@ -90,7 +161,7 @@ class VendorLead(models.Model):
         user = VendorLead.objects.filter(email=email)
         if user:
             ## TODO implement email here.
-            return ge("POST",req_dict(request.POST),"Will contact you soon", error_fields=['email'])
+            return gs("POST",req_dict(request.POST),{"message":"Already in records, Wedwise team time will contact you soon."})
  
         if not mobile.isdigit() :
             return ge("POST",req_dict(request.POST),"Invalid mobile number", error_fields=['mobile'])

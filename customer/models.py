@@ -28,9 +28,6 @@ class Customer(models.Model):
     fbid = models.CharField(max_length=1024,default="")
     gid =models.CharField(max_length=1024,default="")
     
- 
-
-        
     @classmethod
     @transaction.atomic # @Nishant see if its effect speed @Amit dash 
     def create(cls,
