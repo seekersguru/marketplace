@@ -4,7 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from vendor.vendor_rules import banquet_rule
 #import static url form setting
 from market_place.settings import STATIC_URL
-
+from django.utils import timezone
 from django.forms import ModelForm
 from vendor.models import Vendor
 class VendorForm(ModelForm):
@@ -37,7 +37,7 @@ def vendor_validation(request,vendor_rule):
 
 
 def add_vendor(request):
-
+    message=""
     if request.method == "POST":
         form = VendorForm(request.POST)
         if form.is_valid():
@@ -47,11 +47,12 @@ def add_vendor(request):
             model_instance = form.save(commit=False)
             model_instance.timestamp = timezone.now()
             model_instance.save()
-            return redirect('victory')
+            message="Saved succesfully"
     else:
         form = VendorForm()
 
-    return render(request, "my_template.html", {'form': form})
+    return render(request, "add_vendor.html", {'form': form,"message":message
+                                               ,"vendors":Vendor.objects.all()})
 
 @csrf_exempt
 def vendors(request):
@@ -63,7 +64,7 @@ def vendors(request):
     add_vendor_form = VendorForm()
 
     
-    return TemplateResponse (request,'banquets.html',
+    return TemplateResponse (request,'vendors.html',
                              {"rules":banquet_rule_copy ,
                              "message":"Some Message on the top ",
                              "message_class":"",

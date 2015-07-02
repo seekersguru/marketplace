@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 02, 2015 at 04:37 PM
+-- Generation Time: Jul 02, 2015 at 08:03 PM
 -- Server version: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -245,7 +245,7 @@ CREATE TABLE IF NOT EXISTS `django_migrations` (
   `app` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `applied` datetime NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `django_migrations`
@@ -265,7 +265,8 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (11, 'vendor', '0003_vendorlead_name', '2015-07-02 13:19:49'),
 (12, 'vendor', '0004_auto_20150702_1850', '2015-07-02 13:20:46'),
 (13, 'vendor', '0005_auto_20150702_1920', '2015-07-02 13:50:15'),
-(14, 'vendor', '0006_vendor_identifier', '2015-07-02 14:36:28');
+(14, 'vendor', '0006_vendor_identifier', '2015-07-02 14:36:28'),
+(15, 'vendor', '0007_vendor_dynamic_info', '2015-07-02 17:58:44');
 
 -- --------------------------------------------------------
 
@@ -325,15 +326,17 @@ CREATE TABLE IF NOT EXISTS `vendor_vendor` (
   `role` varchar(100) NOT NULL,
   `user_id` int(11) NOT NULL,
   `vendor_type_id` int(11),
-  `identifier` varchar(512) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  `identifier` varchar(512) NOT NULL,
+  `dynamic_info` longtext NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `vendor_vendor`
 --
 
-INSERT INTO `vendor_vendor` (`id`, `name`, `contact_number`, `address`, `email`, `role`, `user_id`, `vendor_type_id`, `identifier`) VALUES
-(1, 'Nishant .Saxena', '9032092000', 'Dharam Kran Road', '', '', 51, 1, 'nishusaxena@gmail.com:qfTWg0bJkKk1E_WMxN7uH_PbYOw');
+INSERT INTO `vendor_vendor` (`id`, `name`, `contact_number`, `address`, `email`, `role`, `user_id`, `vendor_type_id`, `identifier`, `dynamic_info`) VALUES
+(1, 'Nishant .Saxena', '9032092000', 'Dharam Kran Road', '', '', 51, 1, 'nishusaxena@gmail.com:qfTWg0bJkKk1E_WMxN7uH_PbYOw', '2015-07-02'),
+(2, 'sss', 'ss', 'sss', 'ssds@gmail.com', 'Admin', 1, 1, 'sss', 'ssss');
 
 -- --------------------------------------------------------
 
@@ -494,7 +497,7 @@ ALTER TABLE `django_content_type`
 -- AUTO_INCREMENT for table `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `vendor_category`
 --
@@ -504,7 +507,7 @@ ALTER TABLE `vendor_category`
 -- AUTO_INCREMENT for table `vendor_vendor`
 --
 ALTER TABLE `vendor_vendor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `vendor_vendorlead`
 --

@@ -71,7 +71,7 @@ class Vendor(models.Model):
 
 
     def __unicode__(self):
-        return "%s belong to vendor %s (as %s)" % (self.user, self.vendor, self.role)
+        return "%s belong to vendor %s (as %s)" % (self.user, self.vendor_type, self.role)
     @classmethod
     @transaction.atomic # @Nishant see if its effect speed @Amit dash 
     def create(cls,

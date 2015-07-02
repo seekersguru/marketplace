@@ -17,7 +17,8 @@ urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='home.html')),
  
     ##Here add url add banquet and point o core.views.oy#
-     url(r'^vendors/$','vendor.views.vendors', name='banquets'),        
+     url(r'^vendors/$','vendor.views.vendors', name='banquets'),
+     url(r'^add_vendor/$','vendor.views.add_vendor', name='add_vendor'),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve',{'document_root': MEDIA_PATH}),
 #     url(r'^api/', include(category_resource.urls)),
 ]
