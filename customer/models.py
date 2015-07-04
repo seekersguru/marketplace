@@ -38,6 +38,8 @@ class Customer(models.Model):
         groom_name = request.POST.get('groom_name')
         bride_name = request.POST.get('bride_name')
         contact_number = request.POST.get('contact_number').strip()
+        fbid = request.POST.get("fbid","").strip()
+        gid = request.POST.get("gid","").strip()
         
 
         f = forms.EmailField()
@@ -64,7 +66,9 @@ class Customer(models.Model):
         customer=Customer(user=user,groom_name=groom_name,
                  bride_name=bride_name,
                  contact_number=contact_number,
-                 identifier=signer.sign(email))
+                 identifier=signer.sign(email),
+                 fbid=fbid,
+                 gid=gid)
         # do something with the book
         customer.save()
         
@@ -94,6 +98,34 @@ class Customer(models.Model):
             ## Add critical error code for such situations and normal error code for all 
             return ge("POST",req_dict(request.POST),"User is present but problem", 
                       error_fields=['email','password'])
+
+
+    @classmethod
+    def login_fb_gm(cls,
+               request, 
+               ):
+        email = request.POST.get('email').strip().lower()
+        
+        user=User.objects.filter(email=email)
+        if not user:
+            return ge("POST",req_dict(request.POST),
+                      "User not exist", 
+                      error_fields=['email','password'],
+                      code_string="CUSTOMER_NOT_EXIST")
+
+        else:
+            user = user[0]
+            customer= Customer.objects.filter(user=user)
+            if customer:
+                customer=customer[0]
+                return gs("POST",req_dict(request.POST),{"identifier":customer.identifier})
+            else:
+                ## TODO Log may be user registered and is vendor else even after transaction some problem
+                ## in register customer
+                return ge("POST",req_dict(request.POST),
+                          "User not exist", 
+                          error_fields=['email','password'],
+                          code_string="CUSTOMER_NOT_EXIST")                
 
 
             

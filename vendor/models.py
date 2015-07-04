@@ -58,7 +58,39 @@ class Vendor(models.Model):
     email = models.EmailField()
     role = models.CharField(max_length=100, choices=CHOICES_VENDOR_ROLE)
     identifier = models.CharField(max_length=512)
+    fbid = models.CharField(max_length=1024,default="")
+    gid =models.CharField(max_length=1024,default="")
+
     dynamic_info = models.TextField()
+
+    @classmethod
+    def login_fb_gm(cls,
+               request, 
+               ):
+        email = request.POST.get('email').strip().lower()
+        
+        user=User.objects.filter(email=email)
+        if not user:
+            return ge("POST",req_dict(request.POST),
+                      "User not exist", 
+                      error_fields=['email','password'],
+                      code_string="CUSTOMER_NOT_EXIST")
+
+        else:
+            user = user[0]
+            customer= Vendor.objects.filter(user=user)
+            if customer:
+                customer=customer[0]
+                return gs("POST",req_dict(request.POST),{"identifier":customer.identifier})
+            else:
+                ## TODO Log may be user registered and is vendor else even after transaction some problem
+                ## in register customer
+                return ge("POST",req_dict(request.POST),
+                          "User not exist", 
+                          error_fields=['email','password'],
+                          code_string="CUSTOMER_NOT_EXIST")                
+
+
     
     @classmethod
     def get_listing(self,request):
@@ -83,7 +115,8 @@ class Vendor(models.Model):
         name = request.POST.get('name')
         contact_number = request.POST.get('contact_number').strip()
         address = request.POST.get('address').strip()
-        
+        fbid = request.POST.get("fbid","").strip()
+        gid = request.POST.get("gid","").strip()        
 
         f = forms.EmailField()
         
@@ -103,7 +136,9 @@ class Vendor(models.Model):
 
         if len(str(int(contact_number))) not in [10,11]:
             return ge("POST",req_dict(request.POST),"Mobile number should be of 10/11 digits", error_fields=['contact_number'])
-            
+
+        fbid = request.POST.get("fbid","").strip()
+        gid = request.POST.get("gid","").strip()            
         # As we using transactions, no need to error handle. 
         # In case of error all will revert
         user = User.objects.create_user(email, email, password)
@@ -112,7 +147,10 @@ class Vendor(models.Model):
                  name=name,
                  contact_number=contact_number,
                  address=address,
-                 identifier=signer.sign(email))
+                 identifier=signer.sign(email),
+                 fbid=fbid,
+                 gid=gid
+                 )
         # do something with the book
         vendor.save()
         
@@ -164,7 +202,7 @@ class VendorLead(models.Model):
         address = request.POST.get('address')
         services = request.POST.get('services')
         mobile = request.POST.get('mobile').strip()
-        
+      
 
         f = forms.EmailField()
         try:
