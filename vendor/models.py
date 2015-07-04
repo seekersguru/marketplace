@@ -200,9 +200,12 @@ class Vendor(models.Model):
         if len(password)<3:
             return ge("POST",req_dict(request.POST),"Password too short", error_fields=['password']) 
         user = User.objects.filter(username=email)
+
         if user:
-            return ge("POST",req_dict(request.POST),"Email already exists", error_fields=['email'])
- 
+            vendor_exist=Vendor(user=user)
+            if vendor_exist:
+                return ge("POST",req_dict(request.POST),"Email already exists", error_fields=['email'])
+
         if not contact_number.isdigit() :
             return ge("POST",req_dict(request.POST),"Invalid mobile number", error_fields=['contact_number'])
 
