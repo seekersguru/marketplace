@@ -9,6 +9,8 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.db import transaction
 from django.core.signing import Signer
+from django.contrib.auth import authenticate
+
 signer = Signer()
 
 VENDOR_TYPES=[("banquets","Banquets"),("caterers","Caterers"),("decorators","Decorators")
@@ -64,6 +66,29 @@ class Vendor(models.Model):
     dynamic_info = models.TextField()
 
     @classmethod
+    def login(cls,
+               request, 
+               ):
+        email = request.POST.get('email').strip().lower()
+        password = request.POST.get('password')
+        user = authenticate(username=email, password=password)
+        if not user:
+            return ge("POST",req_dict(request.POST),"Invalid username or password", error_fields=['email','password'])
+            
+        try:
+            vendor = Vendor.objects.get(user=user)
+            return gs("POST",req_dict(request.POST),{"identifier":vendor.identifier})
+
+        except:
+            ## TODO Proper error handling 
+            ## Case 1: USer is Vendor 
+            ## Case 2 : User Could not register, some error user registered but problem
+            ## Critical error must be addressed TODO 
+            ## Add critical error code for such situations and normal error code for all 
+            return ge("POST",req_dict(request.POST),"User is present but problem", 
+                      error_fields=['email','password'])
+
+    @classmethod
     def login_fb_gm(cls,
                request, 
                ):
@@ -74,21 +99,21 @@ class Vendor(models.Model):
             return ge("POST",req_dict(request.POST),
                       "User not exist", 
                       error_fields=['email','password'],
-                      code_string="CUSTOMER_NOT_EXIST")
+                      code_string="VENDOR_NOT_EXIST")
 
         else:
             user = user[0]
-            customer= Vendor.objects.filter(user=user)
-            if customer:
-                customer=customer[0]
-                return gs("POST",req_dict(request.POST),{"identifier":customer.identifier})
+            vendor= Vendor.objects.filter(user=user)
+            if vendor:
+                vendor=vendor[0]
+                return gs("POST",req_dict(request.POST),{"identifier":vendor.identifier})
             else:
                 ## TODO Log may be user registered and is vendor else even after transaction some problem
                 ## in register customer
                 return ge("POST",req_dict(request.POST),
                           "User not exist", 
                           error_fields=['email','password'],
-                          code_string="CUSTOMER_NOT_EXIST")                
+                          code_string="VENDOR_NOT_EXIST")                
 
 
     

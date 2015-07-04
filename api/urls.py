@@ -148,24 +148,20 @@ patterns = {##"customer_login_registration",
 		 	},
 		"vendor_login":
 			{
-				"order":17,
-				"type":"POST",
-	 			"params":[]
-		 	},
+			"type":"POST",
+			"order":17,
+			"params":["email","password",],
+			"required_params":["email","password",]
+			},
 		 
-		"vendor_registration_login_fb":
+
+		"vendor_registration_login_fb_gm":
 			{
+				"type":"POST",
 				"order":18,
-				"type":"POST",
-	 			"params":[]
-		 	},
-		
-		"vendor_registration_login_gmail":
-			{
-				"order":19,
-				"type":"POST",
-	 			"params":[]
-		 	}, 
+		 		"params":["email"],
+		 		"required_params":["email",	]
+			 },
 		"vendor_forgot_password":
 		 	{
 				"order":20,

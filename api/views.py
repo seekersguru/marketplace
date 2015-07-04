@@ -122,12 +122,21 @@ def customer_create_book(request):
 #         return response(request,VendorLead.create(request))
 ## TODO Remove all vendor_lead stuff
 
+@csrf_exempt
 def vendor_login(request):
-    return TemplateResponse(request,'api/api.html',{})
-def vendor_registration_login_fb(request):
-    return TemplateResponse(request,'api/api.html',{})
-def vendor_registration_login_gmail(request):
-    return TemplateResponse(request,'api/api.html',{})
+    #TODO Put all in decorators  with csrf 
+    invalid=check_basic_validations("vendor_login",request,"POST")
+    if invalid:return response(request,invalid)
+    if request.method=="POST":
+        return response(request,Vendor.login(request))
+@csrf_exempt
+def vendor_registration_login_fb_gm(request):
+    #TODO Put all in decorators  with csrf 
+    invalid=check_basic_validations("vendor_registration_login_fb_gm",request,"POST")
+    if invalid:return response(request,invalid)
+    if request.method=="POST":
+        return response(request,Vendor.login_fb_gm(request))
+
 def vendor_forgot_password(request):
     return TemplateResponse(request,'api/api.html',{})
 def vendor_reset_password(request):
