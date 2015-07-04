@@ -92,15 +92,22 @@ patterns = {##"customer_login_registration",
 	
 
 		##"customer_messages_bid_book_schedule",
-		"customer_mbb_send":
+		"customer_message_list":
 			{
 				"order":11,
 				"type":"POST",
-	 			"params":[]
+	 			"params":[]#["identifier"]
 		 	},
-		"customer_mbb_list_and_search_and_filter":
+		"customer_message_create":
 			{
-				"order":12,
+				"order":-11,
+				"type":"POST",
+	 			"params":["identifier","vendor_email","message"],
+	 			"required_params":["identifier","vendor_email","message"]
+		 	},
+		"customer_message_detail":
+			{
+				"order":11,
 				"type":"POST",
 	 			"params":[]
 		 	},
