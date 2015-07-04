@@ -73,7 +73,7 @@ patterns = {##"customer_login_registration",
 		"customer_vendor_list_and_search":
 	 		{
 				"type":"POST",
-				"order":-8,
+				"order":8,
 	 			"params":["mode","image_type","vendor_type","page_no","search_string"],
 	 			"required_params":["mode","image_type","vendor_type"],
 	 			"help":{"mode":"Possible values 'android' or 'ios'",
