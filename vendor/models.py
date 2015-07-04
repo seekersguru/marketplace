@@ -202,7 +202,8 @@ class Vendor(models.Model):
         user = User.objects.filter(username=email)
 
         if user:
-            vendor_exist=Vendor(user=user)
+            user=user[0]
+            vendor_exist=Vendor.objects.filter(user=user)
             if vendor_exist:
                 return ge("POST",req_dict(request.POST),"Email already exists", error_fields=['email'])
 
@@ -216,7 +217,8 @@ class Vendor(models.Model):
         gid = request.POST.get("gid","").strip()            
         # As we using transactions, no need to error handle. 
         # In case of error all will revert
-        user = User.objects.create_user(email, email, password)
+        if not user:
+            user = User.objects.create_user(email, email, password)
         category = Category.objects.get(key=vendor_type)
         vendor=Vendor(user=user,vendor_type=category,
                  name=name,

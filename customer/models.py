@@ -52,9 +52,10 @@ class Customer(models.Model):
             return ge("POST",req_dict(request.POST),"Password too short", error_fields=['password']) 
         user = User.objects.filter(username=email)
         if user:
-            customer_exist=Customer(user=user)
+            user=user[0]
+            customer_exist=Customer.objects.filter(user=user)
             if customer_exist:
-                return ge("POST",req_dict(request.POST),"Email already exists", error_fields=['email'])
+                return ge("POST",req_dict(request.POST),"==Email already exists", error_fields=['email'])
  
         if not contact_number.isdigit() :
             return ge("POST",req_dict(request.POST),"Invalid mobile number", error_fields=['contact_number'])
@@ -64,7 +65,8 @@ class Customer(models.Model):
             
         # As we using transactions, no need to error handle. 
         # In case of error all will revert
-        user = User.objects.create_user(email, email, password)
+        if not user:
+            user = User.objects.create_user(email, email, password)
         customer=Customer(user=user,groom_name=groom_name,
                  bride_name=bride_name,
                  contact_number=contact_number,
