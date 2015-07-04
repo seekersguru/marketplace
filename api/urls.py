@@ -91,13 +91,6 @@ patterns = {##"customer_login_registration",
 		 	},
 	
 
-		##"customer_messages_bid_book_schedule",
-		"customer_message_list":
-			{
-				"order":11,
-				"type":"POST",
-	 			"params":[]#["identifier"]
-		 	},
 		"customer_message_create":
 			{
 				"order":-11,
@@ -113,6 +106,15 @@ patterns = {##"customer_login_registration",
 	 			"required_params":["identifier","vendor_email"],
 		 	},
 	
+		##"customer_messages_bid_book_schedule",
+		"customer_message_list":
+			{
+				"order":-9,
+				"type":"POST",
+	 			"params":["identifier","page_no"],#["identifier"]
+	 			"required_params":["identifier",]
+		 	},
+	 	
 	 	"customer_schedule_visit":
 	 		{
 				"order":13,

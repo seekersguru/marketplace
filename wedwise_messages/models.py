@@ -63,6 +63,7 @@ class Messages(models.Model):
         return gs("POST",req_dict(request.POST),{"id":msg.id,
                                                  "message":msg.message,
                                                  "vendor_email":vendor_email,
+                                                  "vendor_name":msg.vendor.name,
                                                  "identifier":identifier,
                                                  "msg_time":str(msg.msg_time)
                                                  })
@@ -105,14 +106,49 @@ class Messages(models.Model):
         msgs= Messages.objects.filter(
                vendor=vendor,
                 customer=customer,
-
-                )
+                ).order_by('msg_time')
         return gs("POST",req_dict(request.POST),[{"id":msg.id,
                                                  "message":msg.message,
                                                  "vendor_email":msg.vendor.user.email,
+                                                  "vendor_name":msg.vendor.name,
                                                  "identifier":msg.customer.identifier,
                                                  "msg_time":str(msg.msg_time)
-                                                 } for msg in msgs])    
+                                                } for msg in msgs])    
+
+
+    @classmethod
+    def listing(cls,
+               request, 
+               ):
+        identifier = request.POST.get('identifier')
+        customer = Customer.objects.filter(identifier=identifier)
+        if not customer:
+            return ge("POST",req_dict(request.POST),"Customer unauthorized", error_fields=['identifier'],
+                      code_string="CUSTOMER_NOT_EXIST")
+        else:
+            customer=customer[0] 
+            
+        all_msgs= Messages.objects.filter(
+                customer=customer,
+                ).order_by('msg_time')
+        msgs=[]
+        listed={}# Which vendor id indexed at which positions
+        for msg in all_msgs:
+            info={"id":msg.id, "message":msg.message,
+                                                 "vendor_email":msg.vendor.user.email,
+                                                 "vendor_name":msg.vendor.name,
+                                                 "identifier":msg.customer.identifier,
+                                                 "msg_time":str(msg.msg_time)
+                                                 }
+            if msg.vendor.id not in listed:
+                msgs.append([info])
+                
+                listed = {msg.vendor.id :len(msgs)-1}
+            else:
+                msgs[listed[msg.vendor.id]].append(info)
+         
+        return gs("POST",req_dict(request.POST),msgs) 
+
 class Book(models.Model):
     vendor = models.ForeignKey(Vendor)
     customer = models.ForeignKey(Customer)
