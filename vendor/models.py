@@ -116,15 +116,62 @@ class Vendor(models.Model):
                           code_string="VENDOR_NOT_EXIST")                
 
 
-    
+    @classmethod
+    def get_vendor_list(self,vendor_type,page_no,mode,image_type):
+        """
+        Name , 
+        location, 
+        USP Icons,starting price , 
+        starting price 
+        starting price label,
+        years_in_business
+        others [[k1,v1], [k2,v2],....[kn.vn]]
+        Banquets => min-max cap , veg only, jain only , stay ,alocohol
+        """
+        img="/media/apps/{mode}/{image_type}/category/{vendor_type}.jpg".\
+                format(vendor_type=vendor_type,mode=mode,image_type=image_type)
+        return [
+                {
+                 "id":"vendor_id",
+                 "image":img,
+                 "name":"Name of the vendor" ,
+                 "icons":[],
+                 "starting_price":"500",
+                 "starting_rice_labe":"Person",
+                 "years_in_business":"2 years",
+                 "in_favourites":3,
+                 "others_two":[["Capacity","200 - 500 peoples"]],
+                 "others_one":["Alcohol","Jain Only","Veg Only"]
+                 
+                 },   
+                
+                ]*10
     @classmethod
     def get_listing(self,request):
-        mode = request.POST.get('mode').strip().lower()
-        image_type = request.POST.get('image_type').strip().lower()
-        vendor_type = request.POST.get('vendor_type').strip().lower()
-        page_no = request.POST.get('page_no',1)
-        search_param= request.POST.get('search_param',"")
+
+        required_mode=mode_require(request)
+        if  "error" in required_mode: return required_mode["error"]
+        else:
+            mode= required_mode["success"]["mode"]
+            image_type= required_mode["success"]["image_type"]
         
+   
+        
+        vendor_type = request.POST.get('vendor_type').strip().lower()
+        if vendor_type not in [v[0] for v in VENDOR_TYPES]:
+            return ge("POST",req_dict(request.POST),"Invalid vendor type", error_fields=['vendor_type'])
+        page_no = request.POST.get('page_no','')
+        if not page_no: page_no="1"
+     
+        if not page_no.isdigit():
+            return ge("POST",req_dict(request.POST),"Invalid page number", error_fields=['page_no'])
+        ## TODO will do it later
+        search_param= request.POST.get('search_param',"")
+        if len(search_param) > 1000:
+            return ge("POST",req_dict(request.POST),"search string too long", error_fields=['page_no'])
+        vendor_list=self.get_vendor_list(vendor_type,page_no,mode,image_type)
+        
+        return gs("POST",req_dict(request.POST),{"vendor_list":vendor_list})
 
 
     def __unicode__(self):
@@ -182,28 +229,7 @@ class Vendor(models.Model):
         return gs("POST",req_dict(request.POST),{"identifier":vendor.identifier})
 
         
-    @classmethod
-    def login(cls,
-               request, 
-               ):
-        email = request.POST.get('email').strip().lower()
-        password = request.POST.get('password')
-        user = authenticate(username=email, password=password)
-        if not user:
-            return ge("POST",req_dict(request.POST),"Invalid username or password", error_fields=['email','password'])
-            
-        try:
-            vendor = Vendor.objects.get(user=user)
-            return gs("POST",req_dict(request.POST),{"identifier":vendor.identifier})
 
-        except:
-            ## TODO Proper error handling 
-            ## Case 1: USer is Vendor 
-            ## Case 2 : User Could not register, some error user registered but problem
-            ## Critical error must be addressed TODO 
-            ## Add critical error code for such situations and normal error code for all 
-            return ge("POST",req_dict(request.POST),"User is present but problem", 
-                      error_fields=['email','password'])
 
 
 class VendorLead(models.Model):
