@@ -106,13 +106,17 @@ def customer_message_create(request):
     if invalid:return response(request,invalid) 
 
     return response(request,Messages.create(request))
+@csrf_exempt
+def customer_message_detail(request):
+    #TODO Put all in decorators  with csrf 
+    invalid=check_basic_validations("customer_message_detail",request,"POST")
+    if invalid:return response(request,invalid) 
+
+    return response(request,Messages.details(request))
+
 
 def customer_message_list(request):
     return TemplateResponse(request,'api/api.html',{})
-
-def customer_message_detail(request):
-    return TemplateResponse(request,'api/api.html',{})
-
 def customer_schedule_visit(request):
     return TemplateResponse(request,'api/api.html',{})
 def customer_create_bid(request):

@@ -107,9 +107,10 @@ patterns = {##"customer_login_registration",
 		 	},
 		"customer_message_detail":
 			{
-				"order":11,
+				"order":-10,
 				"type":"POST",
-	 			"params":[]
+	 			"params":["identifier","vendor_email","page_no"],
+	 			"required_params":["identifier","vendor_email"],
 		 	},
 	
 	 	"customer_schedule_visit":

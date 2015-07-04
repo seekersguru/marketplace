@@ -68,26 +68,13 @@ class Messages(models.Model):
                                                  })
 
 
-    
-class Book(models.Model):
-    vendor = models.ForeignKey(Vendor)
-    customer = models.ForeignKey(Customer)
-    from_to = models.CharField(max_length=3, choices=FROM_TO_CHOICES)
-    msg_time = models.DateTimeField()
-    quoted_price_label= models.CharField(max_length=512) 
-    message = models.TextField()
     @classmethod
-    def create(cls,
+    def details(cls,
                request, 
                ):
         vendor_email = request.POST.get('vendor_email').strip().lower()
         identifier = request.POST.get('identifier')
-        message = request.POST.get('message')
-        from_to="c2v"
-     
-
         f = forms.EmailField()
-        
         try:
             f.clean(vendor_email)
         except ValidationError:
@@ -115,14 +102,24 @@ class Book(models.Model):
             vendor=vendor[0]            
         
         
-        msg= Messages(
+        msgs= Messages.objects.filter(
                vendor=vendor,
                 customer=customer,
-                from_to=from_to,
-                message =message
+
                 )
-        msg.save()
-        return gs("POST",req_dict(request.POST),{"message_id":msg.id})
+        return gs("POST",req_dict(request.POST),[{"id":msg.id,
+                                                 "message":msg.message,
+                                                 "vendor_email":msg.vendor.user.email,
+                                                 "identifier":msg.customer.identifier,
+                                                 "msg_time":str(msg.msg_time)
+                                                 } for msg in msgs])    
+class Book(models.Model):
+    vendor = models.ForeignKey(Vendor)
+    customer = models.ForeignKey(Customer)
+    from_to = models.CharField(max_length=3, choices=FROM_TO_CHOICES)
+    msg_time = models.DateTimeField()
+    quoted_price_label= models.CharField(max_length=512) 
+    message = models.TextField()
 
 
 class Bid(models.Model):
