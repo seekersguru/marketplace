@@ -19,8 +19,60 @@
 <div ng-app="marriageSettingsApp" id="add-packagediv">
 
 <div id="content-main">
-<form  method='post'>{% csrf_token %}
-{{ form.as_p }}
+<form  method='post'>
+{% csrf_token %}
+
+<p><label for="id_vendor_type">Vendor type:</label> <select id="id_vendor_type" name="vendor_type">
+<option value="" selected="selected">---------</option>
+<option value="1">Banquets</option>
+<option value="2">Catereres</option>
+<option value="3">Decorators</option>
+<option value="4">Photographers</option>
+<option value="5">Others</option>
+</select></p>
+<p><label for="id_name">Name:</label> <input id="id_name" maxlength="250" name="name" type="text" /></p>
+<p><label for="id_contact_number">Contact number:</label> <input id="id_contact_number" maxlength="50" name="contact_number" type="text" /></p>
+<p><label for="id_address">Address:</label> <textarea cols="40" id="id_address" name="address" rows="10">
+</textarea></p>
+<p><label for="id_email">Email:</label> <input id="id_email" maxlength="75" name="email" type="email" /></p>
+<p><label for="id_role">Role:</label> <select id="id_role" name="role">
+<option value="" selected="selected">---------</option>
+<option value="Admin">Admin</option>
+<option value="Reception">Reception</option>
+</select></p>
+<p><label for="id_identifier">Identifier:</label> <input id="id_identifier" maxlength="512" name="identifier" type="text" /></p>
+<p><label for="id_fbid">Fbid:</label> <input id="id_fbid" maxlength="1024" name="fbid" type="text" /></p>
+<p><label for="id_gid">Gid:</label> <input id="id_gid" maxlength="1024" name="gid" type="text" /></p>
+<p><label for="id_dynamic_info">Dynamic info:</label> <textarea cols="40" id="id_dynamic_info" name="dynamic_info" rows="10">
+</textarea></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <p>
 <label for="addresspicker_map">Address</label>
