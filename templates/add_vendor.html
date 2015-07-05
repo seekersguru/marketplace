@@ -22,86 +22,72 @@
 		<form  class="form-horizontal" novalidate   method='post' novalidate  name="mainform" role="form" ng-submit="saveform(mainform)">
 			{% csrf_token %}
 
-			<div class="form-group  has-feedback" ng-class="{'has-error':mainform.vendor_type.$dirty && mainform.vendor_type.$error.required,'has-success':mainform.vendor_type.$valid}">
-				<label class="control-label col-sm-3" for="id_vendor_type">Vendor type:</label>
-				<div class="col-sm-9">
-				 <select id="id_vendor_type" class="form-control" name="vendor_type" ng-model="userOrder.formdata.vendor_type" required>
-				<option value="" selected="selected">---------</option>
-				<option value="1">Banquets</option>
-				<option value="2">Catereres</option>
-				<option value="3">Decorators</option>
-				<option value="4">Photographers</option>
-				<option value="5">Others</option>
-				</select>
-			</div>
-			</div>
-			<div class="form-group  has-feedback" ng-class="{'has-error':mainform.name.$dirty && mainform.name.$error.required,'has-success':mainform.name.$valid}">
-				<label class="control-label col-sm-3" for="id_name">Name:</label>
-				<div class="col-sm-9"> 
-				<input id="id_name" maxlength="250" class="form-control" name="name" type="text"  ng-model="userOrder.formdata.name" required/>
-			</div>
-			</div>
-			
-			<div class="form-group  has-feedback" ng-class="{'has-error':mainform.contact_number.$dirty && mainform.contact_number.$error.required,'has-success':mainform.contact_number.$valid}">
-				<label class="control-label col-sm-3" for="id_contact_number">Contact number:</label>
-				<div class="col-sm-9"> 
 
-				<input id="id_contact_number" maxlength="50" class="form-control" name="contact_number" type="text" ng-model="userOrder.formdata.contact_number" required/>
-		
-			</div>
-			</div>
-
-					<div class="form-group  has-feedback" ng-class="{'has-error':mainform.email.$dirty &&(  mainform.email.$error.required ||  mainform.email.$error.email),'has-success':mainform.email.$valid }">
-
-					<label class="control-label col-sm-3" for="id_email">Email:</label>
-					<div class="col-sm-9">
-					<input id="id_email" maxlength="75" class="form-control" name="email" type="email" ng-model="userOrder.formdata.email" required/>
-
-					</div>
-					</div>
-					
-					<div class="form-group  has-feedback" ng-class="{'has-error':mainform.role.$dirty && mainform.role.$error.required,'has-success':mainform.role.$valid}" >
-						<label class="control-label col-sm-3" for="id_role">Role:</label>
-						<div class="col-sm-9">
-						 <select id="id_role" class="form-control" name="role" ng-model="userOrder.formdata.role" required>
-							 <option value="" selected="selected">---------</option>
-							 <option value="Admin">Admin</option>
-							 <option value="Reception">Reception</option>
-						</select>
-						</div>
-						</div>
-						
 						<div class="form-group  has-feedback" ng-class="{'has-error':mainform.identifier.$dirty && mainform.identifier.$error.required,'has-success':mainform.identifier.$valid}">
-
 							<label class="control-label col-sm-3" for="id_identifier">Identifier:</label>
 							<div class="col-sm-9">
-							<input id="id_identifier" maxlength="512" class="form-control" name="identifier" type="text" ng-model="userOrder.formdata.identifier" required />
+							 <select id="id_identifier" class="form-control" name="identifier" ng-model="userOrder.formdata.identifier" required>
+								 <option value="" selected="selected">---------</option>
+								 {% for identifier in identifiers %}
+								  <option value="{{identifier.0}}" selected="selected">{{identifier.1}}</option>
+								  {% endfor %}
+								 
+			
+							</select>
 							</div>
+						</div>
+						<div class="form-group  has-feedback" ng-class="{'has-error':mainform.vendor_type.$dirty && mainform.vendor_type.$error.required,'has-success':mainform.vendor_type.$valid}">
+							<label class="control-label col-sm-3" for="id_vendor_type">Vendor type:</label>
+							<div class="col-sm-9">
+								<select id="id_vendor_type" class="form-control" name="vendor_type" ng-model="userOrder.formdata.vendor_type" required>
+								<option value="" selected="selected">---------</option>
+								{% for meta in vendor_meta %}
+								<option value="{{meta.cat_id}}">{{meta.name}}</option>
+								{% endfor %}
+								</select>
 							</div>
-						
-							<div class="form-group  has-feedback" ng-class="{'has-error':mainform.fbid.$dirty && mainform.fbid.$error.required,'has-success':mainform.fbid.$valid}">
-								<label class="control-label col-sm-3" for="id_fbid">Fbid:</label>
-								<div class="col-sm-9"> 
-								<input id="id_fbid" maxlength="1024" class="form-control" name="fbid" type="text" ng-model="userOrder.formdata.fbid" required />
-								</div>
-								</div>
-						
-								<div class="form-group  has-feedback" ng-class="{'has-error':mainform.gid.$dirty && mainform.gid.$error.required,'has-success':mainform.gid.$valid}">
+						</div>
+						<div class="form-group  has-feedback" ng-class="{'has-error':mainform.name.$dirty && mainform.name.$error.required,'has-success':mainform.name.$valid}">
+							<label class="control-label col-sm-3" for="id_name">Name:</label>
+							<div class="col-sm-9"> 
+								<input id="id_name" maxlength="250" class="form-control" name="name" type="text"  ng-model="userOrder.formdata.name" required/>
+							</div>
+						</div>
+			
+						<div class="form-group  has-feedback" ng-class="{'has-error':mainform.contact_number.$dirty && mainform.contact_number.$error.required,'has-success':mainform.contact_number.$valid}">
+							<label class="control-label col-sm-3" for="id_contact_number">Contact number:</label>
+							<div class="col-sm-9"> 
+								<input id="id_contact_number" maxlength="50" class="form-control" name="contact_number" type="text" ng-model="userOrder.formdata.contact_number" required/>
+							</div>
+						</div>
 
-								<label class="control-label col-sm-3" for="id_gid">Gid:</label>
-								<div class="col-sm-9"> 
-								<input id="id_gid" maxlength="1024" class="form-control" name="gid" type="text" ng-model="userOrder.formdata.gid" required />
+						<div class="form-group  has-feedback" ng-class="{'has-error':mainform.email.$dirty &&(  mainform.email.$error.required ||  mainform.email.$error.email),'has-success':mainform.email.$valid }">
+	
+							<label class="control-label col-sm-3" for="id_email">Email:</label>
+							<div class="col-sm-9">
+								<input id="id_email" maxlength="75" class="form-control" name="email" type="email" ng-model="userOrder.formdata.email" required/>
+		
+							</div>
+						</div>
+					
+						<div class="form-group  has-feedback" ng-class="{'has-error':mainform.role.$dirty && mainform.role.$error.required,'has-success':mainform.role.$valid}" >
+							<label class="control-label col-sm-3" for="id_role">Role:</label>
+							<div class="col-sm-9">
+							 <select id="id_role" class="form-control" name="role" ng-model="userOrder.formdata.role" required>
+								 <option value="" selected="selected">---------</option>
+								 <option value="Admin">Admin</option>
+								 <option value="Reception">Reception</option>
+							</select>
+							</div>
+						</div>
 
-								</div>
-								</div>
-						
-									<div class="form-group  has-feedback" >
-										<label class="control-label col-sm-3" for="id_dynamic_info">Dynamic info:</label>
-										<div class="col-sm-9"> 
-										<textarea cols="40" id="id_dynamic_info" class="form-control" name="dynamic_info" rows="10" ng-bind="userOrder | json" disabled="">
+						<div class="form-group  has-feedback" >
+							<label class="control-label col-sm-3" for="id_dynamic_info">Dynamic info:</label>
+							<div class="col-sm-9"> 
+								<textarea cols="40" id="id_dynamic_info" class="form-control" name="dynamic_info" rows="10" ng-bind="userOrder | json" disabled="">
 								  </textarea>
-								</div>
-								</div>
+							</div>
+						</div>
 
 
 									<div class="form-group  has-feedback" ng-class="{'has-error':mainform.address.$dirty && mainform.address.$error.required,'has-success':mainform.address.$valid}" >

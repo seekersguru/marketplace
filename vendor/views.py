@@ -7,6 +7,7 @@ from market_place.settings import STATIC_URL
 from django.utils import timezone
 from django.forms import ModelForm
 from vendor.models import Vendor
+from utils import get_vendor_meta
 class VendorForm(ModelForm):
     class Meta:
         model = Vendor
@@ -36,8 +37,11 @@ def vendor_validation(request,vendor_rule):
     return vendor_rule_copy 
 
 
+ 
 def add_vendor(request):
     message=""
+    
+
     if request.method == "POST":
         form = VendorForm(request.POST)
         if form.is_valid():
@@ -50,9 +54,13 @@ def add_vendor(request):
             message="Saved succesfully"
     else:
         form = VendorForm()
-
+    
+    identifiers = [(e.identifier ,e.user.email) for e in Vendor.objects.all() ]
     return render(request, "add_vendor.html", {'form': form,"message":message
-                                               ,"vendors":Vendor.objects.all()})
+                                               ,"vendors":Vendor.objects.all(),
+                                               "vendor_meta":get_vendor_meta() ,
+                                               "identifiers":identifiers
+                                               })
 
 @csrf_exempt
 def vendors(request):

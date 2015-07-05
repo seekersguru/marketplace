@@ -1,0 +1,58 @@
+def create_vendor_meta(id,name,key,div_label){
+	retrun {
+	"id":id,
+	"name":"Banquets",
+	"key":"banquets",
+	"div_label":"Banquets Contents",
+	},
+
+}
+
+vendor_meta=[
+## Do not change banquet and caterer at 1 and 2 cindition to show packages
+create_vendor_meta(1,"Banquets","banquets","Banquet contents"),
+create_vendor_meta(2,"Caterers","caterers","Caterer contents"),
+create_vendor_meta(3,"Decorators","decorators","Decorator contents"),
+create_vendor_meta(4,"Photographers","photographers","Photographer contents"),
+create_vendor_meta(5,"Hotels","hotels","Hotels contents"),
+create_vendor_meta(6,"Others","others","Others contents"),
+]
+{% for meta in vendor_meta %}
+<div class="selectedrelated" id="{{meta.id}}" > 
+	<h1>{{meta.div_label}}</h1>
+
+	<input type="text"  Placeholder="Banquest" name="banquest_name" ng-model="userOrder.formdata.banquest.name">
+</div>
+{% endfor %}
+
+
+										<div class="selectedrelated" id="1" > 
+											<h1>Banquest Div</h1>
+
+											<input type="text"  Placeholder="Banquest" name="banquest_name" ng-model="userOrder.formdata.banquest.name">
+										</div>
+
+										<div class="selectedrelated" id="2"> 
+											<h1>Catereres Div</h1>
+											<input type="text"  Placeholder="Catereres" name="catereres_name" ng-model="userOrder.formdata.catereres.name">
+
+										</div>
+
+										<div class="selectedrelated" id="3"> 
+											<h1>Decorators</h1>
+											<input type="text"  Placeholder="decorators" name="decorators_name"  ng-model="userOrder.formdata.decorators.name">
+
+										</div>
+
+										<div class="selectedrelated" id="4"> 
+											<h1>Photographers</h1>
+											<input type="text"  Placeholder="Photographers" name="photographers_name" ng-model="userOrder.formdata.photographers.name">
+
+										</div>
+
+										<div class="selectedrelated" id="5"> 
+											<h1>Others</h1>
+											<input type="text"  Placeholder="Others" name="others_name" ng-model="userOrder.formdata.others.name">
+
+										</div>
+
