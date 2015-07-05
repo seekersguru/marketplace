@@ -13,4 +13,4 @@ class CategoryAdmin(admin.ModelAdmin):
     
 
 admin.site.register(Vendor, VendorAdmin)
-admin.site.register(Vendor, CategoryAdmin)
+admin.site.register(Category, CategoryAdmin)
