@@ -130,23 +130,23 @@ class Messages(models.Model):
             
         all_msgs= Messages.objects.filter(
                 customer=customer,
-                ).order_by('msg_time')
+                ).order_by('-msg_time')
         msgs=[]
-        listed={}# Which vendor id indexed at which positions
+        listed=[]# Which vendor id indexed at which positions
         for msg in all_msgs:
-            info={"id":msg.id, "message":msg.message,
+            if msg.vendor.id not in listed:
+                listed.append(msg.vendor.id)
+                msgs.append({"id":msg.id, "message":msg.message,
                                                  "vendor_email":msg.vendor.user.email,
                                                  "vendor_name":msg.vendor.name,
                                                  "identifier":msg.customer.identifier,
-                                                 "msg_time":str(msg.msg_time)
-                                                 }
-            if msg.vendor.id not in listed:
-                msgs.append([info])
+                                                 "msg_time":str(msg.msg_time) ,
+                                                 "from_to":msg.from_to
+                                                 })
                 
-                listed = {msg.vendor.id :len(msgs)-1}
-            else:
-                msgs[listed[msg.vendor.id]].append(info)
-         
+
+        
+
         return gs("POST",req_dict(request.POST),msgs) 
 
 class Book(models.Model):
