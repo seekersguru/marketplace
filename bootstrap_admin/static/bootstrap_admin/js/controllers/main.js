@@ -41,7 +41,7 @@ angular.module('marriageSettingsApp')
   }); 
 
 angular.module('marriageSettingsApp')
-  .controller('MainCtrl', function ($scope,$modal,Orders,$rootScope) {
+  .controller('MainCtrl', function ($scope,$modal,Orders,$rootScope,$http) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -54,6 +54,7 @@ angular.module('marriageSettingsApp')
     
     $rootScope.userOrder={
       formdata:{
+        address:{},
         banquest:{},
         catereres:{},
         decorators:{},
@@ -61,6 +62,36 @@ angular.module('marriageSettingsApp')
         others:{}
       },
       packagedata:{}
+    };
+
+$scope.saveform=function(form){
+
+    if(form.$valid)
+    {
+      alert(JSON.stringify($rootScope.userOrder));
+      $http.post('/', $rootScope.userOrder)
+          .success(function(data, status, headers, config){
+
+            $scope.status=data.status;
+
+          })
+          .error(function(data, status, headers, config){
+
+          });
+      }else{
+        alert("form not valid bhaya");
+      }
+};
+    $scope.applychange=function(){
+
+    $rootScope.userOrder.formdata.address.name=$('#addresspicker_map').val();
+    $rootScope.userOrder.formdata.address.district=$('#city').val();
+    $rootScope.userOrder.formdata.address.state=$('#state').val();
+    $rootScope.userOrder.formdata.address.country=$('#country').val();
+    $rootScope.userOrder.formdata.address.postalcode=$('#pincode').val();
+    $rootScope.userOrder.formdata.address.lat=$('#lat').val();
+    $rootScope.userOrder.formdata.address.lng=$('#lng').val();
+   
     };
 
     $rootScope.userOrder.packagedata=$scope.orderCollection;
@@ -337,3 +368,22 @@ $scope.showMenuSelection = function(menuname) {
 });
 
 
+// override the default input to update on blur
+angular.module('app', []).directive('ngModelOnblur', function() {
+    return {
+        restrict: 'A',
+        require: 'ngModel',
+        priority: 1, // needed for angular 1.2.x
+        link: function(scope, elm, attr, ngModelCtrl) {
+            if (attr.type === 'radio' || attr.type === 'checkbox') return;
+
+            elm.unbind('input').unbind('keydown').unbind('change');
+            // elm.unbind('input').unbind('keydown').unbind('change');
+            elm.bind('blur', function() {
+                scope.$apply(function() {
+                    ngModelCtrl.$setViewValue(elm.val());
+                });         
+            });
+        }
+    };
+});
