@@ -41,7 +41,7 @@ angular.module('marriageSettingsApp')
   }); 
 
 angular.module('marriageSettingsApp')
-  .controller('MainCtrl', function ($scope,$modal,Orders) {
+  .controller('MainCtrl', function ($scope,$modal,Orders,$rootScope) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -51,6 +51,26 @@ angular.module('marriageSettingsApp')
     $("#packages").prependTo('#user_form');
     //list of order which we have save by users
     $scope.orderCollection=Orders.getorders();
+    
+    $rootScope.userOrder={
+      formdata:{
+        banquest:{},
+        catereres:{},
+        decorators:{},
+        photographers:{},
+        others:{}
+      },
+      packagedata:{}
+    };
+
+    $rootScope.userOrder.packagedata=$scope.orderCollection;
+
+
+$scope.$watch(
+function( $scope ) {
+
+  $rootScope.userOrder.packagedata=$scope.orderCollection;
+});
     //type of menus 
     
     $scope.menusType=[
@@ -141,7 +161,7 @@ angular.module('marriageSettingsApp')
 
 
 angular.module('marriageSettingsApp')
-.controller('OrderCtrl', function ($scope, $modalInstance, items ,key,Orders) {
+.controller('OrderCtrl', function ($scope, $modalInstance, items ,key,Orders,$rootScope) {
 
   $scope.item = items;
 
@@ -217,6 +237,7 @@ $scope.showMenuSelection = function(menuname) {
   	Orders.removeOrder(key);
   	// $scope.orderCollection[key];
   	$scope.orderCollection=Orders.getorders();
+    $rootScope.userOrder.packagedata=$scope.orderCollection;
     $modalInstance.close($scope.item);
   };
 
@@ -228,6 +249,7 @@ $scope.showMenuSelection = function(menuname) {
   	delete $scope.order['menu'];
      Orders.addOrder($scope.order);
     	$scope.orderCollection=Orders.getorders();
+      $rootScope.userOrder.packagedata=$scope.orderCollection;
      $modalInstance.close($scope.item);
   };
 
@@ -299,6 +321,7 @@ $scope.showMenuSelection = function(menuname) {
   	delete $scope.order['menu'];
      Orders.editOrder($scope.order);
     	$scope.orderCollection=Orders.getorders();
+      $rootScope.userOrder.packagedata=$scope.orderCollection;
      $modalInstance.close();
   };
 

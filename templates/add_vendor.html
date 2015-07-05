@@ -16,13 +16,13 @@
 {# {% block breadcrumbs %}{% endblock %} #}
 
 {% block content %}
-<div ng-app="marriageSettingsApp" id="add-packagediv">
+<div ng-app="marriageSettingsApp" >
 
 <div id="content-main">
 <form  method='post'>
 {% csrf_token %}
 
-<p><label for="id_vendor_type">Vendor type:</label> <select id="id_vendor_type" name="vendor_type">
+<p><label for="id_vendor_type">Vendor type:</label> <select id="id_vendor_type" name="vendor_type" ng-model="userOrder.formdata.vendor_type">
 <option value="" selected="selected">---------</option>
 <option value="1">Banquets</option>
 <option value="2">Catereres</option>
@@ -30,20 +30,20 @@
 <option value="4">Photographers</option>
 <option value="5">Others</option>
 </select></p>
-<p><label for="id_name">Name:</label> <input id="id_name" maxlength="250" name="name" type="text" /></p>
-<p><label for="id_contact_number">Contact number:</label> <input id="id_contact_number" maxlength="50" name="contact_number" type="text" /></p>
-<p><label for="id_address">Address:</label> <textarea cols="40" id="id_address" name="address" rows="10">
+<p><label for="id_name">Name:</label> <input id="id_name" maxlength="250" name="name" type="text"  ng-model="userOrder.formdata.name"/></p>
+<p><label for="id_contact_number">Contact number:</label> <input id="id_contact_number" maxlength="50" name="contact_number" type="text" ng-model="userOrder.formdata.contact_number"/></p>
+<!-- <p><label for="id_address">Address:</label> <textarea cols="40" id="id_address" name="address" rows="10" ng-model="userOrder.formdata.address"> -->
 </textarea></p>
-<p><label for="id_email">Email:</label> <input id="id_email" maxlength="75" name="email" type="email" /></p>
-<p><label for="id_role">Role:</label> <select id="id_role" name="role">
+<p><label for="id_email">Email:</label> <input id="id_email" maxlength="75" name="email" type="email" ng-model="userOrder.formdata.email"/></p>
+<p><label for="id_role">Role:</label> <select id="id_role" name="role" ng-model="userOrder.formdata.role">
 <option value="" selected="selected">---------</option>
 <option value="Admin">Admin</option>
 <option value="Reception">Reception</option>
 </select></p>
-<p><label for="id_identifier">Identifier:</label> <input id="id_identifier" maxlength="512" name="identifier" type="text" /></p>
-<p><label for="id_fbid">Fbid:</label> <input id="id_fbid" maxlength="1024" name="fbid" type="text" /></p>
-<p><label for="id_gid">Gid:</label> <input id="id_gid" maxlength="1024" name="gid" type="text" /></p>
-<p><label for="id_dynamic_info">Dynamic info:</label> <textarea cols="40" id="id_dynamic_info" name="dynamic_info" rows="10">
+<p><label for="id_identifier">Identifier:</label> <input id="id_identifier" maxlength="512" name="identifier" type="text" ng-model="userOrder.formdata.identifier" /></p>
+<p><label for="id_fbid">Fbid:</label> <input id="id_fbid" maxlength="1024" name="fbid" type="text" ng-model="userOrder.formdata.fbid" /></p>
+<p><label for="id_gid">Gid:</label> <input id="id_gid" maxlength="1024" name="gid" type="text" ng-model="userOrder.formdata.gid" /></p>
+<p><label for="id_dynamic_info">Dynamic info:</label> <textarea cols="40" id="id_dynamic_info" name="dynamic_info" rows="10" ng-bind="userOrder | json" disabled="">
 </textarea></p>
 
 
@@ -76,42 +76,43 @@
 
 <p>
 <label for="addresspicker_map">Address</label>
-<input type="text" id="addresspicker_map" /></p>
+<input type="text" id="addresspicker_map"  ng-model="userOrder.formdata.address" /></p>
 
 <div class="selectedrelated" id="1" > 
 <h1>Banquest Div</h1>
-<input type="text"  Placeholder="Banquest">
+<input type="text"  Placeholder="Banquest" name="banquest_name" ng-model="userOrder.formdata.banquest.name">
 </div>
 
 <div class="selectedrelated" id="2"> 
 <h1>Catereres Div</h1>
-<input type="text"  Placeholder="Catereres">
+<input type="text"  Placeholder="Catereres" name="catereres_name" ng-model="userOrder.formdata.catereres.name">
 
 </div>
 
 <div class="selectedrelated" id="3"> 
 <h1>Decorators</h1>
-<input type="text"  Placeholder="Decorators">
+<input type="text"  Placeholder="decorators" name="decorators_name"  ng-model="userOrder.formdata.decorators.name">
 
 </div>
 
 <div class="selectedrelated" id="4"> 
 <h1>Photographers</h1>
-<input type="text"  Placeholder="Photographers">
+<input type="text"  Placeholder="Photographers" name="photographers_name" ng-model="userOrder.formdata.photographers.name">
 
 </div>
 
 <div class="selectedrelated" id="5"> 
 <h1>Others</h1>
-<input type="text"  Placeholder="Others">
+<input type="text"  Placeholder="Others" name="others_name" ng-model="userOrder.formdata.others.name">
 
 </div>
-<input type="text" value="" id="packages" >
+<!-- <input type="text" value="" id="packages" > -->
 
 
-
-<div ng-view="">
+<div id="add-packagediv">
+<div ng-view="" >
   
+</div>
 </div>
 </div>
 
@@ -122,7 +123,7 @@
 
 <script type="text/javascript" src="{% static "admin/jquery/dist/jquery.min.js" %}"></script>
 <script type="text/javascript" src="{% static "admin/jquery-ui/jquery-ui.min.js" %}"></script>
-<script type="text/javascript" src="{% static "admin/addresspicker/src/jquery.ui.addresspicker.js" %}"></script>
+<!-- <script type="text/javascript" src="{% static "admin/addresspicker/src/jquery.ui.addresspicker.js" %}"></script> -->
 <script type="text/javascript">
     var static_url="/static/bootstrap_admin/";
 </script>
@@ -155,7 +156,7 @@ jQuery(document).ready(function(){
 		// 	});
   //   console.log(alldata);
 		
-		});
+		// });
 
 
 
