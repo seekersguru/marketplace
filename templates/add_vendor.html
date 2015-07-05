@@ -51,7 +51,7 @@
 			</div>
 			</div>
 
-					<div class="form-group  has-feedback" ng-class="{'has-error':mainform.email.$dirty && mainform.email.$error.required,'has-success':mainform.email.$valid}">
+					<div class="form-group  has-feedback" ng-class="{'has-error':mainform.email.$dirty &&(  mainform.email.$error.required ||  mainform.email.$error.email),'has-success':mainform.email.$valid }">
 
 					<label class="control-label col-sm-3" for="id_email">Email:</label>
 					<div class="col-sm-9">
@@ -79,14 +79,14 @@
 							</div>
 							</div>
 						
-							<div class="form-group  has-feedback" ng-class="{'has-error':mainform.name.$dirty && mainform.name.$error.required,'has-success':mainform.name.$valid}">
+							<div class="form-group  has-feedback" ng-class="{'has-error':mainform.fbid.$dirty && mainform.fbid.$error.required,'has-success':mainform.fbid.$valid}">
 								<label class="control-label col-sm-3" for="id_fbid">Fbid:</label>
 								<div class="col-sm-9"> 
 								<input id="id_fbid" maxlength="1024" class="form-control" name="fbid" type="text" ng-model="userOrder.formdata.fbid" required />
 								</div>
 								</div>
 						
-								<div class="form-group  has-feedback" ng-class="{'has-error':mainform.name.$dirty && mainform.name.$error.required,'has-success':mainform.name.$valid}">
+								<div class="form-group  has-feedback" ng-class="{'has-error':mainform.gid.$dirty && mainform.gid.$error.required,'has-success':mainform.gid.$valid}">
 
 								<label class="control-label col-sm-3" for="id_gid">Gid:</label>
 								<div class="col-sm-9"> 
