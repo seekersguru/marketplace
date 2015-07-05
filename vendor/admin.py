@@ -8,7 +8,9 @@ from models import Category, Vendor
 class VendorAdmin(admin.ModelAdmin):
     model = Vendor
 
- 
+class CategoryAdmin(admin.ModelAdmin):
+    model = Category 
     
 
 admin.site.register(Vendor, VendorAdmin)
+admin.site.register(Vendor, CategoryAdmin)
