@@ -16,6 +16,8 @@
 {# {% block breadcrumbs %}{% endblock %} #}
 
 {% block content %}
+<div ng-app="marriageSettingsApp" id="add-packagediv">
+
 <div id="content-main">
 <form  method='post'>{% csrf_token %}
 {{ form.as_p }}
@@ -52,19 +54,19 @@
 <input type="text"  Placeholder="Others">
 
 </div>
-<input type="hidden" value="" id="packages" >
+<input type="text" value="" id="packages" >
 
 
-<div ng-app="marriageSettingsApp" id="add-packagediv">
 
 <div ng-view="">
   
 </div>
 </div>
+
 <input type='submit' value='Submit' />
 
 </form>
-    <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <!-- <script src="http://maps.google.com/maps/api/js?sensor=false"></script> -->
 
 <script type="text/javascript" src="{% static "admin/jquery/dist/jquery.min.js" %}"></script>
 <script type="text/javascript" src="{% static "admin/jquery-ui/jquery-ui.min.js" %}"></script>
@@ -85,10 +87,26 @@
 <script type="text/javascript">
 
 jQuery(document).ready(function(){
-		var addresspickerMap= jQuery( "#addresspicker_map" ).addresspicker({
-		      regionBias: "in",
-		      language: "in"
-		     });
+		// var addresspickerMap= jQuery( "#addresspicker_map" ).addresspicker({
+		//       regionBias: "in",
+		//       language: "in"
+		//      });
+		
+		// var alldata=[];
+		// jQuery("form").find("input").change(function(){
+		// 	jQuery("form").find("input").each(function(){
+		// 	  alldata=[];	
+		// 		var self=jQuery(this);
+
+		// 		alldata.push(self.val());
+			
+		// 	});
+  //   console.log(alldata);
+		
+		});
+
+
+
 
 jQuery(".selectedrelated,#add-packagediv").hide();
 
@@ -111,62 +129,62 @@ if(jQuery(this).val()==1 || jQuery(this).val()==2 )
 
 	});
 	var packages=[
-			{ 
-				'name':'rituraj',
-				'type':'Veg',
-				'shift':['Morning','Evening'],
-				'minpeople':100,
-				'maxpeople':200,
-		    'quoatedprice':100000,
-		    'minprice':10000,
-		    'menus':[
-		    					{
-		    						'name':'name',
-		    						'items':2,
-		    						'quantity':2,
-		    						'options':['paneer pakoda','allo pakoda'],
-		    						'example':'test',
-		    						'status':true
-		    					},{
-		    						'name':'name',
-		    						'items':2,
-		    						'quantity':2,
-		    						'options':['paneer pakoda','allo pakoda'],
-		    						'example':'test',
-		    						'status':true
-		    					}
+			// { 
+			// 	'name':'rituraj',
+			// 	'type':'Veg',
+			// 	'shift':['Morning','Evening'],
+			// 	'minpeople':100,
+			// 	'maxpeople':200,
+		 //    'quoatedprice':100000,
+		 //    'minprice':10000,
+		 //    'menus':[
+		 //    					{
+		 //    						'name':'name',
+		 //    						'items':2,
+		 //    						'quantity':2,
+		 //    						'options':['paneer pakoda','allo pakoda'],
+		 //    						'example':'test',
+		 //    						'status':true
+		 //    					},{
+		 //    						'name':'name',
+		 //    						'items':2,
+		 //    						'quantity':2,
+		 //    						'options':['paneer pakoda','allo pakoda'],
+		 //    						'example':'test',
+		 //    						'status':true
+		 //    					}
 
 
-		  				]
+		 //  				]
 
-				},
-  	    {
+			// 	},
+  	//     {
 				
-				'name':'Swati',
-				'type':'Veg',
-				'shift':['Evening'],
-				'minpeople':50,
-				'maxpeople':2000,
-		    'quoatedprice':100000,
-		    'minprice':10000,
-		    'menus':[
-		    					{
-		    						'name':'name',
-		    						'items':2,
-		    						'quantity':2,
-		    						'options':['paneer pakoda','allo pakoda'],
-		    						'example':'test',
-		    						'status':true
-		    					},
-		    					{
-		    						'name':'name',
-		    						'items':2,
-		    						'quantity':2,
-		    						'options':['paneer pakoda','allo pakoda'],
-		    						'example':'test'
-		    					}
-		  			]
-			}
+			// 	'name':'Swati',
+			// 	'type':'Veg',
+			// 	'shift':['Evening'],
+			// 	'minpeople':50,
+			// 	'maxpeople':2000,
+		 //    'quoatedprice':100000,
+		 //    'minprice':10000,
+		 //    'menus':[
+		 //    					{
+		 //    						'name':'name',
+		 //    						'items':2,
+		 //    						'quantity':2,
+		 //    						'options':['paneer pakoda','allo pakoda'],
+		 //    						'example':'test',
+		 //    						'status':true
+		 //    					},
+		 //    					{
+		 //    						'name':'name',
+		 //    						'items':2,
+		 //    						'quantity':2,
+		 //    						'options':['paneer pakoda','allo pakoda'],
+		 //    						'example':'test'
+		 //    					}
+		 //  			]
+			// }
 	];
 </script>
 
