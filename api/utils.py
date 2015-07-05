@@ -19,6 +19,8 @@ def get_bg_images_login(request):
         image_type= required_mode["success"]["image_type"]
     data=[str("/media/apps/%s/%s/login_images/%s.jpg") %(mode,image_type,each)  
                 for each in LOGIN_IMAGES ]
+    import random 
+    random.shuffle(data)
     if request.method=="POST":
         return gs("POST",req_dict(request.POST),{"data":data})
          
@@ -30,23 +32,25 @@ def req_dict(request_method):
 
 def get_error(request_type,
               request_data,
-              message,error_fields=None):
+              message,error_fields=None,code_string=0):
     return {"result":"error",
             "message":message,
             "request_type":request_type,
             "request_data":request_data,
             "error_fields":error_fields,
-            "json":0
+            "json":0,
+            "code_string":code_string
             }
     
-def get_success(request_type,request_data,json_data):
+def get_success(request_type,request_data,json_data,code_string=0):
     return {
             "message":0,
             "request_type":request_type,
             "request_data":request_data,
             "result":"success",
             "json":json_data,
-            "error_fields":[]
+            "error_fields":[],
+             "code_string":code_string
             }
 
 gs,ge=get_success, get_error

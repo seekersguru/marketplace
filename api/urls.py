@@ -12,18 +12,8 @@ patterns = {##"customer_login_registration",
 	 		{
 				"type":"POST",
 				"order":1,
-	 			"params":["email","password","groom_name","bride_name","contact_number"],
+	 			"params":["email","password","groom_name","bride_name","contact_number","fbid","gid"],
 	 			"required_params":["email","password","groom_name","bride_name","contact_number"]
-		 	},
-		"non_app_vendor_registration":
-	 		{#In last so can add categories and dump the json for corresponding category
-
-				"type":"POST",
-				"order":155,
-	 			"params":["email" ,"password" ,"vendor_type" ,"name","contact_number","address"],
-	 			"required_params":["email" ,"password" ,"vendor_type" ,"name","contact_number","address"],
-	 			# Better pick from DB
-	 			"selects":{"vendor_type":VENDOR_TYPES}
 		 	},
 		"customer_login":
 			{
@@ -33,19 +23,13 @@ patterns = {##"customer_login_registration",
 			"required_params":["email","password",]
 			},
 	
-		"customer_registration_login_fb":
+		"customer_registration_login_fb_gm":
 			{
 				"type":"POST",
 				"order":3,
-		 		"	params":[]
+		 		"params":["email"],
+		 		"required_params":["email",	]
 			 },
-
-		"customer_registration_login_gmail":
-			{
-				"type":"POST",
-				"order":4,
-		 		"params":[]
-			}, 
 
 	 	"customer_forgot_password":
 	 		{
@@ -90,7 +74,7 @@ patterns = {##"customer_login_registration",
 	 		{
 				"type":"POST",
 				"order":8,
-	 			"params":["mode","image_type","vendor_type","page_no"],
+	 			"params":["mode","image_type","vendor_type","page_no","search_string"],
 	 			"required_params":["mode","image_type","vendor_type"],
 	 			"help":{"mode":"Possible values 'android' or 'ios'",
 						"image_type":"For android allowed: " + str(ALLOWED_ANDRIOD_IMAGE_TYPE)\
@@ -107,20 +91,30 @@ patterns = {##"customer_login_registration",
 		 	},
 	
 
-		##"customer_messages_bid_book_schedule",
-		"customer_mbb_send":
+		"customer_message_create":
 			{
-				"order":11,
+				"order":-11,
 				"type":"POST",
-	 			"params":[]
+	 			"params":["identifier","vendor_email","message"],
+	 			"required_params":["identifier","vendor_email","message"]
 		 	},
-		"customer_mbb_list_and_search_and_filter":
+		"customer_message_detail":
 			{
-				"order":12,
+				"order":-10,
 				"type":"POST",
-	 			"params":[]
+	 			"params":["identifier","vendor_email","page_no"],
+	 			"required_params":["identifier","vendor_email"],
 		 	},
 	
+		##"customer_messages_bid_book_schedule",
+		"customer_message_list":
+			{
+				"order":-9,
+				"type":"POST",
+	 			"params":["identifier","page_no"],#["identifier"]
+	 			"required_params":["identifier",]
+		 	},
+	 	
 	 	"customer_schedule_visit":
 	 		{
 				"order":13,
@@ -145,33 +139,39 @@ patterns = {##"customer_login_registration",
 
 	##"vendor_login_registration",
 	
-	 	"vendor_lead":
-			{
-				"order":18,
+# 	 	"vendor_lead":
+# 			{
+# 				"order":18,
+# 				"type":"POST",
+# 	 			"params":["email","name","mobile","address","services","fbid","gid"],
+# 	 			"required_params":["email","name","mobile","address","services"],
+# 		 	},
+		"vendor_registration":
+	 		{#In last so can add categories and dump the json for corresponding category
+
 				"type":"POST",
-	 			"params":["email","name","mobile","address","services"],
-	 			"required_params":["email","name","mobile","address","services"],
+				"order":155,
+	 			"params":["email" ,"password" ,"vendor_type" ,"name","contact_number","address","fbid","gid"],
+	 			"required_params":["email" ,"password" ,"vendor_type" ,"name","contact_number","address"],
+	 			# Better pick from DB
+	 			"selects":{"vendor_type":VENDOR_TYPES}
 		 	},
 		"vendor_login":
 			{
-				"order":17,
-				"type":"POST",
-	 			"params":[]
-		 	},
+			"type":"POST",
+			"order":17,
+			"params":["email","password",],
+			"required_params":["email","password",]
+			},
 		 
-		"vendor_registration_login_fb":
+
+		"vendor_registration_login_fb_gm":
 			{
+				"type":"POST",
 				"order":18,
-				"type":"POST",
-	 			"params":[]
-		 	},
-		
-		"vendor_registration_login_gmail":
-			{
-				"order":19,
-				"type":"POST",
-	 			"params":[]
-		 	}, 
+		 		"params":["email"],
+		 		"required_params":["email",	]
+			 },
 		"vendor_forgot_password":
 		 	{
 				"order":20,

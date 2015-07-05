@@ -9,6 +9,8 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.db import transaction
 from django.core.signing import Signer
+from django.contrib.auth import authenticate
+
 signer = Signer()
 
 VENDOR_TYPES=[("banquets","Banquets"),("caterers","Caterers"),("decorators","Decorators")
@@ -58,67 +60,11 @@ class Vendor(models.Model):
     email = models.EmailField()
     role = models.CharField(max_length=100, choices=CHOICES_VENDOR_ROLE)
     identifier = models.CharField(max_length=512)
+    fbid = models.CharField(max_length=1024,default="")
+    gid =models.CharField(max_length=1024,default="")
+
     dynamic_info = models.TextField()
-    
-    @classmethod
-    def get_listing(self,request):
-        mode = request.POST.get('mode').strip().lower()
-        image_type = request.POST.get('image_type').strip().lower()
-        vendor_type = request.POST.get('vendor_type').strip().lower()
-        page_no = request.POST.get('page_no',1)
-        search_param= request.POST.get('search_param',"")
-        
 
-
-    def __unicode__(self):
-        return "%s belong to vendor %s (as %s)" % (self.user, self.vendor_type, self.role)
-    @classmethod
-    @transaction.atomic # @Nishant see if its effect speed @Amit dash 
-    def create(cls,
-               request, 
-               ):
-        email = request.POST.get('email').strip().lower()
-        password = request.POST.get('password')
-        vendor_type = request.POST.get('vendor_type')
-        name = request.POST.get('name')
-        contact_number = request.POST.get('contact_number').strip()
-        address = request.POST.get('address').strip()
-        
-
-        f = forms.EmailField()
-        
-        try:
-            f.clean(email)
-        except ValidationError:
-            return ge("POST",req_dict(request.POST),"Invalid email", error_fields=['email']) 
- 
-        if len(password)<3:
-            return ge("POST",req_dict(request.POST),"Password too short", error_fields=['password']) 
-        user = User.objects.filter(username=email)
-        if user:
-            return ge("POST",req_dict(request.POST),"Email already exists", error_fields=['email'])
- 
-        if not contact_number.isdigit() :
-            return ge("POST",req_dict(request.POST),"Invalid mobile number", error_fields=['contact_number'])
-
-        if len(str(int(contact_number))) not in [10,11]:
-            return ge("POST",req_dict(request.POST),"Mobile number should be of 10/11 digits", error_fields=['contact_number'])
-            
-        # As we using transactions, no need to error handle. 
-        # In case of error all will revert
-        user = User.objects.create_user(email, email, password)
-        category = Category.objects.get(key=vendor_type)
-        vendor=Vendor(user=user,vendor_type=category,
-                 name=name,
-                 contact_number=contact_number,
-                 address=address,
-                 identifier=signer.sign(email))
-        # do something with the book
-        vendor.save()
-        
-        return gs("POST",req_dict(request.POST),{"identifier":vendor.identifier})
-
-        
     @classmethod
     def login(cls,
                request, 
@@ -142,6 +88,154 @@ class Vendor(models.Model):
             return ge("POST",req_dict(request.POST),"User is present but problem", 
                       error_fields=['email','password'])
 
+    @classmethod
+    def login_fb_gm(cls,
+               request, 
+               ):
+        email = request.POST.get('email').strip().lower()
+        
+        user=User.objects.filter(email=email)
+        if not user:
+            return ge("POST",req_dict(request.POST),
+                      "User not exist", 
+                      error_fields=['email','password'],
+                      code_string="VENDOR_NOT_EXIST")
+
+        else:
+            user = user[0]
+            vendor= Vendor.objects.filter(user=user)
+            if vendor:
+                vendor=vendor[0]
+                return gs("POST",req_dict(request.POST),{"identifier":vendor.identifier})
+            else:
+                ## TODO Log may be user registered and is vendor else even after transaction some problem
+                ## in register customer
+                return ge("POST",req_dict(request.POST),
+                          "User not exist", 
+                          error_fields=['email','password'],
+                          code_string="VENDOR_NOT_EXIST")                
+
+
+    @classmethod
+    def get_vendor_list(self,vendor_type,page_no,mode,image_type):
+        """
+        Name , 
+        location, 
+        USP Icons,starting price , 
+        starting price 
+        starting price label,
+        years_in_business
+        others [[k1,v1], [k2,v2],....[kn.vn]]
+        Banquets => min-max cap , veg only, jain only , stay ,alocohol
+        """
+        img="/media/apps/{mode}/{image_type}/category/{vendor_type}.jpg".\
+                format(vendor_type=vendor_type,mode=mode,image_type=image_type)
+        return [
+                {
+                 "id":"vendor_id",
+                 "image":img,
+                 "name":"Name of the vendor" ,
+                 "icons":[],
+                 "starting_price":"500",
+                 "starting_rice_labe":"Person",
+                 "years_in_business":"2 years",
+                 "in_favourites":3,
+                 "others_two":[["Capacity","200 - 500 peoples"]],
+                 "others_one":["Alcohol","Jain Only","Veg Only"]
+                 
+                 },   
+                
+                ]*10
+    @classmethod
+    def get_listing(self,request):
+
+        required_mode=mode_require(request)
+        if  "error" in required_mode: return required_mode["error"]
+        else:
+            mode= required_mode["success"]["mode"]
+            image_type= required_mode["success"]["image_type"]
+        
+   
+        
+        vendor_type = request.POST.get('vendor_type').strip().lower()
+        if vendor_type not in [v[0] for v in VENDOR_TYPES]:
+            return ge("POST",req_dict(request.POST),"Invalid vendor type", error_fields=['vendor_type'])
+        page_no = request.POST.get('page_no','')
+        if not page_no: page_no="1"
+     
+        if not page_no.isdigit():
+            return ge("POST",req_dict(request.POST),"Invalid page number", error_fields=['page_no'])
+        ## TODO will do it later
+        search_param= request.POST.get('search_param',"")
+        if len(search_param) > 1000:
+            return ge("POST",req_dict(request.POST),"search string too long", error_fields=['page_no'])
+        vendor_list=self.get_vendor_list(vendor_type,page_no,mode,image_type)
+        
+        return gs("POST",req_dict(request.POST),{"vendor_list":vendor_list})
+
+
+    def __unicode__(self):
+        return "%s belong to vendor %s (as %s)" % (self.user, self.vendor_type, self.role)
+    @classmethod
+    @transaction.atomic # @Nishant see if its effect speed @Amit dash 
+    def create(cls,
+               request, 
+               ):
+        email = request.POST.get('email').strip().lower()
+        password = request.POST.get('password')
+        vendor_type = request.POST.get('vendor_type')
+        name = request.POST.get('name')
+        contact_number = request.POST.get('contact_number').strip()
+        address = request.POST.get('address').strip()
+        fbid = request.POST.get("fbid","").strip()
+        gid = request.POST.get("gid","").strip()        
+
+        f = forms.EmailField()
+        
+        try:
+            f.clean(email)
+        except ValidationError:
+            return ge("POST",req_dict(request.POST),"Invalid email", error_fields=['email']) 
+ 
+        if len(password)<3:
+            return ge("POST",req_dict(request.POST),"Password too short", error_fields=['password']) 
+        user = User.objects.filter(username=email)
+
+        if user:
+            user=user[0]
+            vendor_exist=Vendor.objects.filter(user=user)
+            if vendor_exist:
+                return ge("POST",req_dict(request.POST),"Email already exists", error_fields=['email'])
+
+        if not contact_number.isdigit() :
+            return ge("POST",req_dict(request.POST),"Invalid mobile number", error_fields=['contact_number'])
+
+        if len(str(int(contact_number))) not in [10,11]:
+            return ge("POST",req_dict(request.POST),"Mobile number should be of 10/11 digits", error_fields=['contact_number'])
+
+        fbid = request.POST.get("fbid","").strip()
+        gid = request.POST.get("gid","").strip()            
+        # As we using transactions, no need to error handle. 
+        # In case of error all will revert
+        if not user:
+            user = User.objects.create_user(email, email, password)
+        category = Category.objects.get(key=vendor_type)
+        vendor=Vendor(user=user,vendor_type=category,
+                 name=name,
+                 contact_number=contact_number,
+                 address=address,
+                 identifier=signer.sign(email),
+                 fbid=fbid,
+                 gid=gid
+                 )
+        # do something with the book
+        vendor.save()
+        
+        return gs("POST",req_dict(request.POST),{"identifier":vendor.identifier})
+
+        
+
+
 
 class VendorLead(models.Model):
     #email password
@@ -164,7 +258,7 @@ class VendorLead(models.Model):
         address = request.POST.get('address')
         services = request.POST.get('services')
         mobile = request.POST.get('mobile').strip()
-        
+      
 
         f = forms.EmailField()
         try:

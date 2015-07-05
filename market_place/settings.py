@@ -51,6 +51,7 @@ INSTALLED_APPS = (
     'api',
     'customer',
     'vendor',
+    'wedwise_messages'
 )
 
 MIDDLEWARE_CLASSES = (

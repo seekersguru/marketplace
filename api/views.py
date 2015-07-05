@@ -8,7 +8,7 @@ from api.utils import get_error as ge , get_success as gs
 import utils
 from customer.models import Customer
 from vendor.models import Category, VendorLead, Vendor
-
+from wedwise_messages.models import Messages,Bid,Book
 def check_basic_validations(pattern_name,request,req_type):
     required=patterns[pattern_name].get("required_params",None)
     if req_type =="POST":
@@ -43,9 +43,9 @@ def customer_registration(request):
         return response(request,Customer.create(request))
 
 @csrf_exempt
-def non_app_vendor_registration(request):
+def vendor_registration(request):
     #TODO Put all in decorators  with csrf 
-    invalid=check_basic_validations("non_app_vendor_registration",request,"POST")
+    invalid=check_basic_validations("vendor_registration",request,"POST")
     if invalid:return response(request,invalid) 
     
     if request.method=="POST":
@@ -59,10 +59,14 @@ def customer_login(request):
     if invalid:return response(request,invalid)
     if request.method=="POST":
         return response(request,Customer.login(request))
-def customer_registration_login_fb(request):
-    return TemplateResponse(request,'api/api.html',{})
-def customer_registration_login_gmail(request):
-    return TemplateResponse(request,'api/api.html',{})
+@csrf_exempt
+def customer_registration_login_fb_gm(request):
+    #TODO Put all in decorators  with csrf 
+    invalid=check_basic_validations("customer_registration_login_fb_gm",request,"POST")
+    if invalid:return response(request,invalid)
+    if request.method=="POST":
+        return response(request,Customer.login_fb_gm(request))
+
 def customer_forgot_password(request):
     return TemplateResponse(request,'api/api.html',{})
 def customer_reset_password(request):
@@ -95,10 +99,29 @@ def customer_vendor_detail(request):
     return TemplateResponse(request,'api/api.html',{})
 
 ########## customer_messages_bid_book_schedule
-def customer_mbb_send(request):
-    return TemplateResponse(request,'api/api.html',{})
-def customer_mbb_list_and_search_and_filter(request):
-    return TemplateResponse(request,'api/api.html',{})
+@csrf_exempt
+def customer_message_create(request):
+    #TODO Put all in decorators  with csrf 
+    invalid=check_basic_validations("customer_message_create",request,"POST")
+    if invalid:return response(request,invalid) 
+
+    return response(request,Messages.create(request))
+@csrf_exempt
+def customer_message_detail(request):
+    #TODO Put all in decorators  with csrf 
+    invalid=check_basic_validations("customer_message_detail",request,"POST")
+    if invalid:return response(request,invalid) 
+
+    return response(request,Messages.details(request))
+
+@csrf_exempt
+def customer_message_list(request):
+    #TODO Put all in decorators  with csrf 
+    invalid=check_basic_validations("customer_message_list",request,"POST")
+    if invalid:return response(request,invalid) 
+
+    return response(request,Messages.listing(request))
+
 def customer_schedule_visit(request):
     return TemplateResponse(request,'api/api.html',{})
 def customer_create_bid(request):
@@ -108,21 +131,31 @@ def customer_create_book(request):
 
 
 ########## vendor_login_registration
-@csrf_exempt
-def vendor_lead(request):
-    #TODO Put all in decorators  with csrf 
-    invalid=check_basic_validations("vendor_lead",request,"POST")
-    if invalid:return response(request,invalid) 
-    res={}
-    if request.method=="POST":
-        return response(request,VendorLead.create(request))
+# @csrf_exempt
+# def vendor_lead(request):
+#     #TODO Put all in decorators  with csrf 
+#     invalid=check_basic_validations("vendor_lead",request,"POST")
+#     if invalid:return response(request,invalid) 
+# 
+#     if request.method=="POST":
+#         return response(request,VendorLead.create(request))
+## TODO Remove all vendor_lead stuff
 
+@csrf_exempt
 def vendor_login(request):
-    return TemplateResponse(request,'api/api.html',{})
-def vendor_registration_login_fb(request):
-    return TemplateResponse(request,'api/api.html',{})
-def vendor_registration_login_gmail(request):
-    return TemplateResponse(request,'api/api.html',{})
+    #TODO Put all in decorators  with csrf 
+    invalid=check_basic_validations("vendor_login",request,"POST")
+    if invalid:return response(request,invalid)
+    if request.method=="POST":
+        return response(request,Vendor.login(request))
+@csrf_exempt
+def vendor_registration_login_fb_gm(request):
+    #TODO Put all in decorators  with csrf 
+    invalid=check_basic_validations("vendor_registration_login_fb_gm",request,"POST")
+    if invalid:return response(request,invalid)
+    if request.method=="POST":
+        return response(request,Vendor.login_fb_gm(request))
+
 def vendor_forgot_password(request):
     return TemplateResponse(request,'api/api.html',{})
 def vendor_reset_password(request):
