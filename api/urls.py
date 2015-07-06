@@ -92,7 +92,7 @@ patterns = {##"customer_login_registration",
 		 	},
 	
 
-		"customer_message_create":
+		"customer_vendor_message_create":
 			{
 				"order":-11,
 				"type":"POST",
@@ -100,7 +100,7 @@ patterns = {##"customer_login_registration",
 	 			"required_params":["identifier","receiver_email","message","from_to"],
 	 			"selects":{"from_to": FROM_TO_CHOICES }
 		 	},
-		"customer_message_detail":
+		"customer_vendor_message_detail":
 			{
 				"order":-10,
 				"type":"POST",
@@ -109,7 +109,7 @@ patterns = {##"customer_login_registration",
 		 	},
 	
 		##"customer_messages_bid_book_schedule",
-		"customer_message_list":
+		"customer_vendor_message_list":
 			{
 				"order":-9,
 				"type":"POST",

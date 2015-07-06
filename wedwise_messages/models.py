@@ -80,9 +80,9 @@ class Messages(models.Model):
         return gs("POST",req_dict(request.POST),{"id":msg.id,
                                                  "message":msg.message,
                                                  "receiver_email":receiver_email,
-                                                  "vendor_name":receiver_name,
+                                                  "receiver_name":receiver_name,
                                                  "identifier":identifier,
-                                                 "msg_time":str(msg.msg_time)
+                                                 "msg_time":str(msg.msg_time)[:19]
                                                  })
 
 
@@ -129,7 +129,7 @@ class Messages(models.Model):
                                                  "vendor_email":msg.vendor.user.email,
                                                   "vendor_name":msg.vendor.name,
                                                  "identifier":msg.customer.identifier,
-                                                 "msg_time":str(msg.msg_time),
+                                                 "msg_time":str(msg.msg_time)[:19],
                                                  "from_to":msg.from_to
                                                 } for msg in msgs])    
 
@@ -158,7 +158,7 @@ class Messages(models.Model):
                                                  "vendor_email":msg.vendor.user.email,
                                                  "vendor_name":msg.vendor.name,
                                                  "identifier":msg.customer.identifier,
-                                                 "msg_time":str(msg.msg_time) ,
+                                                 "msg_time":str(msg.msg_time)[:19] ,
                                                  "from_to":msg.from_to
                                                  })
                 
