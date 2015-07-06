@@ -55,7 +55,7 @@ class Customer(models.Model):
             user=user[0]
             customer_exist=Customer.objects.filter(user=user)
             if customer_exist:
-                return ge("POST",req_dict(request.POST),"==Email already exists", error_fields=['email'])
+                return ge("POST",req_dict(request.POST),"Email already exists", error_fields=['email'])
  
         if not contact_number.isdigit() :
             return ge("POST",req_dict(request.POST),"Invalid mobile number", error_fields=['contact_number'])
