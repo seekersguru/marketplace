@@ -121,16 +121,16 @@ class Messages(models.Model):
             user=user[0]
         
         if from_to=="c2v":
-            receiver = Vendor.objects.filter(user=user)
-            vendor = receiver
+            customer = sender
+            vendor = receiver = Vendor.objects.filter(user=user)
         elif from_to=="v2c":
-            receiver = Customer.objects.filter(user=user)
-            customer=receiver
+            customer = receiver = Customer.objects.filter(user=user)
+            vendor = sender
+            
         if not receiver:
             return ge("POST",req_dict(request.POST),"Receiver unauthorized", error_fields=['receiver_email'],
                       code_string="RECEIVERNOT_EXIST")
-        else:
-            receiver=receiver[0]            
+           
         
         
         msgs= Messages.objects.filter(
@@ -168,7 +168,6 @@ class Messages(models.Model):
         elif from_to=="v2c":
             sender = Vendor.objects.filter(identifier=identifier)
             
-        
         if not sender:
             return ge("POST",req_dict(request.POST),"Sender unauthorized", error_fields=['identifier'],
                       code_string="SENDER_NOT_EXIST")
@@ -179,7 +178,7 @@ class Messages(models.Model):
             all_msgs= Messages.objects.filter(
                     customer=sender,
                     ).order_by('-msg_time')
-        elif from_to=="c2v":
+        elif from_to=="v2c":
             all_msgs= Messages.objects.filter(
                     vendor=sender,
                     ).order_by('-msg_time')            
@@ -189,8 +188,8 @@ class Messages(models.Model):
         listed=[]# Which vendor id indexed at which positions
         for msg in all_msgs:
             if from_to=="c2v":
-                if msg.vendor.id not in listed:
-                    listed.append(msg.vendor.id)
+                if msg.vendor.pk not in listed:
+                    listed.append(msg.vendor.pk)
                     msgs.append({"id":msg.id, "message":msg.message,
                                                      "receiver_email":msg.vendor.user.email,
                                                      "receiver_name":msg.vendor.name,
@@ -199,8 +198,8 @@ class Messages(models.Model):
                                                      "from_to":msg.from_to
                                                      })
             if from_to=="v2c":
-                if msg.customer.id not in listed:
-                    listed.append(msg.customer.id)
+                if msg.customer.pk not in listed:
+                    listed.append(msg.customer.pk)
                     msgs.append({"id":msg.id, "message":msg.message,
                                                      "receiver_email":msg.customer.user.email,
                                                      "receiver_name":msg.customer.groom_name + " vs "+msg.customer.bride_name ,
