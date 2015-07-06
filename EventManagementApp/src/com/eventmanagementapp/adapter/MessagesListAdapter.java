@@ -12,12 +12,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.eventmanagementapp.R;
-import com.eventmanagementapp.util.CustomFonts;
 
 public class MessagesListAdapter extends BaseAdapter{
 
 	Context mContext;
-	ArrayList<String> listMessages;
+	public ArrayList<String> listMessages;
 
 	public MessagesListAdapter(Context mContext,ArrayList<String> listMessages)
 	{
@@ -27,7 +26,6 @@ public class MessagesListAdapter extends BaseAdapter{
 
 	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
 		return listMessages.size();
 	}
 

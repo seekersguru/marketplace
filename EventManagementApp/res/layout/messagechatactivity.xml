@@ -60,9 +60,6 @@
                 </LinearLayout>
         </LinearLayout>
     
-    
-    
-    
     <ListView
         android:id="@+id/lvChatMessages"
         android:layout_width="match_parent"
