@@ -13,7 +13,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.wedwiseapp.R;
-import com.wedwiseapp.util.CustomFonts;
 
 public class ChatAdapter extends BaseAdapter {
 

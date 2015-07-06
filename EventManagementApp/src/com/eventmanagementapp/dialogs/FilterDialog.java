@@ -10,9 +10,9 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+
 import com.eventmanagementapp.R;
 import com.eventmanagementapp.interfaces.INotify;
-import com.eventmanagementapp.util.CustomFonts;
 
 public class FilterDialog extends DialogFragment{
 

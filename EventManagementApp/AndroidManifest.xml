@@ -13,6 +13,8 @@
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <!-- So that we can get the account name -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
         android:allowBackup="true"
@@ -67,7 +69,9 @@
         </activity>
         <activity
             android:name="com.eventmanagementapp.Activities.MessageChatActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait" 
+            android:configChanges="screenSize"
+            android:windowSoftInputMode="adjustResize">
         </activity>
         <activity
             android:name="com.eventmanagementapp.Activities.VendorCategoryHome"
@@ -83,6 +87,10 @@
         </activity>
         <activity
             android:name="com.eventmanagementapp.tab.BidBookCreateActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.eventmanagementapp.tab.EnquiryDetailsActivity"
             android:screenOrientation="portrait" >
         </activity>
 

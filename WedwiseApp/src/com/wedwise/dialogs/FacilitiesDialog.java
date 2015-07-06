@@ -13,7 +13,6 @@ import android.widget.Button;
 
 import com.wedwise.interfaces.INotify;
 import com.wedwiseapp.R;
-import com.wedwiseapp.util.CustomFonts;
 
 
 public class FacilitiesDialog extends DialogFragment{

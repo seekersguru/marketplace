@@ -44,6 +44,26 @@ public class PreferenceUtil {
 		editor.commit();
 	}
 	
+	public Boolean isLogin() {
+		Boolean isLogin = sp.getBoolean("isLogin", false);
+		return isLogin;
+	}
+
+	public void setLogin(boolean value) {
+		editor.putBoolean("isLogin", value);
+		editor.commit();
+	}
+	
+	public Boolean getVendorType() {
+		Boolean isLogin = sp.getBoolean("vendor_type", false);
+		return isLogin;
+	}
+
+	public void setVendorType(String vendor_type) {
+		editor.putString("vendor_type",vendor_type);
+		editor.commit();
+	}
+	
 	public String getUid() {
 		String uid = sp.getString("uid", null);
 		return uid;

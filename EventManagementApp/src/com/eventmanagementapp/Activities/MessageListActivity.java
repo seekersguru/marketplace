@@ -10,10 +10,12 @@ import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.eventmanagementapp.R;
 import com.eventmanagementapp.adapter.MessagesListAdapter;
@@ -25,13 +27,16 @@ public class MessageListActivity extends FragmentActivity{
 	MessagesListAdapter adapterMessageList;
 	Button btnBack;
 	Context mContext;
+	View viewTopbar;
+	TextView tvTitle;
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.messagetab);
 		mContext=MessageListActivity.this;
-		ActionBar actionBar = getActionBar();
+		/*ActionBar actionBar = getActionBar();
 		actionBar.setDisplayShowHomeEnabled(false);
 		actionBar.setDisplayShowTitleEnabled(false);
 		LayoutInflater mInflater = LayoutInflater.from(this);
@@ -39,7 +44,10 @@ public class MessageListActivity extends FragmentActivity{
 		actionBar.setCustomView(mCustomView);
 		btnBack=(Button) mCustomView.findViewById(R.id.btnBack);
 		actionBar.setDisplayShowCustomEnabled(true);
-
+		viewTopbar=findViewById(R.id.viewTopbar);
+		viewTopbar.setVisibility(View.VISIBLE);*/
+		tvTitle=(TextView) findViewById(R.id.tvTitle);
+		btnBack=(Button) findViewById(R.id.btnBack);
 		lvMessages=(ListView)findViewById(R.id.lvMessages);
 		listMessages=new ArrayList<String>();
 		listMessages.add("Andy Lau");

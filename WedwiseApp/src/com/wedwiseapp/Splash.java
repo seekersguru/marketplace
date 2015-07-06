@@ -34,13 +34,13 @@ public class Splash extends Activity {
 	private void launch(final Context context) {
 		Handler handler = new Handler();
 		boolean isRegistered = PreferenceUtil.getInstance().isRegistered();
-		if (isRegistered == true) {
+		if (isRegistered) {
 			handler.postDelayed(new Runnable() {
 				@Override
 				public void run() {
-					//					Intent intent = new Intent(context, RegisterActivity.class);
-					//					intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-					//					startActivity(intent);
+					Intent intent = new Intent(context, NavigationDrawerHomeActivity.class);
+					startActivity(intent);
+					overridePendingTransition(R.anim.right_in, R.anim.left_out);
 					finish();
 				}
 			}, 2000);

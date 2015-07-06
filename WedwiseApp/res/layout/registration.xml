@@ -2,8 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
     android:fitsSystemWindows="true" >
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <include
         android:id="@+id/toolbar"
@@ -156,6 +160,7 @@
                         android:background="#ffffff"
                         android:hint="Contact Number"
                         android:inputType="phone"
+                        android:maxLength="11"
                         android:paddingLeft="@dimen/paddingLeftEditText"
                         android:singleLine="true"
                         android:textColor="#000"
@@ -172,7 +177,6 @@
                     android:layout_width="@dimen/viewSeparatorHeight"
                     android:layout_height="match_parent"
                     android:background="#5C5858" />
-
 
                 <Button
                     android:id="@+id/btnSignIn"

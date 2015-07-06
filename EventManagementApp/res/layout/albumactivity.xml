@@ -39,7 +39,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:background="@drawable/mail_icon"
+            android:background="@drawable/mail_unselected"
             android:visibility="gone" />
     </RelativeLayout>
 
@@ -76,7 +76,7 @@
                     android:layout_width="@dimen/buttonMessageWidth"
                     android:layout_height="@dimen/buttonMessageHeight"
                     android:layout_gravity="center"
-                    android:background="@drawable/mail" />
+                    android:background="@drawable/mail_unselected" />
             </LinearLayout>
 
             <LinearLayout
@@ -90,7 +90,7 @@
                     android:layout_width="@dimen/dimenBottomBarIcons"
                     android:layout_height="@dimen/dimenBottomBarIcons"
                     android:layout_gravity="center"
-                    android:background="@drawable/home" />
+                    android:background="@drawable/home_unselected" />
             </LinearLayout>
 
             <LinearLayout
@@ -104,7 +104,7 @@
                     android:layout_width="@dimen/dimenBottomBarIcons"
                     android:layout_height="@dimen/dimenBottomBarIcons"
                     android:layout_gravity="center"
-                    android:background="@drawable/like" />
+                    android:background="@drawable/like_unselected" />
             </LinearLayout>
 
             <LinearLayout
@@ -118,7 +118,7 @@
                     android:layout_width="@dimen/dimenBottomBarIcons"
                     android:layout_height="@dimen/buttonMessageHeight"
                     android:layout_gravity="center"
-                    android:background="@drawable/menu" />
+                    android:background="@drawable/menu_unselected" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

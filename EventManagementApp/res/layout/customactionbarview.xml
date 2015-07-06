@@ -49,6 +49,13 @@
             android:layout_centerVertical="true"
             android:background="@drawable/overflow_menu"
             android:visibility="invisible" />
+        <View
+            android:id="@+id/viewTopbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/bottomBarDividerHeight"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/divider_bottom_bar" 
+            android:visibility="gone"/>
     </RelativeLayout>
 
 </LinearLayout>

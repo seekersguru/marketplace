@@ -1,15 +1,15 @@
 package com.wedwiseapp;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.wedwise.calendar.CalendarActivity;
@@ -17,12 +17,11 @@ import com.wedwise.dialogs.FacilitiesDialog;
 import com.wedwise.dialogs.GeneralDialog;
 import com.wedwise.dialogs.PackagesDialog;
 import com.wedwise.dialogs.VideoViewerDialog;
-import com.wedwiseapp.util.CustomFonts;
 
 public class VendorDetailsActivity extends FragmentActivity implements OnClickListener{
 
 	Button btnBack,btnSchedule;
-	TextView tvVenue,tvAddress,tvMobileNumber,
+	TextView tvTitle,tvVenue,tvAddress,tvMobileNumber,
 	tvLocation,tvSharedRoom,tvCapacity,tvCapacityCount,tvRate,
 	tvType,tvTypeData,tvReadMoreSecond,tvVideoLink,tvRotatingView,tvSPCuisine,tvSPCuisineData,
 	tvFaclities,tvReadMoreThird,tvReadMoreFourth,tvPackages,
@@ -31,20 +30,27 @@ public class VendorDetailsActivity extends FragmentActivity implements OnClickLi
 	tvDescription;
 	ImageView imViewPicture,imViewMap;
 	Context mContext;
+	LinearLayout llMail,llHome,llSchedule,llMenu;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.vendor_details);
 		//		tvReadMore=(TextView) findViewById(R.id.tvReadMore);
 		mContext=VendorDetailsActivity.this;
+		tvTitle=(TextView) findViewById(R.id.tvTitle);
 		tvVenue=(TextView) findViewById(R.id.tvVenue);
 		tvAddress=(TextView) findViewById(R.id.tvAddress);
 		tvMobileNumber=(TextView) findViewById(R.id.tvMobileNumber);
-		//		tvDescription=(TextView) findViewById(R.id.tvDescription);
-		//		tvDecriptionData=(TextView) findViewById(R.id.tvDecriptionData);
-		//		tvListing=(TextView) findViewById(R.id.tvListing);
+		llMail=(LinearLayout) findViewById(R.id.llMail);
+		llHome=(LinearLayout) findViewById(R.id.llHome);	
+		llSchedule=(LinearLayout) findViewById(R.id.llSchedule);
+		llMenu=(LinearLayout) findViewById(R.id.llMenu);
+		llMail.setOnClickListener(this);
+		llHome.setOnClickListener(this);
+		llSchedule.setOnClickListener(this);
+		llMenu.setOnClickListener(this);
 		tvLocation=(TextView) findViewById(R.id.tvLocation);
 		tvSharedRoom=(TextView) findViewById(R.id.tvSharedRoom);
 		tvCapacity=(TextView) findViewById(R.id.tvCapacity);
@@ -76,7 +82,8 @@ public class VendorDetailsActivity extends FragmentActivity implements OnClickLi
 		tvType2=(TextView) findViewById(R.id.tvType2);
 		tvTypeData2=(TextView) findViewById(R.id.tvTypeData2);
 		tvDescription=(TextView)findViewById(R.id.tvDescription);
-		ActionBar actionBar = getActionBar();
+		btnBack=(Button) findViewById(R.id.btnBack);
+		/*ActionBar actionBar = getActionBar();
 		actionBar.setDisplayShowHomeEnabled(false);
 		actionBar.setDisplayShowTitleEnabled(false);
 		LayoutInflater mInflater = LayoutInflater.from(this);
@@ -85,44 +92,44 @@ public class VendorDetailsActivity extends FragmentActivity implements OnClickLi
 		actionBar.setCustomView(mCustomView);
 		btnBack=(Button) mCustomView.findViewById(R.id.btnBack);
 		actionBar.setDisplayShowCustomEnabled(true);
-
+		 */
 		//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvReadMore,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvVenue,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvAddress,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvMobileNumber,"fonts/GothamRnd-Light.otf");
-//		//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvDescription,"fonts/GothamRnd-Light.otf");
-//		//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvDecriptionData,"fonts/GothamRnd-Light.otf");
-//		//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvListing,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvLocation,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvSharedRoom,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvCapacity,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvCapacityCount,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvType,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvTypeData,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvReadMoreSecond,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvRate,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvVideoLink,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvRotatingView,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvSPCuisine,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvSPCuisineData,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvFaclities,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvReadMoreThird,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvReadMoreFourth,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvPackages,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvLocation3,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvSharedRoom3,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvCapacity3,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvCapacityCount3,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvType3,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvTypeData3,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvLocation2,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvSharedRoom2,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvCapacity2,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvCapacityCount2,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvType2,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvTypeData2,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvGeneral,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfButton(VendorDetailsActivity.this,btnSchedule,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvVenue,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvAddress,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvMobileNumber,"fonts/GothamRnd-Light.otf");
+		//		//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvDescription,"fonts/GothamRnd-Light.otf");
+		//		//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvDecriptionData,"fonts/GothamRnd-Light.otf");
+		//		//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvListing,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvLocation,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvSharedRoom,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvCapacity,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvCapacityCount,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvType,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvTypeData,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvReadMoreSecond,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvRate,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvVideoLink,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvRotatingView,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvSPCuisine,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvSPCuisineData,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvFaclities,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvReadMoreThird,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvReadMoreFourth,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvPackages,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvLocation3,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvSharedRoom3,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvCapacity3,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvCapacityCount3,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvType3,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvTypeData3,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvLocation2,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvSharedRoom2,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvCapacity2,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvCapacityCount2,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvType2,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvTypeData2,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(VendorDetailsActivity.this,tvGeneral,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfButton(VendorDetailsActivity.this,btnSchedule,"fonts/GothamRnd-Light.otf");
 
 		tvVideoLink.setOnClickListener(new OnClickListener() {
 
@@ -165,21 +172,7 @@ public class VendorDetailsActivity extends FragmentActivity implements OnClickLi
 			}
 		});
 
-		btnSchedule.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent myIntent=new Intent(VendorDetailsActivity.this,CalendarActivity.class);
-				startActivity(myIntent);	
-				overridePendingTransition(R.anim.right_in, R.anim.left_out);
-			}
-		});
-		//		tvReadMore.setOnClickListener(new OnClickListener() {
-		//
-		//			@Override
-		//			public void onClick(View v) {
-		//			}
-		//		});
+		btnSchedule.setOnClickListener(this);
 		idInitialization();
 	}
 
@@ -213,10 +206,14 @@ public class VendorDetailsActivity extends FragmentActivity implements OnClickLi
 			dialogPackages.newInstance(mContext, null);
 			dialogPackages.show(getSupportFragmentManager(), "test");
 			break;
-
+		case R.id.llSchedule:
+		case R.id.btnSchedule:
+			Intent myIntent=new Intent(VendorDetailsActivity.this,CalendarActivity.class);
+			startActivity(myIntent);	
+			overridePendingTransition(R.anim.right_in, R.anim.left_out);
+			break;
 		default:
 			break;
 		}
-
 	}
 }

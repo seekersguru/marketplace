@@ -29,7 +29,6 @@ public class MFCalendarView extends LinearLayout{
 
 	private Calendar month;
 	private CalendarAdapter calendaradapter;
-
 	private Handler handler;
 	private ExpandableHeightGridView gridview;
 	private String currentSelectedDate;
@@ -59,16 +58,11 @@ public class MFCalendarView extends LinearLayout{
 	void init(Context context){
 		LayoutInflater li = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		view = li.inflate(R.layout.mf_calendarview, null, false);
-
 		month = (Calendar) Calendar.getInstance();
-
 		month.setTimeInMillis(Util.dateToLong(getInitialDate()));
-
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd", Util.getLocale());
 		currentSelectedDate = df.format(month.getTime());
-
 		calendaradapter = new CalendarAdapter(context, month);
-
 		gridview = (ExpandableHeightGridView) view.findViewById(R.id.gridview);
 		gridview.setAdapter(calendaradapter);
 
@@ -77,14 +71,10 @@ public class MFCalendarView extends LinearLayout{
 
 		TextView title = (TextView) view.findViewById(R.id.title);
 		title.setText(android.text.format.DateFormat.format("MMMM yyyy", month));
-
 		RelativeLayout previous = (RelativeLayout) view.findViewById(R.id.previous);
-
 		previous.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
-				CalendarAdapter.count=1;
 				setPreviousMonth();
 				refreshCalendar();
 			}
@@ -92,11 +82,9 @@ public class MFCalendarView extends LinearLayout{
 
 		RelativeLayout next = (RelativeLayout) view.findViewById(R.id.next);
 		next.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
 				setNextMonth();
-				CalendarAdapter.count=1;
 				refreshCalendar();
 			}
 		});
@@ -185,16 +173,12 @@ public class MFCalendarView extends LinearLayout{
 					month.get(Calendar.YEAR), 
 					(String) DateFormat.format("MMMM", month));
 		}
-
 	}
 
 	public Runnable calendarUpdater = new Runnable() {
-
 		@Override
 		public void run() {
-
 			gridview.setExpanded(true);
-
 			Log.d("", "month:"+ (month.get(Calendar.MONTH)+1) + 
 					" year:" + month.get(Calendar.YEAR));
 

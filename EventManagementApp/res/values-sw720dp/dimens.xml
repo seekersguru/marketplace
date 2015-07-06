@@ -6,7 +6,7 @@
 
     <!--
          Per the design guidelines, navigation drawers should be between 240dp and 320dp:
-         https://developer.android.com/design/patterns/navigation-drawer.html
+         https://developer.android.com/design/patterns/navigation-drawer.html
     -->
     <dimen name="navigation_drawer_width">240dp</dimen>
     <dimen name="toolbar_elevation">4dp</dimen>
@@ -86,8 +86,8 @@
     <!-- FilterDialog -->
     <dimen name="widthFilterSubmitButton">150dp</dimen>
     <dimen name="heightwidthFilterSubmitButton">80dp</dimen>
- <dimen name="marginTopButtonBtnSubmit">30dp</dimen>
-    
+    <dimen name="marginTopButtonBtnSubmit">30dp</dimen>
+
     <!-- bid book crete -->
     <dimen name="editTextWidth">150dp</dimen>
     <dimen name="editTextHeightBidBookCreate">40dp</dimen>
@@ -98,5 +98,10 @@
     <dimen name="widthSpinnerTimeSlot">160dp</dimen>
     <dimen name="marginTopllFields">10dp</dimen>
     <dimen name="marginTopbtnSchedule">50dp</dimen>
-    
+
+    <!-- Enquiry Details -->
+    <dimen name="rowHeightEnquiryDetails">40dp</dimen>
+    <dimen name="widthBottomBarButtons">100dp</dimen>
+  <!-- Error Dialog -->
+     <dimen name="buttonHeightOk">50dp</dimen>
 </resources>

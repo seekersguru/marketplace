@@ -44,6 +44,16 @@ public class PreferenceUtil {
 		editor.commit();
 	}
 	
+	public Boolean isLogin() {
+		Boolean isLogin = sp.getBoolean("isLogin", false);
+		return isLogin;
+	}
+
+	public void setLogin(boolean value) {
+		editor.putBoolean("isLogin", value);
+		editor.commit();
+	}
+	
 	public String getUid() {
 		String uid = sp.getString("uid", null);
 		return uid;

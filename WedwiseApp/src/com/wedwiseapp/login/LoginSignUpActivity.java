@@ -15,8 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.wedwiseapp.R;
-import com.wedwiseapp.VendorCategoryHome;
-import com.wedwiseapp.util.CustomFonts;
+import com.wedwiseapp.util.PreferenceUtil;
 
 //import com.google.android.gms.common.ConnectionResult;
 //import com.google.android.gms.common.api.GoogleApiClient;
@@ -73,6 +72,17 @@ OnConnectionFailedListener*/ {
 		//		etEmailAddress.setHintTextColor(Color.parseColor("#ffffff"));
 		//		etPassword.setHintTextColor(Color.parseColor("#ffffff"));
 		btnSignUp=(Button) findViewById(R.id.btnSignUp);
+
+//		boolean isRegistered = PreferenceUtil.getInstance().isRegistered();
+//		if(isRegistered)
+//		{
+//			btnSignUp.setVisibility(View.GONE);
+//		}
+//		else if (!isRegistered)
+//		{
+//			btnSignUp.setVisibility(View.VISIBLE);
+//		}
+
 		tvBottomBar=(TextView) findViewById(R.id.tvBottomBar);
 		tvBottomBar.setText(Html.fromHtml("By signing up,I agree to terms of services,privacy policies,guest policies,and host guarantee terms.").toString());
 		toolbar=(Toolbar) findViewById(R.id.toolbar);
@@ -80,10 +90,10 @@ OnConnectionFailedListener*/ {
 		tvToolBar=(TextView)toolbar.findViewById(R.id.tvToolBar);
 		tvToolBar.setText("Log In or Sign Up");
 		btnBack.setVisibility(View.VISIBLE);
-//		CustomFonts.setFontOfButton(mContext, btnSignUp,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfButton(mContext, btnLogin,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfTextView(mContext, tvToolBar,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfTextView(mContext, tvBottomBar,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfButton(mContext, btnSignUp,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfButton(mContext, btnLogin,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(mContext, tvToolBar,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(mContext, tvBottomBar,"fonts/GothamRnd-Light.otf");
 		btnBack.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -118,9 +128,9 @@ OnConnectionFailedListener*/ {
 
 			@Override
 			public void onClick(View v) {
-				Intent myIntent=new Intent(LoginSignUpActivity.this,VendorCategoryHome.class);
-				startActivity(myIntent);
-				overridePendingTransition(R.anim.right_in, R.anim.left_out);
+				//				Intent myIntent=new Intent(LoginSignUpActivity.this,VendorCategoryHome.class);
+				//				startActivity(myIntent);
+				//				overridePendingTransition(R.anim.right_in, R.anim.left_out);
 			}
 		});
 

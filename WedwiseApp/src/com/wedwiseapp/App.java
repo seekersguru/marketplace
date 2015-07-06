@@ -16,8 +16,4 @@ public class App extends Application {
 	public void onLowMemory() {
 		super.onLowMemory();
 	}
-	
-	
-	 
-	
 }

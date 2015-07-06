@@ -144,14 +144,13 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
 		mCallbacks = null;
 	}
 
-	@SuppressWarnings("deprecation")
 	public List<NavigationItem> getMenu() {
 		List<NavigationItem> items = new ArrayList<NavigationItem>();
-		items.add(new NavigationItem("Banquite", getResources().getDrawable(R.drawable.like)));
-		items.add(new NavigationItem("Decorators", getResources().getDrawable(R.drawable.like)));
-		items.add(new NavigationItem("Caterers", getResources().getDrawable(R.drawable.like)));
-		items.add(new NavigationItem("Photography", getResources().getDrawable(R.drawable.like)));
-		items.add(new NavigationItem("Others", getResources().getDrawable(R.drawable.like)));
+		items.add(new NavigationItem("Banquite", getResources().getDrawable(R.drawable.like_unselected)));
+		items.add(new NavigationItem("Decorators", getResources().getDrawable(R.drawable.like_unselected)));
+		items.add(new NavigationItem("Caterers", getResources().getDrawable(R.drawable.like_unselected)));
+		items.add(new NavigationItem("Photography", getResources().getDrawable(R.drawable.like_unselected)));
+		items.add(new NavigationItem("Others", getResources().getDrawable(R.drawable.like_unselected)));
 		return items;
 	}
 

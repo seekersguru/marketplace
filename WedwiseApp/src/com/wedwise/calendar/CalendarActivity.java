@@ -3,7 +3,6 @@ package com.wedwise.calendar;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -19,9 +18,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.wedwise.tab.MessageTabActivity;
 import com.wedwiseapp.R;
-import com.wedwiseapp.util.CustomFonts;
 
 /**
  * Shows off the most basic usage
@@ -34,6 +31,8 @@ public class CalendarActivity extends FragmentActivity implements OnClickListene
 	TextView tvTitle,tvScheduledDate;
 	TimePicker tpScheduleVisit;
 	Resources system;
+	int hour_numberpicker_id,minute_numberpicker_id,ampm_numberpicker_id;
+	NumberPicker hour_numberpicker,minute_numberpicker,ampm_numberpicker;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,11 +50,15 @@ public class CalendarActivity extends FragmentActivity implements OnClickListene
 		btnBack.setOnClickListener(this);
 		btnSchedule.setOnClickListener(this);
 
-//		CustomFonts.setFontOfTextView(CalendarActivity.this,tvTitle,"fonts/GothamRnd-Book_0.otf");
-//		CustomFonts.setFontOfButton(CalendarActivity.this,btnSchedule,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfTextView(CalendarActivity.this,tvScheduledDate,"fonts/GothamRnd-Light.otf");
-//		
-		set_timepicker_text_colour();
+		//		CustomFonts.setFontOfTextView(CalendarActivity.this,tvTitle,"fonts/GothamRnd-Book_0.otf");
+		//		CustomFonts.setFontOfButton(CalendarActivity.this,btnSchedule,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(CalendarActivity.this,tvScheduledDate,"fonts/GothamRnd-Light.otf");
+		//		
+		try {
+			set_timepicker_text_colour();
+		} catch (Exception e) {
+			e.getMessage();
+		}
 		mf.setOnCalendarViewListener(new onMFCalendarViewListener() {
 
 			@Override
@@ -103,58 +106,72 @@ public class CalendarActivity extends FragmentActivity implements OnClickListene
 	}
 
 	private void set_timepicker_text_colour(){
-		system = Resources.getSystem();
-		int hour_numberpicker_id = system.getIdentifier("hour", "id", "android");
-		int minute_numberpicker_id = system.getIdentifier("minute", "id", "android");
-		int ampm_numberpicker_id = system.getIdentifier("amPm", "id", "android");
 
-		NumberPicker hour_numberpicker = (NumberPicker) tpScheduleVisit.findViewById(hour_numberpicker_id);
-		NumberPicker minute_numberpicker = (NumberPicker) tpScheduleVisit.findViewById(minute_numberpicker_id);
-		NumberPicker ampm_numberpicker = (NumberPicker) tpScheduleVisit.findViewById(ampm_numberpicker_id);
+		try {
+			system = Resources.getSystem();
+			hour_numberpicker_id = system.getIdentifier("hour", "id", "android");
+			minute_numberpicker_id = system.getIdentifier("minute", "id", "android");
+			ampm_numberpicker_id = system.getIdentifier("amPm", "id", "android");
+		} catch (Exception e) {
+			e.getMessage();
+		}
 
-		set_numberpicker_text_colour(hour_numberpicker);
-		set_numberpicker_text_colour(minute_numberpicker);
-		set_numberpicker_text_colour(ampm_numberpicker);
+		try {
+			hour_numberpicker = (NumberPicker) tpScheduleVisit.findViewById(hour_numberpicker_id);
+			minute_numberpicker = (NumberPicker) tpScheduleVisit.findViewById(minute_numberpicker_id);
+			ampm_numberpicker = (NumberPicker) tpScheduleVisit.findViewById(ampm_numberpicker_id);
+		} catch (Exception e) {
+			e.getMessage();
+		}
+
+		try {
+			set_numberpicker_text_colour(hour_numberpicker);
+			set_numberpicker_text_colour(minute_numberpicker);
+			set_numberpicker_text_colour(ampm_numberpicker);
+		} catch (Exception e) {
+			e.getMessage();
+		}
 	}
 
 	private void set_numberpicker_text_colour(NumberPicker number_picker){
-		final int count = number_picker.getChildCount();
-		final int color = getResources().getColor(R.color.OrangeColorTheme);
+		try {
+			final int count = number_picker.getChildCount();
+			final int color = getResources().getColor(R.color.OrangeColorTheme);
+			for(int i = 0; i < count; i++){
+				View child = number_picker.getChildAt(i);
+				try{
+					Field wheelpaint_field = number_picker.getClass().getDeclaredField("mSelectorWheelPaint");
+					wheelpaint_field.setAccessible(true);
 
-		for(int i = 0; i < count; i++){
-			View child = number_picker.getChildAt(i);
+					((Paint)wheelpaint_field.get(number_picker)).setColor(color);
+					((EditText)child).setTextColor(color);
 
-			try{
-				Field wheelpaint_field = number_picker.getClass().getDeclaredField("mSelectorWheelPaint");
-				wheelpaint_field.setAccessible(true);
+					Field field2=number_picker.getClass().getDeclaredField("mSelectionDivider");
 
-				((Paint)wheelpaint_field.get(number_picker)).setColor(color);
-				((EditText)child).setTextColor(color);
+					if (field2.getName().equals("mSelectionDivider")) {
+						field2.setAccessible(true);
+						try {
+							field2.set(number_picker, getResources().getDrawable(R.drawable.divider_orange));
 
-				Field field2=number_picker.getClass().getDeclaredField("mSelectionDivider");
-
-				if (field2.getName().equals("mSelectionDivider")) {
-					field2.setAccessible(true);
-					try {
-						field2.set(number_picker, getResources().getDrawable(R.drawable.divider_orange));
-
-					}catch (Exception e) {
-						Toast.makeText(getApplicationContext(), e.getMessage(),1000).show();
+						}catch (Exception e) {
+							Toast.makeText(getApplicationContext(), e.getMessage(),1000).show();
+						}
 					}
+					number_picker.invalidate();
 				}
+				catch(NoSuchFieldException e){
+					Log.w("setNumberPickerTextColor", e);
+				}
+				catch(IllegalAccessException e){
+					Log.w("setNumberPickerTextColor", e);
+				}
+				catch(IllegalArgumentException e){
+					Log.w("setNumberPickerTextColor", e);
+				}
+			}
 
-
-				number_picker.invalidate();
-			}
-			catch(NoSuchFieldException e){
-				Log.w("setNumberPickerTextColor", e);
-			}
-			catch(IllegalAccessException e){
-				Log.w("setNumberPickerTextColor", e);
-			}
-			catch(IllegalArgumentException e){
-				Log.w("setNumberPickerTextColor", e);
-			}
+		} catch (Exception e) {
+			e.getMessage();
 		}
 	}
 

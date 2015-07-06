@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
-    android:orientation="vertical" >
+    android:background="#ffffff" >
 
     <include
         android:id="@+id/toolbar"
@@ -13,12 +12,74 @@
         layout="@layout/toolbar" />
 
     <View
-        android:id="@+id/viewSeparator"
+        android:id="@+id/viewTopbar"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="@dimen/bottomBarDividerHeight"
+        android:layout_below="@+id/toolbar"
         android:background="@drawable/divider_bottom_bar" />
 
+    
+    
+     <LinearLayout
+            android:id="@+id/lvBottomBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#F1EFF0"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
+            android:padding="8dp">
+
+            <EditText
+                android:id="@+id/etMessage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".85"
+                android:background="@drawable/rounded_border_edittext"
+                android:gravity="fill_vertical"
+                android:hint="Type a message"
+                android:minHeight="45dp"
+                android:paddingLeft="@dimen/paddingLeftEditText"
+                android:singleLine="false"
+                android:textColor="#000"
+                android:textSize="@dimen/textSizeMedium" />
+
+            <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight=".15"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/paddingLeftEditText"
+                    android:gravity="center" >
+
+                    <Button
+                        android:id="@+id/btnSendMessage"
+                        android:layout_width="@dimen/circleSendButtonBg"
+                        android:layout_height="@dimen/circleSendButtonBg"
+                        android:layout_gravity="center"
+                        android:background="@drawable/circle_oval" />
+                </LinearLayout>
+        </LinearLayout>
+    
+    
+    
+    
+    <ListView
+        android:id="@+id/lvChatMessages"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/viewTopbar"
+        android:layout_above="@+id/lvBottomBar"
+        android:background="#F1EFF0"
+        android:cacheColorHint="#00000000"
+        android:divider="#00000000"
+        android:dividerHeight="0dp"
+        android:scrollbars="none" >
+    </ListView>
+
+    <!--
     <LinearLayout
+        android:id="@+id/llListContainer"
+        android:layout_below="@+id/viewTopbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#F1EFF0"
@@ -84,149 +145,7 @@
                 </LinearLayout>
             </FrameLayout>
         </LinearLayout>
-    </LinearLayout>
-    <!--
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/bottomBarHeight"
-        android:background="#F1EFF0"
-        android:orientation="vertical"
-        android:weightSum="1" >
-
-        <ListView
-            android:id="@+id/lvChatMessages"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight=".85"
-            android:background="#F1EFF0"
-            android:cacheColorHint="#00000000"
-            android:divider="#00000000"
-            android:dividerHeight="0dp" >
-        </ListView>
-
-        <LinearLayout
-            android:id="@+id/lvBottomBar"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_weight=".15"
-            android:background="#00000000"
-            android:gravity="center_vertical"
-            android:minHeight="50dp"
-            android:orientation="horizontal"
-            android:padding="8dp"
-            android:weightSum="1" >
-
-            <EditText
-                android:id="@+id/etMessage"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/bottomBarHeight"
-                android:layout_weight=".85"
-                android:background="@drawable/rounded_border_edittext"
-                android:gravity="fill_vertical"
-                android:hint="Type a message"
-                android:minHeight="45dp"
-                android:paddingLeft="@dimen/paddingLeftEditText"
-                android:singleLine="false"
-                android:textColor="#000"
-                android:textSize="@dimen/textSizeMedium" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight=".15"
-                android:gravity="center" >
-
-                <Button
-                    android:id="@+id/btnSendMessage"
-                    android:layout_width="@dimen/sendmessageIconWidth"
-                    android:layout_height="@dimen/sendmessageIconHeight"
-                    android:layout_marginLeft="@dimen/marginLeftRightllFields"
-                    android:background="@drawable/send_message"
-                    android:padding="@dimen/paddingLeftEditText" />
-            </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/llBottomBarParent"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/bottomBarHeight"
-        android:layout_alignParentBottom="true"
-        android:background="#F0EEEF"
-        android:orientation="vertical" >
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/bottomBarDividerHeight"
-            android:background="@drawable/divider_bottom_bar" />
-
-        <LinearLayout
-            android:id="@+id/llBottomBar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#00000000"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:weightSum="1" >
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight=".25"
-                android:gravity="center" >
-
-                <Button
-                    android:id="@+id/btnMail"
-                    android:layout_width="@dimen/buttonMessageWidth"
-                    android:layout_height="@dimen/buttonMessageHeight"
-                    android:layout_gravity="center"
-                    android:background="@drawable/mail" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight=".25"
-                android:gravity="center" >
-
-                <Button
-                    android:id="@+id/btnHome"
-                    android:layout_width="@dimen/dimenBottomBarIcons"
-                    android:layout_height="@dimen/dimenBottomBarIcons"
-                    android:layout_gravity="center"
-                    android:background="@drawable/home" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight=".25"
-                android:gravity="center" >
-
-                <Button
-                    android:id="@+id/btnLike"
-                    android:layout_width="@dimen/dimenBottomBarIcons"
-                    android:layout_height="@dimen/dimenBottomBarIcons"
-                    android:layout_gravity="center"
-                    android:background="@drawable/like" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight=".25"
-                android:gravity="center" >
-
-                <Button
-                    android:id="@+id/btnMenu"
-                    android:layout_width="@dimen/dimenBottomBarIcons"
-                    android:layout_height="@dimen/buttonMessageHeight"
-                    android:layout_gravity="center"
-                    android:background="@drawable/menu" />
-            </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
+    </LinearLayout>
     -->
 
-</LinearLayout>
+</RelativeLayout>

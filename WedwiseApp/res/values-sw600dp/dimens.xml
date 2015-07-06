@@ -112,6 +112,7 @@
     <dimen name="dimenCustomactionBarSearchIcom">35dp</dimen>
     <dimen name="widthSearchBar">300dp</dimen>
     <dimen name="heightSearchBar">60dp</dimen>
+      <dimen name="marginLeftSearchBar">180dp</dimen>
 
     <!-- FilterDialog -->
     <dimen name="widthFilterSubmitButton">130dp</dimen>
@@ -119,5 +120,7 @@
 
     <!-- Facilities Dialog -->
     <dimen name="marginTopButtonBtnSubmit">50dp</dimen>
+     <!-- Error Dialog -->
+     <dimen name="buttonHeightOk">50dp</dimen>
 
 </resources>

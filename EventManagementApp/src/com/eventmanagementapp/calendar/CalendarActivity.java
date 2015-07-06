@@ -2,6 +2,7 @@ package com.eventmanagementapp.calendar;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -14,6 +15,7 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.eventmanagementapp.MessageTabActivity;
@@ -36,6 +38,7 @@ public class CalendarActivity extends FragmentActivity implements OnClickListene
 	DatePickerDialog dpDialog;
 	Context mContext;
 	TextView tvFilterCriteria,tvFilterFirst;//,tvFilterSecond;
+	LinearLayout llCalendar,llMail,llLeads,llMenu;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +79,17 @@ public class CalendarActivity extends FragmentActivity implements OnClickListene
 		btnLeads=(Button) findViewById(R.id.btnLeads);
 		btnCalendar=(Button) findViewById(R.id.btnCalendar);
 		btnMail=(Button)findViewById(R.id.btnMail);
-		btnMail.setOnClickListener(new OnClickListener() {
+		llCalendar=(LinearLayout) findViewById(R.id.llCalendar);
+		llMail=(LinearLayout) findViewById(R.id.llMail);
+		llLeads=(LinearLayout) findViewById(R.id.llLeads);
+		llMenu=(LinearLayout) findViewById(R.id.llMenu);
+		llCalendar.setOnClickListener(this);
+		llMail.setOnClickListener(this);
+		llLeads.setOnClickListener(this);
+		llMenu.setOnClickListener(this);
+		btnMail.setOnClickListener(this);
+		btnLeads.setOnClickListener(this);
+		/*btnMail.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				Intent myIntent=new Intent(CalendarActivity.this,MessageListActivity.class);
@@ -93,9 +106,8 @@ public class CalendarActivity extends FragmentActivity implements OnClickListene
 				overridePendingTransition(R.anim.right_in, R.anim.left_out);		
 			}
 		});
-
+*/
 		btnSelecteDate.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
 				showDialog(999);
@@ -224,6 +236,18 @@ public class CalendarActivity extends FragmentActivity implements OnClickListene
 		{
 			finish();	
 			overridePendingTransition(R.anim.right_in, R.anim.right_out);
+		}
+		else if (v.getId()==R.id.llMail || v.getId()==R.id.btnMail)
+		{
+			Intent myIntent=new Intent(CalendarActivity.this,MessageListActivity.class);
+			startActivity(myIntent);	
+			overridePendingTransition(R.anim.right_in, R.anim.left_out);	
+		}
+		else if (v.getId()==R.id.llLeads || v.getId()==R.id.btnLeads)
+		{
+			Intent myIntent=new Intent(CalendarActivity.this,MessageTabActivity.class);
+			startActivity(myIntent);	
+			overridePendingTransition(R.anim.right_in, R.anim.left_out);	
 		}
 		/*else if(v.getId()==R.id.btnCalendar)
 		{

@@ -51,6 +51,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:text="Helo Guys how are you"
+            android:paddingLeft="@dimen/paddingLeftEditText"
             android:textColor="#000"
             android:textSize="@dimen/textSizeNormal" />
 
@@ -61,6 +62,7 @@
             android:layout_below="@+id/tvMessageLeft"
             android:layout_marginTop="@dimen/marginleftBackButton"
             android:text="6:15 pm"
+            android:paddingLeft="@dimen/paddingLeftEditText"
             android:textColor="#000"
             android:textSize="@dimen/textSizeSmall"
             android:visibility="visible" />

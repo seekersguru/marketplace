@@ -6,7 +6,43 @@
     android:gravity="center"
     android:orientation="vertical" >
 
-    <!-- <include layout="@layout/topbar" /> -->
+     <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottomBarHeight"
+        android:background="#ffffff"
+        android:gravity="center_vertical" >
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="@dimen/btnBackWidth"
+            android:layout_height="@dimen/btnBackHeight"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/marginLeftRightllFields"
+            android:background="@drawable/back_orange" />
+
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/marginleftToolbarText"
+            android:layout_toRightOf="@+id/btnBack"
+            android:singleLine="true"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/textSizeMedium" />
+
+        
+
+        <View
+            android:id="@+id/viewTopbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/bottomBarDividerHeight"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/divider_bottom_bar" />
+    </RelativeLayout>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -116,7 +152,7 @@
                         android:gravity="center"
                         android:padding="@dimen/paddingLeftEditText"
                         android:text="Video Link"
-                        android:textColor="#f16959"
+                        android:textColor="@color/OrangeColorTheme"
                         android:textSize="@dimen/textSizeMedium" />
 
                     <com.wedwiseapp.views.CTextView
@@ -130,7 +166,7 @@
                         android:gravity="center"
                         android:padding="@dimen/paddingLeftEditText"
                         android:text="360 View"
-                        android:textColor="#f16959"
+                        android:textColor="@color/OrangeColorTheme"
                         android:textSize="@dimen/textSizeMedium" />
                 </LinearLayout>
 
@@ -170,7 +206,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/marginLeftRightllFields"
-                            android:gravity="center"
+                            android:gravity="left|center_vertical"
                             android:text="Location" />
 
                         <com.wedwiseapp.views.CTextView
@@ -179,7 +215,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/marginLeftRightllFields"
-                            android:gravity="center"
+                            android:gravity="left|center_vertical"
                             android:text="Shared room"
                             android:textSize="@dimen/textSizeNormal" />
                     </TableRow>
@@ -201,7 +237,7 @@
                             style="@style/text_999_16"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
+                            android:gravity="left|center_vertical"
                             android:text="Capacity" />
 
                         <com.wedwiseapp.views.CTextView
@@ -209,7 +245,7 @@
                             style="@style/text_333_16"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
+                            android:gravity="left|center_vertical"
                             android:text="16"
                             android:textSize="@dimen/textSizeNormal" />
                     </TableRow>
@@ -231,7 +267,7 @@
                             style="@style/text_999_16"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
+                            android:gravity="left|center_vertical"
                             android:text="Type" />
 
                         <com.wedwiseapp.views.CTextView
@@ -239,7 +275,7 @@
                             style="@style/text_333_16"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
+                            android:gravity="left|center_vertical"
                             android:text="Party room"
                             android:textSize="@dimen/textSizeNormal" />
                     </TableRow>
@@ -261,7 +297,7 @@
                             style="@style/text_999_16"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
+                            android:gravity="left|center_vertical"
                             android:text="Sp. Cuisine" />
 
                         <com.wedwiseapp.views.CTextView
@@ -269,7 +305,7 @@
                             style="@style/text_333_16"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
+                            android:gravity="left|center_vertical"
                             android:text="Jain only"
                             android:textSize="@dimen/textSizeNormal" />
                     </TableRow>
@@ -284,7 +320,7 @@
                     android:background="@drawable/red_border"
                     android:padding="@dimen/paddingLeftEditText"
                     android:text="Read more"
-                    android:textColor="#F16959"
+                    android:textColor="@color/OrangeColorTheme"
                     android:textSize="@dimen/textSizeMedium" />
 
                 <ImageView
@@ -331,7 +367,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/marginLeftRightllFields"
-                            android:gravity="center"
+                            android:gravity="left|center_vertical"
                             android:text="Venue Type"
                             android:textSize="@dimen/textSizeNormal" />
 
@@ -341,7 +377,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/marginLeftRightllFields"
-                            android:gravity="center"
+                            android:gravity="left|center_vertical"
                             android:text="Party Room"
                             android:textSize="@dimen/textSizeNormal" />
                     </TableRow>
@@ -363,7 +399,7 @@
                             style="@style/text_999_16"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
+                            android:gravity="left|center_vertical"
                             android:text="Power Backup"
                             android:textSize="@dimen/textSizeNormal" />
 
@@ -372,7 +408,7 @@
                             style="@style/text_333_16"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
+                            android:gravity="left|center_vertical"
                             android:text="Yes"
                             android:textSize="@dimen/textSizeNormal" />
                     </TableRow>
@@ -394,7 +430,7 @@
                             style="@style/text_999_16"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
+                            android:gravity="left|center_vertical"
                             android:text="Rest Rooms"
                             android:textSize="@dimen/textSizeNormal" />
 
@@ -403,7 +439,7 @@
                             style="@style/text_333_16"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
+                            android:gravity="left|center_vertical"
                             android:text="Yes"
                             android:textSize="@dimen/textSizeNormal" />
                     </TableRow>
@@ -418,7 +454,7 @@
                     android:background="@drawable/red_border"
                     android:padding="@dimen/paddingLeftEditText"
                     android:text="Read more"
-                    android:textColor="#F16959"
+                    android:textColor="@color/OrangeColorTheme"
                     android:textSize="@dimen/textSizeMedium" />
 
                 <com.wedwiseapp.views.CTextView
@@ -457,7 +493,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/marginLeftRightllFields"
-                            android:gravity="center"
+                            android:gravity="left|center_vertical"
                             android:text="Jain only"
                             android:textSize="@dimen/textSizeNormal" />
 
@@ -467,7 +503,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/marginLeftRightllFields"
-                            android:gravity="center"
+                            android:gravity="left|center_vertical"
                             android:text="Yes"
                             android:textSize="@dimen/textSizeNormal" />
                     </TableRow>
@@ -489,7 +525,7 @@
                             style="@style/text_999_16"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
+                            android:gravity="left|center_vertical"
                             android:text="Veg"
                             android:textSize="@dimen/textSizeNormal" />
 
@@ -498,7 +534,7 @@
                             style="@style/text_333_16"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
+                            android:gravity="left|center_vertical"
                             android:text="Yes"
                             android:textSize="@dimen/textSizeNormal" />
                     </TableRow>
@@ -520,7 +556,7 @@
                             style="@style/text_999_16"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
+                            android:gravity="left|center_vertical"
                             android:text="Alcohol"
                             android:textSize="@dimen/textSizeNormal" />
 
@@ -529,7 +565,7 @@
                             style="@style/text_333_16"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
+                            android:gravity="left|center_vertical"
                             android:text="Yes"
                             android:textSize="@dimen/textSizeNormal" />
                     </TableRow>
@@ -545,7 +581,7 @@
                     android:background="@drawable/red_border"
                     android:padding="@dimen/paddingLeftEditText"
                     android:text="Read more"
-                    android:textColor="#F16959"
+                    android:textColor="@color/OrangeColorTheme"
                     android:textSize="@dimen/textSizeMedium" />
             </LinearLayout>
         </ScrollView>
@@ -573,59 +609,118 @@
                 android:weightSum="1" >
 
                 <LinearLayout
+                    android:id="@+id/llMail"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".25"
-                    android:gravity="center" >
+                    android:orientation="vertical" >
 
-                    <Button
-                        android:id="@+id/btnMail"
-                        android:layout_width="@dimen/buttonMessageWidth"
-                     android:layout_height="@dimen/buttonMessageHeight"
-                        android:layout_gravity="center"
-                        android:background="@drawable/mail__" />
+                    <View
+                        android:id="@+id/viewSeparatorOrangeFirst"
+                        android:layout_width="match_parent"
+                        android:layout_height="3dp"
+                        android:background="@drawable/divider_orange" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical" >
+
+                        <Button
+                            android:id="@+id/btnMail"
+                            android:layout_width="@dimen/dimenBottomBarIcons"
+                            android:layout_height="@dimen/dimenBottomBarIcons"
+                            android:layout_gravity="center"
+                            android:background="@drawable/mail_unselected" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/llHome"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".25"
-                    android:gravity="center" >
+                    android:orientation="vertical" >
 
-                    <Button
-                        android:id="@+id/btnHome"
-                        android:layout_width="@dimen/dimenBottomBarIcons"
-                        android:layout_height="@dimen/dimenBottomBarIcons"
-                        android:layout_gravity="center"
-                        android:background="@drawable/home" />
+                    <View
+                        android:id="@+id/viewSeparatorOrangeSecond"
+                        android:layout_width="match_parent"
+                        android:layout_height="3dp"
+                        android:background="@drawable/divider_orange"
+                        android:visibility="gone" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical" >
+
+                        <Button
+                            android:id="@+id/btnHome"
+                            android:layout_width="@dimen/dimenBottomBarIcons"
+                            android:layout_height="@dimen/dimenBottomBarIcons"
+                            android:layout_gravity="center"
+                            android:background="@drawable/home_unselected" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/llSchedule"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".25"
-                    android:gravity="center" >
+                    android:orientation="vertical" >
 
-                    <Button
-                        android:id="@+id/btnSchedule"
-                        android:layout_width="@dimen/dimenBottomBarIcons"
-                        android:layout_height="@dimen/dimenBottomBarIcons"
-                        android:layout_gravity="center"
-                        android:background="@drawable/like" />
+                    <View
+                        android:id="@+id/viewSeparatorOrangeThird"
+                        android:layout_width="match_parent"
+                        android:layout_height="3dp"
+                        android:background="@drawable/divider_orange"
+                        android:visibility="gone" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical" >
+
+                        <Button
+                            android:id="@+id/btnSchedule"
+                            android:layout_width="@dimen/dimenBottomBarIcons"
+                            android:layout_height="@dimen/dimenBottomBarIcons"
+                            android:layout_gravity="center"
+                            android:background="@drawable/leads_icon" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/llMenu"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".25"
-                    android:gravity="center" >
+                    android:orientation="vertical" >
 
-                    <Button
-                        android:id="@+id/btnMenu"
-                        android:layout_width="@dimen/dimenBottomBarIcons"
-                        android:layout_height="@dimen/dimenBottomBarIcons"
-                        android:layout_gravity="center"
-                        android:background="@drawable/menu" />
+                    <View
+                        android:id="@+id/viewSeparatorOrangeFourth"
+                        android:layout_width="match_parent"
+                        android:layout_height="3dp"
+                        android:background="@drawable/divider_orange"
+                        android:visibility="gone" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical" >
+
+                        <Button
+                            android:id="@+id/btnMenu"
+                            android:layout_width="@dimen/dimenBottomBarIcons"
+                            android:layout_height="@dimen/dimenBottomBarIcons"
+                            android:layout_gravity="center"
+                            android:background="@drawable/menu_unselected" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

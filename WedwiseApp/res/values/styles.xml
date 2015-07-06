@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <style name="FullscreenTheme" parent="android:Theme.NoTitleBar">
         <item name="android:windowContentOverlay">@null</item>
@@ -10,6 +10,12 @@
     <style name="datepickerstyle" parent="@android:style/Widget.DeviceDefault.DatePicker">
         <item name="android:divider">#cc00cc</item>
         <item name="android:textColor">#cc00cc</item>
+    </style>
+
+    <style name="edittext_style" parent="@android:style/Widget.EditText">
+        <item name="android:textCursorDrawable">@drawable/black_cursor</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:icon">@android:color/transparent</item>
     </style>
 
     <style name="news_title">

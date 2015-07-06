@@ -40,7 +40,7 @@
         android:layout_height="@dimen/menuIconDimension"
         android:layout_gravity="end"
         android:layout_marginRight="@dimen/marginleftBackButton"
-        android:background="@drawable/menu_icon"
+        android:background="@drawable/menu_unselected"
         android:visibility="gone" />
 
 </LinearLayout>

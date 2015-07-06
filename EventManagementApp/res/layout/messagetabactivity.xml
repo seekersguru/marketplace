@@ -8,13 +8,19 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical" >
 
         <include
             android:id="@+id/tool_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             layout="@layout/tool_bar" />
+
+       <View
+            android:id="@+id/viewTopbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/bottomBarDividerHeight"
+            android:background="@drawable/divider_bottom_bar" />
 
         <com.eventmanagementapp.tab.SlidingTabLayout
             android:id="@+id/tabs"
@@ -32,12 +38,12 @@
             android:id="@+id/pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-           
             android:layout_weight="1" >
-        <!--  android:layout_marginBottom="@dimen/bottomBarHeight" -->
+
+            <!-- android:layout_marginBottom="@dimen/bottomBarHeight" -->
         </android.support.v4.view.ViewPager>
     </LinearLayout>
-<!-- 
+    <!--
     <LinearLayout
         android:id="@+id/llBottomBarParent"
         android:layout_width="match_parent"
@@ -116,10 +122,10 @@
                     android:background="@drawable/menu" />
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
- -->
-</RelativeLayout>
-<!--
+    </LinearLayout>
+    -->
+
+</RelativeLayout><!--
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -259,5 +265,5 @@
         </LinearLayout>
     </LinearLayout>
 
-</RelativeLayout>
+</RelativeLayout>
 -->

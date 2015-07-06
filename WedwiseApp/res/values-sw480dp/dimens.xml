@@ -6,7 +6,7 @@
 
     <!--
          Per the design guidelines, navigation drawers should be between 240dp and 320dp:
-         https://developer.android.com/design/patterns/navigation-drawer.html
+         https://developer.android.com/design/patterns/navigation-drawer.html
     -->
     <dimen name="navigation_drawer_width">240dp</dimen>
     <dimen name="toolbar_elevation">4dp</dimen>
@@ -30,7 +30,7 @@
     <dimen name="menuIconDimension">30dp</dimen>
     <dimen name="marginTopToolBar">30dp</dimen>
     <dimen name="marginLeftRightButton">10dp</dimen>
-    <dimen name="buttonheightFbLogin">47dp</dimen>
+    <dimen name="buttonheightFbLogin">50dp</dimen>
     <dimen name="marginTopSocialSiteLoginLayout">25dp</dimen>
     <dimen name="marginTopGoogleLoginButton">20dp</dimen>
     <dimen name="buttonSignUpWidth">130dp</dimen>
@@ -57,8 +57,8 @@
     <!-- Message Tab Activity -->
     <dimen name="buttonMessageWidth">25dp</dimen>
     <dimen name="buttonMessageHeight">20dp</dimen>
-    <dimen name="dimenBottomBarIcons">22dp</dimen>
-      <dimen name="heightMenuIcon">27dp</dimen>
+    <dimen name="dimenBottomBarIcons">30dp</dimen>
+    <dimen name="heightMenuIcon">27dp</dimen>
     <dimen name="bottomBarHeight">50dp</dimen>
     <dimen name="bottomBarDividerHeight">5dp</dimen>
     <dimen name="attachmentIconHeight">18dp</dimen>
@@ -81,7 +81,7 @@
     <dimen name="marginTopCreateButton">10dp</dimen>
     <dimen name="marginTopListView">15dp</dimen>
     <dimen name="heigthCreateButton">50dp</dimen>
-      <dimen name="spinnerTimeWidth">100dp</dimen>
+    <dimen name="spinnerTimeWidth">100dp</dimen>
 
     <!-- bid book crete -->
     <dimen name="editTextWidth">150dp</dimen>
@@ -112,12 +112,15 @@
     <dimen name="dimenCustomactionBarSearchIcom">20dp</dimen>
     <dimen name="widthSearchBar">220dp</dimen>
     <dimen name="heightSearchBar">50dp</dimen>
-
+    <dimen name="marginLeftSearchBar">70dp</dimen>
     <!-- FilterDialog -->
     <dimen name="widthFilterSubmitButton">80dp</dimen>
     <dimen name="heightwidthFilterSubmitButton">40dp</dimen>
 
-     <!-- Facilities Dialog -->
-     <dimen name="marginTopButtonBtnSubmit">30dp</dimen>
-    
+    <!-- Facilities Dialog -->
+    <dimen name="marginTopButtonBtnSubmit">30dp</dimen>
+
+    <!-- Error Dialog -->
+    <dimen name="buttonHeightOk">40dp</dimen>
+
 </resources>

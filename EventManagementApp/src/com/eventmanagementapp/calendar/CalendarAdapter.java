@@ -118,8 +118,8 @@ public class CalendarAdapter extends BaseAdapter {
 		llSelectedDateBorder.setVisibility(View.GONE);
 		rlContainer.setBackgroundColor(Color.parseColor("#ffffff"));
 
-//		CustomFonts.setFontOfTextView(mContext, dayView, "fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfTextView(mContext, tvCount, "fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(mContext, dayView, "fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(mContext, tvCount, "fonts/GothamRnd-Light.otf");
 		dayView.setTextColor(Color.BLACK);
 		tvCount.setText("19");
 		tvCount.setVisibility(View.GONE);
@@ -169,19 +169,23 @@ public class CalendarAdapter extends BaseAdapter {
 		//		}
 		return v;
 	}
-	static int count=1;
+
+	View prev=null;
+
 	public View setSelected(View view) {
 		RelativeLayout rlTemp;
 		rlTemp=(RelativeLayout) view.findViewById(R.id.rlContainer);
-		//MultiSelection
-		if(count==1)
+		if(prev!=null)
 		{
-			rlTemp.setBackgroundColor(Color.parseColor("#F05543"));
-			TextView tv=(TextView)view.findViewById(R.id.rlContainer).findViewById(R.id.tvDate);
-			tv.setTextColor(Color.parseColor("#ffffff"));
-			count++;
+			prev.setBackgroundColor(Color.parseColor("#ffffff"));
+			TextView tv=(TextView)prev.findViewById(R.id.rlContainer).findViewById(R.id.tvDate);
+			tv.setTextColor(Color.parseColor("#000000"));
 		}
-
+		//To Display Selection
+		rlTemp.setBackgroundColor(Color.parseColor("#F05543"));
+		TextView tv=(TextView)view.findViewById(R.id.rlContainer).findViewById(R.id.tvDate);
+		tv.setTextColor(Color.parseColor("#ffffff"));
+		prev=rlTemp;
 		return view;
 	}
 

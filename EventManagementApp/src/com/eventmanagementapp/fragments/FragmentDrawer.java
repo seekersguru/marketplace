@@ -2,10 +2,8 @@ package com.eventmanagementapp.fragments;
 
 
 import java.util.ArrayList;
-import java.util.List;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
@@ -14,7 +12,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.GestureDetector;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -48,21 +45,21 @@ public class FragmentDrawer extends Fragment {
 		ArrayList<ObjectDrawerItem> data = new ArrayList<>();
 		listItems=new ArrayList<>();
 		ObjectDrawerItem item1=new ObjectDrawerItem(R.drawable.weeding_venu_icon, "Wedding Venues");
-		listItems.add(item1);
-		ObjectDrawerItem item2=new ObjectDrawerItem(R.drawable.bridal_fashion_icon, "Bridal Fashion");
-		listItems.add(item2);
-		ObjectDrawerItem item3=new ObjectDrawerItem(R.drawable.photogrphers_icon, "Photographers");
-		listItems.add(item3);
-		ObjectDrawerItem item4=new ObjectDrawerItem(R.drawable.makeup_icon, "Makeup");
-		listItems.add(item4);
-		ObjectDrawerItem item5=new ObjectDrawerItem(R.drawable.caters_icon, "Caterers");
-		listItems.add(item5);
-		ObjectDrawerItem item6=new ObjectDrawerItem(R.drawable.flowers_icon, "Flowers");
-		listItems.add(item6);
-		ObjectDrawerItem item7=new ObjectDrawerItem(R.drawable.discjokey, "Disc jockeys");
-		listItems.add(item7);
-		ObjectDrawerItem item8=new ObjectDrawerItem(R.drawable.invitation_icon, "Invitations");
-		listItems.add(item8);
+//		listItems.add(item1);
+//		ObjectDrawerItem item2=new ObjectDrawerItem(R.drawable.bridal_fashion_icon, "Bridal Fashion");
+//		listItems.add(item2);
+//		ObjectDrawerItem item3=new ObjectDrawerItem(R.drawable.photogrphers_icon, "Photographers");
+//		listItems.add(item3);
+//		ObjectDrawerItem item4=new ObjectDrawerItem(R.drawable.makeup_icon, "Makeup");
+//		listItems.add(item4);
+//		ObjectDrawerItem item5=new ObjectDrawerItem(R.drawable.caters_icon, "Caterers");
+//		listItems.add(item5);
+//		ObjectDrawerItem item6=new ObjectDrawerItem(R.drawable.flowers_icon, "Flowers");
+//		listItems.add(item6);
+//		ObjectDrawerItem item7=new ObjectDrawerItem(R.drawable.discjokey, "Disc jockeys");
+//		listItems.add(item7);
+//		ObjectDrawerItem item8=new ObjectDrawerItem(R.drawable.invitation_icon, "Invitations");
+//		listItems.add(item8);
 
 		//		// preparing navigation drawer items
 		//		for (int i = 0; i < titles.length; i++) {

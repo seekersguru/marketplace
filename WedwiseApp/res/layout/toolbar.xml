@@ -47,7 +47,7 @@
                 android:id="@+id/imViewAttachment"
                 android:layout_width="@dimen/attachmentBlackIconWidth"
                 android:layout_height="@dimen/attachmentBlackIconHeight"
-                android:layout_marginRight="@dimen/marginLeftRightllFields"
+                android:layout_marginRight="@dimen/marginTopBUttonSignIn"
                 android:background="@drawable/attechedment_black"
                 android:visibility="invisible" />
 
@@ -75,7 +75,7 @@
         android:layout_height="@dimen/menuIconDimension"
         android:layout_gravity="end"
         android:layout_marginRight="@dimen/marginleftBackButton"
-        android:background="@drawable/menu_icon"
+        android:background="@drawable/menu_unselected"
         android:visibility="gone" />
 
 </android.support.v7.widget.Toolbar><!--

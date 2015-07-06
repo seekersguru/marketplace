@@ -12,9 +12,6 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.eventmanagementapp.Activities.BidBookDetailsScreenActivity;
-import com.eventmanagementapp.util.CustomFonts;
-
 //import com.google.android.gms.common.ConnectionResult;
 //import com.google.android.gms.common.api.GoogleApiClient;
 //import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
@@ -38,6 +35,7 @@ OnConnectionFailedListener*/ {
 	TextView tvBottomBar,tvToolBar;
 	Toolbar toolbar;
 	Context mContext;
+	public static boolean isLoggedIn=false;
 
 	//	@Override
 	//	public void onWindowFocusChanged(boolean hasFocus) {
@@ -76,10 +74,10 @@ OnConnectionFailedListener*/ {
 		tvToolBar=(TextView)toolbar.findViewById(R.id.tvToolBar);
 		tvToolBar.setText("Log In or Sign Up");
 		btnBack.setVisibility(View.GONE);
-//		CustomFonts.setFontOfButton(mContext, btnSignUp,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfButton(mContext, btnLogin,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfTextView(mContext, tvToolBar,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfTextView(mContext, tvBottomBar,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfButton(mContext, btnSignUp,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfButton(mContext, btnLogin,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(mContext, tvToolBar,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(mContext, tvBottomBar,"fonts/GothamRnd-Light.otf");
 		btnBack.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -156,8 +154,12 @@ OnConnectionFailedListener*/ {
 	}
 
 	@Override
-	protected void onStart() {
-		super.onStart();
+	protected void onResume() {
+		super.onResume();
+		if(isLoggedIn)
+		{
+			finish();
+		}
 	}
 
 	@Override

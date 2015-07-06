@@ -101,15 +101,12 @@
                         android:layout_height="@dimen/viewSeparatorHeight"
                         android:background="#EEECED" />
 
-                    <EditText
-                        android:id="@+id/etBrideName"
+                    <Spinner
+                        android:id="@+id/spVendorType"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/editTextHeight"
                         android:background="#ffffff"
-                        android:hint="Mobile Number"
                         android:paddingLeft="@dimen/paddingLeftEditText"
-                        android:singleLine="true"
-                        android:inputType="phone"
                         android:textColor="#000"
                         android:textSize="@dimen/textSizeMedium" />
 
@@ -119,7 +116,37 @@
                         android:background="#EEECED" />
 
                     <EditText
-                        android:id="@+id/etGroomName"
+                        android:id="@+id/etName"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/editTextHeight"
+                        android:background="#ffffff"
+                        android:hint="Name"
+                        android:inputType="text"
+                        android:paddingLeft="@dimen/paddingLeftEditText"
+                        android:singleLine="true"
+                        android:textColor="#000"
+                        android:textSize="@dimen/textSizeMedium" />
+
+                    <EditText
+                        android:id="@+id/etNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/editTextHeight"
+                        android:background="#ffffff"
+                        android:hint="Mobile Number"
+                        android:inputType="phone"
+                        android:maxLength="11"
+                        android:paddingLeft="@dimen/paddingLeftEditText"
+                        android:singleLine="true"
+                        android:textColor="#000"
+                        android:textSize="@dimen/textSizeMedium" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/viewSeparatorHeight"
+                        android:background="#EEECED" />
+
+                    <EditText
+                        android:id="@+id/etAddress"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/editTextHeight"
                         android:background="#ffffff"
@@ -129,7 +156,7 @@
                         android:textColor="#000"
                         android:textSize="@dimen/textSizeMedium" />
 
-                    <View
+                   <!--  <View
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/viewSeparatorHeight"
                         android:background="#EEECED" />
@@ -143,10 +170,10 @@
                         android:paddingLeft="@dimen/paddingLeftEditText"
                         android:singleLine="true"
                         android:textColor="#000"
-                        android:textSize="@dimen/textSizeMedium" />
-                    
-                    
-                     <!-- <View
+                        android:textSize="@dimen/textSizeMedium" /> -->
+
+                    <!--
+                    <View
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/viewSeparatorHeight"
                         android:background="#EEECED" />
@@ -161,8 +188,8 @@
                         android:paddingLeft="@dimen/paddingLeftEditText"
                         android:singleLine="true"
                         android:textColor="#000"
-                        android:textSize="@dimen/textSizeMedium" /> -->
-                    
+                        android:textSize="@dimen/textSizeMedium" />
+                    -->
 
                     <View
                         android:layout_width="match_parent"
@@ -240,7 +267,7 @@
         android:padding="@dimen/marginLeftRightllFields"
         android:singleLine="false"
         android:textColor="#ffffff"
-        android:textSize="@dimen/textSizeNormal" />
+        android:textSize="@dimen/textSizeNormal" />
     -->
 
 </RelativeLayout>

@@ -1,49 +1,67 @@
 package com.eventmanagementapp;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+
+import org.json.JSONObject;
+
+import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.eventmanagementapp.calendar.CalendarActivity;
-import com.eventmanagementapp.util.CustomFonts;
+import com.eventmanagementapp.common.GlobalCommonMethods;
+import com.eventmanagementapp.common.GlobalCommonValues;
+import com.eventmanagementapp.dialogs.ErrorDialog;
+import com.eventmanagementapp.interfaces.IAction;
+import com.eventmanagementapp.util.PreferenceUtil;
+import com.eventmanagementapp.util.ShowDialog;
 import com.eventmanagementapp.util.SystemBarTintManager;
+
 
 public class RegistrationSignUpActivity extends FragmentActivity implements
 TextWatcher{
 
-	EditText etEmailAddress,etPassword,etBrideName,etGroomName,etArea,etPasswordReset;
+	EditText etEmailAddress,etPassword,etName,etNumber,etAddress,etPasswordReset;
 	Button btnSignIn,btnBack,btnPasswordReset;
 	TextView tvToolBar,tvForgotPassword,tvLogin;//,tvBottomBar;
 	Toolbar toolbar;
 	Context mContext;
 	LinearLayout llFields,llForgotpassword;
+	Spinner spVendorType;
+	String vendorType="Banquets",emailUser,passwordUser,name,mobileNumber,address;
+	boolean isRecentRegistered=false;;
+	String response="",url="";
+	ProgressDialog progress;
+	String emailLogin,passwordLogin;
 
-	//	@Override
-	//	public void onWindowFocusChanged(boolean hasFocus) {
-	//		super.onWindowFocusChanged(hasFocus);
-	//		if (hasFocus) {
-	//			getWindow().getDecorView().setSystemUiVisibility(
-	//					View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-	//					| View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-	//					| View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-	//					| View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-	//					| View.SYSTEM_UI_FLAG_FULLSCREEN
-	//					| View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-	//		}
-	//	}
-
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -51,6 +69,7 @@ TextWatcher{
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.registration);
 		mContext=RegistrationSignUpActivity.this;
+
 		// create our manager instance after the content view is set
 		SystemBarTintManager tintManager = new SystemBarTintManager(this);
 		// enable status bar tint
@@ -66,18 +85,46 @@ TextWatcher{
 		llForgotpassword=(LinearLayout) findViewById(R.id.llForgotpassword);
 		etEmailAddress=(EditText) findViewById(R.id.etEmailAddress);
 		etPassword=(EditText) findViewById(R.id.etPassword);
-		etBrideName=(EditText) findViewById(R.id.etBrideName);
-		etGroomName=(EditText) findViewById(R.id.etGroomName);
-		etArea=(EditText) findViewById(R.id.etArea);
+		etName=(EditText) findViewById(R.id.etName);
+		etNumber=(EditText) findViewById(R.id.etNumber);
+		etAddress=(EditText) findViewById(R.id.etAddress);
 		tvForgotPassword=(TextView) findViewById(R.id.tvForgotPassword);
 		tvLogin=(TextView) findViewById(R.id.tvLogin);
+		spVendorType=(Spinner) findViewById(R.id.spVendorType);
+
+
+		ArrayList<String> spinnerArray = new ArrayList<String>();
+
+		spinnerArray.add("Banquets");
+		spinnerArray.add("Caterers");
+		spinnerArray.add("Photographers");
+		spinnerArray.add("Others");
+
+		@SuppressWarnings("rawtypes")
+		ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(this,
+				android.R.layout.simple_spinner_dropdown_item,
+				spinnerArray);
+		spVendorType.setAdapter(spinnerArrayAdapter);
+		spVendorType.setOnItemSelectedListener(new OnItemSelectedListener() {
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view,
+					int position, long id) {
+				vendorType=String.valueOf(spVendorType.getItemAtPosition(position));				
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+
+			}
+		});
+
 		//		tvBottomBar=(TextView) findViewById(R.id.tvBottomBar);
 		//		tvBottomBar.setText(Html.fromHtml("By signing up,I agree to terms of<br>services,privacy policies,guest policies,<br>and host guarantee terms.").toString());
 		etEmailAddress.setHintTextColor(Color.parseColor("#5C5858"));
 		etPassword.setHintTextColor(Color.parseColor("#5C5858"));
-		etBrideName.setHintTextColor(Color.parseColor("#5C5858"));
-		etGroomName.setHintTextColor(Color.parseColor("#5C5858"));
-		etArea.setHintTextColor(Color.parseColor("#5C5858"));
+		etName.setHintTextColor(Color.parseColor("#5C5858"));
+		etNumber.setHintTextColor(Color.parseColor("#5C5858"));
+		etAddress.setHintTextColor(Color.parseColor("#5C5858"));
 		etPasswordReset=(EditText) findViewById(R.id.etPasswordReset);
 		etPasswordReset.setHintTextColor(Color.parseColor("#5C5858"));
 		btnSignIn=(Button) findViewById(R.id.btnSignIn);
@@ -94,9 +141,10 @@ TextWatcher{
 			llForgotpassword.setVisibility(View.GONE);
 			etEmailAddress.setVisibility(View.VISIBLE);
 			etPassword.setVisibility(View.VISIBLE);
-			etBrideName.setVisibility(View.VISIBLE);
-			etGroomName.setVisibility(View.VISIBLE);
-			etArea.setVisibility(View.VISIBLE);
+			etName.setVisibility(View.VISIBLE);
+			etNumber.setVisibility(View.VISIBLE);
+			etAddress.setVisibility(View.VISIBLE);
+			spVendorType.setVisibility(View.VISIBLE);
 		}
 		else if(getIntent().getExtras().getString("type").equals("login"))
 		{ 
@@ -110,29 +158,30 @@ TextWatcher{
 			llForgotpassword.setVisibility(View.GONE);
 			etEmailAddress.setVisibility(View.VISIBLE);
 			etPassword.setVisibility(View.VISIBLE);
-			etBrideName.setVisibility(View.GONE);
-			etGroomName.setVisibility(View.GONE);
-			etArea.setVisibility(View.GONE);
-			//			etBrideName.setVisibility(View.VISIBLE);
-			//			etGroomName.setVisibility(View.VISIBLE);
-			//			etArea.setVisibility(View.VISIBLE);
+			etName.setVisibility(View.GONE);
+			etNumber.setVisibility(View.GONE);
+			etAddress.setVisibility(View.GONE);
+			spVendorType.setVisibility(View.GONE);
+			//			etName.setVisibility(View.VISIBLE);
+			//			etNumber.setVisibility(View.VISIBLE);
+			//			etAddress.setVisibility(View.VISIBLE);
 		}
-//		CustomFonts.setFontOfEditText(mContext, etEmailAddress,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfEditText(mContext, etPassword,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfEditText(mContext, etBrideName,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfEditText(mContext, etGroomName,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfEditText(mContext, etArea,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfEditText(mContext, etPasswordReset,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfButton(mContext,btnSignIn,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfButton(mContext,btnPasswordReset,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfTextView(mContext,tvLogin,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfTextView(mContext,tvForgotPassword,"fonts/GothamRnd-Light.otf");
-//		CustomFonts.setFontOfTextView(mContext,tvToolBar,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfEditText(mContext, etEmailAddress,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfEditText(mContext, etPassword,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfEditText(mContext, etName,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfEditText(mContext, etNumber,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfEditText(mContext, etAddress,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfEditText(mContext, etPasswordReset,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfButton(mContext,btnSignIn,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfButton(mContext,btnPasswordReset,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(mContext,tvLogin,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(mContext,tvForgotPassword,"fonts/GothamRnd-Light.otf");
+		//		CustomFonts.setFontOfTextView(mContext,tvToolBar,"fonts/GothamRnd-Light.otf");
 		etEmailAddress.addTextChangedListener(this);
 		etPassword.addTextChangedListener(this);
-		etBrideName.addTextChangedListener(this);
-		etGroomName.addTextChangedListener(this);
-		etArea.addTextChangedListener(this);
+		etName.addTextChangedListener(this);
+		etNumber.addTextChangedListener(this);
+		etAddress.addTextChangedListener(this);
 		etPasswordReset.addTextChangedListener(this);
 		btnSignIn.setBackgroundColor(Color.parseColor("#F9B9BA"));
 		btnSignIn.setEnabled(false);
@@ -160,14 +209,14 @@ TextWatcher{
 			public void onClick(View v) {
 				if(btnSignIn.getText().toString().equalsIgnoreCase("Log In"))
 				{
-
+					isRecentRegistered=false;
+					checkInternetConnection("login");
 				}
-				else if(btnSignIn.getText().toString().equalsIgnoreCase("Sign In"))
+				else if(btnSignIn.getText().toString().equalsIgnoreCase("Sign Up"))
 				{
-
+					isRecentRegistered=false;
+					checkInternetConnection("registration");
 				}
-				startActivity(new Intent(RegistrationSignUpActivity.this,CalendarActivity.class));
-				overridePendingTransition(R.anim.right_in, R.anim.left_out);
 			}
 		});
 		tvForgotPassword.setOnClickListener(new OnClickListener() {
@@ -187,6 +236,7 @@ TextWatcher{
 				if(tvLogin.getText().toString().equalsIgnoreCase("Login"))
 				{//In Case Of Login Screen
 					tvForgotPassword.setVisibility(View.VISIBLE);
+					spVendorType.setVisibility(View.GONE);
 					tvForgotPassword.setText("Forgot Password?");
 					tvLogin.setText("Sign Up");
 					tvToolBar.setText("Log In with Email");
@@ -195,21 +245,22 @@ TextWatcher{
 					btnSignIn.setEnabled(false);
 					etEmailAddress.setText("");
 					etPassword.setText("");
-					etBrideName.setText("");
-					etGroomName.setText("");
-					etArea.setText("");
+					etName.setText("");
+					etNumber.setText("");
+					etAddress.setText("");
 
 					etEmailAddress.setVisibility(View.VISIBLE);
 					etPassword.setVisibility(View.VISIBLE);
-					etBrideName.setVisibility(View.GONE);
-					etGroomName.setVisibility(View.GONE);
-					etArea.setVisibility(View.GONE);
+					etName.setVisibility(View.GONE);
+					etNumber.setVisibility(View.GONE);
+					etAddress.setVisibility(View.GONE);
 					btnSignIn.setBackgroundColor(Color.parseColor("#F9B9BA"));
 					etEmailAddress.requestFocus();
 				}
 				else if(tvLogin.getText().toString().equalsIgnoreCase("Sign Up")){
 					//In Case Of Sign Up Screen
 					tvForgotPassword.setVisibility(View.GONE);
+					spVendorType.setVisibility(View.VISIBLE);
 					tvLogin.setText("Login");
 					tvToolBar.setText("Sign Up with Email");
 					//					llSignupFields.setVisibility(View.VISIBLE);
@@ -217,19 +268,255 @@ TextWatcher{
 					btnSignIn.setEnabled(false);
 					etEmailAddress.setVisibility(View.VISIBLE);
 					etPassword.setVisibility(View.VISIBLE);
-					etBrideName.setVisibility(View.VISIBLE);
-					etGroomName.setVisibility(View.VISIBLE);
-					etArea.setVisibility(View.VISIBLE);
+					etName.setVisibility(View.VISIBLE);
+					etNumber.setVisibility(View.VISIBLE);
+					etAddress.setVisibility(View.VISIBLE);
 					etEmailAddress.setText("");
 					etPassword.setText("");
-					etBrideName.setText("");
-					etGroomName.setText("");
-					etArea.setText("");
+					etName.setText("");
+					etNumber.setText("");
+					etAddress.setText("");
 					btnSignIn.setBackgroundColor(Color.parseColor("#F9B9BA"));
 					etEmailAddress.requestFocus();
 				}
 			}
 		});
+	}
+
+	private void checkInternetConnection(String serviceType)
+	{
+		if(GlobalCommonMethods.isNetworkAvailable(mContext))
+		{
+			if(serviceType.equalsIgnoreCase("registration"))
+			{
+				url=GlobalCommonValues.USERREGISTRATION;
+				new HttpAsyncTask().execute(url);
+			}
+			if(serviceType.equalsIgnoreCase("login"))
+			{
+				url=GlobalCommonValues.LOGIN;
+				new HttpAsyncTask().execute(url);
+			}
+		}
+		else{
+			ShowDialog.displayDialog(mContext,"Connection error:","No Internet Connection");
+		}
+	}
+
+	private class HttpAsyncTask extends AsyncTask<String, Void, Void> {
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			if(progress==null)
+			{
+				progress=new ProgressDialog(mContext);
+				progress.show();		
+			}
+		}
+
+		@Override
+		protected Void doInBackground(String... params) {
+			try {
+				// Calling method for setting to be sent to the server
+				SetData();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+		// onPostExecute displays the results of the AsyncTask.
+		@SuppressLint("DefaultLocale")
+		@Override
+		protected void onPostExecute(Void result) {
+			//			Toast.makeText(getBaseContext(), "Data Sent!"+response, Toast.LENGTH_LONG).show();
+			if(progress!=null && progress.isShowing())
+			{
+				progress.dismiss();
+				progress=null;
+			}
+
+			if(!TextUtils.isEmpty(response) && GlobalCommonMethods.isJSONValid(response))
+			{
+				if(url.equals(GlobalCommonValues.USERREGISTRATION))
+				{
+					try {
+						JSONObject jsonObj = new JSONObject(response);
+						//JSONObject jsonMainNode = jsonObj.getJSONObject("request_data");
+						JSONObject request_data = jsonObj.getJSONObject("request_data");
+						String contact_number = request_data.getString("contact_number");
+						String password = request_data.getString("password");
+						String name = request_data.getString("name");
+						String email = request_data.getString("email");
+						String address = request_data.getString("address");
+						String _result = jsonObj.getString("result");
+						String message = jsonObj.getString("message");
+						if(message.equals("0"))
+							message="Registered Successfully";
+						if(!message.toLowerCase().equalsIgnoreCase("registered successfully"))
+						{
+							isRecentRegistered=false;
+							ErrorDialog dialog=new ErrorDialog();
+							dialog.newInstance(mContext, _result.toUpperCase(), message, iActionObj);
+							dialog.setCancelable(false);
+							dialog.show(getFragmentManager(), "test");
+						}
+						else if(message.toLowerCase().equalsIgnoreCase("registered successfully"))
+						{
+							PreferenceUtil.getInstance().setRegister(true);
+							String vendor_type = request_data.getString("vendor_type");
+							PreferenceUtil.getInstance().setVendorType(vendor_type);
+							isRecentRegistered=true;
+							emailLogin=email;
+							passwordLogin=password;
+							checkInternetConnection("login");
+						}
+					} catch (Exception e) {
+						e.getMessage();
+					}
+				}
+				else if(url.equals(GlobalCommonValues.LOGIN))
+				{
+					try {
+						JSONObject jsonObj = new JSONObject(response);
+						String _result = jsonObj.getString("result");
+						String message = jsonObj.getString("message");
+						if(message.equals("0"))
+							message="Logged In Successfully";
+						ErrorDialog dialog=new ErrorDialog();
+						dialog.newInstance(mContext, _result.toUpperCase(), message, iActionObj);
+						dialog.setCancelable(false);
+						dialog.show(getFragmentManager(), "test");
+						if(message.toLowerCase().contains("logged in successfully"))
+						{
+							PreferenceUtil.getInstance().setLogin(true);
+						}
+					} catch (Exception e) {
+						e.getMessage();
+					}
+				}
+			}
+		}
+	}
+
+	IAction iActionObj = new IAction() {
+
+		@Override
+		public void setAction(String action) {
+			if(action.equals("dismiss"))
+			{
+			}
+			else if(action.equals("navigate"))
+			{
+				PreferenceUtil.getInstance().setRegister(true);
+				Intent intent = new Intent(mContext, CalendarActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+				startActivity(intent);
+				LoginSignUpActivity.isLoggedIn=true;
+				overridePendingTransition(R.anim.right_in, R.anim.left_out);
+				finish();
+			}
+		}
+	};
+
+	// Create GetData Metod
+	public  void  SetData()  throws  UnsupportedEncodingException
+	{
+		// Create data variable for sent values to server  
+		String data="";
+		if(url.equals(GlobalCommonValues.USERREGISTRATION))
+		{
+			emailUser=etEmailAddress.getText().toString();
+			passwordUser=etPassword.getText().toString();
+			mobileNumber=etNumber.getText().toString();
+			name=etName.getText().toString();
+			address=etEmailAddress.getText().toString();
+
+			data= URLEncoder.encode("email", "UTF-8") 
+					+ "=" + URLEncoder.encode(emailUser, "UTF-8"); 
+
+			data += "&" + URLEncoder.encode("password", "UTF-8") + "="
+					+ URLEncoder.encode(passwordUser, "UTF-8"); 
+
+			data += "&" + URLEncoder.encode("vendor_type", "UTF-8") + "="
+					+ URLEncoder.encode(vendorType, "UTF-8"); 
+
+			data += "&" + URLEncoder.encode("name", "UTF-8") 
+					+ "=" + URLEncoder.encode(name, "UTF-8");
+
+			data += "&" + URLEncoder.encode("contact_number", "UTF-8") 
+					+ "=" + URLEncoder.encode(mobileNumber, "UTF-8");
+
+			data += "&" + URLEncoder.encode("address", "UTF-8") 
+					+ "=" + URLEncoder.encode(address, "UTF-8");
+		}
+		else if(url.equals(GlobalCommonValues.LOGIN)){
+			if(!isRecentRegistered)
+			{
+				emailUser=etEmailAddress.getText().toString();
+				passwordUser=etPassword.getText().toString();
+
+				data = URLEncoder.encode("email", "UTF-8") 
+						+ "=" + URLEncoder.encode(emailUser, "UTF-8"); 
+
+				data += "&" + URLEncoder.encode("password", "UTF-8") + "="
+						+ URLEncoder.encode(passwordUser, "UTF-8"); 
+			}
+			else if(isRecentRegistered)
+			{
+				data = URLEncoder.encode("email", "UTF-8") 
+						+ "=" + URLEncoder.encode(emailLogin, "UTF-8"); 
+
+				data += "&" + URLEncoder.encode("password", "UTF-8") + "="
+						+ URLEncoder.encode(passwordLogin, "UTF-8");
+			}
+		}
+		BufferedReader reader=null;
+
+		// Send data 
+		try
+		{ 
+			URL _url=null;
+			// Defined URL  where to send data
+			if(url.equals(GlobalCommonValues.USERREGISTRATION))
+			{
+				_url= new URL(GlobalCommonValues.USERREGISTRATION);
+			}
+			else if(url.equals(GlobalCommonValues.LOGIN))
+			{
+				_url= new URL(GlobalCommonValues.LOGIN);
+			}
+			// Send POST data request
+
+			URLConnection conn = _url.openConnection(); 
+			conn.setDoOutput(true); 
+			OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream()); 
+			wr.write( data ); 
+			wr.flush(); 
+
+			// Get the server response 
+			reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			StringBuilder sb = new StringBuilder();
+			String line = null;
+
+			// Read Server Response
+			while((line = reader.readLine()) != null)
+			{
+				// Append server response in string
+				sb.append(line + "\n");
+			}
+			response = sb.toString();
+		}
+		catch(Exception ex)
+		{
+		}
+		finally
+		{
+			try
+			{
+				reader.close();
+			}
+			catch(Exception ex) {}
+		}
 	}
 
 	@Override
@@ -276,12 +563,12 @@ TextWatcher{
 			}
 			else if(btnSignIn.getText().toString().equalsIgnoreCase("Sign Up"))
 			{
-				if(etEmailAddress.getText().toString().trim().equals("") || etPassword.getText().toString().trim().equals("") || etBrideName.getText().toString().trim().equals("") || etGroomName.getText().toString().trim().equals("") || etArea.getText().toString().trim().equals(""))
+				if(etEmailAddress.getText().toString().trim().equals("") || etPassword.getText().toString().trim().equals("") || etName.getText().toString().trim().equals("") || etNumber.getText().toString().trim().equals("") || etAddress.getText().toString().trim().equals(""))
 				{
 					btnSignIn.setEnabled(false);
 					btnSignIn.setBackgroundColor(Color.parseColor("#F9B9BA"));
 				}
-				else if(!etEmailAddress.getText().toString().trim().equals("") && !etPassword.getText().toString().trim().equals("") && !etBrideName.getText().toString().trim().equals("") && !etGroomName.getText().toString().trim().equals("") && !etArea.getText().toString().trim().equals(""))
+				else if(!etEmailAddress.getText().toString().trim().equals("") && !etPassword.getText().toString().trim().equals("") && !etName.getText().toString().trim().equals("") && !etNumber.getText().toString().trim().equals("") && !etAddress.getText().toString().trim().equals(""))
 				{
 					btnSignIn.setEnabled(true);
 					btnSignIn.setBackgroundColor(Color.parseColor("#E4484B"));

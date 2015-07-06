@@ -2,26 +2,24 @@ package com.eventmanagementapp.Activities;
 
 import java.util.ArrayList;
 
-import com.eventmanagementapp.R;
-import com.eventmanagementapp.adapter.ChatAdapter;
-import com.eventmanagementapp.util.CustomFonts;
-
-import android.app.ActionBar;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.eventmanagementapp.R;
+import com.eventmanagementapp.adapter.ChatAdapter;
+import com.eventmanagementapp.util.CustomFonts;
 
 public class MessageChatActivity extends FragmentActivity{
 

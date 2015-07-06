@@ -136,7 +136,7 @@
         android:layout_height="2dp"
         android:background="#9c9c9c" />
 
-    <LinearLayout
+   <!--  <LinearLayout
         android:id="@+id/llFieldsSecond"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -194,7 +194,7 @@
         android:background="#000" />
 
     <LinearLayout
-        android:id="@+id/llFieldsSecond"
+        android:id="@+id/llFieldsThird"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/marginTopCreateButton"
@@ -251,7 +251,7 @@
         android:background="#000" />
 
     <LinearLayout
-        android:id="@+id/llFieldsSecond"
+        android:id="@+id/llFieldsFourth"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/marginTopCreateButton"
@@ -305,7 +305,7 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_marginTop="@dimen/paddingLeftEditText"
-        android:background="#000" />
+        android:background="#000" /> -->
 
    <!--  <LinearLayout
         android:id="@+id/llFieldsSecond"
@@ -371,8 +371,7 @@
         android:layout_marginTop="@dimen/marginTopListView"
         android:cacheColorHint="@android:color/transparent"
         android:divider="#f1f1f1"
-        android:dividerHeight="1dp"
-        android:visibility="gone" >
+        android:dividerHeight="2dp" >
     </ListView>
 
 </LinearLayout>

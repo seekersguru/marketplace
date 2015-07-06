@@ -3,22 +3,23 @@ package com.wedwiseapp;
 import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SearchView.OnCloseListener;
+import android.widget.TextView;
 
 import com.wedwise.adapter.FavAdapter;
 import com.wedwise.adapter.SpinnerAdapter;
@@ -31,44 +32,47 @@ public class FavListActivity extends FragmentActivity {
 	Button btnBack,btnMenu,btnSearch;//,btnSpinnerOpen;
 	ArrayList<FavData> data;
 	SearchView searchView;
-//	Spinner spSwitchCategory;
+	//	Spinner spSwitchCategory;
 	ArrayList<String> listCategory;
 	SpinnerAdapter  adapterSpinner;
 	ImageView imViewCategoryType;
+	View viewTopbar;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mContext = FavListActivity.this;
-		//		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.favorite);
 
 		idInitialization();
 	}
 
 	private void idInitialization() {
-//		spSwitchCategory=(Spinner) findViewById(R.id.spSwitchCategory);
+		//		spSwitchCategory=(Spinner) findViewById(R.id.spSwitchCategory);
 		favList = (ListView) findViewById(R.id.favList);
 		listCategory=new ArrayList<String>();
 		data=new ArrayList<FavData>();
 		adapterSubList = new FavAdapter(mContext,data);
 		favList.setAdapter(adapterSubList);
 
-		ActionBar actionBar = getActionBar();
+		/*ActionBar actionBar = getActionBar();
 		actionBar.setDisplayShowHomeEnabled(false);
 		actionBar.setDisplayShowTitleEnabled(false);
 		LayoutInflater mInflater = LayoutInflater.from(this);
 
 		View mCustomView = mInflater.inflate(R.layout.customactionbarview, null);
-		actionBar.setCustomView(mCustomView);
-		btnBack=(Button) mCustomView.findViewById(R.id.btnBack);
-		searchView=(SearchView) mCustomView.findViewById(R.id.searchView);
-		btnSearch=(Button) mCustomView.findViewById(R.id.btnSeacrh);
-		imViewCategoryType=(ImageView) mCustomView.findViewById(R.id.imViewCategoryType);
-//		btnSpinnerOpen=(Button) findViewById(R.id.btnSpinnerOpen);
+		actionBar.setCustomView(mCustomView);*/
+		btnBack=(Button) findViewById(R.id.btnBack);
+		viewTopbar=findViewById(R.id.viewTopbar);
+		viewTopbar.setVisibility(View.GONE);
+		searchView=(SearchView) findViewById(R.id.searchView);
+		btnSearch=(Button) findViewById(R.id.btnSeacrh);
+		imViewCategoryType=(ImageView) findViewById(R.id.imViewCategoryType);
+		//		btnSpinnerOpen=(Button) findViewById(R.id.btnSpinnerOpen);
 		btnSearch.setVisibility(View.VISIBLE);
 		imViewCategoryType.setVisibility(View.VISIBLE);
-		actionBar.setDisplayShowCustomEnabled(true);
+		//		actionBar.setDisplayShowCustomEnabled(true);
 
 		listCategory.add("BANQUITE");
 		listCategory.add("PHOTOGRAPHY");
@@ -79,7 +83,7 @@ public class FavListActivity extends FragmentActivity {
 		//		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
 		//				android.R.layout.simple_spinner_item, listCategory);
 		//		dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-//		spSwitchCategory.setAdapter(adapterSpinner);
+		//		spSwitchCategory.setAdapter(adapterSpinner);
 		/*btnSpinnerOpen.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -97,23 +101,37 @@ public class FavListActivity extends FragmentActivity {
 				searchView.setBackgroundColor(Color.TRANSPARENT);
 				searchView.requestFocus();
 				int searchPlateId = searchView.getContext().getResources().getIdentifier("android:id/search_plate", null, null);
-				searchView.findViewById(searchPlateId).setBackgroundColor(Color.parseColor("#d3d3d3"));
+				//				searchView.findViewById(searchPlateId).setBackgroundColor(Color.parseColor("#00000000"));
+				View searchPlateView=searchView.findViewById(searchPlateId);
+				if(searchPlateView!=null)
+				{
+					searchPlateView.setBackgroundColor(Color.WHITE);
+				}
+				try {
+					int id=searchView.getContext().getResources().getIdentifier("android:id/search_src_text",null,null);
+					TextView tv=(TextView) searchView.findViewById(id);
+					EditText et=(EditText) searchView.findViewById(id);
+					et.setHint("Search Here");
+					tv.setTextColor(Color.parseColor("#F05543"));
+				} catch (Exception e) {
+					e.getMessage();
+				}
 				searchView.performClick();
 			}
 		});
 
-//		spSwitchCategory.setOnItemSelectedListener(new OnItemSelectedListener() {
-//
-//			@Override
-//			public void onItemSelected(AdapterView<?> parent, View view,
-//					int position, long id) {
-//
-//			}
-//
-//			@Override
-//			public void onNothingSelected(AdapterView<?> parent) {
-//			}
-//		});
+		//		spSwitchCategory.setOnItemSelectedListener(new OnItemSelectedListener() {
+		//
+		//			@Override
+		//			public void onItemSelected(AdapterView<?> parent, View view,
+		//					int position, long id) {
+		//
+		//			}
+		//
+		//			@Override
+		//			public void onNothingSelected(AdapterView<?> parent) {
+		//			}
+		//		});
 		searchView.setOnCloseListener(new OnCloseListener() {
 
 			@Override

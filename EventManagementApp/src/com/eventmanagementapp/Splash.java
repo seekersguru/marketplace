@@ -1,5 +1,6 @@
 package com.eventmanagementapp;
 
+import com.eventmanagementapp.calendar.CalendarActivity;
 import com.eventmanagementapp.util.PreferenceUtil;
 
 import android.app.Activity;
@@ -14,7 +15,7 @@ public class Splash extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE); 
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_splash);
 		PreferenceUtil.init(this);
 
@@ -38,9 +39,8 @@ public class Splash extends Activity {
 			handler.postDelayed(new Runnable() {
 				@Override
 				public void run() {
-					//					Intent intent = new Intent(context, RegisterActivity.class);
-					//					intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-					//					startActivity(intent);
+					startActivity(new Intent(Splash.this,CalendarActivity.class));
+					overridePendingTransition(R.anim.right_in, R.anim.left_out);
 					finish();
 				}
 			}, 2000);
