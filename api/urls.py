@@ -1,6 +1,7 @@
 from django.conf.urls import url
 from collections import OrderedDict
 from utils import ALLOWED_ANDRIOD_IMAGE_TYPE,ALLOWED_IOS_IMAGE_TYPE
+from wedwise_messages.models import FROM_TO_CHOICES
 urlpatterns = [
 	## Home page for apis 
     url(r'^$','api.views.index', name='api_index'),
@@ -95,8 +96,9 @@ patterns = {##"customer_login_registration",
 			{
 				"order":-11,
 				"type":"POST",
-	 			"params":["identifier","vendor_email","message"],
-	 			"required_params":["identifier","vendor_email","message"]
+	 			"params":["identifier","receiver_email","message","from_to"],
+	 			"required_params":["identifier","receiver_email","message","from_to"],
+	 			"selects":{"from_to": FROM_TO_CHOICES }
 		 	},
 		"customer_message_detail":
 			{

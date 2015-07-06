@@ -18,40 +18,53 @@ class Messages(models.Model):
     def create(cls,
                request, 
                ):
-        vendor_email = request.POST.get('vendor_email').strip().lower()
+        receiver_email = request.POST.get('receiver_email').strip().lower()
         identifier = request.POST.get('identifier')
         message = request.POST.get('message')
-        from_to="c2v"
-     
-
+        from_to=request.POST.get('from_to')
         f = forms.EmailField()
-        
         try:
-            f.clean(vendor_email)
+            f.clean(receiver_email)
         except ValidationError:
-            return ge("POST",req_dict(request.POST),"Invalid vendor email", error_fields=['vendor_email']) 
+            return ge("POST",req_dict(request.POST),"Invalid vendor email", error_fields=['receiver_email']) 
  
-        customer = Customer.objects.filter(identifier=identifier)
-        if not customer:
-            return ge("POST",req_dict(request.POST),"Customer unauthorized", error_fields=['identifier'],
-                      code_string="CUSTOMER_NOT_EXIST")
-        else:
-            customer=customer[0] 
+        if from_to =="c2v":
+            sender = Customer.objects.filter(identifier=identifier)
+        elif from_to=="v2c":
+            sender = Vendor.objects.filter(identifier=identifier)
             
-        user = User.objects.filter(email=vendor_email)
+        if not sender:
+            return ge("POST",req_dict(request.POST),"Sender unauthorized", error_fields=['identifier'],
+                      code_string="SENDER_NOT_EXIST")
+        else:
+            sender=sender[0] 
+
+
+            
+        user = User.objects.filter(email=receiver_email)
         if not user:
-            return ge("POST",req_dict(request.POST),"Vendor unauthorized", error_fields=['vendor_email'],
-                      code_string="VENDOR_NOT_EXIST")
+            return ge("POST",req_dict(request.POST),"Receiver unauthorized", error_fields=['receiver_email'],
+                      code_string="RECEIVER_NOT_EXIST")
         else:
             user=user[0]
-        
-        vendor = Vendor.objects.filter(user=user)
-        if not vendor:
-            return ge("POST",req_dict(request.POST),"Vendor unauthorized", error_fields=['vendor_email'],
-                      code_string="VENDOR_NOT_EXIST")
+        if from_to=="c2v":
+            receiver = Vendor.objects.filter(user=user)
         else:
-            vendor=vendor[0]            
+            receiver = Customer.objects.filter(user=user)
+        if not receiver:
+            return ge("POST",req_dict(request.POST),"Receiver unauthorized", error_fields=['receiver_email'],
+                      code_string="RECEIVER_NOT_EXIST")
+        else:
+            receiver=receiver[0]            
         
+        if from_to=="c2v":
+            vendor=receiver
+            customer=sender
+            
+        else:
+            vendor=sender
+            customer=receiver
+            
         
         msg= Messages(
                vendor=vendor,
@@ -60,10 +73,14 @@ class Messages(models.Model):
                 message =message
                 )
         msg.save()
+        if from_to=="c2v":
+            receiver_name=msg.vendor.name
+        elif from_to=="v2c":
+            receiver_name=msg.customer.groom_name + " weds " + msg.customer.bride_name 
         return gs("POST",req_dict(request.POST),{"id":msg.id,
                                                  "message":msg.message,
-                                                 "vendor_email":vendor_email,
-                                                  "vendor_name":msg.vendor.name,
+                                                 "receiver_email":receiver_email,
+                                                  "vendor_name":receiver_name,
                                                  "identifier":identifier,
                                                  "msg_time":str(msg.msg_time)
                                                  })
