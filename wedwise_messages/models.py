@@ -90,78 +90,124 @@ class Messages(models.Model):
     def details(cls,
                request, 
                ):
-        vendor_email = request.POST.get('vendor_email').strip().lower()
+        receiver_email = request.POST.get('receiver_email').strip().lower()
+        from_to = request.POST.get('from_to').strip().lower()
         identifier = request.POST.get('identifier')
         f = forms.EmailField()
         try:
-            f.clean(vendor_email)
+            f.clean(receiver_email)
         except ValidationError:
-            return ge("POST",req_dict(request.POST),"Invalid vendor email", error_fields=['vendor_email']) 
+            return ge("POST",req_dict(request.POST),"Invalid receiver email", error_fields=['receiver_email']) 
  
-        customer = Customer.objects.filter(identifier=identifier)
-        if not customer:
-            return ge("POST",req_dict(request.POST),"Customer unauthorized", error_fields=['identifier'],
-                      code_string="CUSTOMER_NOT_EXIST")
-        else:
-            customer=customer[0] 
+        if from_to=="c2v":
+            sender = Customer.objects.filter(identifier=identifier)
+        elif from_to=="v2c":
+            sender = Vendor.objects.filter(identifier=identifier)  
             
-        user = User.objects.filter(email=vendor_email)
+            
+            
+            
+        if not sender:
+            return ge("POST",req_dict(request.POST),"sender unauthorized", error_fields=['identifier'],
+                      code_string="SENDER_NOT_EXIST")
+        else:
+            sender=sender[0] 
+            
+        user = User.objects.filter(email=receiver_email)
         if not user:
-            return ge("POST",req_dict(request.POST),"Vendor unauthorized", error_fields=['vendor_email'],
-                      code_string="VENDOR_NOT_EXIST")
+            return ge("POST",req_dict(request.POST),"Receiver unauthorized", error_fields=['receiver_email'],
+                      code_string="RECEIVER_NOT_EXIST")
         else:
             user=user[0]
         
-        vendor = Vendor.objects.filter(user=user)
-        if not vendor:
-            return ge("POST",req_dict(request.POST),"Vendor unauthorized", error_fields=['vendor_email'],
-                      code_string="VENDOR_NOT_EXIST")
+        if from_to=="c2v":
+            receiver = Vendor.objects.filter(user=user)
+            vendor = receiver
+        elif from_to=="v2c":
+            receiver = Customer.objects.filter(user=user)
+            customer=receiver
+        if not receiver:
+            return ge("POST",req_dict(request.POST),"Receiver unauthorized", error_fields=['receiver_email'],
+                      code_string="RECEIVERNOT_EXIST")
         else:
-            vendor=vendor[0]            
+            receiver=receiver[0]            
         
         
         msgs= Messages.objects.filter(
                vendor=vendor,
                 customer=customer,
                 ).order_by('msg_time')
-        return gs("POST",req_dict(request.POST),[{"id":msg.id,
-                                                 "message":msg.message,
-                                                 "vendor_email":msg.vendor.user.email,
-                                                  "vendor_name":msg.vendor.name,
-                                                 "identifier":msg.customer.identifier,
-                                                 "msg_time":str(msg.msg_time)[:19],
-                                                 "from_to":msg.from_to
-                                                } for msg in msgs])    
-
+                
+        if from_to=="c2v":       
+            return gs("POST",req_dict(request.POST),[{"id":msg.id,
+                                                     "message":msg.message,
+                                                     "receiver_email":msg.vendor.user.email,
+                                                      "vendor_name":msg.vendor.name,
+                                                     "identifier":identifier,
+                                                     "msg_time":str(msg.msg_time)[:19],
+                                                     "from_to":msg.from_to
+                                                    } for msg in msgs]) 
+        elif from_to=="v2c": 
+            return gs("POST",req_dict(request.POST),[{"id":msg.id,
+                                                     "message":msg.message,
+                                                     "receiver_email":msg.customer.user.email,
+                                                      "vendor_name":msg.customer.bride_name + " vs " + msg.customer.groom_name ,
+                                                     "identifier":identifier,
+                                                     "msg_time":str(msg.msg_time)[:19],
+                                                     "from_to":msg.from_to
+                                                    } for msg in msgs])
 
     @classmethod
     def listing(cls,
                request, 
                ):
         identifier = request.POST.get('identifier')
-        customer = Customer.objects.filter(identifier=identifier)
-        if not customer:
-            return ge("POST",req_dict(request.POST),"Customer unauthorized", error_fields=['identifier'],
-                      code_string="CUSTOMER_NOT_EXIST")
-        else:
-            customer=customer[0] 
+        from_to=request.POST.get('from_to')
+        if from_to=="c2v":
+            sender = Customer.objects.filter(identifier=identifier)
+        elif from_to=="v2c":
+            sender = Vendor.objects.filter(identifier=identifier)
             
-        all_msgs= Messages.objects.filter(
-                customer=customer,
-                ).order_by('-msg_time')
+        
+        if not sender:
+            return ge("POST",req_dict(request.POST),"Sender unauthorized", error_fields=['identifier'],
+                      code_string="SENDER_NOT_EXIST")
+        else:
+            sender=sender[0] 
+            
+        if from_to=="c2v":
+            all_msgs= Messages.objects.filter(
+                    customer=sender,
+                    ).order_by('-msg_time')
+        elif from_to=="c2v":
+            all_msgs= Messages.objects.filter(
+                    vendor=sender,
+                    ).order_by('-msg_time')            
+        
+        
         msgs=[]
         listed=[]# Which vendor id indexed at which positions
         for msg in all_msgs:
-            if msg.vendor.id not in listed:
-                listed.append(msg.vendor.id)
-                msgs.append({"id":msg.id, "message":msg.message,
-                                                 "vendor_email":msg.vendor.user.email,
-                                                 "vendor_name":msg.vendor.name,
-                                                 "identifier":msg.customer.identifier,
-                                                 "msg_time":str(msg.msg_time)[:19] ,
-                                                 "from_to":msg.from_to
-                                                 })
-                
+            if from_to=="c2v":
+                if msg.vendor.id not in listed:
+                    listed.append(msg.vendor.id)
+                    msgs.append({"id":msg.id, "message":msg.message,
+                                                     "receiver_email":msg.vendor.user.email,
+                                                     "receiver_name":msg.vendor.name,
+                                                     "identifier":msg.customer.identifier,
+                                                     "msg_time":str(msg.msg_time)[:19] ,
+                                                     "from_to":msg.from_to
+                                                     })
+            if from_to=="v2c":
+                if msg.customer.id not in listed:
+                    listed.append(msg.customer.id)
+                    msgs.append({"id":msg.id, "message":msg.message,
+                                                     "receiver_email":msg.customer.user.email,
+                                                     "receiver_name":msg.customer.groom_name + " vs "+msg.customer.bride_name ,
+                                                     "identifier":msg.customer.identifier,
+                                                     "msg_time":str(msg.msg_time)[:19] ,
+                                                     "from_to":msg.from_to
+                                                     })                
 
         
 

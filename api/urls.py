@@ -104,8 +104,8 @@ patterns = {##"customer_login_registration",
 			{
 				"order":-10,
 				"type":"POST",
-	 			"params":["identifier","vendor_email","page_no","from_to"],
-	 			"required_params":["identifier","vendor_email","from_to"],
+	 			"params":["identifier","receiver_email","page_no","from_to"],
+	 			"required_params":["identifier","receiver_email","from_to"],
 	 			"selects":{"from_to": FROM_TO_CHOICES }
 		 	},
 	
