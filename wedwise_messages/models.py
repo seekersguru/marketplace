@@ -112,7 +112,8 @@ class Messages(models.Model):
                                                  "vendor_email":msg.vendor.user.email,
                                                   "vendor_name":msg.vendor.name,
                                                  "identifier":msg.customer.identifier,
-                                                 "msg_time":str(msg.msg_time)
+                                                 "msg_time":str(msg.msg_time),
+                                                 "from_to":msg.from_to
                                                 } for msg in msgs])    
 
 
