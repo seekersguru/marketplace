@@ -100,24 +100,24 @@ def customer_vendor_detail(request):
 
 ########## customer_messages_bid_book_schedule
 @csrf_exempt
-def customer_message_create(request):
+def customer_vendor_message_create(request):
     #TODO Put all in decorators  with csrf 
-    invalid=check_basic_validations("customer_message_create",request,"POST")
+    invalid=check_basic_validations("customer_vendor_message_create",request,"POST")
     if invalid:return response(request,invalid) 
 
     return response(request,Messages.create(request))
 @csrf_exempt
-def customer_message_detail(request):
+def customer_vendor_message_detail(request):
     #TODO Put all in decorators  with csrf 
-    invalid=check_basic_validations("customer_message_detail",request,"POST")
+    invalid=check_basic_validations("customer_vendor_message_detail",request,"POST")
     if invalid:return response(request,invalid) 
 
     return response(request,Messages.details(request))
 
 @csrf_exempt
-def customer_message_list(request):
+def customer_vendor_message_list(request):
     #TODO Put all in decorators  with csrf 
-    invalid=check_basic_validations("customer_message_list",request,"POST")
+    invalid=check_basic_validations("customer_vendor_message_list",request,"POST")
     if invalid:return response(request,invalid) 
 
     return response(request,Messages.listing(request))

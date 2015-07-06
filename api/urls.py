@@ -104,8 +104,9 @@ patterns = {##"customer_login_registration",
 			{
 				"order":-10,
 				"type":"POST",
-	 			"params":["identifier","vendor_email","page_no"],
-	 			"required_params":["identifier","vendor_email"],
+	 			"params":["identifier","vendor_email","page_no","from_to"],
+	 			"required_params":["identifier","vendor_email","from_to"],
+	 			"selects":{"from_to": FROM_TO_CHOICES }
 		 	},
 	
 		##"customer_messages_bid_book_schedule",
@@ -113,8 +114,9 @@ patterns = {##"customer_login_registration",
 			{
 				"order":-9,
 				"type":"POST",
-	 			"params":["identifier","page_no"],#["identifier"]
-	 			"required_params":["identifier",]
+	 			"params":["identifier","page_no","from_to"],#["identifier"]
+	 			"required_params":["identifier","from_to"],
+	 			"selects":{"from_to": FROM_TO_CHOICES }
 		 	},
 	 	
 	 	"customer_schedule_visit":
