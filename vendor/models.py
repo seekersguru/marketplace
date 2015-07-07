@@ -132,19 +132,20 @@ class Vendor(models.Model):
         
 
         data= {
-    "email":vendor.user.username,
-    "top_name":"Royal Gardens",
-    "name":"Royal Gardens at ITC",
-    "top_address":"Andheri east Mumbai",
-    "contact":"64538236478",
-    "hero_imgs":["/media/apps/ios/2x/category/banquets.jpg",
-                                "/media/apps/ios/2x/category/decorators.jpg",
-                                "/media/apps/ios/2x/category/others.jpg",
-                                ],
-    "starting_price":"10000 /-",
-    "video_links":["https://www.youtube.com/watch?v=75xp_31ET-U","https://www.youtube.com/watch?v=HwYKxmxU5NA"],
-    "360_imgs":["/media/apps/ios/2x/category/banquets.jpg","/media/apps/ios/2x/category/decorators.jpg","/media/apps/ios/2x/category/others.jpg",], 
-    
+        "info":{
+            "email":vendor.user.username,
+            "top_name":"Royal Gardens",
+            "name":"Royal Gardens at ITC",
+            "top_address":"Andheri east Mumbai",
+            "contact":"64538236478",
+            "hero_imgs":["/media/apps/ios/2x/category/banquets.jpg",
+                                        "/media/apps/ios/2x/category/decorators.jpg",
+                                        "/media/apps/ios/2x/category/others.jpg",
+                                        ],
+            "starting_price":"10000 /-",
+            "video_links":["https://www.youtube.com/watch?v=75xp_31ET-U","https://www.youtube.com/watch?v=HwYKxmxU5NA"],
+            "360_imgs":["/media/apps/ios/2x/category/banquets.jpg","/media/apps/ios/2x/category/decorators.jpg","/media/apps/ios/2x/category/others.jpg",], 
+        },
     "sections":
     [
         {
