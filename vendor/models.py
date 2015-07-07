@@ -58,7 +58,7 @@ DUMMY_VENDOR_JSON=\
                                                     ["Location","Santa Kruz east"],
                                                     ["Capacity","50 - 1000"],
                                                     ["Type","Party Lawn"],
-                                                    ["Speciality","Jain only"]
+                                                    ["Speciality","Jain only"],
                                                     ["Location","Santa Kruz east"],
                                                     ["Capacity","50 - 1000"],
                                                     ["Type","Party Lawn"],
