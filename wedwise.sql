@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.5.43, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.16, for osx10.9 (x86_64)
 --
 -- Host: localhost    Database: wedwise
 -- ------------------------------------------------------
--- Server version	5.5.43-0ubuntu0.14.04.1
+-- Server version	5.6.16
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -118,7 +118,7 @@ CREATE TABLE `auth_user` (
   `date_joined` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -127,7 +127,7 @@ CREATE TABLE `auth_user` (
 
 LOCK TABLES `auth_user` WRITE;
 /*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
-INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$12000$cuaKF9yaj59W$PjlRnLv7o3YJMQcDRprsBw6I5x95l9KcBLvRC4JotxI=','2015-07-02 02:52:28',1,'root','','','root@gm.com',1,1,'2015-06-28 17:32:56'),(33,'pbkdf2_sha256$12000$oDloHP51dspv$9EfQuvam72w6YUuiJx1vRuF2UknGM9PYjAkU9DZ89/4=','2015-06-29 12:23:08',0,'nishu.ssddsaxenadd@gmail.com','','','nishu.ssddsaxenadd@gmail.com',0,1,'2015-06-29 12:23:08'),(34,'pbkdf2_sha256$12000$4so8CYr1ZjoZ$AfAKDYEssJV4AriRvYKTxtpLVET6TvxsLQKeWdAVUmI=','2015-06-29 12:23:15',0,'nishu.ssddccsaxenadd@gmail.com','','','nishu.ssddccsaxenadd@gmail.com',0,1,'2015-06-29 12:23:15'),(36,'pbkdf2_sha256$12000$vYLn0RovmxZ2$C413Fadg3roT61m6hrSyB0tKRt6BMuqDwumOb0vVRIE=','2015-06-29 12:27:29',0,'nishu.ssddssccsaxenadd@gmail.com','','','nishu.ssddssccsaxenadd@gmail.com',0,1,'2015-06-29 12:27:29'),(37,'pbkdf2_sha256$12000$8and7zrmxA5F$3CJ1MT9Q/iBtG748KlksEKL+yr0t3rcJUDPFAa0vrlo=','2015-06-29 12:27:55',0,'nishu.ssddsaasccsaxenadd@gmail.com','','','nishu.ssddsaasccsaxenadd@gmail.com',0,1,'2015-06-29 12:27:55'),(38,'pbkdf2_sha256$12000$q5otyl6THn9M$HGGZ51TMZz2nUHaWbWKVpkICjgTHjhDQKVRxdLUC5rg=','2015-06-29 19:27:35',0,'ccc','','','ccc',0,1,'2015-06-29 19:27:35'),(39,'pbkdf2_sha256$12000$sslW5NPT3Tj6$DmEow6xvpNKgn5jQ6jBQMW2nOp4omXyrcbCNgMaVsRM=','2015-06-29 19:33:14',0,'sss@gm.com','','','sss@gm.com',0,1,'2015-06-29 19:33:14'),(40,'pbkdf2_sha256$12000$3TwAwKy1jn4j$NuxepPZyRtNj423TLWBt6vMhkkGwCEvQf0haHJq6WgE=','2015-06-29 19:33:42',0,'ssss@gm.com','','','ssss@gm.com',0,1,'2015-06-29 19:33:42'),(41,'pbkdf2_sha256$12000$Zg9ysvG1pPpi$ETrbzb24eJN9KJZ+fN0r28MEwy6e+FGIVXDxdm4CaeU=','2015-07-02 00:37:30',0,'ss@gm.com','','','ss@gm.com',0,1,'2015-07-02 00:37:30'),(42,'pbkdf2_sha256$12000$4IEcdRrYQ5dJ$ILxs0ogNsF28Tv1upo3CZQ1GtLuZ2I6aJv5751pycA8=','2015-07-02 00:38:07',0,'ssdd@gm.com','','','ssdd@gm.com',0,1,'2015-07-02 00:38:07'),(43,'pbkdf2_sha256$12000$uq3NySYsPx0X$lO3FOnH0leoDG0uwBlkMjfgshPedIUvBCp4a8bIK4go=','2015-07-02 00:41:32',0,'ssdsssd@gm.com','','','ssdsssd@gm.com',0,1,'2015-07-02 00:41:32'),(44,'pbkdf2_sha256$12000$MJ7UfTL70mxz$b/waH1CcompA3KIG6nD63+nUCyTrogRo0sa/w3q4Hjg=','2015-07-02 01:53:52',0,'nishu.saxena@gmail.com','','','nishu.saxena@gmail.com',0,1,'2015-07-02 01:53:52'),(51,'pbkdf2_sha256$12000$lSZPyS6AQ74C$QWiBmj8unoST+7rJuGsEpAhWnFibaqwH0+uWOj5gi94=','2015-07-02 14:36:43',0,'nishusaxena@gmail.com','','','nishusaxena@gmail.com',0,1,'2015-07-02 14:36:43'),(52,'pbkdf2_sha256$12000$cWSzGFmtdqoV$aa/fZmONr//hzrFufUbmemsKloHpkMBD/2l00Ob8e6w=','2015-07-04 19:16:44',0,'vendor@test.com','','','vendor@test.com',0,1,'2015-07-04 19:16:44'),(53,'pbkdf2_sha256$12000$dJjs78d7opIh$XnRXyZhuZ5TbEvH1Tb9346RmccFQFA6v71KDAeOHuSQ=','2015-07-04 19:18:15',0,'customer@test.com','','','customer@test.com',0,1,'2015-07-04 19:18:15');
+INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$12000$cuaKF9yaj59W$PjlRnLv7o3YJMQcDRprsBw6I5x95l9KcBLvRC4JotxI=','2015-07-07 12:19:53',1,'root','','','root@gm.com',1,1,'2015-06-28 17:32:56');
 /*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -215,7 +215,6 @@ CREATE TABLE `customer_customer` (
 
 LOCK TABLES `customer_customer` WRITE;
 /*!40000 ALTER TABLE `customer_customer` DISABLE KEYS */;
-INSERT INTO `customer_customer` VALUES (33,'NNN','NNNN','NNN','','','nishu.ssddsaxenadd@gmail.com:xHGJ4LD08HTnP3WhxmVbMvoWoOU'),(34,'NNN','NNNN','NNN','','','nishu.ssddccsaxenadd@gmail.com:Y2_s_jOreXqApMsUkNonFAFMfFg'),(36,'NNN','NNNN','NNN','','','nishu.ssddssccsaxenadd@gmail.com:9g4VS6bAJPrVuc3STRhHN9wgxGQ'),(37,'NNN','NNNN','NNN','','','nishu.ssddsaasccsaxenadd@gmail.com:3exXQeUXm62CcKsHpj4f2gY_fDg'),(38,'ccc','ccc','ccccc','','','ccc:edgWvDKUo5izxVWTjZHvl0U9pXA'),(39,'`msmsm','mmm','mmmm','','','sss@gm.com:Bjp_Ul4oDb0iA0JeNc87F25vyZg'),(40,'`msmsm','mmm','mmmm','','','ssss@gm.com:ru3h8HnRLJFqE9F8Mj03WkDYdHY'),(41,'ss','ss','01010101010','','','ss@gm.com:WBivtuTuZ5JaF-fl-eghfzgG_nk'),(42,'ss','ss','01010101010','','','ssdd@gm.com:be5saLWEkx5-hZoTN9lIdb0nL7w'),(43,'ss','ss','9010101010','','','ssdsssd@gm.com:HUVFpvfSfvlT6ph7w_ybJ5utPv8'),(44,'Nishant','HP','9032092000','','','nishu.saxena@gmail.com:-aXxfMHFNWGP9SY6d6DStZ0qDnY'),(53,'Rama','Shayama','8198191891','','','customer@test.com:kdr9UCeqzG783-MMiFBw9axN-BY');
 /*!40000 ALTER TABLE `customer_customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -240,7 +239,7 @@ CREATE TABLE `django_admin_log` (
   KEY `django_admin_log_e8701ad4` (`user_id`),
   CONSTRAINT `django_admin_log_user_id_1c5f563_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`),
   CONSTRAINT `django_admin__content_type_id_5151027a_fk_django_content_type_id` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -249,6 +248,7 @@ CREATE TABLE `django_admin_log` (
 
 LOCK TABLES `django_admin_log` WRITE;
 /*!40000 ALTER TABLE `django_admin_log` DISABLE KEYS */;
+INSERT INTO `django_admin_log` VALUES (1,'2015-07-07 12:20:14','3','vendor@test.com belong to vendor Banquets (as )',3,'',9,1),(2,'2015-07-07 12:20:14','2','root belong to vendor Banquets (as Admin)',3,'',9,1),(3,'2015-07-07 12:20:14','1','nishusaxena@gmail.com belong to vendor Banquets (as )',3,'',9,1),(4,'2015-07-07 12:21:05','38','ccc',3,'',4,1),(5,'2015-07-07 12:21:05','53','customer@test.com',3,'',4,1),(6,'2015-07-07 12:21:05','44','nishu.saxena@gmail.com',3,'',4,1),(7,'2015-07-07 12:21:05','34','nishu.ssddccsaxenadd@gmail.com',3,'',4,1),(8,'2015-07-07 12:21:05','37','nishu.ssddsaasccsaxenadd@gmail.com',3,'',4,1),(9,'2015-07-07 12:21:05','33','nishu.ssddsaxenadd@gmail.com',3,'',4,1),(10,'2015-07-07 12:21:05','36','nishu.ssddssccsaxenadd@gmail.com',3,'',4,1),(11,'2015-07-07 12:21:05','51','nishusaxena@gmail.com',3,'',4,1),(12,'2015-07-07 12:21:05','41','ss@gm.com',3,'',4,1),(13,'2015-07-07 12:21:05','42','ssdd@gm.com',3,'',4,1),(14,'2015-07-07 12:21:05','43','ssdsssd@gm.com',3,'',4,1),(15,'2015-07-07 12:21:05','39','sss@gm.com',3,'',4,1),(16,'2015-07-07 12:21:05','40','ssss@gm.com',3,'',4,1),(17,'2015-07-07 12:21:05','52','vendor@test.com',3,'',4,1),(18,'2015-07-07 12:27:05','54','jafferbhai@wedwise.in',1,'',4,1),(19,'2015-07-07 12:29:34','54','jafferbhai@wedwise.in',3,'',4,1),(20,'2015-07-07 14:48:47','8','nishu.sacxaenaa@gmailq.com belong to vendor Banquets (as )',3,'',9,1),(21,'2015-07-07 14:48:47','7','nishu.sacxaena@gmailq.com belong to vendor Banquets (as )',3,'',9,1),(22,'2015-07-07 14:48:47','6','nishu.saxaena@gmailq.com belong to vendor Banquets (as )',3,'',9,1),(23,'2015-07-07 14:48:47','5','nishu.saxena@gmailq.com belong to vendor Banquets (as )',3,'',9,1),(24,'2015-07-07 14:48:47','4','nishu.saxena@gmail.com belong to vendor Banquets (as )',3,'',9,1),(25,'2015-07-07 15:48:13','11','nish@gm.com belong to vendor Catereres (as )',3,'',9,1),(26,'2015-07-07 15:48:13','10','nisshu.saxena@gmail.com belong to vendor Catereres (as )',3,'',9,1),(27,'2015-07-07 15:48:13','9','nishu.saxena@gmail.com belong to vendor Catereres (as )',3,'',9,1),(28,'2015-07-07 15:48:35','65','nish@gm.com',3,'',4,1),(29,'2015-07-07 15:48:35','62','nishu.sacxaena@gmailq.com',3,'',4,1),(30,'2015-07-07 15:48:35','63','nishu.sacxaenaa@gmailq.com',3,'',4,1),(31,'2015-07-07 15:48:35','61','nishu.saxaena@gmailq.com',3,'',4,1),(32,'2015-07-07 15:48:35','59','nishu.saxena@gmail.com',3,'',4,1),(33,'2015-07-07 15:48:35','60','nishu.saxena@gmailq.com',3,'',4,1),(34,'2015-07-07 15:48:35','64','nisshu.saxena@gmail.com',3,'',4,1);
 /*!40000 ALTER TABLE `django_admin_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -292,7 +292,7 @@ CREATE TABLE `django_migrations` (
   `name` varchar(255) NOT NULL,
   `applied` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -301,7 +301,7 @@ CREATE TABLE `django_migrations` (
 
 LOCK TABLES `django_migrations` WRITE;
 /*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
-INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2015-06-28 17:31:36'),(2,'auth','0001_initial','2015-06-28 17:31:50'),(3,'admin','0001_initial','2015-06-28 17:31:52'),(4,'customer','0001_initial','2015-06-28 17:31:53'),(5,'sessions','0001_initial','2015-06-28 17:31:54'),(6,'vendor','0001_initial','2015-06-28 17:31:59'),(7,'customer','0002_auto_20150629_1300','2015-06-29 07:32:28'),(8,'customer','0003_auto_20150629_1301','2015-06-29 07:32:28'),(9,'customer','0004_auto_20150629_1301','2015-06-29 07:32:29'),(10,'vendor','0002_auto_20150702_1849','2015-07-02 13:19:48'),(11,'vendor','0003_vendorlead_name','2015-07-02 13:19:49'),(12,'vendor','0004_auto_20150702_1850','2015-07-02 13:20:46'),(13,'vendor','0005_auto_20150702_1920','2015-07-02 13:50:15'),(14,'vendor','0006_vendor_identifier','2015-07-02 14:36:28'),(15,'vendor','0007_vendor_dynamic_info','2015-07-02 17:58:44'),(16,'vendor','0008_auto_20150704_0910','2015-07-04 09:10:55'),(17,'wedwise_messages','0001_initial','2015-07-04 19:53:45'),(18,'wedwise_messages','0002_auto_20150704_2010','2015-07-04 20:10:14');
+INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2015-06-28 17:31:36'),(2,'auth','0001_initial','2015-06-28 17:31:50'),(3,'admin','0001_initial','2015-06-28 17:31:52'),(4,'customer','0001_initial','2015-06-28 17:31:53'),(5,'sessions','0001_initial','2015-06-28 17:31:54'),(6,'vendor','0001_initial','2015-06-28 17:31:59'),(7,'customer','0002_auto_20150629_1300','2015-06-29 07:32:28'),(8,'customer','0003_auto_20150629_1301','2015-06-29 07:32:28'),(9,'customer','0004_auto_20150629_1301','2015-06-29 07:32:29'),(10,'vendor','0002_auto_20150702_1849','2015-07-02 13:19:48'),(11,'vendor','0003_vendorlead_name','2015-07-02 13:19:49'),(12,'vendor','0004_auto_20150702_1850','2015-07-02 13:20:46'),(13,'vendor','0005_auto_20150702_1920','2015-07-02 13:50:15'),(14,'vendor','0006_vendor_identifier','2015-07-02 14:36:28'),(15,'vendor','0007_vendor_dynamic_info','2015-07-02 17:58:44'),(16,'vendor','0008_auto_20150704_0910','2015-07-04 09:10:55'),(17,'wedwise_messages','0001_initial','2015-07-04 19:53:45'),(18,'wedwise_messages','0002_auto_20150704_2010','2015-07-04 20:10:14'),(19,'vendor','0009_remove_vendor_email','2015-07-07 14:31:11'),(20,'wedwise_messages','0003_auto_20150707_1431','2015-07-07 14:31:11');
 /*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -327,7 +327,7 @@ CREATE TABLE `django_session` (
 
 LOCK TABLES `django_session` WRITE;
 /*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
-INSERT INTO `django_session` VALUES ('q4ui5k158ykuh1fx0mqfd1e16r6cqsye','NzQyYWZhNzhlNmFiZmM5ZDZlOWRhMmNiZjczNDQ3NGFmNGMzZjJlMDp7Il9hdXRoX3VzZXJfaGFzaCI6IjhjZDlhNjRjNzQzODE0YTBkYjVlYmUyNDllMDIzYzU4OWQzNWUxODMiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOjF9','2015-07-16 02:52:28');
+INSERT INTO `django_session` VALUES ('q4ui5k158ykuh1fx0mqfd1e16r6cqsye','NzQyYWZhNzhlNmFiZmM5ZDZlOWRhMmNiZjczNDQ3NGFmNGMzZjJlMDp7Il9hdXRoX3VzZXJfaGFzaCI6IjhjZDlhNjRjNzQzODE0YTBkYjVlYmUyNDllMDIzYzU4OWQzNWUxODMiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOjF9','2015-07-16 02:52:28'),('vghlrzs5jzcdmloeze7k4ekhkiprt8gj','NzQyYWZhNzhlNmFiZmM5ZDZlOWRhMmNiZjczNDQ3NGFmNGMzZjJlMDp7Il9hdXRoX3VzZXJfaGFzaCI6IjhjZDlhNjRjNzQzODE0YTBkYjVlYmUyNDllMDIzYzU4OWQzNWUxODMiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOjF9','2015-07-21 12:19:53');
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -369,7 +369,6 @@ CREATE TABLE `vendor_vendor` (
   `name` varchar(250) NOT NULL,
   `contact_number` varchar(50) NOT NULL,
   `address` longtext NOT NULL,
-  `email` varchar(75) NOT NULL,
   `role` varchar(100) NOT NULL,
   `user_id` int(11) NOT NULL,
   `vendor_type_id` int(11) DEFAULT NULL,
@@ -382,7 +381,7 @@ CREATE TABLE `vendor_vendor` (
   KEY `vendor_vendor_96b1f972` (`vendor_type_id`),
   CONSTRAINT `vendor_vendor_user_id_73675de7_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`),
   CONSTRAINT `vendor_vendor_vendor_type_id_6f6c99e_fk_vendor_category_id` FOREIGN KEY (`vendor_type_id`) REFERENCES `vendor_category` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -391,7 +390,6 @@ CREATE TABLE `vendor_vendor` (
 
 LOCK TABLES `vendor_vendor` WRITE;
 /*!40000 ALTER TABLE `vendor_vendor` DISABLE KEYS */;
-INSERT INTO `vendor_vendor` VALUES (1,'Nishant .Saxena','9032092000','Dharam Kran Road','','',51,1,'nishusaxena@gmail.com:qfTWg0bJkKk1E_WMxN7uH_PbYOw','2015-07-02','',''),(2,'sss','ss','sss','ssds@gmail.com','Admin',1,1,'sss','ssss','',''),(3,'Banquet wala','9288298292','Santa kruz navi mumbai','','',52,1,'vendor@test.com:-1Jwmiucd0MuY9VftiQ_u7XXquw','','','');
 /*!40000 ALTER TABLE `vendor_vendor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -469,7 +467,7 @@ DROP TABLE IF EXISTS `wedwise_messages_book`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `wedwise_messages_book` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `from_to` varchar(2) NOT NULL,
+  `from_to` varchar(3),
   `msg_time` datetime NOT NULL,
   `quoted_price_label` varchar(512) NOT NULL,
   `message` longtext NOT NULL,
@@ -501,7 +499,7 @@ DROP TABLE IF EXISTS `wedwise_messages_messages`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `wedwise_messages_messages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `from_to` varchar(3),
+  `from_to` varchar(3) DEFAULT NULL,
   `message` longtext NOT NULL,
   `msg_time` datetime NOT NULL,
   `customer_id` int(11) NOT NULL,
@@ -511,7 +509,7 @@ CREATE TABLE `wedwise_messages_messages` (
   KEY `wedwise_messages_messages_96b1f972` (`vendor_id`),
   CONSTRAINT `wedwise_messages__vendor_id_5a214c5fcbedd4d3_fk_vendor_vendor_id` FOREIGN KEY (`vendor_id`) REFERENCES `vendor_vendor` (`id`),
   CONSTRAINT `wedwis_customer_id_4d15317179ef6bc3_fk_customer_customer_user_id` FOREIGN KEY (`customer_id`) REFERENCES `customer_customer` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -520,7 +518,6 @@ CREATE TABLE `wedwise_messages_messages` (
 
 LOCK TABLES `wedwise_messages_messages` WRITE;
 /*!40000 ALTER TABLE `wedwise_messages_messages` DISABLE KEYS */;
-INSERT INTO `wedwise_messages_messages` VALUES (2,'c2v','d','2015-07-04 20:10:27',53,3),(3,'c2v','d','2015-07-04 20:10:36',53,3),(4,'c2v','d','2015-07-04 20:14:19',53,3),(5,'c2v','d','2015-07-04 20:14:33',53,3),(6,'c2v','d','2015-07-04 20:14:36',53,3),(7,'c2v','d','2015-07-04 20:14:38',53,3),(8,'c2v','d','2015-07-04 20:14:39',53,3);
 /*!40000 ALTER TABLE `wedwise_messages_messages` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -533,4 +530,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-07-05  1:47:58
+-- Dump completed on 2015-07-07 21:19:07

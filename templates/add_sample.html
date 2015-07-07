@@ -1,0 +1,118 @@
+{% extends "admin/base_site.html" %}
+
+{% load i18n admin_static %}
+{% load util_filters %}
+{% block extrastyle %}{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />
+<link rel='stylesheet' href="{% static "admin/jquery-ui/themes/base/all.css" %}"/>
+
+
+{% endblock %}
+
+{% block coltype %}colMS{% endblock %}
+
+{% block bodyclass %}{{ block.super }} dashboard{% endblock %}
+
+{# {% block breadcrumbs %}{% endblock %} #}
+
+{% block content %}
+
+<div id="content-main">
+
+
+
+{% ifequal output.result "error" %}
+<p class='bg-danger'>{{output.message}} </p>
+{% endifequal %}
+{% ifequal output.result "success" %}
+<p class='bg-success'>Success !!{{output.message}} </p>
+{% endifequal %}
+
+<form class="form-horizontal"  method="post" name="mainform" role="form" >
+{%csrf_token%}
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="email">email:</label>
+      <div class="col-sm-10">
+		<input class="form-control" name="email" placeholder="email" value="{{output.request_data.email}}" {% if vendor %}readonly {%endif%}>
+      </div>
+    </div>
+	{%if not vendor %}
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="password">password:</label>
+      <div class="col-sm-10">
+		<input class="form-control" value="{{output.request_data.password}}" name="password" placeholder="password">
+      </div>
+    </div>
+	{% endif %}
+	{%if not vendor %}
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="vendor_type">vendor_type:</label>
+      <div class="col-sm-10">
+		<select class="form-control" name="vendor_type">
+		{% for ven in vendor_types %}
+			<option value="{{ven.0}}"  {% ifequal ven.0 output.request_data.vendor_type %} selected {% endifequal%}>{{ven.1}}</option>
+		{% endfor %}
+		</select>
+      </div>
+    </div>
+    {%else%}
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="vendor_type">vendor_type:</label>
+      <div class="col-sm-10">
+		<input class="form-control" name="vendor_type" placeholder="vendor_type" value="{{output.request_data.vendor_type}}" {% if vendor %}readonly {%endif%}>
+      </div>
+    </div>
+    {% endif %}
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="name">name:</label>
+      <div class="col-sm-10">
+		<input class="form-control" name="name" placeholder="name" value="{{output.request_data.name}}">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="contact_number" > contact_number:</label>
+      <div class="col-sm-10">
+		<input class="form-control" name="contact_number" value="{{output.request_data.contact_number}}" placeholder="contact_number">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="address">address:</label>
+      <div class="col-sm-10">
+		<input class="form-control" name="address" placeholder="address" value="{{output.request_data.address}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="dynamic_info">dynamic_info:</label>
+      <div class="col-sm-10">
+		<input class="form-control" name="dynamic_info" placeholder="dynamic_info" value="{{output.request_data.dynamic_info}}">
+      </div>
+    </div>
+
+	{% if vendor %}
+		<input type="hidden" name="edit" value='1'/>
+	{% endif %}
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="submit"></label>
+      <div class="col-sm-10">
+		<input class="btn btn-default" type="submit" >
+      </div>
+    </div>
+    
+	</form>
+<a href="/add_sample/">Add vendor</a>
+<ul>
+{% for vendor in vendors  %}
+<li> 
+	<a href="/add_sample/{{vendor.id}}/">{{vendor}}</a>
+</li>
+{% endfor %}
+</ul>
+</div>	
+
+{% endblock %}
+
+</body>
+</html>

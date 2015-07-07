@@ -204,6 +204,28 @@ class Vendor(models.Model):
 
     def __unicode__(self):
         return "%s belong to vendor %s (as %s)" % (self.user, self.vendor_type, self.role)
+
+    @classmethod
+    @transaction.atomic # @Nishant see if its effect speed @Amit dash 
+    def update(cls,
+               request, 
+               ):
+        try:
+            import pdb;pdb.set_trace()
+            email = request.POST.get('email').strip().lower()
+            user=User.objects.get(username=email)
+            vendor = Vendor.objects.get(user=user)
+            vendor_type = request.POST.get('vendor_type').strip()
+            vendor.category=Category.objects.get(key=vendor_type)
+            vendor.name = request.POST.get('name').strip()
+            vendor.contact_number = request.POST.get('contact_number').strip()
+            vendor.address = request.POST.get('address').strip()
+            vendor.dynamic_info = request.POST.get('dynamic_info').strip()
+        except:
+            return ge("POST",req_dict(request.POST),"Some problem in vlaues", error_fields=[]) 
+        vendor.save()
+        return gs("POST",req_dict(request.POST),{"id":vendor.id})
+    
     @classmethod
     @transaction.atomic # @Nishant see if its effect speed @Amit dash 
     def create(cls,
@@ -236,13 +258,14 @@ class Vendor(models.Model):
                 return ge("POST",req_dict(request.POST),"Email already exists", error_fields=['email'])
 
         if not contact_number.isdigit() :
-            return ge("POST",req_dict(request.POST),"Invalid mobile number", error_fields=['contact_number'])
+            return ge("POST",req_dict(request.POST),"Invalid phone number", error_fields=['contact_number'])
 
-        if len(str(int(contact_number))) not in [10,11]:
-            return ge("POST",req_dict(request.POST),"Mobile number should be of 10/11 digits", error_fields=['contact_number'])
+        if len(str(int(contact_number))) < 5 or len(str(int(contact_number))) >20 :
+            return ge("POST",req_dict(request.POST),"Invalid phone number", error_fields=['contact_number'])
 
         fbid = request.POST.get("fbid","").strip()
-        gid = request.POST.get("gid","").strip()            
+        gid = request.POST.get("gid","").strip() 
+        dynamic_info=request.POST.get("dynamic_info","").strip()            
         # As we using transactions, no need to error handle. 
         # In case of error all will revert
         if not user:
@@ -254,7 +277,8 @@ class Vendor(models.Model):
                  address=address,
                  identifier=signer.sign(email),
                  fbid=fbid,
-                 gid=gid
+                 gid=gid,
+                 dynamic_info=dynamic_info
                  )
         # do something with the book
         vendor.save()

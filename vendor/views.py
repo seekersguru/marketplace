@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.template.response import TemplateResponse
 from django.views.decorators.csrf import csrf_exempt
 from vendor.vendor_rules import banquet_rule
@@ -8,6 +7,8 @@ from django.utils import timezone
 from django.forms import ModelForm
 from vendor.models import Vendor
 from utils import get_vendor_meta
+from vendor.models import VENDOR_TYPES
+
 class VendorForm(ModelForm):
     class Meta:
         model = Vendor
@@ -36,9 +37,47 @@ def vendor_validation(request,vendor_rule):
               
     return vendor_rule_copy 
 
+def add_sample(request,vendor_id=None):
+    output={}
+    vendor=None
+    if vendor_id:
+        vendor = Vendor.objects.get(id=vendor_id)
+    if request.method=="POST":
+        if request.POST.get("edit",None):
+            output=Vendor.update(request)
+        else:
+            from api.views import check_basic_validations
+            #TODO Put all in decorators  with csrf 
+            invalid=check_basic_validations("vendor_registration",request,"POST")
+            if invalid:
+                output=invalid
+            else:
+                
+                output=Vendor.create(request)
+
+    if vendor:
+        output["request_data"]={}
+        output["request_data"]["email"]=vendor.user.username
+        output["request_data"]["name"]=vendor.name
+        output["request_data"]["vendor_type"]=vendor.vendor_type.key
+        output["request_data"]["contact_number"]=vendor.contact_number
+        output["request_data"]["address"]=vendor.address
+        output["request_data"]["dynamic_info"]=vendor.dynamic_info
+        
+        
+    return TemplateResponse(request, "add_sample.html",
+                  {
+                    "output" :output,
+                    "vendor_types":VENDOR_TYPES,
+                    "vendors":Vendor.objects.all(),
+                    "vendor":vendor
+                         
+                  }
+                )
+
 
  
-def add_vendor(request):
+def add_vendor(request,vendor_id=None):
     message=""
     
 
@@ -56,7 +95,7 @@ def add_vendor(request):
         form = VendorForm()
     
     identifiers = [(e.identifier ,e.user.email) for e in Vendor.objects.all() ]
-    return render(request, "add_vendor.html", {'form': form,"message":message
+    return TemplateResponse(request, "add_vendor.html", {'form': form,"message":message
                                                ,"vendors":Vendor.objects.all(),
                                                "vendor_meta":get_vendor_meta() ,
                                                "identifiers":identifiers
