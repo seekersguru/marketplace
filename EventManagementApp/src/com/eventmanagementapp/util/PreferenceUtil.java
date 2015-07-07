@@ -73,4 +73,24 @@ public class PreferenceUtil {
 		editor.putString("uid", uid);
 		editor.commit();
 	}
+	
+	public String getIdentifier() {
+		String uid = sp.getString("identifier", null);
+		return uid;
+	}
+	
+	public void setIdentifier(String identifier) {
+		editor.putString("identifier", identifier);
+		editor.commit();
+	}
+	
+	public String getEmail() {
+		String uid = sp.getString("email", null);
+		return uid;
+	}
+	
+	public void setEmail(String email) {
+		editor.putString("email", email);
+		editor.commit();
+	}
 }

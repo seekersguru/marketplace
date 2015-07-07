@@ -1,6 +1,7 @@
 package com.eventmanagementapp.adapter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -16,10 +17,10 @@ import com.eventmanagementapp.R;
 
 public class ChatAdapter extends BaseAdapter {
 
-	public ArrayList<String> listChat;
+	public ArrayList<HashMap<String, String>> listChat;
 	Context mContext;
 
-	public ChatAdapter(Context mContext, ArrayList<String> listChat) {
+	public ChatAdapter(Context mContext, ArrayList<HashMap<String, String>> listChat) {
 		this.mContext = mContext;
 		this.listChat = listChat;
 	}
@@ -62,13 +63,15 @@ public class ChatAdapter extends BaseAdapter {
 		if (position % 2 == 0) {
 			rlRight.setVisibility(View.GONE);
 			rlLeft.setVisibility(View.VISIBLE);
-			tvMessageLeft.setText(listChat.get(position));
+			tvMessageLeft.setText(listChat.get(position).get("message"));
 			tvDateLeft.setVisibility(View.VISIBLE);
+			tvDateLeft.setText(listChat.get(position).get("msg_time"));
 		} else {
 			rlRight.setVisibility(View.VISIBLE);
 			rlLeft.setVisibility(View.GONE);
-			tvMessageRight.setText(listChat.get(position));
+			tvMessageRight.setText(listChat.get(position).get("message"));
 			tvDateRight.setVisibility(View.VISIBLE);
+			tvDateRight.setText(listChat.get(position).get("message"));
 		}
 		return chatView;
 	}

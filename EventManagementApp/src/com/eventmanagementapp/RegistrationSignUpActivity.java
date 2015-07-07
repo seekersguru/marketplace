@@ -91,10 +91,7 @@ TextWatcher{
 		tvForgotPassword=(TextView) findViewById(R.id.tvForgotPassword);
 		tvLogin=(TextView) findViewById(R.id.tvLogin);
 		spVendorType=(Spinner) findViewById(R.id.spVendorType);
-
-
 		ArrayList<String> spinnerArray = new ArrayList<String>();
-
 		spinnerArray.add("Banquets");
 		spinnerArray.add("Caterers");
 		spinnerArray.add("Photographers");
@@ -349,7 +346,10 @@ TextWatcher{
 						String email = request_data.getString("email");
 						String address = request_data.getString("address");
 						String _result = jsonObj.getString("result");
-						String message = jsonObj.getString("message");
+						String message = jsonObj.getString("message");//{"identifier":"aattyy@aa.com:cKrNpFhEm4DogRm1a8E6Lhc9YBg"}
+						String identifier =new JSONObject( jsonObj.getString("json")).getString("identifier");
+						PreferenceUtil.getInstance().setEmail(email);
+						PreferenceUtil.getInstance().setIdentifier(identifier);
 						if(message.equals("0"))
 							message="Registered Successfully";
 						if(!message.toLowerCase().equalsIgnoreCase("registered successfully"))
