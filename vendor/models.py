@@ -23,7 +23,7 @@ class Category(models.Model):
     def __unicode__(self):
         return self.name 
     @classmethod
-    def get_categories(self,request):
+    def get_categories(cls,request):
         required_mode=mode_require(request)
         if  "error" in required_mode: return required_mode["error"]
         else:
@@ -57,7 +57,6 @@ class Vendor(models.Model):
     name = models.CharField(max_length=250)
     contact_number = models.CharField(max_length=50)    
     address = models.TextField()
-    email = models.EmailField()
     role = models.CharField(max_length=100, choices=CHOICES_VENDOR_ROLE)
     identifier = models.CharField(max_length=512)
     fbid = models.CharField(max_length=1024,default="")
@@ -94,7 +93,7 @@ class Vendor(models.Model):
                ):
         email = request.POST.get('email').strip().lower()
         
-        user=User.objects.filter(email=email)
+        user=User.objects.filter(username=email)
         if not user:
             return ge("POST",req_dict(request.POST),
                       "User not exist", 
@@ -117,7 +116,34 @@ class Vendor(models.Model):
 
 
     @classmethod
-    def get_vendor_list(self,vendor_type,page_no,mode,image_type):
+    def get_vendor_detail(cls,request):
+        vendor_email=request.POST.get("vendor_email")
+        user=User.objects.filter(username=vendor_email)
+        if not user:
+            return ge("POST",req_dict(request.POST),"User not exists", error_fields=['vendor_email']) 
+        
+        vendor = Vendor.objects.filter(user=user)  
+        if not vendor:
+            return ge("POST",req_dict(request.POST),"Vendor not exists", error_fields=['vendor_email']) 
+        vendor=vendor[0]   
+        
+
+        data={"email":vendor.user.username,
+              "name":vendor.name,
+              "contact_number":vendor.contact_number,
+              "address":vendor.address,
+              "dynamic_info":{
+                    "package_text":"",
+                    "quotes_price_text":"",
+                    "bid_price_label":"",
+                }
+         
+        }
+        return gs("POST",req_dict(request.POST),{"data":data})
+
+
+    @classmethod
+    def get_vendor_list(cls,vendor_type,page_no,mode,image_type):
         """
         Name , 
         location, 
@@ -130,9 +156,11 @@ class Vendor(models.Model):
         """
         img="/media/apps/{mode}/{image_type}/category/{vendor_type}.jpg".\
                 format(vendor_type=vendor_type,mode=mode,image_type=image_type)
-        return [
+        lst=[]
+        for vendor in Vendor.objects.all() :
+            lst.append(
                 {
-                 "id":"vendor_id",
+                 "vendor_email":vendor.user.username,
                  "image":img,
                  "name":"Name of the vendor" ,
                  "icons":[],
@@ -141,13 +169,13 @@ class Vendor(models.Model):
                  "years_in_business":"2 years",
                  "in_favourites":3,
                  "others_two":[["Capacity","200 - 500 peoples"]],
-                 "others_one":["Alcohol","Jain Only","Veg Only"]
-                 
+                 "others_one":["Alcohol","Jain Only","Veg Only"],
                  },   
-                
-                ]*10
+                )
+            
+        return lst
     @classmethod
-    def get_listing(self,request):
+    def get_listing(cls,request):
 
         required_mode=mode_require(request)
         if  "error" in required_mode: return required_mode["error"]
@@ -169,7 +197,7 @@ class Vendor(models.Model):
         search_param= request.POST.get('search_param',"")
         if len(search_param) > 1000:
             return ge("POST",req_dict(request.POST),"search string too long", error_fields=['page_no'])
-        vendor_list=self.get_vendor_list(vendor_type,page_no,mode,image_type)
+        vendor_list=cls.get_vendor_list(vendor_type,page_no,mode,image_type)
         
         return gs("POST",req_dict(request.POST),{"vendor_list":vendor_list})
 

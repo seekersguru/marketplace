@@ -110,7 +110,7 @@ class Customer(models.Model):
                ):
         email = request.POST.get('email').strip().lower()
         
-        user=User.objects.filter(email=email)
+        user=User.objects.filter(username=email)
         if not user:
             return ge("POST",req_dict(request.POST),
                       "User not exist", 

@@ -94,9 +94,13 @@ def customer_vendor_list_and_search(request):
     invalid=check_basic_validations("customer_vendor_list_and_search",request,"POST")
     if invalid:return response(request,invalid) 
     return response(request,Vendor.get_listing(request))
-
+    
+@csrf_exempt
 def customer_vendor_detail(request):
-    return TemplateResponse(request,'api/api.html',{})
+    #TODO Put all in decorators  with csrf 
+    invalid=check_basic_validations("customer_vendor_detail",request,"POST")
+    if invalid:return response(request,invalid) 
+    return response(request,Vendor.get_vendor_detail(request))
 
 ########## customer_messages_bid_book_schedule
 @csrf_exempt

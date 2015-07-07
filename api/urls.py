@@ -87,8 +87,12 @@ patterns = {##"customer_login_registration",
 		"customer_vendor_detail":
 		 	{
 				"type":"POST",
-				"order":10,
-	 			"params":[]
+				"order":-20,
+	 			"params":["mode","image_type","vendor_email"],
+	 			"required_params":["mode","image_type","vendor_email"],
+	 			"help":{"mode":"Possible values 'android' or 'ios'",
+						"image_type":"For android allowed: " + str(ALLOWED_ANDRIOD_IMAGE_TYPE)\
+						+ "<br/>For ios allowed :"+str(ALLOWED_IOS_IMAGE_TYPE)}, 
 		 	},
 	
 

@@ -1,0 +1,373 @@
+diff --git a/api/urls.py b/api/urls.py
+index b33a144..2b0f96c 100644
+--- a/api/urls.py
++++ b/api/urls.py
+@@ -87,8 +87,12 @@ patterns = {##"customer_login_registration",
+ 		"customer_vendor_detail":
+ 		 	{
+ 				"type":"POST",
+-				"order":10,
+-	 			"params":[]
++				"order":-20,
++	 			"params":["mode","image_type","vendor_email"],
++	 			"required_params":["mode","image_type","vendor_email"],
++	 			"help":{"mode":"Possible values 'android' or 'ios'",
++						"image_type":"For android allowed: " + str(ALLOWED_ANDRIOD_IMAGE_TYPE)\
++						+ "<br/>For ios allowed :"+str(ALLOWED_IOS_IMAGE_TYPE)}, 
+ 		 	},
+ 	
+ 
+diff --git a/api/views.py b/api/views.py
+index 4522771..ef47b2a 100644
+--- a/api/views.py
++++ b/api/views.py
+@@ -93,10 +93,13 @@ def customer_vendor_list_and_search(request):
+     #TODO Put all in decorators  with csrf 
+     invalid=check_basic_validations("customer_vendor_list_and_search",request,"POST")
+     if invalid:return response(request,invalid) 
+-    return response(request,Vendor.get_listing(request))
+-
++    
++@csrf_exempt
+ def customer_vendor_detail(request):
+-    return TemplateResponse(request,'api/api.html',{})
++    #TODO Put all in decorators  with csrf 
++    invalid=check_basic_validations("customer_vendor_detail",request,"POST")
++    if invalid:return response(request,invalid) 
++    return response(request,Vendor.get_vendor_detail(request))
+ 
+ ########## customer_messages_bid_book_schedule
+ @csrf_exempt
+diff --git a/customer/models.py b/customer/models.py
+index a248d7f..49ceb58 100644
+--- a/customer/models.py
++++ b/customer/models.py
+@@ -110,7 +110,7 @@ class Customer(models.Model):
+                ):
+         email = request.POST.get('email').strip().lower()
+         
+-        user=User.objects.filter(email=email)
++        user=User.objects.filter(username=email)
+         if not user:
+             return ge("POST",req_dict(request.POST),
+                       "User not exist", 
+diff --git a/market_place/urls.py b/market_place/urls.py
+index 6a16079..8daac74 100644
+--- a/market_place/urls.py
++++ b/market_place/urls.py
+@@ -18,7 +18,9 @@ urlpatterns = [
+  
+     ##Here add url add banquet and point o core.views.oy#
+      url(r'^vendors/$','vendor.views.vendors', name='banquets'),
+-     url(r'^add_vendor/$','vendor.views.add_vendor', name='add_vendor'),
++     
++     url(r'^add_vendor/(?P<vendor_id>[0-9]+)/$','vendor.views.add_vendor', name='add_vendor'),
++    url(r'^add_vendor/$','vendor.views.add_vendor', name='add_vendor'),
+     url(r'^media/(?P<path>.*)$', 'django.views.static.serve',{'document_root': MEDIA_PATH}),
+ #     url(r'^api/', include(category_resource.urls)),
+ ]
+diff --git a/templates/add_vendor.html b/templates/add_vendor.html
+index 6cd723b..3d72b26 100644
+--- a/templates/add_vendor.html
++++ b/templates/add_vendor.html
+@@ -1,7 +1,7 @@
+ {% extends "admin/base_site.html" %}
+ 
+ {% load i18n admin_static %}
+-
++{% load util_filters %}
+ {% block extrastyle %}{{ block.super }}
+ <link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />
+ <link rel='stylesheet' href="{% static "admin/jquery-ui/themes/base/all.css" %}"/>
+@@ -23,6 +23,37 @@
+ 			{% csrf_token %}
+ 
+ 
++{% for param in pattern.params %}
++    <div class="form-group">
++      <label class="control-label col-sm-2" for="{{param}}">{{param}}:</label>
++      <div class="col-sm-10">
++		{% if pattern.selects|get_dictionary_value:param %}
++		<select class="form-control" name="{{param}}">
++		{%for each in pattern.selects|get_dictionary_value:param %}
++		<option value='{{each.0}}'>{{each.1}}</option>
++		{%endfor%}
++		</select>
++			
++		{% else %}
++		<input  class="form-control" name="{{param}}" placeholder="{{param}}">
++		{% endif %}
++
++        {% if  pattern.help|get_dictionary_value:param   %}
++
++        <p class="help-block">{{ pattern.help|get_dictionary_value:param |safe}} </p>
++        {% endif %}
++      </div>
++    </div>
++
++{% endfor %}
++
++
++
++
++
++
++
++						{% if vendor_id %}
+ 						<div class="form-group  has-feedback" ng-class="{'has-error':mainform.identifier.$dirty && mainform.identifier.$error.required,'has-success':mainform.identifier.$valid}">
+ 							<label class="control-label col-sm-3" for="id_identifier">Identifier:</label>
+ 							<div class="col-sm-9">
+@@ -36,6 +67,18 @@
+ 							</select>
+ 							</div>
+ 						</div>
++						{% else %}
++						
++						<div class="form-group  has-feedback" ng-class="{'has-error':mainform.identifier.$dirty && mainform.identifier.$error.required,'has-success':mainform.identifier.$valid}">
++							<label class="control-label col-sm-3" for="id_identifier">New USer:</label>
++							<div class="col-sm-9">
++							 NEW USER
++							</div>
++						</div>						
++						
++						{% endif %}
++						
++						
+ 						<div class="form-group  has-feedback" ng-class="{'has-error':mainform.vendor_type.$dirty && mainform.vendor_type.$error.required,'has-success':mainform.vendor_type.$valid}">
+ 							<label class="control-label col-sm-3" for="id_vendor_type">Vendor type:</label>
+ 							<div class="col-sm-9">
+@@ -60,15 +103,6 @@
+ 								<input id="id_contact_number" maxlength="50" class="form-control" name="contact_number" type="text" ng-model="userOrder.formdata.contact_number" required/>
+ 							</div>
+ 						</div>
+-
+-						<div class="form-group  has-feedback" ng-class="{'has-error':mainform.email.$dirty &&(  mainform.email.$error.required ||  mainform.email.$error.email),'has-success':mainform.email.$valid }">
+-	
+-							<label class="control-label col-sm-3" for="id_email">Email:</label>
+-							<div class="col-sm-9">
+-								<input id="id_email" maxlength="75" class="form-control" name="email" type="email" ng-model="userOrder.formdata.email" required/>
+-		
+-							</div>
+-						</div>
+ 					
+ 						<div class="form-group  has-feedback" ng-class="{'has-error':mainform.role.$dirty && mainform.role.$error.required,'has-success':mainform.role.$valid}" >
+ 							<label class="control-label col-sm-3" for="id_role">Role:</label>
+diff --git a/templates/home.html b/templates/home.html
+index 7e50bab..bc43555 100644
+--- a/templates/home.html
++++ b/templates/home.html
+@@ -24,12 +24,15 @@
+   <div id="swagger-ui-container" class="swagger-ui-wrap">
+     
+     <ul>
+-    <li> <a href='/test-api/'> Wedwise  APIS </a></li>
++    <li> <a href='/api/'> Wedwise  APIS </a></li>
+ 
+     <li> <a href='/admin/'> Wedwise Admin  </a></li>
+     <li> <a href='/add_vendor/'> Add Banquets  </a></li>
+     <li> <a href='/vendors/'> Dynamic Banquets  </a></li>
+     <li> <a href='/customer-login-registration/'> Customer Login Registrations  </a></li>
++    
++    
++     <li> <a href='/add_sample/'> Working Add Vendors  </a></li>
+   </ul>
+   </div>
+ </div>
+diff --git a/vendor/models.py b/vendor/models.py
+index ffa13e6..946d5f7 100644
+--- a/vendor/models.py
++++ b/vendor/models.py
+@@ -23,7 +23,7 @@ class Category(models.Model):
+     def __unicode__(self):
+         return self.name 
+     @classmethod
+-    def get_categories(self,request):
++    def get_categories(cls,request):
+         required_mode=mode_require(request)
+         if  "error" in required_mode: return required_mode["error"]
+         else:
+@@ -57,7 +57,6 @@ class Vendor(models.Model):
+     name = models.CharField(max_length=250)
+     contact_number = models.CharField(max_length=50)    
+     address = models.TextField()
+-    email = models.EmailField()
+     role = models.CharField(max_length=100, choices=CHOICES_VENDOR_ROLE)
+     identifier = models.CharField(max_length=512)
+     fbid = models.CharField(max_length=1024,default="")
+@@ -94,7 +93,7 @@ class Vendor(models.Model):
+                ):
+         email = request.POST.get('email').strip().lower()
+         
+-        user=User.objects.filter(email=email)
++        user=User.objects.filter(username=email)
+         if not user:
+             return ge("POST",req_dict(request.POST),
+                       "User not exist", 
+@@ -117,7 +116,34 @@ class Vendor(models.Model):
+ 
+ 
+     @classmethod
+-    def get_vendor_list(self,vendor_type,page_no,mode,image_type):
++    def get_vendor_detail(cls,request):
++        vendor_email=request.POST.get("vendor_email")
++        user=User.objects.filter(username=vendor_email)
++        if not user:
++            return ge("POST",req_dict(request.POST),"User not exists", error_fields=['vendor_email']) 
++        
++        vendor = Vendor.objects.filter(user=user)  
++        if not vendor:
++            return ge("POST",req_dict(request.POST),"Vendor not exists", error_fields=['vendor_email']) 
++        vendor=vendor[0]   
++        
++
++        data={"email":vendor.user.username,
++              "name":vendor.name,
++              "contact_number":vendor.contact_number,
++              "address":vendor.address,
++              "dynamic_info":{
++                    "package_text":"",
++                    "quotes_price_text":"",
++                    "bid_price_label":"",
++                }
++         
++        }
++        return gs("POST",req_dict(request.POST),{"data":data})
++
++
++    @classmethod
++    def get_vendor_list(cls,vendor_type,page_no,mode,image_type):
+         """
+         Name , 
+         location, 
+@@ -130,9 +156,11 @@ class Vendor(models.Model):
+         """
+         img="/media/apps/{mode}/{image_type}/category/{vendor_type}.jpg".\
+                 format(vendor_type=vendor_type,mode=mode,image_type=image_type)
+-        return [
++        lst=[]
++        for vendor in Vendor.objects.all() :
++            lst.append(
+                 {
+-                 "id":"vendor_id",
++                 "vendor_email":vendor.user.username,
+                  "image":img,
+                  "name":"Name of the vendor" ,
+                  "icons":[],
+@@ -141,13 +169,13 @@ class Vendor(models.Model):
+                  "years_in_business":"2 years",
+                  "in_favourites":3,
+                  "others_two":[["Capacity","200 - 500 peoples"]],
+-                 "others_one":["Alcohol","Jain Only","Veg Only"]
+-                 
++                 "others_one":["Alcohol","Jain Only","Veg Only"],
+                  },   
+-                
+-                ]*10
++                )
++            
++        return lst
+     @classmethod
+-    def get_listing(self,request):
++    def get_listing(cls,request):
+ 
+         required_mode=mode_require(request)
+         if  "error" in required_mode: return required_mode["error"]
+@@ -169,7 +197,7 @@ class Vendor(models.Model):
+         search_param= request.POST.get('search_param',"")
+         if len(search_param) > 1000:
+             return ge("POST",req_dict(request.POST),"search string too long", error_fields=['page_no'])
+-        vendor_list=self.get_vendor_list(vendor_type,page_no,mode,image_type)
++        vendor_list=cls.get_vendor_list(vendor_type,page_no,mode,image_type)
+         
+         return gs("POST",req_dict(request.POST),{"vendor_list":vendor_list})
+ 
+diff --git a/vendor/views.py b/vendor/views.py
+index 433c04b..b8f365b 100644
+--- a/vendor/views.py
++++ b/vendor/views.py
+@@ -8,6 +8,7 @@ from django.utils import timezone
+ from django.forms import ModelForm
+ from vendor.models import Vendor
+ from utils import get_vendor_meta
++from api.urls import patterns
+ class VendorForm(ModelForm):
+     class Meta:
+         model = Vendor
+@@ -38,7 +39,7 @@ def vendor_validation(request,vendor_rule):
+ 
+ 
+  
+-def add_vendor(request):
++def add_vendor(request,vendor_id=None):
+     message=""
+     
+ 
+@@ -59,7 +60,9 @@ def add_vendor(request):
+     return render(request, "add_vendor.html", {'form': form,"message":message
+                                                ,"vendors":Vendor.objects.all(),
+                                                "vendor_meta":get_vendor_meta() ,
+-                                               "identifiers":identifiers
++                                               "identifiers":identifiers,
++                                               "pattern":patterns["vendor_registration"],
++                                               "vendor_id":vendor_id
+                                                })
+ 
+ @csrf_exempt
+diff --git a/wedwise_messages/models.py b/wedwise_messages/models.py
+index 3df90bf..35a4590 100644
+--- a/wedwise_messages/models.py
++++ b/wedwise_messages/models.py
+@@ -41,7 +41,7 @@ class Messages(models.Model):
+ 
+ 
+             
+-        user = User.objects.filter(email=receiver_email)
++        user = User.objects.filter(username=receiver_email)
+         if not user:
+             return ge("POST",req_dict(request.POST),"Receiver unauthorized", error_fields=['receiver_email'],
+                       code_string="RECEIVER_NOT_EXIST")
+@@ -113,7 +113,7 @@ class Messages(models.Model):
+         else:
+             sender=sender[0] 
+             
+-        user = User.objects.filter(email=receiver_email)
++        user = User.objects.filter(username=receiver_email)
+         if not user:
+             return ge("POST",req_dict(request.POST),"Receiver unauthorized", error_fields=['receiver_email'],
+                       code_string="RECEIVER_NOT_EXIST")
+@@ -141,7 +141,7 @@ class Messages(models.Model):
+         if from_to=="c2v":       
+             return gs("POST",req_dict(request.POST),[{"id":msg.id,
+                                                      "message":msg.message,
+-                                                     "receiver_email":msg.vendor.user.email,
++                                                     "receiver_email":msg.vendor.user.username,
+                                                       "vendor_name":msg.vendor.name,
+                                                      "identifier":identifier,
+                                                      "msg_time":str(msg.msg_time)[:19],
+@@ -150,7 +150,7 @@ class Messages(models.Model):
+         elif from_to=="v2c": 
+             return gs("POST",req_dict(request.POST),[{"id":msg.id,
+                                                      "message":msg.message,
+-                                                     "receiver_email":msg.customer.user.email,
++                                                     "receiver_email":msg.customer.user.username,
+                                                       "vendor_name":msg.customer.bride_name + " vs " + msg.customer.groom_name ,
+                                                      "identifier":identifier,
+                                                      "msg_time":str(msg.msg_time)[:19],
+@@ -191,7 +191,7 @@ class Messages(models.Model):
+                 if msg.vendor.pk not in listed:
+                     listed.append(msg.vendor.pk)
+                     msgs.append({"id":msg.id, "message":msg.message,
+-                                                     "receiver_email":msg.vendor.user.email,
++                                                     "receiver_email":msg.vendor.user.username,
+                                                      "receiver_name":msg.vendor.name,
+                                                      "identifier":msg.customer.identifier,
+                                                      "msg_time":str(msg.msg_time)[:19] ,
+@@ -201,7 +201,7 @@ class Messages(models.Model):
+                 if msg.customer.pk not in listed:
+                     listed.append(msg.customer.pk)
+                     msgs.append({"id":msg.id, "message":msg.message,
+-                                                     "receiver_email":msg.customer.user.email,
++                                                     "receiver_email":msg.customer.user.username,
+                                                      "receiver_name":msg.customer.groom_name + " vs "+msg.customer.bride_name ,
+                                                      "identifier":msg.customer.identifier,
+                                                      "msg_time":str(msg.msg_time)[:19] ,

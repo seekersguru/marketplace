@@ -6,13 +6,33 @@ from django import forms
 from django.core.exceptions import ValidationError
 from api.utils import get_error as ge , get_success as gs ,req_dict
 from django.contrib.auth.models import User
+MESSAGE_CHOICES = [("message","message"),("bid","bid"),("book","book"),]
+TIME_SLOTS = [("morning","Morning"),("evening","Evening")]
 
+class Bid_Book(models.Model):
+    # Will come along with email of vendor
+    vendor = models.ForeignKey(Vendor)
+    package_text=models.CharField(max_length=256,)
+    quotes_price_text=models.CharField(max_length=256,)
+    bid_price_label=models.CharField(max_length=26,)
+    bid_price = models.CharField(max_length=26)
+    entity_label=models.CharField(max_length=26,)
+    entity_quantity=models.IntegerField()
+    event_date=models.DateField()
+    time_slot = models.CharField(max_length=7, choices=TIME_SLOTS)    
+    
+    
 class Messages(models.Model):
     vendor = models.ForeignKey(Vendor)
     customer = models.ForeignKey(Customer)
     from_to = models.CharField(max_length=3, choices=FROM_TO_CHOICES)
     message = models.TextField()
     msg_time = models.DateTimeField(auto_now_add=True)
+    msg_type=models.CharField(max_length=7, choices=MESSAGE_CHOICES)
+
+    
+
+    
     
     @classmethod
     def create(cls,
@@ -41,7 +61,7 @@ class Messages(models.Model):
 
 
             
-        user = User.objects.filter(username=receiver_email)
+        user = User.objects.filter(email=receiver_email)
         if not user:
             return ge("POST",req_dict(request.POST),"Receiver unauthorized", error_fields=['receiver_email'],
                       code_string="RECEIVER_NOT_EXIST")
@@ -113,7 +133,7 @@ class Messages(models.Model):
         else:
             sender=sender[0] 
             
-        user = User.objects.filter(username=receiver_email)
+        user = User.objects.filter(email=receiver_email)
         if not user:
             return ge("POST",req_dict(request.POST),"Receiver unauthorized", error_fields=['receiver_email'],
                       code_string="RECEIVER_NOT_EXIST")
@@ -141,7 +161,7 @@ class Messages(models.Model):
         if from_to=="c2v":       
             return gs("POST",req_dict(request.POST),[{"id":msg.id,
                                                      "message":msg.message,
-                                                     "receiver_email":msg.vendor.user.username,
+                                                     "receiver_email":msg.vendor.user.email,
                                                       "vendor_name":msg.vendor.name,
                                                      "identifier":identifier,
                                                      "msg_time":str(msg.msg_time)[:19],
@@ -150,7 +170,7 @@ class Messages(models.Model):
         elif from_to=="v2c": 
             return gs("POST",req_dict(request.POST),[{"id":msg.id,
                                                      "message":msg.message,
-                                                     "receiver_email":msg.customer.user.username,
+                                                     "receiver_email":msg.customer.user.email,
                                                       "vendor_name":msg.customer.bride_name + " vs " + msg.customer.groom_name ,
                                                      "identifier":identifier,
                                                      "msg_time":str(msg.msg_time)[:19],
@@ -191,7 +211,7 @@ class Messages(models.Model):
                 if msg.vendor.pk not in listed:
                     listed.append(msg.vendor.pk)
                     msgs.append({"id":msg.id, "message":msg.message,
-                                                     "receiver_email":msg.vendor.user.username,
+                                                     "receiver_email":msg.vendor.user.email,
                                                      "receiver_name":msg.vendor.name,
                                                      "identifier":msg.customer.identifier,
                                                      "msg_time":str(msg.msg_time)[:19] ,
@@ -201,7 +221,7 @@ class Messages(models.Model):
                 if msg.customer.pk not in listed:
                     listed.append(msg.customer.pk)
                     msgs.append({"id":msg.id, "message":msg.message,
-                                                     "receiver_email":msg.customer.user.username,
+                                                     "receiver_email":msg.customer.user.email,
                                                      "receiver_name":msg.customer.groom_name + " vs "+msg.customer.bride_name ,
                                                      "identifier":msg.customer.identifier,
                                                      "msg_time":str(msg.msg_time)[:19] ,
