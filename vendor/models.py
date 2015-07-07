@@ -211,7 +211,6 @@ class Vendor(models.Model):
                request, 
                ):
         try:
-            import pdb;pdb.set_trace()
             email = request.POST.get('email').strip().lower()
             user=User.objects.get(username=email)
             vendor = Vendor.objects.get(user=user)
