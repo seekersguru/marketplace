@@ -15,6 +15,67 @@ signer = Signer()
 
 VENDOR_TYPES=[("banquets","Banquets"),("caterers","Caterers"),("decorators","Decorators")
                                         ,("photographers","Photographers"),("others","Others")]
+
+
+DUMMY_VENDOR_JSON=\
+{
+    "top_name":"Royal Gardens",
+    "name":"Royal Gardens at ITC",
+    "top_address":"Andheri east Mumbai",
+    "contact":"64538236478",
+    "hero_imgs":["/media/apps/ios/2x/category/banquets.jpg",
+                                "/media/apps/ios/2x/category/decorators.jpg",
+                                "/media/apps/ios/2x/category/others.jpg",
+                                ],
+    "starting_price":"10000 /-",
+    "video_links":["https://www.youtube.com/watch?v=75xp_31ET-U","https://www.youtube.com/watch?v=HwYKxmxU5NA"],
+    "360_imgs":["/media/apps/ios/2x/category/banquets.jpg","/media/apps/ios/2x/category/decorators.jpg","/media/apps/ios/2x/category/others.jpg",], 
+    
+    "sections":
+    [
+        {
+            "heading":"Descriptions",
+            "data_display":
+                [
+                    {
+                        "type":"key_value",
+                        "key_values":
+                            [
+                                ["Location","Santa Kruz east"],
+                                ["Capacity","50 - 1000"],
+                                ["Type","Party Lawn"],
+                                ["Speciality","Jain only"]
+                            ],
+                        "read_more":
+                            {
+                                "heading":"Descriptions",
+                                "data_display":
+                                    [
+                                        {
+                                            "type":"key_value",
+                                            "key_values":
+                                                [
+                                                    ["Location","Santa Kruz east"],
+                                                    ["Capacity","50 - 1000"],
+                                                    ["Type","Party Lawn"],
+                                                    ["Speciality","Jain only"]
+                                                    ["Location","Santa Kruz east"],
+                                                    ["Capacity","50 - 1000"],
+                                                    ["Type","Party Lawn"],
+                                                    ["Speciality","Jain only"]
+                                                ],
+                                                
+                                        }                                            
+                                    ]
+                             }
+                    }           
+                    
+                    
+                ]                  
+                   
+        }
+     ]
+}
 class Category(models.Model):
     name = models.CharField(max_length=250)
     key = models.CharField(max_length=250)
@@ -128,17 +189,65 @@ class Vendor(models.Model):
         vendor=vendor[0]   
         
 
-        data={"email":vendor.user.username,
-              "name":vendor.name,
-              "contact_number":vendor.contact_number,
-              "address":vendor.address,
-              "dynamic_info":{
-                    "package_text":"",
-                    "quotes_price_text":"",
-                    "bid_price_label":"",
-                }
-         
+        data= {
+    "email":vendor.user.username,
+    "top_name":"Royal Gardens",
+    "name":"Royal Gardens at ITC",
+    "top_address":"Andheri east Mumbai",
+    "contact":"64538236478",
+    "hero_imgs":["/media/apps/ios/2x/category/banquets.jpg",
+                                "/media/apps/ios/2x/category/decorators.jpg",
+                                "/media/apps/ios/2x/category/others.jpg",
+                                ],
+    "starting_price":"10000 /-",
+    "video_links":["https://www.youtube.com/watch?v=75xp_31ET-U","https://www.youtube.com/watch?v=HwYKxmxU5NA"],
+    "360_imgs":["/media/apps/ios/2x/category/banquets.jpg","/media/apps/ios/2x/category/decorators.jpg","/media/apps/ios/2x/category/others.jpg",], 
+    
+    "sections":
+    [
+        {
+            "heading":"Descriptions",
+            "data_display":
+                [
+                    {
+                        "type":"key_value",
+                        "key_values":
+                            [
+                                ["Location","Santa Kruz east"],
+                                ["Capacity","50 - 1000"],
+                                ["Type","Party Lawn"],
+                                ["Speciality","Jain only"]
+                            ],
+                        "read_more":
+                            {
+                                "heading":"Descriptions",
+                                "data_display":
+                                    [
+                                        {
+                                            "type":"key_value",
+                                            "key_values":
+                                                [
+                                                    ["Location","Santa Kruz east"],
+                                                    ["Capacity","50 - 1000"],
+                                                    ["Type","Party Lawn"],
+                                                    ["Speciality","Jain only"]
+                                                    ["Location","Santa Kruz east"],
+                                                    ["Capacity","50 - 1000"],
+                                                    ["Type","Party Lawn"],
+                                                    ["Speciality","Jain only"]
+                                                ],
+                                                
+                                        }                                            
+                                    ]
+                             }
+                    }           
+                    
+                    
+                ]                  
+                   
         }
+     ]
+}
         return gs("POST",req_dict(request.POST),{"data":data})
 
 
