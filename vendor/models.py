@@ -156,10 +156,10 @@ class Vendor(models.Model):
                         "type":"key_value",
                         "key_values":
                             [
-                                ["Location33","Santa Kruz east"],
-                                ["Capacity33","50 - 1000"],
-                                ["Type33","Party Lawn"],
-                                ["Speciality33","Jain only"]
+                                {"Location33":"Santa Kruz east"},
+                                {"Capacity33":"50 - 1000"},
+                                {"Type33":"Party Lawn"},
+                                {"Speciality33":"Jain only"}
                             ],
                         "read_more":
                             [
@@ -171,13 +171,13 @@ class Vendor(models.Model):
                                                 "type":"key_value",
                                                  "key_values":
                                                      [
-                                                         ["Capacity44","50 - 1000"],
-                                                         ["Type44","Party Lawn"],
-                                                         ["Speciality44","Jain only"],
-                                                         ["Location44","Santa Kruz east"],
-                                                         ["Capacity44","50 - 1000"],
-                                                         ["Type44","Party Lawn"],
-                                                         ["Speciality44","Jain only"]
+                                                         {"Capacity44":"50 - 1000"},
+                                                         {"Type44":"Party Lawn"},
+                                                         {"Speciality44":"Jain only"},
+                                                         {"Location44":"Santa Kruz east"},
+                                                         {"Capacity44":"50 - 1000"},
+                                                         {"Type44":"Party Lawn"},
+                                                         {"Speciality44":"Jain only"}
                                                      ],
                                                     
                                             }                                            
@@ -191,13 +191,13 @@ class Vendor(models.Model):
                                                 "type":"key_value",
                                                  "key_values":
                                                      [
-                                                         ["Capacity55","50 - 1000"],
-                                                         ["Type44","Party Lawn"],
-                                                         ["Speciality44","Jain only"],
-                                                         ["Location55","Santa Kruz east"],
-                                                         ["Capacity55","50 - 1000"],
-                                                         ["Type55","Party Lawn"],
-                                                         ["Speciality55","Jain only"]
+                                                         {"Capacity55":"50 - 1000"},
+                                                         {"Type44":"Party Lawn"},
+                                                         {"Speciality44":"Jain only"},
+                                                         {"Location55":"Santa Kruz east"},
+                                                         {"Capacity55":"50 - 1000"},
+                                                         {"Type55":"Party Lawn"},
+                                                         {"Speciality55":"Jain only"}
                                                      ],
                                                     
                                             }                                            
@@ -218,10 +218,10 @@ class Vendor(models.Model):
                         "type":"key_value",
                         "key_values":
                             [
-                                ["Location77","Santa Kruz east"],
-                                ["Capacity77","50 - 1000"],
-                                ["Type77","Party Lawn"],
-                                ["Speciality77","Jain only"]
+                                 {"Capacity66":"50 - 1000"},
+                                 {"Type66":"Party Lawn"},
+                                 {"Speciality66":"Jain only"},
+                                 {"Location66":"Santa Kruz east"},
                             ],
                         "read_more":
                             [
@@ -233,13 +233,13 @@ class Vendor(models.Model):
                                                 "type":"key_value",
                                                  "key_values":
                                                      [
-                                                         ["Capacity99","50 - 1000"],
-                                                         ["Type99","Party Lawn"],
-                                                         ["Speciality99","Jain only"],
-                                                         ["Location99","Santa Kruz east"],
-                                                         ["Capacity99","50 - 1000"],
-                                                         ["Type99","Party Lawn"],
-                                                         ["Speciality","Jain only"]
+                                                         {"Capacity99":"50 - 1000"},
+                                                         {"Type99":"Party Lawn"},
+                                                         {"Speciality99":"Jain only"},
+                                                         {"Location99":"Santa Kruz east"},
+                                                         {"Capacity99":"50 - 1000"},
+                                                         {"Type99":"Party Lawn"},
+                                                         {"Speciality99":"Jain only"}
                                                      ],
                                                     
                                             }                                            
