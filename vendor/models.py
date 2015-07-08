@@ -163,6 +163,7 @@ class Vendor(models.Model):
                         "read_more":
                             [
                                 {
+                                    "heading":"Basic Info",
                                     "data_display":
                                         [
                                             {
@@ -257,7 +258,21 @@ class Vendor(models.Model):
 
                                                          ],
                                                         
-                                                }                                            
+                                                },             
+                                                {
+                                                    "type":"key_value",
+                                                    "key_values":
+                                                    [
+                                                        {"Ouside Catering Allowed":"YES"},
+                                                    ],
+                                                        
+                                                } ,                                
+                                                {"type":"para",
+                                                    "text":"HAVE TIGH UPS WITH REVAN CATERERS"
+                                                },
+                                                {"type":"para",
+                                                     "text":"HAVE TIGH UPS WITH MM CATERERS"
+                                                },    
                                             ]
                                      },
                                  ]
