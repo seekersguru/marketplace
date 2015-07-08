@@ -129,9 +129,8 @@ class Vendor(models.Model):
         if not vendor:
             return ge("POST",req_dict(request.POST),"Vendor not exists", error_fields=['vendor_email']) 
         vendor=vendor[0]   
-        
-
-        data= {
+        data= \
+        {
         "info":{
             "email":vendor.user.username,
             "top_name":"Royal Gardens",
@@ -146,135 +145,141 @@ class Vendor(models.Model):
             "video_links":["https://www.youtube.com/watch?v=75xp_31ET-U","https://www.youtube.com/watch?v=HwYKxmxU5NA"],
             "360_imgs":["/media/apps/ios/2x/category/banquets.jpg","/media/apps/ios/2x/category/decorators.jpg","/media/apps/ios/2x/category/others.jpg",], 
         },
-    "sections":
-    [
-        {
-            "heading":"Descriptions11",
-            "data_display":
+        "sections":
+        [
+            ##BANQUET EXAMPLE
+            {#"heading":" JK Banquetes facilitis section",
+             "data_display":
                 [
                     {
                         "type":"key_value",
                         "key_values":
-                            [
-                                {"Location33":"Santa Kruz east"},
-                                {"Capacity33":"50 - 1000"},
-                                {"Type33":"Party Lawn"},
-                                {"Speciality33":"Jain only"}
-                            ],
+                        [
+                            {"Location":"Santacruz"},
+                            {"Capacity":"350-1500"},
+                            {"Type":"Banquet"},
+                            {"Speciality Cusisine":"Spanish, French, Chinese"}
+                        ],
                         "read_more":
                             [
                                 {
-                                    "heading":"Descriptions44",
                                     "data_display":
                                         [
                                             {
                                                 "type":"key_value",
-                                                 "key_values":
-                                                     [
-                                                         {"Capacity44":"50 - 1000"},
-                                                         {"Type44":"Party Lawn"},
-                                                         {"Speciality44":"Jain only"},
-                                                         {"Location44":"Santa Kruz east"},
-                                                         {"Capacity44":"50 - 1000"},
-                                                         {"Type44":"Party Lawn"},
-                                                         {"Speciality44":"Jain only"}
-                                                     ],
+                                                "key_values":
+                                                [
+                                                    {"Location":"Santacruz"},
+                                                    {"Capacity":"350-1500"},
+                                                    {"Type":"Banquet"},
+                                                    {"Speciality Cusisine":"Spanish, French, Chinese"},
+                                                    {"Outside catering":"Allowed"},
+                                                    {"Stay night":"Allowed"}
+                                                ],
                                                     
                                             }                                            
                                         ]
-                                 },
+                                },                 
+                     
+                            ]
+                    }            
+                ]
+             
+            
+            },
+            {"heading":"Map Location",
+             "data_display":
+                [
+                    {
+                        "heading":"Locate us on map",
+                        "data_display":
+                            [
                                 {
-                                    "heading":"Descriptions55",
-                                    "data_display":
-                                        [
-                                            {
-                                                "type":"key_value",
-                                                 "key_values":
-                                                     [
-                                                         {"Capacity55":"50 - 1000"},
-                                                         {"Type44":"Party Lawn"},
-                                                         {"Speciality44":"Jain only"},
-                                                         {"Location55":"Santa Kruz east"},
-                                                         {"Capacity55":"50 - 1000"},
-                                                         {"Type55":"Party Lawn"},
-                                                         {"Speciality55":"Jain only"}
-                                                     ],
-                                                    
-                                            } ,
-                                            { 
-                                             "type":"para",
-                                              "text":'''We are situated at santakruz and provide our motto is to provide best services'''
-                                              
-                                            }
+                                  "type":"map",
+                                  "long":["20", "15", "N"],
+                                  "lat":["75", "58", "E"],
+                                } ,  
+                                {"type":"para",
+                                  "text":"We are situated at santakruz and near, to reach us you can come via metro,"
+                                 },        
+                            ]                  
+                               
+                    },         
+                ]
+             
+            
+            },
+         
+            {
+                "heading":"Food Packages",
+                "data_display":
+                    [
+                        {
+                            "type":"key_values",
+                            "key_values":
+                                [
+                                    {"Package 1":"600 /- per plate"},
+                                    {"Package 2":"900 /- per plate"},
+                                    {"Package 3":"1100 /- per plate minimum 300 peoples"},
+    
+                                ],
+                            "read_more":
+                                [
+                                    {
+                                        "heading":"Descriptions44",
+                                        "data_display":
+                                            [
+                                                {
+                                                    "type":"packages",
+                                                     "package_values":
+                                                         [
+                                                            {"Package 1 ( 600 /- per plate)":
+                                                                [
+                                                                    {"Starters (Any 2)":"Veg manchurian / Hara bhara kabab / paneer pakoda"},
+                                                                    {"Cold Drink (Any 2)":"Pepsi / Coke / Jaljeera /"},
+                                                                ]
+                                                             
+                                                             },
+                                                            {"Package 2 (900 /- per plate)":
+                                                                [
+                                                                    {"Starters (Any 2)":"Veg manchurian / Hara bhara kabab / paneer pakoda"},
+                                                                    {"Cold Drink (Any 2)":"Pepsi / Coke / Jaljeera /"},
+                                                                ]
+                                                             
+                                                            },
+                                                            {"Package 3 (1100 /- per plate minimum 300 peoples)":
+                                                                [
+                                                                    {"Starters (Any 2)":"Veg manchurian / Hara bhara kabab / paneer pakoda"},
+                                                                    {"Cold Drink (Any 2)":"Pepsi / Coke / Jaljeera /"},
+                                                                ]
+                                                            
+                                                            },
 
-                                           
-                                        ]
-                                 }
-                             ]
-                    }           
-                    
-                    
-                ]                  
-                   
-        },
-        {
-            "heading":"My map implementation",
-            "data_display":
-                [
-                    {
-                      "type":"map",
-                      "long":["20", "15", "N"],
-                      "lat":["75", "58", "E"],
-                    }           
-                    
-                    
-                ]                  
-                   
-        },
-        {
-            "heading":"Descriptions 6",
-            "data_display":
-                [
-                    {
-                        "type":"key_value",
-                        "key_values":
-                            [
-                                 {"Capacity66":"50 - 1000"},
-                                 {"Type66":"Party Lawn"},
-                                 {"Speciality66":"Jain only"},
-                                 {"Location66":"Santa Kruz east"},
-                            ],
-                        "read_more":
-                            [
-                                {
-                                    "heading":"Descriptions88",
-                                    "data_display":
-                                        [
-                                            {
-                                                "type":"key_value",
-                                                 "key_values":
-                                                     [
-                                                         {"Capacity99":"50 - 1000"},
-                                                         {"Type99":"Party Lawn"},
-                                                         {"Speciality99":"Jain only"},
-                                                         {"Location99":"Santa Kruz east"},
-                                                         {"Capacity99":"50 - 1000"},
-                                                         {"Type99":"Party Lawn"},
-                                                         {"Speciality99":"Jain only"}
-                                                     ],
-                                                    
-                                            }                                            
-                                        ]
-                                 },
-                             ]
-                    }           
-                    
-                    
-                ]                  
-                   
-        }
-     ]
-}
+                                                         ],
+                                                        
+                                                }                                            
+                                            ]
+                                     },
+                                 ]
+                        }           
+                    ]                  
+            },
+            {
+                "heading":"My map implementation",
+                "data_display":
+                    [
+                        {
+                          "type":"map",
+                          "long":["20", "15", "N"],
+                          "lat":["75", "58", "E"],
+                        }           
+                        
+                        
+                    ]                  
+                       
+            },
+         ]
+    }
         return gs("POST",req_dict(request.POST),{"data":data})
 
 
