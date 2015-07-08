@@ -92,7 +92,9 @@ patterns = {##"customer_login_registration",
 	 			"required_params":["mode","image_type","vendor_email"],
 	 			"help":{"mode":"Possible values 'android' or 'ios'",
 						"image_type":"For android allowed: " + str(ALLOWED_ANDRIOD_IMAGE_TYPE)\
-						+ "<br/>For ios allowed :"+str(ALLOWED_IOS_IMAGE_TYPE)}, 
+						+ "<br/>For ios allowed :"+str(ALLOWED_IOS_IMAGE_TYPE),
+						"vendor_email":"https://docs.google.com/document/d/1YU3aJUd4bAb13LfFMMHEGMpS8lCt3utSZE6IEu1K23I/edit?usp=sharing"
+						}, 
 		 	},
 	
 

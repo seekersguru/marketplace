@@ -200,10 +200,31 @@ class Vendor(models.Model):
                                                          {"Speciality55":"Jain only"}
                                                      ],
                                                     
-                                            }                                            
+                                            } ,
+                                            { 
+                                             "type":"para",
+                                              "text":'''We are situated at santakruz and provide our motto is to provide best services'''
+                                              
+                                            }
+
+                                           
                                         ]
                                  }
                              ]
+                    }           
+                    
+                    
+                ]                  
+                   
+        },
+        {
+            "heading":"My map implementation",
+            "data_display":
+                [
+                    {
+                      "type":"map",
+                      "long":["20", "15", "N"],
+                      "lat":["75", "58", "E"],
                     }           
                     
                     
