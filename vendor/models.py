@@ -131,6 +131,60 @@ class Vendor(models.Model):
         vendor=vendor[0]   
         data=\
 {
+    "bid":{ # Show if
+        "type":"bid",
+        "event_date":1,
+        "time_slot":
+            {
+                "name":"Time Slot",
+                "value":[["morning","Morning"],["evening","Evening"],],
+            },                 
+        "package":
+            {
+                "name":"Package",
+                "value":"500 Rs per plate minimum 100 persons required"
+            },
+        "quoted":
+            {
+                "name":"Package",
+                "value":"450 Rs per plate minimum 100 persons required"
+            }, 
+        "bid_options":{
+                "name":"Bid Price",
+                "min_per_unit":430.50,
+                "quantity": #Show if
+                    {
+                        "label":"Persons",
+                        "min":{"value":50,"message":"Book for least 50 people"},
+                        "max":1500,
+                    },
+                "item":
+                    {
+                        "label":"Per plate",
+                        "min":400,
+                        "max":500
+                    
+                    }
+        
+        },
+        "text":"Some terms and conditions text at the end", #Show if
+        "button":"BID"    
+    },
+    "book":{
+        "type":"book",
+        "event_date":1,
+        "time_slot":
+            {
+                "name":"Time Slot",
+                "value":[["morning","Morning"],["evening","Evening"],],
+            },                 
+        "package":
+            {
+                "name":"Package",
+                "value":"500 Rs per plate minimum 100 persons required"
+            },
+        "button":"BOOK"
+    },
     "info": {
       "contact": "23715656",
       "starting_price": "300 /-",
@@ -212,6 +266,7 @@ class Vendor(models.Model):
       },
       {
         "heading": "Locate us on map",
+         "type": "map",
         "data_display": [
           {
             "lat": [

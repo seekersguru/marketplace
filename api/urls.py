@@ -6,6 +6,7 @@ urlpatterns = [
 	## Home page for apis 
     url(r'^$','api.views.index', name='api_index'),
 ]
+from wedwise_messages.models import MESSAGE_TYPES
 from vendor.models import VENDOR_TYPES
 patterns = {##"customer_login_registration",
 	
@@ -97,14 +98,31 @@ patterns = {##"customer_login_registration",
 						}, 
 		 	},
 	
-
+#         elif msg_type=="bid":
+#             pass
+#             book_json (char)
+#             event_date (date)
+#             time_slot  (char)
+#             bid_json  (json)
+#             bid_price  (float)
+#             bid_quantity (int)
+#         elif msg_type=="message":
+#             pass
+#             book_json (char)
+#             event_date (date)
+#             time_slot  (char)
+#             bid_json  (json)
+#             bid_price  (float)
+#             bid_quantity (int)		
 		"customer_vendor_message_create":
 			{
 				"order":-11,
 				"type":"POST",
-	 			"params":["identifier","receiver_email","message","from_to"],
+	 			"params":["identifier","receiver_email","message","from_to",
+						"msg_type","bid_json","book_json","event_date","time_slot",
+						"bid_price","bid_quantity"],
 	 			"required_params":["identifier","receiver_email","message","from_to"],
-	 			"selects":{"from_to": FROM_TO_CHOICES }
+	 			"selects":{"from_to": FROM_TO_CHOICES,"msg_type":MESSAGE_TYPES}
 		 	},
 		"customer_vendor_message_detail":
 			{

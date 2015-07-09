@@ -6,6 +6,9 @@ from django import forms
 from django.core.exceptions import ValidationError
 from api.utils import get_error as ge , get_success as gs ,req_dict
 from django.contrib.auth.models import User
+MESSAGE_TYPES=["message","bid","book"]
+MESSAGE_TYPES_CHOICES=[[e[0],e[0]] for e in MESSAGE_TYPES]
+import datetime
 
 class Messages(models.Model):
     vendor = models.ForeignKey(Vendor)
@@ -13,11 +16,28 @@ class Messages(models.Model):
     from_to = models.CharField(max_length=3, choices=FROM_TO_CHOICES)
     message = models.TextField()
     msg_time = models.DateTimeField(auto_now_add=True)
+    #
+    msg_type = models.CharField(max_length=7, choices=MESSAGE_TYPES_CHOICES)
     
+    book_json = models.CharField(max_length=1024,blank=True,default=None )
+    event_date=models.DateField(blank=True,default=None )
+    time_slot = models.CharField(max_length=128,blank=True,default=None  ) 
+    bid_json = models.CharField(max_length=1024,blank=True,default=None )
+    bid_price = models.CharField(max_length=100,blank=True,default=None  )    
+    bid_quantity = models.IntegerField(blank=True,default=None  ) 
+    status = models.CharField(max_length=1,blank=True,default=None  ) 
+
+
+
+ 
     @classmethod
     def create(cls,
-               request, 
+               request,
                ):
+        msg_type=request.POST.get("msg_type")
+        if msg_type not in MESSAGE_TYPES:
+            return ge("POST",req_dict(request.POST),"Invalid message type", error_fields=['msg_type']) 
+ 
         receiver_email = request.POST.get('receiver_email').strip().lower()
         identifier = request.POST.get('identifier')
         message = request.POST.get('message')
@@ -64,13 +84,51 @@ class Messages(models.Model):
         else:
             vendor=sender
             customer=receiver
+
+
+        event_date =request.POST.get("event_date",None)
+        time_slot = request.POST.get("time_slot",None)
+        bid_json = request.POST.get("bid_json","")
+        book_json = request.POST.get("bid_json","")
+        bid_price  =request.POST.get("bid_price","").strip()  
+        bid_quantity  =request.POST.get("bid_quantity","").strip()            
+        if msg_type in ["bid","book"]: 
             
-        
+            try:
+                event_date=datetime.date(*[int(e) for e in event_date.split("-")])
+            except:
+                return ge("POST",req_dict(request.POST),"Invalid event_date", error_fields=['event_date']) 
+
+            if msg_type=="bid":
+                if not bid_json:
+                    return ge("POST",req_dict(request.POST),"No bid_json", error_fields=['bid_json']) 
+                if bid_price:
+                    try:
+                        float(bid_price)
+                    except:
+                        return ge("POST",req_dict(request.POST),"Invalid bid_price", error_fields=['bid_price']) 
+            
+                if bid_quantity:
+                    try:
+                        int(bid_quantity)
+                    except:
+                        return ge("POST",req_dict(request.POST),"Invalid bid_quantity", error_fields=['bid_quantity']) 
+            elif msg_type=="book":
+                if not book_json:
+                    return ge("POST",req_dict(request.POST),"No book_json", error_fields=['book_json']) 
+
         msg= Messages(
                vendor=vendor,
                 customer=customer,
                 from_to=from_to,
-                message =message
+                message =message,
+                ## Added for bif and book
+                event_date = event_date,
+                time_slot = time_slot,
+                bid_json = bid_json,
+                book_json =book_json,
+                bid_price = bid_price,
+                bid_quantity =bid_quantity,
                 )
         msg.save()
         if from_to=="c2v":
@@ -84,6 +142,8 @@ class Messages(models.Model):
                                                  "identifier":identifier,
                                                  "msg_time":str(msg.msg_time)[:19]
                                                  })
+
+
 
 
     @classmethod
@@ -212,27 +272,4 @@ class Messages(models.Model):
 
         return gs("POST",req_dict(request.POST),msgs) 
 
-class Book(models.Model):
-    vendor = models.ForeignKey(Vendor)
-    customer = models.ForeignKey(Customer)
-    from_to = models.CharField(max_length=3, choices=FROM_TO_CHOICES)
-    msg_time = models.DateTimeField()
-    quoted_price_label= models.CharField(max_length=512) 
-    message = models.TextField()
-
-
-class Bid(models.Model):
-    vendor = models.ForeignKey(Vendor)
-    customer = models.ForeignKey(Customer)
-    from_to = models.CharField(max_length=2, choices=FROM_TO_CHOICES)
-    message = models.TextField()
-    msg_time = models.DateTimeField()
-    event_date=models.DateField()   
-    quoted_price= models.CharField(max_length=512) 
-    bid_price= models.FloatField() 
-    quoted_price_label= models.CharField(max_length=512) 
-    bid_price_entity= models.FloatField() 
-    bid_price_entity_label= models.CharField(max_length=512) 
-
-#CHOICES_VENDOR_ROLE=[('Admin','Admin'), ('Reception','Reception')] 
 

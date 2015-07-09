@@ -8,7 +8,7 @@ from api.utils import get_error as ge , get_success as gs
 import utils
 from customer.models import Customer
 from vendor.models import Category, VendorLead, Vendor
-from wedwise_messages.models import Messages,Bid,Book
+from wedwise_messages.models import Messages
 def check_basic_validations(pattern_name,request,req_type):
     required=patterns[pattern_name].get("required_params",None)
     if req_type =="POST":
