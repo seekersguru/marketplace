@@ -301,7 +301,7 @@ class Vendor(models.Model):
       "heading": "Food Packages",
       "data_display": [
         {
-          "type": "key_values",
+          "type": "key_value",
           "key_values": [
             {
               "Package 1 (Lunch)": "600 /- per plate"
