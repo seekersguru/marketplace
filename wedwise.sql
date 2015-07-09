@@ -292,7 +292,7 @@ CREATE TABLE `django_migrations` (
   `name` varchar(255) NOT NULL,
   `applied` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -301,7 +301,7 @@ CREATE TABLE `django_migrations` (
 
 LOCK TABLES `django_migrations` WRITE;
 /*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
-INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2015-06-28 17:31:36'),(2,'auth','0001_initial','2015-06-28 17:31:50'),(3,'admin','0001_initial','2015-06-28 17:31:52'),(4,'customer','0001_initial','2015-06-28 17:31:53'),(5,'sessions','0001_initial','2015-06-28 17:31:54'),(6,'vendor','0001_initial','2015-06-28 17:31:59'),(7,'customer','0002_auto_20150629_1300','2015-06-29 07:32:28'),(8,'customer','0003_auto_20150629_1301','2015-06-29 07:32:28'),(9,'customer','0004_auto_20150629_1301','2015-06-29 07:32:29'),(10,'vendor','0002_auto_20150702_1849','2015-07-02 13:19:48'),(11,'vendor','0003_vendorlead_name','2015-07-02 13:19:49'),(12,'vendor','0004_auto_20150702_1850','2015-07-02 13:20:46'),(13,'vendor','0005_auto_20150702_1920','2015-07-02 13:50:15'),(14,'vendor','0006_vendor_identifier','2015-07-02 14:36:28'),(15,'vendor','0007_vendor_dynamic_info','2015-07-02 17:58:44'),(16,'vendor','0008_auto_20150704_0910','2015-07-04 09:10:55'),(17,'wedwise_messages','0001_initial','2015-07-04 19:53:45'),(18,'wedwise_messages','0002_auto_20150704_2010','2015-07-04 20:10:14'),(19,'vendor','0009_remove_vendor_email','2015-07-07 16:34:47'),(20,'wedwise_messages','0003_auto_20150707_1431','2015-07-07 16:34:47'),(21,'wedwise_messages','0004_auto_20150709_1426','2015-07-09 14:36:28'),(22,'wedwise_messages','0005_auto_20150709_1706','2015-07-09 17:07:08'),(23,'wedwise_messages','0006_auto_20150709_1710','2015-07-09 17:10:13');
+INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2015-06-28 17:31:36'),(2,'auth','0001_initial','2015-06-28 17:31:50'),(3,'admin','0001_initial','2015-06-28 17:31:52'),(4,'customer','0001_initial','2015-06-28 17:31:53'),(5,'sessions','0001_initial','2015-06-28 17:31:54'),(6,'vendor','0001_initial','2015-06-28 17:31:59'),(7,'customer','0002_auto_20150629_1300','2015-06-29 07:32:28'),(8,'customer','0003_auto_20150629_1301','2015-06-29 07:32:28'),(9,'customer','0004_auto_20150629_1301','2015-06-29 07:32:29'),(10,'vendor','0002_auto_20150702_1849','2015-07-02 13:19:48'),(11,'vendor','0003_vendorlead_name','2015-07-02 13:19:49'),(12,'vendor','0004_auto_20150702_1850','2015-07-02 13:20:46'),(13,'vendor','0005_auto_20150702_1920','2015-07-02 13:50:15'),(14,'vendor','0006_vendor_identifier','2015-07-02 14:36:28'),(15,'vendor','0007_vendor_dynamic_info','2015-07-02 17:58:44'),(16,'vendor','0008_auto_20150704_0910','2015-07-04 09:10:55'),(17,'wedwise_messages','0001_initial','2015-07-04 19:53:45'),(18,'wedwise_messages','0002_auto_20150704_2010','2015-07-04 20:10:14'),(19,'vendor','0009_remove_vendor_email','2015-07-07 16:34:47'),(20,'wedwise_messages','0003_auto_20150707_1431','2015-07-07 16:34:47'),(21,'wedwise_messages','0004_auto_20150709_1426','2015-07-09 14:36:28'),(22,'wedwise_messages','0005_auto_20150709_1706','2015-07-09 17:07:08'),(23,'wedwise_messages','0006_auto_20150709_1710','2015-07-09 17:10:13'),(24,'wedwise_messages','0007_remove_messages_msg_type','2015-07-09 18:01:06'),(25,'wedwise_messages','0008_messages_msg_type','2015-07-09 18:01:06');
 /*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -436,19 +436,20 @@ CREATE TABLE `wedwise_messages_messages` (
   `msg_time` datetime NOT NULL,
   `customer_id` int(11) NOT NULL,
   `vendor_id` int(11) NOT NULL,
-  `bid_json` varchar(1024) NOT NULL,
-  `bid_price` varchar(100) NOT NULL,
-  `bid_quantity` int(11) NOT NULL,
-  `book_json` varchar(1024) NOT NULL,
-  `event_date` date NOT NULL,
-  `status` varchar(1) NOT NULL,
+  `bid_json` varchar(1024) DEFAULT '',
+  `bid_price` varchar(100) DEFAULT '',
+  `bid_quantity` int(11) DEFAULT NULL,
+  `book_json` varchar(1024) DEFAULT '',
+  `event_date` date DEFAULT NULL,
+  `status` varchar(1) DEFAULT '',
   `time_slot` varchar(128) NOT NULL,
+  `msg_type` varchar(7) DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `wedwise_messages_messages_cb24373b` (`customer_id`),
   KEY `wedwise_messages_messages_96b1f972` (`vendor_id`),
   CONSTRAINT `wedwise_messages__vendor_id_5a214c5fcbedd4d3_fk_vendor_vendor_id` FOREIGN KEY (`vendor_id`) REFERENCES `vendor_vendor` (`id`),
   CONSTRAINT `wedwis_customer_id_4d15317179ef6bc3_fk_customer_customer_user_id` FOREIGN KEY (`customer_id`) REFERENCES `customer_customer` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -457,6 +458,7 @@ CREATE TABLE `wedwise_messages_messages` (
 
 LOCK TABLES `wedwise_messages_messages` WRITE;
 /*!40000 ALTER TABLE `wedwise_messages_messages` DISABLE KEYS */;
+INSERT INTO `wedwise_messages_messages` VALUES (1,'v2c','vemdor to customer message ','2015-07-09 18:20:15',53,3,'','',0,'',NULL,NULL,'','message');
 /*!40000 ALTER TABLE `wedwise_messages_messages` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -469,4 +471,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-07-09 23:18:58
+-- Dump completed on 2015-07-09 23:51:41

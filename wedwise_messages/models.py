@@ -7,7 +7,8 @@ from django.core.exceptions import ValidationError
 from api.utils import get_error as ge , get_success as gs ,req_dict
 from django.contrib.auth.models import User
 MESSAGE_TYPES=["message","bid","book"]
-MESSAGE_TYPES_CHOICES=[[e[0],e[0]] for e in MESSAGE_TYPES]
+MESSAGE_TYPES_CHOICES=[  [e,e ] for e in MESSAGE_TYPES]
+print MESSAGE_TYPES_CHOICES
 import datetime
 
 class Messages(models.Model):
@@ -17,7 +18,7 @@ class Messages(models.Model):
     message = models.TextField()
     msg_time = models.DateTimeField(auto_now_add=True)
     #
-    msg_type = models.CharField(max_length=7, choices=MESSAGE_TYPES_CHOICES)
+    msg_type = models.CharField(max_length=7, choices=MESSAGE_TYPES_CHOICES , default="message")
     
     book_json = models.CharField(max_length=1024,blank=True,default=None )
     event_date=models.DateField(blank=True,default=None )
@@ -117,6 +118,11 @@ class Messages(models.Model):
                 if not book_json:
                     return ge("POST",req_dict(request.POST),"No book_json", error_fields=['book_json']) 
 
+        
+        if not event_date:
+            event_date=None
+        if not  bid_quantity:
+            bid_quantity=0
         msg= Messages(
                vendor=vendor,
                 customer=customer,
