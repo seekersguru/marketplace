@@ -6,7 +6,7 @@ urlpatterns = [
 	## Home page for apis 
     url(r'^$','api.views.index', name='api_index'),
 ]
-from wedwise_messages.models import MESSAGE_TYPES
+from wedwise_messages.models import MESSAGE_TYPES_CHOICES
 from vendor.models import VENDOR_TYPES
 patterns = {##"customer_login_registration",
 	
@@ -118,11 +118,11 @@ patterns = {##"customer_login_registration",
 			{
 				"order":-11,
 				"type":"POST",
-	 			"params":["identifier","receiver_email","message","from_to",
+	 			"params":["device_id","push_data","identifier","receiver_email","message","from_to",
 						"msg_type","bid_json","book_json","event_date","time_slot",
 						"bid_price","bid_quantity"],
-	 			"required_params":["identifier","receiver_email","message","from_to"],
-	 			"selects":{"from_to": FROM_TO_CHOICES,"msg_type":MESSAGE_TYPES}
+	 			"required_params":["device_id","push_data","identifier","receiver_email","message","from_to"],
+	 			"selects":{"from_to": FROM_TO_CHOICES,"msg_type":MESSAGE_TYPES_CHOICES}
 		 	},
 		"customer_vendor_message_detail":
 			{
