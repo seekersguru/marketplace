@@ -252,10 +252,10 @@ class Vendor(models.Model):
           "read_more": [
               {
                 "heading": "Food Packages",
+                "type": "packages",
                 "data_display": [
                   {
                     "Lunch": {
-                      "type": "packages",
                       "package_values": [
                         {
                           "Package 1 ( 600 /- per plate)": [
@@ -290,7 +290,6 @@ class Vendor(models.Model):
                       ]
                     },
                     "Dinner": {
-                      "type": "packages",
                       "package_values": [
                         {
                           "Package 1 ( 600 /- per plate)": [
