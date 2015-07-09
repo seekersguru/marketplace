@@ -156,6 +156,7 @@ class Vendor(models.Model):
     },
     "sections": [
       {
+       "heading": "Basic Info",
         "data_display": [
           {
             "type": "key_value",
@@ -208,7 +209,7 @@ class Vendor(models.Model):
             ]
           }
         ],
-        "heading": "Basic Info"
+        
       },
       {
         "heading": "Locate us on map",
@@ -239,71 +240,93 @@ class Vendor(models.Model):
             "type": "key_values",
             "key_values": [
               {
-                "Package 1": "600 /- per plate"
+                "Package 1 (Lunch)": "600 /- per plate"
               },
               {
-                "Package 2": "900 /- per plate"
+                "Package 2 (Dinner)": "900 /- per plate"
               },
               {
-                "Package 3": "1100 /- per plate minimum 300 peoples"
+                "Package 3 (Lunch/Dinner)": "1100 /- per plate minimum 300 peoples"
               }
             ],
-            "read_more": [
+          "read_more": [
               {
+                "heading": "Food Packages",
                 "data_display": [
                   {
-                    "type": "packages",
-                    "package_values": [
-                      {
-                        "Package 1 ( 600 /- per plate)": [
-                          {
-                            "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
-                          },
-                          {
-                            "Cold Drink (Any 2)": "Pepsi / Coke / Jaljeera /"
-                          }
-                        ]
-                      },
-                      {
-                        "Package 2 (900 /- per plate)": [
-                          {
-                            "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
-                          },
-                          {
-                            "Cold Drink (Any 2)": "Pepsi / Coke / Jaljeera /"
-                          }
-                        ]
-                      },
-                      {
-                        "Package 3 (1100 /- per plate minimum 300 peoples)": [
-                          {
-                            "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
-                          },
-                          {
-                            "Cold Drink (Any 2)": "Pepsi / Coke / Jaljeera /"
-                          }
-                        ]
-                      }
-                    ]
-                  },
-                  {
-                    "key_values": [
-                      {
-                        "Ouside Catering Allowed": "YES"
-                      }
-                    ],
-                    "type": "key_value"
-                  },
-                  {
-                    "text": "HAVE TIGH UPS WITH REVAN CATERERS",
-                    "type": "para"
-                  },
-                  {
-                    "text": "HAVE TIGH UPS WITH MM CATERERS",
-                    "type": "para"
+                    "Lunch": {
+                      "type": "packages",
+                      "package_values": [
+                        {
+                          "Package 1 ( 600 /- per plate)": [
+                            {
+                              "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
+                            },
+                            {
+                              "Cold Drink (Any 2)": "Pepsi / Coke / Jaljeera /"
+                            }
+                          ]
+                        },
+                        {
+                          "Package 2 (900 /- per plate)": [
+                            {
+                              "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
+                            },
+                            {
+                              "Cold Drink (Any 2)": "Pepsi / Coke / Jaljeera /"
+                            }
+                          ]
+                        },
+                        {
+                          "Package 3 (1100 /- per plate minimum 300 peoples)": [
+                            {
+                              "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
+                            },
+                            {
+                              "Cold Drink (Any 2)": "Pepsi / Coke / Jaljeera /"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "Dinner": {
+                      "type": "packages",
+                      "package_values": [
+                        {
+                          "Package 1 ( 600 /- per plate)": [
+                            {
+                              "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
+                            },
+                            {
+                              "Cold Drink (Any 2)": "Pepsi / Coke / Jaljeera /"
+                            }
+                          ]
+                        },
+                        {
+                          "Package 2 (900 /- per plate)": [
+                            {
+                              "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
+                            },
+                            {
+                              "Cold Drink (Any 2)": "Pepsi / Coke / Jaljeera /"
+                            }
+                          ]
+                        },
+                        {
+                          "Package 3 (1100 /- per plate minimum 300 peoples)": [
+                            {
+                              "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
+                            },
+                            {
+                              "Cold Drink (Any 2)": "Pepsi / Coke / Jaljeera /"
+                            }
+                          ]
+                        }
+                      ]
+                    }
                   }
-                ],
-                "heading": "Descriptions44"
+                ]
+                
               }
             ]
           }
