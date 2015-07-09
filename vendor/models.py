@@ -129,248 +129,189 @@ class Vendor(models.Model):
         if not vendor:
             return ge("POST",req_dict(request.POST),"Vendor not exists", error_fields=['vendor_email']) 
         vendor=vendor[0]   
-        data= \
-        {
-        "bid":{ # Show if
-            "type":"bid",
-            "event_date":1,
-            "time_slot":
-                {
-                    "name":"Time Slot",
-                    "value":[["morning","Morning"],["evening","Evening"],],
-                },                 
-            "package":
-                {
-                    "name":"Package",
-                    "value":"500 Rs per plate minimum 100 persons required"
-                },
-            "quoted":
-                {
-                    "name":"Package",
-                    "value":"450 Rs per plate minimum 100 persons required"
-                }, 
-            "bid_options":{
-                    "name":"Bid Price",
-                    "min_per_unit":430.50,
-                    "quantity": #Show if
-                        {
-                            "label":"Persons",
-                            "min":{"value":50,"message":"Book for least 50 people"},
-                            "max":1500,
-                        },
-                    "item":
-                        {
-                            "label":"Per plate",
-                            "min":400,
-                            "max":500
-                        
-                        }
-            
-            },
-            "text":"Some terms and conditions text at the end", #Show if
-            "button":"BID"    
-        },
-        "book":{
-            "type":"book",
-            "event_date":1,
-            "time_slot":
-                {
-                    "name":"Time Slot",
-                    "value":[["morning","Morning"],["evening","Evening"],],
-                },                 
-            "package":
-                {
-                    "name":"Package",
-                    "value":"500 Rs per plate minimum 100 persons required"
-                },
-            "button":"BOOK"
-        },
-        "info":{
-            "email":vendor.user.username,
-            "top_name":"Royal Gardens",
-            "name":"Royal Gardens at ITC",
-            "top_address":"Andheri east Mumbai",
-            "contact":"64538236478",
-            "hero_imgs":["/media/apps/ios/2x/category/banquets.jpg",
-                                        "/media/apps/ios/2x/category/decorators.jpg",
-                                        "/media/apps/ios/2x/category/others.jpg",
-                                        ],
-            "starting_price":"10000 /-",
-            "video_links":["https://www.youtube.com/watch?v=75xp_31ET-U","https://www.youtube.com/watch?v=HwYKxmxU5NA"],
-            "360_imgs":["/media/apps/ios/2x/category/banquets.jpg","/media/apps/ios/2x/category/decorators.jpg","/media/apps/ios/2x/category/others.jpg",], 
-        },
-        "sections":
-        [
+        data=\
+{
+  "data": {
+    "info": {
+      "contact": "23715656",
+      "starting_price": "300 /-",
+      "top_name": "Jafer Bhai's Delhi Darbar",
+      "hero_imgs": [
+        "/media/apps/ios/2x/category/banquets.jpg",
+        "/media/apps/ios/2x/category/decorators.jpg",
+        "/media/apps/ios/2x/category/others.jpg"
+      ],
+      "360_imgs": [
+        "/media/apps/ios/2x/category/banquets.jpg",
+        "/media/apps/ios/2x/category/decorators.jpg",
+        "/media/apps/ios/2x/category/others.jpg"
+      ],
+      "top_address": "Noor Baug",
+      "video_links": [
+        "https://www.youtube.com/watch?v=75xp_31ET-U",
+        "https://www.youtube.com/watch?v=HwYKxmxU5NA"
+      ],
+      "email": "jaffer@wedwise.com",
+      "name": "Jafer Bhai's Delhi Darbar"
+    },
+    "sections": [
+      {
+        "data_display": [
           {
-            "data_display": [
+            "type": "key_value",
+            "key_values": [
               {
-                "key_values": [
+                "Veg": "YES"
+              },
+              {
+                "Jain only": "YES"
+              },
+              {
+                "Non-Veg": "YES"
+              }
+            ],
+            "read_more": [
+              {
+                "heading": "Basic Info",
+                "data_display": [
                   {
-                    "Location": "Santacruz"
-                  },
-                  {
-                    "Capacity": "350-1500"
-                  },
-                  {
-                    "Type": "Banquet"
-                  },
-                  {
-                    "Speciality Cusisine": "Spanish, French, Chinese"
-                  }
-                ],
-                "type": "key_value",
-                "read_more": [
-                  {
-                    "data_display": [
+                    "type": "key_value",
+                    "key_values": [
                       {
-                        "key_values": [
-                          {
-                            "Location": "Santacruz"
-                          },
-                          {
-                            "Capacity": "350-1500"
-                          },
-                          {
-                            "Type": "Banquet"
-                          },
-                          {
-                            "Speciality Cusisine": "Spanish, French, Chinese"
-                          },
-                          {
-                            "Outside catering": "Allowed"
-                          },
-                          {
-                            "Stay night": "Allowed"
-                          }
-                        ],
-                        "type": "key_value"
+                        "Name": "Jafer Bhai's Delhi Darbar"
+                      },
+                      {
+                        "Address": "Noor Baug"
+                      },
+                      {
+                        "Phone": 23715656
+                      },
+                      {
+                        "Veg": "YES"
+                      },
+                      {
+                        "Jain only": "YES"
+                      },
+                      {
+                        "Non-Veg": "YES"
+                      },
+                      {
+                        "Speciliaty Cuisine": "Moughlai, Indian"
+                      },
+                      {
+                        "Years in Business": "35"
                       }
-                    ],
-                    "heading": "Basic Info"
+                    ]
                   }
                 ]
               }
             ]
+          }
+        ],
+        "heading": "Basic Info"
+      },
+      {
+        "heading": "Locate us on map",
+        "data_display": [
+          {
+            "lat": [
+              "75",
+              "58",
+              "E"
+            ],
+            "type": "map",
+            "long": [
+              "20",
+              "15",
+              "N"
+            ]
           },
           {
-            "data_display": [
+            "text": "Description how to reach",
+            "type": "para"
+          }
+        ]
+      },
+      {
+        "heading": "Food Packages",
+        "data_display": [
+          {
+            "type": "key_values",
+            "key_values": [
               {
-                "lat": [
-                  "75",
-                  "58",
-                  "E"
-                ],
-                "type": "map",
-                "long": [
-                  "20",
-                  "15",
-                  "N"
-                ]
+                "Package 1": "600 /- per plate"
               },
               {
-                "text": "We are situated at santakruz and near, to reach us you can come via metro,",
-                "type": "para"
+                "Package 2": "900 /- per plate"
+              },
+              {
+                "Package 3": "1100 /- per plate minimum 300 peoples"
               }
             ],
-            "heading": "Locate us on map"
-          },
-          {
-            "data_display": [
+            "read_more": [
               {
-                "key_values": [
+                "data_display": [
                   {
-                    "Package 1": "600 /- per plate"
-                  },
-                  {
-                    "Package 2": "900 /- per plate"
-                  },
-                  {
-                    "Package 3": "1100 /- per plate minimum 300 peoples"
-                  }
-                ],
-                "type": "key_values",
-                "read_more": [
-                  {
-                    "data_display": [
+                    "type": "packages",
+                    "package_values": [
                       {
-                        "type": "packages",
-                        "package_values": [
+                        "Package 1 ( 600 /- per plate)": [
                           {
-                            "Package 1 ( 600 /- per plate)": [
-                              {
-                                "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
-                              },
-                              {
-                                "Cold Drink (Any 2)": "Pepsi / Coke / Jaljeera /"
-                              }
-                            ]
+                            "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
                           },
                           {
-                            "Package 2 (900 /- per plate)": [
-                              {
-                                "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
-                              },
-                              {
-                                "Cold Drink (Any 2)": "Pepsi / Coke / Jaljeera /"
-                              }
-                            ]
-                          },
-                          {
-                            "Package 3 (1100 /- per plate minimum 300 peoples)": [
-                              {
-                                "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
-                              },
-                              {
-                                "Cold Drink (Any 2)": "Pepsi / Coke / Jaljeera /"
-                              }
-                            ]
+                            "Cold Drink (Any 2)": "Pepsi / Coke / Jaljeera /"
                           }
                         ]
                       },
                       {
-                        "key_values": [
+                        "Package 2 (900 /- per plate)": [
                           {
-                            "Ouside Catering Allowed": "YES"
+                            "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
+                          },
+                          {
+                            "Cold Drink (Any 2)": "Pepsi / Coke / Jaljeera /"
                           }
-                        ],
-                        "type": "key_value"
+                        ]
                       },
                       {
-                        "text": "HAVE TIGH UPS WITH REVAN CATERERS",
-                        "type": "para"
-                      },
+                        "Package 3 (1100 /- per plate minimum 300 peoples)": [
+                          {
+                            "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
+                          },
+                          {
+                            "Cold Drink (Any 2)": "Pepsi / Coke / Jaljeera /"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "key_values": [
                       {
-                        "text": "HAVE TIGH UPS WITH MM CATERERS",
-                        "type": "para"
+                        "Ouside Catering Allowed": "YES"
                       }
                     ],
-                    "heading": "Descriptions44"
+                    "type": "key_value"
+                  },
+                  {
+                    "text": "HAVE TIGH UPS WITH REVAN CATERERS",
+                    "type": "para"
+                  },
+                  {
+                    "text": "HAVE TIGH UPS WITH MM CATERERS",
+                    "type": "para"
                   }
-                ]
-              }
-            ],
-            "heading": "Food Packages"
-          },
-          {
-            "data_display": [
-              {
-                "lat": [
-                  "75",
-                  "58",
-                  "E"
                 ],
-                "type": "map",
-                "long": [
-                  "20",
-                  "15",
-                  "N"
-                ]
+                "heading": "Descriptions44"
               }
-            ],
-            "heading": "My map implementation"
+            ]
           }
         ]
-    }
+      }
+    ]
+  }
+}
         return gs("POST",req_dict(request.POST),{"data":data})
 
 
