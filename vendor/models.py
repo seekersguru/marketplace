@@ -258,7 +258,10 @@ class Vendor(models.Model):
                     "Lunch": {
                       "package_values": [
                         {
-                          "Package 1 ( 600 /- per plate)": [
+                          "quoted":{"Quoted Price":"1200"},
+                          "minimum":{"Minimum Price":"1100"},
+                          "label":"Veg Package 1 ( 600 /- per plate)",
+                          "options": [
                             {
                               "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
                             },
@@ -268,7 +271,10 @@ class Vendor(models.Model):
                           ]
                         },
                         {
-                          "Package 2 (900 /- per plate)": [
+                          "quoted":{"Quoted Price":"1200"},
+                          "minimum":{"Minimum Price":"1100"},
+                          "label":"Veg Package 1 ( 600 /- per plate)",
+                          "options": [
                             {
                               "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
                             },
@@ -278,7 +284,10 @@ class Vendor(models.Model):
                           ]
                         },
                         {
-                          "Package 3 (1100 /- per plate minimum 300 peoples)": [
+                          "quoted":{"Quoted Price":"1200"},
+                          "minimum":{"Minimum Price":"1100"},
+                          "label":"Veg Package 1 ( 600 /- per plate)",
+                          "options": [
                             {
                               "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
                             },
@@ -286,13 +295,16 @@ class Vendor(models.Model):
                               "Cold Drink (Any 2)": "Pepsi / Coke / Jaljeera /"
                             }
                           ]
-                        }
+                        },
                       ]
                     },
                     "Dinner": {
                       "package_values": [
                         {
-                          "Package 1 ( 600 /- per plate)": [
+                          "quoted":{"Quoted Price":"1200"},
+                          "minimum":{"Minimum Price":"1100"},
+                          "label":"Veg Package 1 ( 600 /- per plate)",
+                          "options": [
                             {
                               "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
                             },
@@ -302,7 +314,10 @@ class Vendor(models.Model):
                           ]
                         },
                         {
-                          "Package 2 (900 /- per plate)": [
+                          "quoted":{"Quoted Price":"1200"},
+                          "minimum":{"Minimum Price":"1100"},
+                          "label":"Veg Package 1 ( 600 /- per plate)",
+                          "options": [
                             {
                               "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
                             },
@@ -312,7 +327,10 @@ class Vendor(models.Model):
                           ]
                         },
                         {
-                          "Package 3 (1100 /- per plate minimum 300 peoples)": [
+                          "quoted":{"Quoted Price":"1200"},
+                          "minimum":{"Minimum Price":"1100"},
+                          "label":"Veg Package 1 ( 600 /- per plate)",
+                          "options": [
                             {
                               "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
                             },
