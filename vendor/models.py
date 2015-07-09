@@ -131,280 +131,313 @@ class Vendor(models.Model):
         vendor=vendor[0]   
         data=\
 {
-    "bid":{ # Show if
-        "type":"bid",
-        "event_date":1,
-        "time_slot":
-            {
-                "name":"Time Slot",
-                "value":[["morning","Morning"],["evening","Evening"],],
-            },                 
-        "package":
-            {
-                "name":"Package",
-                "value":"500 Rs per plate minimum 100 persons required"
-            },
-        "quoted":
-            {
-                "name":"Package",
-                "value":"450 Rs per plate minimum 100 persons required"
-            }, 
-        "bid_options":{
-                "name":"Bid Price",
-                "min_per_unit":430.50,
-                "quantity": #Show if
-                    {
-                        "label":"Persons",
-                        "min":{"value":50,"message":"Book for least 50 people"},
-                        "max":1500,
-                    },
-                "item":
-                    {
-                        "label":"Per plate",
-                        "min":400,
-                        "max":500
-                    
-                    }
-        
+  "bid": {
+    "type": "bid",
+    "event_date": 1,
+    "time_slot": {
+      "name": "Time Slot",
+      "value": [
+        [
+          "morning",
+          "Morning"
+        ],
+        [
+          "evening",
+          "Evening"
+        ]
+      ]
+    },
+    "package": {
+      "name": "Package",
+      "value": "500 Rs per plate minimum 100 persons required"
+    },
+    "quoted": {
+      "name": "Package",
+      "value": "450 Rs per plate minimum 100 persons required"
+    },
+    "bid_options": {
+      "name": "Bid Price",
+      "min_per_unit": 430.5,
+      "quantity": {
+        "label": "Persons",
+        "min": {
+          "value": 50,
+          "message": "Book for least 50 people"
         },
-        "text":"Some terms and conditions text at the end", #Show if
-        "button":"BID"    
+        "max": 1500
+      },
+      "item": {
+        "label": "Per plate",
+        "min": 400,
+        "max": 500
+      }
     },
-    "book":{
-        "type":"book",
-        "event_date":1,
-        "time_slot":
+    "text": "Some terms and conditions text at the end",
+    "button": "BID"
+  },
+  "book": {
+    "type": "book",
+    "event_date": 1,
+    "time_slot": {
+      "name": "Time Slot",
+      "value": [
+        [
+          "morning",
+          "Morning"
+        ],
+        [
+          "evening",
+          "Evening"
+        ]
+      ]
+    },
+    "package": {
+      "name": "Package",
+      "value": "500 Rs per plate minimum 100 persons required"
+    },
+    "button": "BOOK"
+  },
+  "info": {
+    "contact": "23715656",
+    "starting_price": "300 /-",
+    "top_name": "Jafer Bhai's Delhi Darbar",
+    "hero_imgs": [
+      "/media/apps/ios/2x/category/banquets.jpg",
+      "/media/apps/ios/2x/category/decorators.jpg",
+      "/media/apps/ios/2x/category/others.jpg"
+    ],
+    "360_imgs": [
+      "/media/apps/ios/2x/category/banquets.jpg",
+      "/media/apps/ios/2x/category/decorators.jpg",
+      "/media/apps/ios/2x/category/others.jpg"
+    ],
+    "top_address": "Noor Baug",
+    "video_links": [
+      "https://www.youtube.com/watch?v=75xp_31ET-U",
+      "https://www.youtube.com/watch?v=HwYKxmxU5NA"
+    ],
+    "email": "jaffer@wedwise.com",
+    "name": "Jafer Bhai's Delhi Darbar"
+  },
+  "sections": [
+    {
+      "heading": "Basic Info",
+      "data_display": [
+        {
+          "type": "key_value",
+          "key_values": [
             {
-                "name":"Time Slot",
-                "value":[["morning","Morning"],["evening","Evening"],],
-            },                 
-        "package":
-            {
-                "name":"Package",
-                "value":"500 Rs per plate minimum 100 persons required"
+              "Veg": "YES"
             },
-        "button":"BOOK"
+            {
+              "Jain only": "YES"
+            },
+            {
+              "Non-Veg": "YES"
+            }
+          ],
+          "read_more": [
+            {
+              "heading": "Basic Info",
+              "data_display": [
+                {
+                  "type": "key_value",
+                  "key_values": [
+                    {
+                      "Name": "Jafer Bhai's Delhi Darbar"
+                    },
+                    {
+                      "Address": "Noor Baug"
+                    },
+                    {
+                      "Phone": 23715656
+                    },
+                    {
+                      "Veg": "YES"
+                    },
+                    {
+                      "Jain only": "YES"
+                    },
+                    {
+                      "Non-Veg": "YES"
+                    },
+                    {
+                      "Speciliaty Cuisine": "Moughlai, Indian"
+                    },
+                    {
+                      "Years in Business": "35"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     },
-    "info": {
-      "contact": "23715656",
-      "starting_price": "300 /-",
-      "top_name": "Jafer Bhai's Delhi Darbar",
-      "hero_imgs": [
-        "/media/apps/ios/2x/category/banquets.jpg",
-        "/media/apps/ios/2x/category/decorators.jpg",
-        "/media/apps/ios/2x/category/others.jpg"
-      ],
-      "360_imgs": [
-        "/media/apps/ios/2x/category/banquets.jpg",
-        "/media/apps/ios/2x/category/decorators.jpg",
-        "/media/apps/ios/2x/category/others.jpg"
-      ],
-      "top_address": "Noor Baug",
-      "video_links": [
-        "https://www.youtube.com/watch?v=75xp_31ET-U",
-        "https://www.youtube.com/watch?v=HwYKxmxU5NA"
-      ],
-      "email": "jaffer@wedwise.com",
-      "name": "Jafer Bhai's Delhi Darbar"
+    {
+      "heading": "Locate us on map",
+      "data_display": [
+        {
+          "lat": [
+            "75",
+            "58",
+            "E"
+          ],
+          "type": "map",
+          "long": [
+            "20",
+            "15",
+            "N"
+          ]
+        },
+        {
+          "text": "Description how to reach",
+          "type": "para"
+        }
+      ]
     },
-    "sections": [
-      {
-       "heading": "Basic Info",
-        "data_display": [
-          {
-            "type": "key_value",
-            "key_values": [
-              {
-                "Veg": "YES"
-              },
-              {
-                "Jain only": "YES"
-              },
-              {
-                "Non-Veg": "YES"
-              }
-            ],
-            "read_more": [
-              {
-                "heading": "Basic Info",
-                "data_display": [
-                  {
-                    "type": "key_value",
-                    "key_values": [
+    {
+      "heading": "Food Packages",
+      "data_display": [
+        {
+          "type": "key_values",
+          "key_values": [
+            {
+              "Package 1 (Lunch)": "600 /- per plate"
+            },
+            {
+              "Package 2 (Dinner)": "900 /- per plate"
+            },
+            {
+              "Package 3 (Lunch/Dinner)": "1100 /- per plate minimum 300 peoples"
+            }
+          ],
+          "read_more": [
+            {
+              "heading": "Food Packages",
+              "data_display": [
+                {
+                  "type": "packages",
+                  "Lunch": {
+                    "package_values": [
                       {
-                        "Name": "Jafer Bhai's Delhi Darbar"
+                        "quoted": {
+                          "Quoted Price": "1200"
+                        },
+                        "minimum": {
+                          "Minimum Price": "1100"
+                        },
+                        "label": "Veg Package 1 ( 600 /- per plate)",
+                        "options": [
+                          {
+                            "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
+                          },
+                          {
+                            "Cold Drink (Any 2)": "Pepsi / Coke / Jaljeera /"
+                          }
+                        ]
                       },
                       {
-                        "Address": "Noor Baug"
+                        "quoted": {
+                          "Quoted Price": "1200"
+                        },
+                        "minimum": {
+                          "Minimum Price": "1100"
+                        },
+                        "label": "Veg Package 1 ( 600 /- per plate)",
+                        "options": [
+                          {
+                            "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
+                          },
+                          {
+                            "Cold Drink (Any 2)": "Pepsi / Coke / Jaljeera /"
+                          }
+                        ]
                       },
                       {
-                        "Phone": 23715656
+                        "quoted": {
+                          "Quoted Price": "1200"
+                        },
+                        "minimum": {
+                          "Minimum Price": "1100"
+                        },
+                        "label": "Veg Package 1 ( 600 /- per plate)",
+                        "options": [
+                          {
+                            "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
+                          },
+                          {
+                            "Cold Drink (Any 2)": "Pepsi / Coke / Jaljeera /"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "Dinner": {
+                    "package_values": [
+                      {
+                        "quoted": {
+                          "Quoted Price": "1200"
+                        },
+                        "minimum": {
+                          "Minimum Price": "1100"
+                        },
+                        "label": "Veg Package 1 ( 600 /- per plate)",
+                        "options": [
+                          {
+                            "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
+                          },
+                          {
+                            "Cold Drink (Any 2)": "Pepsi / Coke / Jaljeera /"
+                          }
+                        ]
                       },
                       {
-                        "Veg": "YES"
+                        "quoted": {
+                          "Quoted Price": "1200"
+                        },
+                        "minimum": {
+                          "Minimum Price": "1100"
+                        },
+                        "label": "Veg Package 1 ( 600 /- per plate)",
+                        "options": [
+                          {
+                            "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
+                          },
+                          {
+                            "Cold Drink (Any 2)": "Pepsi / Coke / Jaljeera /"
+                          }
+                        ]
                       },
                       {
-                        "Jain only": "YES"
-                      },
-                      {
-                        "Non-Veg": "YES"
-                      },
-                      {
-                        "Speciliaty Cuisine": "Moughlai, Indian"
-                      },
-                      {
-                        "Years in Business": "35"
+                        "quoted": {
+                          "Quoted Price": "1200"
+                        },
+                        "minimum": {
+                          "Minimum Price": "1100"
+                        },
+                        "label": "Veg Package 1 ( 600 /- per plate)",
+                        "options": [
+                          {
+                            "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
+                          },
+                          {
+                            "Cold Drink (Any 2)": "Pepsi / Coke / Jaljeera /"
+                          }
+                        ]
                       }
                     ]
                   }
-                ]
-              }
-            ]
-          }
-        ],
-        
-      },
-      {
-        "heading": "Locate us on map",
-         "type": "map",
-        "data_display": [
-          {
-            "lat": [
-              "75",
-              "58",
-              "E"
-            ],
-            "type": "map",
-            "long": [
-              "20",
-              "15",
-              "N"
-            ]
-          },
-          {
-            "text": "Description how to reach",
-            "type": "para"
-          }
-        ]
-      },
-      {
-        "heading": "Food Packages",
-        "data_display": [
-          {
-            "type": "key_values",
-            "key_values": [
-              {
-                "Package 1 (Lunch)": "600 /- per plate"
-              },
-              {
-                "Package 2 (Dinner)": "900 /- per plate"
-              },
-              {
-                "Package 3 (Lunch/Dinner)": "1100 /- per plate minimum 300 peoples"
-              }
-            ],
-          "read_more": [
-              {
-                "heading": "Food Packages",
-                "type": "packages",
-                "data_display": [
-                  {
-                    "Lunch": {
-                      "package_values": [
-                        {
-                          "quoted":{"Quoted Price":"1200"},
-                          "minimum":{"Minimum Price":"1100"},
-                          "label":"Veg Package 1 ( 600 /- per plate)",
-                          "options": [
-                            {
-                              "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
-                            },
-                            {
-                              "Cold Drink (Any 2)": "Pepsi / Coke / Jaljeera /"
-                            }
-                          ]
-                        },
-                        {
-                          "quoted":{"Quoted Price":"1200"},
-                          "minimum":{"Minimum Price":"1100"},
-                          "label":"Veg Package 1 ( 600 /- per plate)",
-                          "options": [
-                            {
-                              "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
-                            },
-                            {
-                              "Cold Drink (Any 2)": "Pepsi / Coke / Jaljeera /"
-                            }
-                          ]
-                        },
-                        {
-                          "quoted":{"Quoted Price":"1200"},
-                          "minimum":{"Minimum Price":"1100"},
-                          "label":"Veg Package 1 ( 600 /- per plate)",
-                          "options": [
-                            {
-                              "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
-                            },
-                            {
-                              "Cold Drink (Any 2)": "Pepsi / Coke / Jaljeera /"
-                            }
-                          ]
-                        },
-                      ]
-                    },
-                    "Dinner": {
-                      "package_values": [
-                        {
-                          "quoted":{"Quoted Price":"1200"},
-                          "minimum":{"Minimum Price":"1100"},
-                          "label":"Veg Package 1 ( 600 /- per plate)",
-                          "options": [
-                            {
-                              "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
-                            },
-                            {
-                              "Cold Drink (Any 2)": "Pepsi / Coke / Jaljeera /"
-                            }
-                          ]
-                        },
-                        {
-                          "quoted":{"Quoted Price":"1200"},
-                          "minimum":{"Minimum Price":"1100"},
-                          "label":"Veg Package 1 ( 600 /- per plate)",
-                          "options": [
-                            {
-                              "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
-                            },
-                            {
-                              "Cold Drink (Any 2)": "Pepsi / Coke / Jaljeera /"
-                            }
-                          ]
-                        },
-                        {
-                          "quoted":{"Quoted Price":"1200"},
-                          "minimum":{"Minimum Price":"1100"},
-                          "label":"Veg Package 1 ( 600 /- per plate)",
-                          "options": [
-                            {
-                              "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
-                            },
-                            {
-                              "Cold Drink (Any 2)": "Pepsi / Coke / Jaljeera /"
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  }
-                ]
-                
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
 
         return gs("POST",req_dict(request.POST),{"data":data})
 
