@@ -131,7 +131,6 @@ class Vendor(models.Model):
         vendor=vendor[0]   
         data=\
 {
-  "data": {
     "info": {
       "contact": "23715656",
       "starting_price": "300 /-",
@@ -351,7 +350,7 @@ class Vendor(models.Model):
       }
     ]
   }
-}
+
         return gs("POST",req_dict(request.POST),{"data":data})
 
 
