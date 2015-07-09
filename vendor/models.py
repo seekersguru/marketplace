@@ -297,6 +297,7 @@ class Vendor(models.Model):
         }
       ]
     },
+
     {
       "heading": "Food Packages",
       "data_display": [

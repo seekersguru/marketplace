@@ -18,7 +18,7 @@ class Messages(models.Model):
     message = models.TextField()
     msg_time = models.DateTimeField(auto_now_add=True)
     #
-    msg_type = models.CharField(max_length=7, choices=MESSAGE_TYPES_CHOICES , default="message")
+    msg_type = models.CharField(max_length=7, choices=MESSAGE_TYPES_CHOICES )
     
     book_json = models.CharField(max_length=1024,blank=True,default=None )
     event_date=models.DateField(blank=True,default=None )
@@ -35,14 +35,20 @@ class Messages(models.Model):
     def create(cls,
                request,
                ):
+        
         msg_type=request.POST.get("msg_type")
         if msg_type not in MESSAGE_TYPES:
             return ge("POST",req_dict(request.POST),"Invalid message type", error_fields=['msg_type']) 
- 
+
         receiver_email = request.POST.get('receiver_email').strip().lower()
         identifier = request.POST.get('identifier')
         message = request.POST.get('message')
         from_to=request.POST.get('from_to')
+        
+        if msg_type in ["bid","book"] and from_to=="v2c":
+            return ge("POST",req_dict(request.POST),"Vendor to Customer create not possible in bid and book", error_fields=['from_to'])
+        
+        
         f = forms.EmailField()
         try:
             f.clean(receiver_email)
@@ -90,7 +96,7 @@ class Messages(models.Model):
         event_date =request.POST.get("event_date",None)
         time_slot = request.POST.get("time_slot",None)
         bid_json = request.POST.get("bid_json","")
-        book_json = request.POST.get("bid_json","")
+        book_json = request.POST.get("book_json","")
         bid_price  =request.POST.get("bid_price","").strip()  
         bid_quantity  =request.POST.get("bid_quantity","").strip()            
         if msg_type in ["bid","book"]: 
@@ -135,6 +141,7 @@ class Messages(models.Model):
                 book_json =book_json,
                 bid_price = bid_price,
                 bid_quantity =bid_quantity,
+                msg_type=msg_type
                 )
         msg.save()
         if from_to=="c2v":

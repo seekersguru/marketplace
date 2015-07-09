@@ -98,31 +98,31 @@ patterns = {##"customer_login_registration",
 						}, 
 		 	},
 	
-#         elif msg_type=="bid":
-#             pass
-#             book_json (char)
-#             event_date (date)
-#             time_slot  (char)
-#             bid_json  (json)
-#             bid_price  (float)
-#             bid_quantity (int)
-#         elif msg_type=="message":
-#             pass
-#             book_json (char)
-#             event_date (date)
-#             time_slot  (char)
-#             bid_json  (json)
-#             bid_price  (float)
-#             bid_quantity (int)		
+	 			
+	 					
 		"customer_vendor_message_create":
 			{
 				"order":-11,
 				"type":"POST",
-	 			"params":["device_id","push_data","identifier","receiver_email","message","from_to",
-						"msg_type","bid_json","book_json","event_date","time_slot",
-						"bid_price","bid_quantity"],
+	 			"params":[
+							"mode","device_id","push_data","identifier","receiver_email","message","from_to",
+							"msg_type","bid_json","book_json","event_date","time_slot",
+							"bid_price","bid_quantity"
+						],
 	 			"required_params":["device_id","push_data","identifier","receiver_email","message","from_to"],
-	 			"selects":{"from_to": FROM_TO_CHOICES,"msg_type":MESSAGE_TYPES_CHOICES}
+	 			"selects":{"from_to": str(FROM_TO_CHOICES)+ " (Also not for bid and book only c2v.)","msg_type":MESSAGE_TYPES_CHOICES},
+	 			"help":{
+						"mode":"Possible values 'android' or 'ios'",
+						"device_id":"Id of the device.",
+						"push_data":"Data to be pushed as notification and parsed on other client's side",
+						"bid_json":"'bid' value from vendor detail page, used to render bid page",
+						"event_date":"required for bid/book and format is yyyy-mm-dd",
+						"book_json":"'book' value from vendor detail page, used to render book page",
+						"bid_price":"Required in bid",
+						"bid_quantity":"Optional in bid, if provided from vendor detail json",
+						"time_slot":"required in bid and book and must be from one of the values from 'time_slot' from vendor detail response"
+						},
+	 			 
 		 	},
 		"customer_vendor_message_detail":
 			{

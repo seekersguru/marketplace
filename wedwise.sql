@@ -442,14 +442,14 @@ CREATE TABLE `wedwise_messages_messages` (
   `book_json` varchar(1024) DEFAULT '',
   `event_date` date DEFAULT NULL,
   `status` varchar(1) DEFAULT '',
-  `time_slot` varchar(128) NOT NULL,
+  `time_slot` varchar(128) DEFAULT '',
   `msg_type` varchar(7) DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `wedwise_messages_messages_cb24373b` (`customer_id`),
   KEY `wedwise_messages_messages_96b1f972` (`vendor_id`),
   CONSTRAINT `wedwise_messages__vendor_id_5a214c5fcbedd4d3_fk_vendor_vendor_id` FOREIGN KEY (`vendor_id`) REFERENCES `vendor_vendor` (`id`),
   CONSTRAINT `wedwis_customer_id_4d15317179ef6bc3_fk_customer_customer_user_id` FOREIGN KEY (`customer_id`) REFERENCES `customer_customer` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -458,7 +458,7 @@ CREATE TABLE `wedwise_messages_messages` (
 
 LOCK TABLES `wedwise_messages_messages` WRITE;
 /*!40000 ALTER TABLE `wedwise_messages_messages` DISABLE KEYS */;
-INSERT INTO `wedwise_messages_messages` VALUES (1,'v2c','vemdor to customer message ','2015-07-09 18:20:15',53,3,'','',0,'',NULL,NULL,'','message');
+INSERT INTO `wedwise_messages_messages` VALUES (1,'v2c','vemdor to customer message ','2015-07-09 18:20:15',53,3,'','',0,'',NULL,NULL,'','message'),(4,'c2v','customer to vendor booking one more message','2015-07-09 20:19:55',53,3,'','',0,'{                 \"event_date\": 1,                 \"button\": \"BOOK\",                 \"time_slot\": {                     \"name\": \"Time Slot\",                     \"value\": [                         [                             \"morning\",                             \"Morning\"                         ],                         [                             \"evening\",                             \"Evening\"                         ]                     ]                 }','2014-11-10',NULL,'morning','book'),(5,'c2v','customer to vendor booking one more message','2015-07-09 20:27:59',53,3,'{     \"type\": \"bid\",     \"event_date\": 1,     \"time_slot\": {       \"name\": \"Time Slot\",       \"value\": [         [           \"morning\",           \"Morning\"         ],         [           \"evening\",           \"Evening\"         ]       ]     },     \"package\": {       \"name\": \"Package\",       \"value\": \"500 Rs per plate minimum 100 persons required\"     },     \"quoted\": {       \"name\": \"Package\",       \"value\": \"450 Rs per plate minimum 100 persons required\"     },     \"bid_options\": {       \"name\": \"Bid Price\",       \"min_per_unit\": 430.5,       \"quantity\": {         \"label\": \"Persons\",         \"min\": {           \"value\": 50,           \"message\": \"Book for least 50 people\"         },         \"max\": 1500       },       \"item\": {         \"label\": \"Per plate\",         \"min\": 400,         \"max\": 500       }     },     \"text\": \"Some terms and conditions text at the end\",     \"button\": \"BID\"   }','',0,'','2014-11-10',NULL,'morning','bid'),(6,'c2v','customer to vendor booking one more message + Another message','2015-07-09 20:28:38',53,3,'{     \"type\": \"bid\",     \"event_date\": 1,     \"time_slot\": {       \"name\": \"Time Slot\",       \"value\": [         [           \"morning\",           \"Morning\"         ],         [           \"evening\",           \"Evening\"         ]       ]     },     \"package\": {       \"name\": \"Package\",       \"value\": \"500 Rs per plate minimum 100 persons required\"     },     \"quoted\": {       \"name\": \"Package\",       \"value\": \"450 Rs per plate minimum 100 persons required\"     },     \"bid_options\": {       \"name\": \"Bid Price\",       \"min_per_unit\": 430.5,       \"quantity\": {         \"label\": \"Persons\",         \"min\": {           \"value\": 50,           \"message\": \"Book for least 50 people\"         },         \"max\": 1500       },       \"item\": {         \"label\": \"Per plate\",         \"min\": 400,         \"max\": 500       }     },     \"text\": \"Some terms and conditions text at the end\",     \"button\": \"BID\"   }','',0,'','2014-11-10',NULL,'morning','bid');
 /*!40000 ALTER TABLE `wedwise_messages_messages` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -471,4 +471,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-07-09 23:51:41
+-- Dump completed on 2015-07-10  1:59:26
