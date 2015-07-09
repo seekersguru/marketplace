@@ -201,153 +201,175 @@ class Vendor(models.Model):
         },
         "sections":
         [
-            ##BANQUET EXAMPLE
-            {#"heading":" JK Banquetes facilitis section",
-             "data_display":
-                [
-                    {
-                        "type":"key_value",
-                        "key_values":
-                        [
-                            {"Location":"Santacruz"},
-                            {"Capacity":"350-1500"},
-                            {"Type":"Banquet"},
-                            {"Speciality Cusisine":"Spanish, French, Chinese"}
+          {
+            "data_display": [
+              {
+                "key_values": [
+                  {
+                    "Location": "Santacruz"
+                  },
+                  {
+                    "Capacity": "350-1500"
+                  },
+                  {
+                    "Type": "Banquet"
+                  },
+                  {
+                    "Speciality Cusisine": "Spanish, French, Chinese"
+                  }
+                ],
+                "type": "key_value",
+                "read_more": [
+                  {
+                    "data_display": [
+                      {
+                        "key_values": [
+                          {
+                            "Location": "Santacruz"
+                          },
+                          {
+                            "Capacity": "350-1500"
+                          },
+                          {
+                            "Type": "Banquet"
+                          },
+                          {
+                            "Speciality Cusisine": "Spanish, French, Chinese"
+                          },
+                          {
+                            "Outside catering": "Allowed"
+                          },
+                          {
+                            "Stay night": "Allowed"
+                          }
                         ],
-                        "read_more":
-                            [
-                                {
-                                    "heading":"Basic Info",
-                                    "data_display":
-                                        [
-                                            {
-                                                "type":"key_value",
-                                                "key_values":
-                                                [
-                                                    {"Location":"Santacruz"},
-                                                    {"Capacity":"350-1500"},
-                                                    {"Type":"Banquet"},
-                                                    {"Speciality Cusisine":"Spanish, French, Chinese"},
-                                                    {"Outside catering":"Allowed"},
-                                                    {"Stay night":"Allowed"}
-                                                ],
-                                                    
-                                            }                                            
-                                        ]
-                                },                 
-                     
+                        "type": "key_value"
+                      }
+                    ],
+                    "heading": "Basic Info"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "data_display": [
+              {
+                "lat": [
+                  "75",
+                  "58",
+                  "E"
+                ],
+                "type": "map",
+                "long": [
+                  "20",
+                  "15",
+                  "N"
+                ]
+              },
+              {
+                "text": "We are situated at santakruz and near, to reach us you can come via metro,",
+                "type": "para"
+              }
+            ],
+            "heading": "Locate us on map"
+          },
+          {
+            "data_display": [
+              {
+                "key_values": [
+                  {
+                    "Package 1": "600 /- per plate"
+                  },
+                  {
+                    "Package 2": "900 /- per plate"
+                  },
+                  {
+                    "Package 3": "1100 /- per plate minimum 300 peoples"
+                  }
+                ],
+                "type": "key_values",
+                "read_more": [
+                  {
+                    "data_display": [
+                      {
+                        "type": "packages",
+                        "package_values": [
+                          {
+                            "Package 1 ( 600 /- per plate)": [
+                              {
+                                "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
+                              },
+                              {
+                                "Cold Drink (Any 2)": "Pepsi / Coke / Jaljeera /"
+                              }
                             ]
-                    }            
+                          },
+                          {
+                            "Package 2 (900 /- per plate)": [
+                              {
+                                "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
+                              },
+                              {
+                                "Cold Drink (Any 2)": "Pepsi / Coke / Jaljeera /"
+                              }
+                            ]
+                          },
+                          {
+                            "Package 3 (1100 /- per plate minimum 300 peoples)": [
+                              {
+                                "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
+                              },
+                              {
+                                "Cold Drink (Any 2)": "Pepsi / Coke / Jaljeera /"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "key_values": [
+                          {
+                            "Ouside Catering Allowed": "YES"
+                          }
+                        ],
+                        "type": "key_value"
+                      },
+                      {
+                        "text": "HAVE TIGH UPS WITH REVAN CATERERS",
+                        "type": "para"
+                      },
+                      {
+                        "text": "HAVE TIGH UPS WITH MM CATERERS",
+                        "type": "para"
+                      }
+                    ],
+                    "heading": "Descriptions44"
+                  }
                 ]
-             
-            
-            },
-            {"heading":"Map Location",
-             "data_display":
-                [
-                    {
-                        "heading":"Locate us on map",
-                        "data_display":
-                            [
-                                {
-                                  "type":"map",
-                                  "long":["20", "15", "N"],
-                                  "lat":["75", "58", "E"],
-                                } ,  
-                                {"type":"para",
-                                  "text":"We are situated at santakruz and near, to reach us you can come via metro,"
-                                 },        
-                            ]                  
-                               
-                    },         
+              }
+            ],
+            "heading": "Food Packages"
+          },
+          {
+            "data_display": [
+              {
+                "lat": [
+                  "75",
+                  "58",
+                  "E"
+                ],
+                "type": "map",
+                "long": [
+                  "20",
+                  "15",
+                  "N"
                 ]
-             
-            
-            },
-         
-            {
-                "heading":"Food Packages",
-                "data_display":
-                    [
-                        {
-                            "type":"key_values",
-                            "key_values":
-                                [
-                                    {"Package 1":"600 /- per plate"},
-                                    {"Package 2":"900 /- per plate"},
-                                    {"Package 3":"1100 /- per plate minimum 300 peoples"},
-    
-                                ],
-                            "read_more":
-                                [
-                                    {
-                                        "heading":"Descriptions44",
-                                        "data_display":
-                                            [
-                                                {
-                                                    "type":"packages",
-                                                     "package_values":
-                                                         [
-                                                            {"Package 1 ( 600 /- per plate)":
-                                                                [
-                                                                    {"Starters (Any 2)":"Veg manchurian / Hara bhara kabab / paneer pakoda"},
-                                                                    {"Cold Drink (Any 2)":"Pepsi / Coke / Jaljeera /"},
-                                                                ]
-                                                             
-                                                             },
-                                                            {"Package 2 (900 /- per plate)":
-                                                                [
-                                                                    {"Starters (Any 2)":"Veg manchurian / Hara bhara kabab / paneer pakoda"},
-                                                                    {"Cold Drink (Any 2)":"Pepsi / Coke / Jaljeera /"},
-                                                                ]
-                                                             
-                                                            },
-                                                            {"Package 3 (1100 /- per plate minimum 300 peoples)":
-                                                                [
-                                                                    {"Starters (Any 2)":"Veg manchurian / Hara bhara kabab / paneer pakoda"},
-                                                                    {"Cold Drink (Any 2)":"Pepsi / Coke / Jaljeera /"},
-                                                                ]
-                                                            
-                                                            },
-
-                                                         ],
-                                                        
-                                                },             
-                                                {
-                                                    "type":"key_value",
-                                                    "key_values":
-                                                    [
-                                                        {"Ouside Catering Allowed":"YES"},
-                                                    ],
-                                                        
-                                                } ,                                
-                                                {"type":"para",
-                                                    "text":"HAVE TIGH UPS WITH REVAN CATERERS"
-                                                },
-                                                {"type":"para",
-                                                     "text":"HAVE TIGH UPS WITH MM CATERERS"
-                                                },    
-                                            ]
-                                     },
-                                 ]
-                        }           
-                    ]                  
-            },
-            {
-                "heading":"My map implementation",
-                "data_display":
-                    [
-                        {
-                          "type":"map",
-                          "long":["20", "15", "N"],
-                          "lat":["75", "58", "E"],
-                        }           
-                        
-                        
-                    ]                  
-                       
-            },
-         ]
+              }
+            ],
+            "heading": "My map implementation"
+          }
+        ]
     }
         return gs("POST",req_dict(request.POST),{"data":data})
 
