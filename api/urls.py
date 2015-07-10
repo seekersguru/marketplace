@@ -133,14 +133,6 @@ patterns = {##"customer_login_registration",
 	 			"required_params":["identifier","receiver_email","from_to","msg_type"],
 	 			"selects":{"from_to": FROM_TO_CHOICES,"msg_type":MESSAGE_TYPES_CHOICES  }
 		 	},
-		"customer_vendor_bid_book_detail":
-			{
-				"order":-110,
-				"type":"POST",
-	 			"params":["identifier","msg_id","msg_type"],
-	 			"required_params":["identifier","msg_id","msg_type"],
-	 			"selects":{"msg_type":[["bid","Bid"],["book","Book"]]  }
-		 	},	
 		##"customer_messages_bid_book_schedule",
 		"customer_vendor_message_list":
 			{
@@ -157,31 +149,6 @@ patterns = {##"customer_login_registration",
 				"type":"POST",
 	 			"params":[]
 		 	},
-		 
-		"customer_create_bid":
-			{
-				"order":14,
-				"type":"POST",
-	 			"params":[]
-		 	},
-		 
-		"customer_create_book":
-			{
-				"order":15,
-				"type":"POST",
-	 			"params":[]
-		 	},
-	
-
-	##"vendor_login_registration",
-	
-# 	 	"vendor_lead":
-# 			{
-# 				"order":18,
-# 				"type":"POST",
-# 	 			"params":["email","name","mobile","address","services","fbid","gid"],
-# 	 			"required_params":["email","name","mobile","address","services"],
-# 		 	},
 		"vendor_registration":
 	 		{#In last so can add categories and dump the json for corresponding category
 
@@ -237,37 +204,24 @@ patterns = {##"customer_login_registration",
 				"type":"POST",
 	 			"params":[]
 		 	}, 
-
-		#"vendor_messages_bid_book",
-	
-	
-	 	"vendor_mbb_send":
-	 		{
-				"order":24,
-				"type":"POST",
-	 			"params":[]
-		 	},
-	
-	 	"vendor_mbb_list_and_search_and_filter":
-	 		{
-				"order":25,
-				"type":"POST",
-	 			"params":[]
-		 	},
-		
-		"vendor_respond_bid":
+		"vendor_bid_book_detail":
 			{
-			"order":26,
-			"type":"POST",
-	 		"params":[]
-		 	},
-	
-	 	"vendor_respond_book":
-	 		{
-				"order":27,
+				"order":-110,
 				"type":"POST",
-	 			"params":[]
-		 	},
+	 			"params":["identifier","msg_id","msg_type",],
+	 			"required_params":["identifier","msg_id","msg_type"],
+	 			"selects":{"msg_type":[["bid","Bid"],["book","Book"]]  }
+		 	},	
+		"vendor_bid_book_response":
+			{
+				"order":-110,
+				"type":"POST",
+	 			"params":["identifier","msg_id","status",],
+	 			"required_params":["identifier","msg_id","status",],
+	 			
+	 			
+		 	},	
+
 	} 
 	
 	
