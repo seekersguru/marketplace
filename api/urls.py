@@ -110,8 +110,9 @@ patterns = {##"customer_login_registration",
 							"bid_price","bid_quantity"
 						],
 	 			"required_params":["device_id","push_data","identifier","receiver_email","message","from_to"],
-	 			"selects":{"from_to": str(FROM_TO_CHOICES)+ " (Also not for bid and book only c2v.)","msg_type":MESSAGE_TYPES_CHOICES},
+	 			"selects":{"from_to": FROM_TO_CHOICES,"msg_type":MESSAGE_TYPES_CHOICES},
 	 			"help":{
+						"fom_to":"(Also not for bid and book only c2v.)",
 						"mode":"Possible values 'android' or 'ios'",
 						"device_id":"Id of the device.",
 						"push_data":"Data to be pushed as notification and parsed on other client's side",
