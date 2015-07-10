@@ -240,7 +240,7 @@ class Messages(models.Model):
             sender = Customer.objects.filter(identifier=identifier)
         elif from_to=="v2c":
             sender = Vendor.objects.filter(identifier=identifier)
-            
+        msg_type=request.POST.get('msg_type')
         if not sender:
             return ge("POST",req_dict(request.POST),"Sender unauthorized", error_fields=['identifier'],
                       code_string="SENDER_NOT_EXIST")
@@ -249,11 +249,11 @@ class Messages(models.Model):
             
         if from_to=="c2v":
             all_msgs= Messages.objects.filter(
-                    customer=sender,
+                    customer=sender,msg_type=msg_type
                     ).order_by('-msg_time')
         elif from_to=="v2c":
             all_msgs= Messages.objects.filter(
-                    vendor=sender,
+                    vendor=sender,msg_type=msg_type
                     ).order_by('-msg_time')            
         
         
@@ -268,7 +268,8 @@ class Messages(models.Model):
                                                      "receiver_name":msg.vendor.name,
                                                      "identifier":msg.customer.identifier,
                                                      "msg_time":str(msg.msg_time)[:19] ,
-                                                     "from_to":msg.from_to
+                                                     "from_to":msg.from_to,
+                                                     "msg_type":msg_type
                                                      })
             if from_to=="v2c":
                 if msg.customer.pk not in listed:
@@ -278,7 +279,8 @@ class Messages(models.Model):
                                                      "receiver_name":msg.customer.groom_name + " vs "+msg.customer.bride_name ,
                                                      "identifier":msg.customer.identifier,
                                                      "msg_time":str(msg.msg_time)[:19] ,
-                                                     "from_to":msg.from_to
+                                                     "from_to":msg.from_to,
+                                                     "msg_type":msg_type
                                                      })                
 
         

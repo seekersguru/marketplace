@@ -139,9 +139,9 @@ patterns = {##"customer_login_registration",
 			{
 				"order":-9,
 				"type":"POST",
-	 			"params":["identifier","page_no","from_to"],#["identifier"]
-	 			"required_params":["identifier","from_to"],
-	 			"selects":{"from_to": FROM_TO_CHOICES }
+	 			"params":["identifier","page_no","from_to","msg_type"],#["identifier"]
+	 			"required_params":["identifier","from_to","msg_type"],
+	 			"selects":{"from_to": FROM_TO_CHOICES,"msg_type":MESSAGE_TYPES_CHOICES }
 		 	},
 	 	
 	 	"customer_schedule_visit":
