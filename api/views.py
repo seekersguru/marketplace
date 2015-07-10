@@ -119,6 +119,14 @@ def customer_vendor_message_detail(request):
     return response(request,Messages.details(request))
 
 @csrf_exempt
+def customer_vendor_bid_book_detail(request):
+    #TODO Put all in decorators  with csrf 
+    invalid=check_basic_validations("customer_vendor_bid_book_detail",request,"POST")
+    if invalid:return response(request,invalid) 
+
+    return response(request,Messages.vendor_bid_book_page(request))
+
+@csrf_exempt
 def customer_vendor_message_list(request):
     #TODO Put all in decorators  with csrf 
     invalid=check_basic_validations("customer_vendor_message_list",request,"POST")

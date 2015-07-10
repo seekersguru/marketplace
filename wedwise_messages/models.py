@@ -158,6 +158,49 @@ class Messages(models.Model):
 
 
 
+    @classmethod
+    def vendor_bid_book_page(cls,
+                        request):
+        msg_type=request.POST.get('msg_type')
+        msg_id=request.POST.get('msg_id')
+        identifier=request.POST.get('identifier')
+        if msg_type not in ["bid","book"]:
+            return ge("POST",req_dict(request.POST),"msg_type can be bid / book", error_fields=['msg_type']) 
+        
+        vendor = Vendor.objects.filter(identifier=identifier)
+        if not vendor:
+            return ge("POST",req_dict(request.POST),"no message exist", error_fields=['msg_id'])
+        else:
+            vendor=vendor[0]
+            
+        msg =Messages.objects.filter(id=msg_id)
+        if not ["msg"]:
+            return ge("POST",req_dict(request.POST),"no message exist", error_fields=['msg_id'])
+        else:
+            msg=msg[0] 
+        
+        return {"label":"Enquiry Detail",
+                "table":[{"Event Date":str(msg.event_date)},
+                         {"Revenue Potential":"630++"},
+                         {"Groom's Name":"Suresh"},
+                         {"Bride Name":"Supriya"},
+                         {"Event Date":str(msg.event_date)},
+                         {"Revenue Potential":"630++"},
+                         {"Groom's Name":"Suresh"},
+                         {"Bride Name":"Supriya"},
+                         {"Event Date":str(msg.event_date)},
+                         {"Revenue Potential":"630++"},
+                         {"Groom's Name":"Suresh"},
+                         {"Bride Name":"Supriya"},
+                         {"Event Date":str(msg.event_date)},
+                         {"Revenue Potential":"630++"},
+                         {"Groom's Name":"Suresh"},
+                         {"Bride Name":"Supriya"},                         
+                         ],
+                "buttons":[["accept","Accept"],["reject","Reject"]],
+                }
+        
+        
 
     @classmethod
     def details(cls,

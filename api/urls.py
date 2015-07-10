@@ -133,7 +133,14 @@ patterns = {##"customer_login_registration",
 	 			"required_params":["identifier","receiver_email","from_to","msg_type"],
 	 			"selects":{"from_to": FROM_TO_CHOICES,"msg_type":MESSAGE_TYPES_CHOICES  }
 		 	},
-	
+		"customer_vendor_bid_book_detail":
+			{
+				"order":-110,
+				"type":"POST",
+	 			"params":["identifier","msg_id","msg_type"],
+	 			"required_params":["identifier","msg_id","msg_type"],
+	 			"selects":{"msg_type":[["bid","Bid"],["book","Book"]]  }
+		 	},	
 		##"customer_messages_bid_book_schedule",
 		"customer_vendor_message_list":
 			{
