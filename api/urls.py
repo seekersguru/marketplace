@@ -119,8 +119,8 @@ patterns = {##"customer_login_registration",
 						"bid_json":"'bid' value from vendor detail page, used to render bid page",
 						"event_date":"required for bid/book and format is yyyy-mm-dd",
 						"book_json":"'book' value from vendor detail page, used to render book page",
-						"bid_price":"Required in bid",
-						"bid_quantity":"Optional in bid, if provided from vendor detail json",
+						"bid_price":"(float value) Required in bid",
+						"bid_quantity":"(int value) Optional in bid, if provided from vendor detail json",
 						"time_slot":"required in bid and book and must be from one of the values from 'time_slot' from vendor detail response"
 						},
 	 			 
