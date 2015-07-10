@@ -273,7 +273,12 @@ class Messages(models.Model):
                                                      "identifier":msg.customer.identifier,
                                                      "msg_time":str(msg.msg_time)[:19] ,
                                                      "from_to":msg.from_to,
-                                                     "msg_type":msg_type
+                                                     "event_date":str(msg.event_date)[:19],
+                                                     "msg_type":msg_type,
+                                                     "line1":"Pax 350-450 Package NVS Rev:5-5100",
+                                                     "line2":"Source:Wedwise",
+                                                     
+                                                     
                                                      })
             if from_to=="v2c":
                 if msg.customer.pk not in listed:
@@ -284,7 +289,10 @@ class Messages(models.Model):
                                                      "identifier":msg.customer.identifier,
                                                      "msg_time":str(msg.msg_time)[:19] ,
                                                      "from_to":msg.from_to,
-                                                     "msg_type":msg_type
+                                                     "msg_type":msg_type,
+                                                     "event_date":str(msg.event_date)[:19],
+                                                     "line1":"Pax 350-450 Package NVS Rev:5-5100",
+                                                     "line2":"Source:Wedwise",
                                                      })                
 
         
