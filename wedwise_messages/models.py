@@ -163,6 +163,7 @@ class Messages(models.Model):
     def details(cls,
                request, 
                ):
+        msg_type=request.POST.get('msg_type')
         receiver_email = request.POST.get('receiver_email').strip().lower()
         from_to = request.POST.get('from_to').strip().lower()
         identifier = request.POST.get('identifier')
@@ -209,6 +210,7 @@ class Messages(models.Model):
         msgs= Messages.objects.filter(
                vendor=vendor,
                 customer=customer,
+                msg_type=msg_type
                 ).order_by('msg_time')
                 
         if from_to=="c2v":       
@@ -218,7 +220,8 @@ class Messages(models.Model):
                                                       "vendor_name":msg.vendor.name,
                                                      "identifier":identifier,
                                                      "msg_time":str(msg.msg_time)[:19],
-                                                     "from_to":msg.from_to
+                                                     "from_to":msg.from_to,
+                                                     "msg_type":msg_type
                                                     } for msg in msgs]) 
         elif from_to=="v2c": 
             return gs("POST",req_dict(request.POST),[{"id":msg.id,
@@ -227,7 +230,8 @@ class Messages(models.Model):
                                                       "vendor_name":msg.customer.bride_name + " vs " + msg.customer.groom_name ,
                                                      "identifier":identifier,
                                                      "msg_time":str(msg.msg_time)[:19],
-                                                     "from_to":msg.from_to
+                                                     "from_to":msg.from_to,
+                                                     "msg_type":msg_type
                                                     } for msg in msgs])
 
     @classmethod
