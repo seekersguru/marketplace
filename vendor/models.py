@@ -279,6 +279,9 @@ class Vendor(models.Model):
       "heading": "Locate us on map",
       "data_display": [
         {
+          "android_lat": "28.613939",
+          "android_lang": "77.209021",
+          
           "lat": [
             "75",
             "58",
