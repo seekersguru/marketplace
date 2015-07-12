@@ -197,7 +197,12 @@ class Messages(models.Model):
             return ge("POST",req_dict(request.POST),"no message exist", error_fields=['msg_id'])
         else:
             msg=msg[0] 
-        
+        if str(msg.status)=="0":
+            status = "Rejected"
+        elif str(msg.status)=="1":
+            status = "Accepted" 
+        else:
+            status = "Pending"       
         return  gs("POST",req_dict(request.POST),{"label":"Enquiry Detail",
                 "table":[{"Event Date":str(msg.event_date)},
                          {"Revenue Potential":"630++"},
@@ -217,6 +222,7 @@ class Messages(models.Model):
                          {"Bride Name":"Supriya"},                         
                          ],
                 "buttons":[["0","Accept"],["1","Reject"]],
+                "status":status
                 })
         
         
@@ -322,7 +328,14 @@ class Messages(models.Model):
                     vendor=sender,msg_type=msg_type
                     ).order_by('-msg_time')            
         
-        
+        def get_status(msg):
+            if str(msg.status)=="0":
+                status = "Rejected"
+            elif str(msg.status)=="1":
+                status = "Accepted" 
+            else:
+                status = "Pending" 
+            return status
         msgs=[]
         listed=[]# Which vendor id indexed at which positions
         for msg in all_msgs:
@@ -339,6 +352,7 @@ class Messages(models.Model):
                                                      "msg_type":msg_type,
                                                      "line1":"Pax 350-450 Package NVS Rev:5-5100",
                                                      "line2":"Source:Wedwise",
+                                                     "status":get_status(msg),
                                                      
                                                      
                                                      })
@@ -355,6 +369,7 @@ class Messages(models.Model):
                                                      "event_date":str(msg.event_date)[:19],
                                                      "line1":"Pax 350-450 Package NVS Rev:5-5100",
                                                      "line2":"Source:Wedwise",
+                                                     "status":get_status(msg),
                                                      })                
 
         

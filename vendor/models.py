@@ -451,6 +451,7 @@ class Vendor(models.Model):
 
     @classmethod
     def get_vendor_list(cls,vendor_type,page_no,mode,image_type):
+        
         img="/media/apps/{mode}/{image_type}/category/{vendor_type}.jpg".\
                 format(vendor_type=vendor_type,mode=mode,image_type=image_type)
         lst=[]
@@ -462,7 +463,7 @@ class Vendor(models.Model):
                  "name":vendor.name ,
                  #todo make it dynamic
                  "icons":["/media/icons/2x/icon1.png",
-                          "/media/icons/2x/ico2.png",
+                          "/media/icons/2x/icon2.png",
                           "/media/icons/2x/icon3.png",
                           "/media/icons/2x/icon4.png",],
                  "starting_price":"500",
@@ -489,6 +490,7 @@ class Vendor(models.Model):
         vendor_type = request.POST.get('vendor_type')
         if vendor_type not in [v[1] for v in VENDOR_TYPES]:
             return ge("POST",req_dict(request.POST),"Invalid vendor type", error_fields=['vendor_type'])
+        vendor_type=Category.objects.get(name=vendor_type).key
         page_no = request.POST.get('page_no','')
         if not page_no: page_no="1"
      
