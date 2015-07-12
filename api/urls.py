@@ -6,6 +6,13 @@ urlpatterns = [
 	## Home page for apis 
     url(r'^$','api.views.index', name='api_index'),
 ]
+from vendor.models import Vendor
+from customer.models import Customer
+vendor_identfiers=[ [e.identifier,e.identifier ] for e in Vendor.objects.all()]
+customer_identfiers=[[e.identifier,e.identifier ] for e in Customer.objects.all()]
+vendor_identfiers.extend(customer_identfiers)
+identifiers=vendor_identfiers
+vendor_emails=[ [e.user.username,e.user.username, ] for e in Vendor.objects.all()]
 from wedwise_messages.models import MESSAGE_TYPES_CHOICES
 from vendor.models import VENDOR_TYPES
 patterns = {##"customer_login_registration",
@@ -91,11 +98,13 @@ patterns = {##"customer_login_registration",
 				"order":-20,
 	 			"params":["mode","image_type","vendor_email"],
 	 			"required_params":["mode","image_type","vendor_email"],
+	 			"selects":{"vendor_email": vendor_emails},
 	 			"help":{"mode":"Possible values 'android' or 'ios'",
 						"image_type":"For android allowed: " + str(ALLOWED_ANDRIOD_IMAGE_TYPE)\
 						+ "<br/>For ios allowed :"+str(ALLOWED_IOS_IMAGE_TYPE),
 						"vendor_email":"https://docs.google.com/document/d/1YU3aJUd4bAb13LfFMMHEGMpS8lCt3utSZE6IEu1K23I/edit?usp=sharing"
 						}, 
+				
 		 	},
 	
 	 			
@@ -110,7 +119,7 @@ patterns = {##"customer_login_registration",
 							"bid_price","bid_quantity"
 						],
 	 			"required_params":["device_id","push_data","identifier","receiver_email","message","from_to"],
-	 			"selects":{"from_to": FROM_TO_CHOICES,"msg_type":MESSAGE_TYPES_CHOICES},
+	 			"selects":{"from_to": FROM_TO_CHOICES,"msg_type":MESSAGE_TYPES_CHOICES,"identifier":identifiers},
 	 			"help":{
 						"fom_to":"(Also not for bid and book only c2v.)",
 						"mode":"Possible values 'android' or 'ios'",
@@ -131,7 +140,7 @@ patterns = {##"customer_login_registration",
 				"type":"POST",
 	 			"params":["identifier","receiver_email","page_no","from_to","msg_type"],
 	 			"required_params":["identifier","receiver_email","from_to","msg_type"],
-	 			"selects":{"from_to": FROM_TO_CHOICES,"msg_type":MESSAGE_TYPES_CHOICES  }
+	 			"selects":{"from_to": FROM_TO_CHOICES,"msg_type":MESSAGE_TYPES_CHOICES ,"identifier":identifiers }
 		 	},
 		##"customer_messages_bid_book_schedule",
 		"customer_vendor_message_list":
@@ -140,7 +149,7 @@ patterns = {##"customer_login_registration",
 				"type":"POST",
 	 			"params":["identifier","page_no","from_to","msg_type"],#["identifier"]
 	 			"required_params":["identifier","from_to","msg_type"],
-	 			"selects":{"from_to": FROM_TO_CHOICES,"msg_type":MESSAGE_TYPES_CHOICES }
+	 			"selects":{"from_to": FROM_TO_CHOICES,"msg_type":MESSAGE_TYPES_CHOICES,"identifier":identifiers }
 		 	},
 	 	
 	 	"customer_schedule_visit":
@@ -210,7 +219,7 @@ patterns = {##"customer_login_registration",
 				"type":"POST",
 	 			"params":["identifier","msg_id","msg_type",],
 	 			"required_params":["identifier","msg_id","msg_type"],
-	 			"selects":{"msg_type":[["bid","Bid"],["book","Book"]]  }
+	 			"selects":{"msg_type":[["bid","Bid"],["book","Book"]] ,"identifier":identifiers }
 		 	},	
 		"vendor_bid_book_response":
 			{
@@ -218,7 +227,7 @@ patterns = {##"customer_login_registration",
 				"type":"POST",
 	 			"params":["identifier","msg_id","status",],
 	 			"required_params":["identifier","msg_id","status",],
-	 			
+	 			"selects":{"identifier":identifiers}
 	 			
 		 	},	
 

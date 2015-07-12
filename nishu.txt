@@ -1,323 +1,1322 @@
-diff --git a/vendor/models.py b/vendor/models.py
-index d5b7ad3..8e2f9cc 100644
---- a/vendor/models.py
-+++ b/vendor/models.py
-@@ -201,153 +201,175 @@ class Vendor(models.Model):
-         },
-         "sections":
-         [
--            ##BANQUET EXAMPLE
--            {#"heading":" JK Banquetes facilitis section",
--             "data_display":
--                [
--                    {
--                        "type":"key_value",
--                        "key_values":
--                        [
--                            {"Location":"Santacruz"},
--                            {"Capacity":"350-1500"},
--                            {"Type":"Banquet"},
--                            {"Speciality Cusisine":"Spanish, French, Chinese"}
-+          {
-+            "data_display": [
-+              {
-+                "key_values": [
-+                  {
-+                    "Location": "Santacruz"
-+                  },
-+                  {
-+                    "Capacity": "350-1500"
-+                  },
-+                  {
-+                    "Type": "Banquet"
-+                  },
-+                  {
-+                    "Speciality Cusisine": "Spanish, French, Chinese"
-+                  }
-+                ],
-+                "type": "key_value",
-+                "read_more": [
-+                  {
-+                    "data_display": [
-+                      {
-+                        "key_values": [
-+                          {
-+                            "Location": "Santacruz"
-+                          },
-+                          {
-+                            "Capacity": "350-1500"
-+                          },
-+                          {
-+                            "Type": "Banquet"
-+                          },
-+                          {
-+                            "Speciality Cusisine": "Spanish, French, Chinese"
-+                          },
-+                          {
-+                            "Outside catering": "Allowed"
-+                          },
-+                          {
-+                            "Stay night": "Allowed"
-+                          }
-                         ],
--                        "read_more":
--                            [
--                                {
--                                    "heading":"Basic Info",
--                                    "data_display":
--                                        [
--                                            {
--                                                "type":"key_value",
--                                                "key_values":
--                                                [
--                                                    {"Location":"Santacruz"},
--                                                    {"Capacity":"350-1500"},
--                                                    {"Type":"Banquet"},
--                                                    {"Speciality Cusisine":"Spanish, French, Chinese"},
--                                                    {"Outside catering":"Allowed"},
--                                                    {"Stay night":"Allowed"}
--                                                ],
--                                                    
--                                            }                                            
--                                        ]
--                                },                 
--                     
-+                        "type": "key_value"
-+                      }
-+                    ],
-+                    "heading": "Basic Info"
-+                  }
-+                ]
-+              }
-+            ]
-+          },
-+          {
-+            "data_display": [
-+              {
-+                "lat": [
-+                  "75",
-+                  "58",
-+                  "E"
-+                ],
-+                "type": "map",
-+                "long": [
-+                  "20",
-+                  "15",
-+                  "N"
-+                ]
-+              },
-+              {
-+                "text": "We are situated at santakruz and near, to reach us you can come via metro,",
-+                "type": "para"
-+              }
-+            ],
-+            "heading": "Locate us on map"
-+          },
-+          {
-+            "data_display": [
-+              {
-+                "key_values": [
-+                  {
-+                    "Package 1": "600 /- per plate"
-+                  },
-+                  {
-+                    "Package 2": "900 /- per plate"
-+                  },
-+                  {
-+                    "Package 3": "1100 /- per plate minimum 300 peoples"
-+                  }
-+                ],
-+                "type": "key_values",
-+                "read_more": [
-+                  {
-+                    "data_display": [
-+                      {
-+                        "type": "packages",
-+                        "package_values": [
-+                          {
-+                            "Package 1 ( 600 /- per plate)": [
-+                              {
-+                                "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
-+                              },
-+                              {
-+                                "Cold Drink (Any 2)": "Pepsi / Coke / Jaljeera /"
-+                              }
-+                            ]
-+                          },
-+                          {
-+                            "Package 2 (900 /- per plate)": [
-+                              {
-+                                "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
-+                              },
-+                              {
-+                                "Cold Drink (Any 2)": "Pepsi / Coke / Jaljeera /"
-+                              }
-                             ]
--                    }            
-+                          },
-+                          {
-+                            "Package 3 (1100 /- per plate minimum 300 peoples)": [
-+                              {
-+                                "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
-+                              },
-+                              {
-+                                "Cold Drink (Any 2)": "Pepsi / Coke / Jaljeera /"
-+                              }
-+                            ]
-+                          }
-+                        ]
-+                      },
-+                      {
-+                        "key_values": [
-+                          {
-+                            "Ouside Catering Allowed": "YES"
-+                          }
-+                        ],
-+                        "type": "key_value"
-+                      },
-+                      {
-+                        "text": "HAVE TIGH UPS WITH REVAN CATERERS",
-+                        "type": "para"
-+                      },
-+                      {
-+                        "text": "HAVE TIGH UPS WITH MM CATERERS",
-+                        "type": "para"
-+                      }
-+                    ],
-+                    "heading": "Descriptions44"
-+                  }
-                 ]
--             
--            
--            },
--            {"heading":"Map Location",
--             "data_display":
--                [
--                    {
--                        "heading":"Locate us on map",
--                        "data_display":
--                            [
--                                {
--                                  "type":"map",
--                                  "long":["20", "15", "N"],
--                                  "lat":["75", "58", "E"],
--                                } ,  
--                                {"type":"para",
--                                  "text":"We are situated at santakruz and near, to reach us you can come via metro,"
--                                 },        
--                            ]                  
--                               
--                    },         
-+              }
-+            ],
-+            "heading": "Food Packages"
-+          },
-+          {
-+            "data_display": [
-+              {
-+                "lat": [
-+                  "75",
-+                  "58",
-+                  "E"
-+                ],
-+                "type": "map",
-+                "long": [
-+                  "20",
-+                  "15",
-+                  "N"
-                 ]
--             
--            
--            },
--         
--            {
--                "heading":"Food Packages",
--                "data_display":
--                    [
--                        {
--                            "type":"key_values",
--                            "key_values":
--                                [
--                                    {"Package 1":"600 /- per plate"},
--                                    {"Package 2":"900 /- per plate"},
--                                    {"Package 3":"1100 /- per plate minimum 300 peoples"},
--    
--                                ],
--                            "read_more":
--                                [
--                                    {
--                                        "heading":"Descriptions44",
--                                        "data_display":
--                                            [
--                                                {
--                                                    "type":"packages",
--                                                     "package_values":
--                                                         [
--                                                            {"Package 1 ( 600 /- per plate)":
--                                                                [
--                                                                    {"Starters (Any 2)":"Veg manchurian / Hara bhara kabab / paneer pakoda"},
--                                                                    {"Cold Drink (Any 2)":"Pepsi / Coke / Jaljeera /"},
--                                                                ]
--                                                             
--                                                             },
--                                                            {"Package 2 (900 /- per plate)":
--                                                                [
--                                                                    {"Starters (Any 2)":"Veg manchurian / Hara bhara kabab / paneer pakoda"},
--                                                                    {"Cold Drink (Any 2)":"Pepsi / Coke / Jaljeera /"},
--                                                                ]
--                                                             
--                                                            },
--                                                            {"Package 3 (1100 /- per plate minimum 300 peoples)":
--                                                                [
--                                                                    {"Starters (Any 2)":"Veg manchurian / Hara bhara kabab / paneer pakoda"},
--                                                                    {"Cold Drink (Any 2)":"Pepsi / Coke / Jaljeera /"},
--                                                                ]
--                                                            
--                                                            },
--
--                                                         ],
--                                                        
--                                                },             
--                                                {
--                                                    "type":"key_value",
--                                                    "key_values":
--                                                    [
--                                                        {"Ouside Catering Allowed":"YES"},
--                                                    ],
--                                                        
--                                                } ,                                
--                                                {"type":"para",
--                                                    "text":"HAVE TIGH UPS WITH REVAN CATERERS"
--                                                },
--                                                {"type":"para",
--                                                     "text":"HAVE TIGH UPS WITH MM CATERERS"
--                                                },    
--                                            ]
--                                     },
--                                 ]
--                        }           
--                    ]                  
--            },
--            {
--                "heading":"My map implementation",
--                "data_display":
--                    [
--                        {
--                          "type":"map",
--                          "long":["20", "15", "N"],
--                          "lat":["75", "58", "E"],
--                        }           
--                        
--                        
--                    ]                  
--                       
--            },
--         ]
-+              }
-+            ],
-+            "heading": "My map implementation"
-+          }
-+        ]
-     }
-         return gs("POST",req_dict(request.POST),{"data":data})
+commit 3bc23a261fd1226d0cf8882171397f55a15c1e66
+Author: nishants <nisants@PRINHYLTPAP0219.local>
+Date:   Sat Jul 11 02:28:59 2015 +0530
+
+    Vendor side bid and accept reject
+
+diff --git a/wedwise_messages/models.py b/wedwise_messages/models.py
+index 23c6344..052eb68 100644
+--- a/wedwise_messages/models.py
++++ b/wedwise_messages/models.py
+@@ -157,6 +157,25 @@ class Messages(models.Model):
+                                                  })
  
+ 
++    @classmethod
++    def vendor_bid_book_response(cls,request):
++        identifier=request.POST.get('identifier')
++        msg_id=request.POST.get('msg_id')
++        status=request.POST.get('status')
++        vendor = Vendor.objects.filter(identifier=identifier)
++        if not vendor:
++            return ge("POST",req_dict(request.POST),"no message exist", error_fields=['msg_id'])
++        else:
++            vendor=vendor[0]
++            
++        msg =Messages.objects.filter(id=msg_id)
++        if not msg:
++            return ge("POST",req_dict(request.POST),"no message exist", error_fields=['msg_id'])
++        else:
++            msg=msg[0] 
++        msg.status=status
++        msg.save()
++        return  gs("POST",req_dict(request.POST),{"label":"Succesfully done"})
+ 
+     @classmethod
+     def vendor_bid_book_page(cls,
+@@ -179,7 +198,7 @@ class Messages(models.Model):
+         else:
+             msg=msg[0] 
+         
+-        return {"label":"Enquiry Detail",
++        return  gs("POST",req_dict(request.POST),{"label":"Enquiry Detail",
+                 "table":[{"Event Date":str(msg.event_date)},
+                          {"Revenue Potential":"630++"},
+                          {"Groom's Name":"Suresh"},
+@@ -197,8 +216,8 @@ class Messages(models.Model):
+                          {"Groom's Name":"Suresh"},
+                          {"Bride Name":"Supriya"},                         
+                          ],
+-                "buttons":[["accept","Accept"],["reject","Reject"]],
+-                }
++                "buttons":[["0","Accept"],["1","Reject"]],
++                })
+         
+         
+ 
+
+commit 9f447345fff1774dc12ee22bab48f9d0b867f4d6
+Author: nishants <nisants@PRINHYLTPAP0219.local>
+Date:   Sat Jul 11 02:04:40 2015 +0530
+
+    vendor side bid book page create as per the id
+
+diff --git a/wedwise_messages/models.py b/wedwise_messages/models.py
+index b192376..23c6344 100644
+--- a/wedwise_messages/models.py
++++ b/wedwise_messages/models.py
+@@ -158,6 +158,49 @@ class Messages(models.Model):
+ 
+ 
+ 
++    @classmethod
++    def vendor_bid_book_page(cls,
++                        request):
++        msg_type=request.POST.get('msg_type')
++        msg_id=request.POST.get('msg_id')
++        identifier=request.POST.get('identifier')
++        if msg_type not in ["bid","book"]:
++            return ge("POST",req_dict(request.POST),"msg_type can be bid / book", error_fields=['msg_type']) 
++        
++        vendor = Vendor.objects.filter(identifier=identifier)
++        if not vendor:
++            return ge("POST",req_dict(request.POST),"no message exist", error_fields=['msg_id'])
++        else:
++            vendor=vendor[0]
++            
++        msg =Messages.objects.filter(id=msg_id)
++        if not ["msg"]:
++            return ge("POST",req_dict(request.POST),"no message exist", error_fields=['msg_id'])
++        else:
++            msg=msg[0] 
++        
++        return {"label":"Enquiry Detail",
++                "table":[{"Event Date":str(msg.event_date)},
++                         {"Revenue Potential":"630++"},
++                         {"Groom's Name":"Suresh"},
++                         {"Bride Name":"Supriya"},
++                         {"Event Date":str(msg.event_date)},
++                         {"Revenue Potential":"630++"},
++                         {"Groom's Name":"Suresh"},
++                         {"Bride Name":"Supriya"},
++                         {"Event Date":str(msg.event_date)},
++                         {"Revenue Potential":"630++"},
++                         {"Groom's Name":"Suresh"},
++                         {"Bride Name":"Supriya"},
++                         {"Event Date":str(msg.event_date)},
++                         {"Revenue Potential":"630++"},
++                         {"Groom's Name":"Suresh"},
++                         {"Bride Name":"Supriya"},                         
++                         ],
++                "buttons":[["accept","Accept"],["reject","Reject"]],
++                }
++        
++        
+ 
+     @classmethod
+     def details(cls,
+
+commit dddcd83371b1e72971e70955f707910122c6066a
+Author: nishants <nisants@PRINHYLTPAP0219.local>
+Date:   Sat Jul 11 00:58:01 2015 +0530
+
+    message listing page
+
+diff --git a/wedwise_messages/models.py b/wedwise_messages/models.py
+index aca1b7a..b192376 100644
+--- a/wedwise_messages/models.py
++++ b/wedwise_messages/models.py
+@@ -273,7 +273,12 @@ class Messages(models.Model):
+                                                      "identifier":msg.customer.identifier,
+                                                      "msg_time":str(msg.msg_time)[:19] ,
+                                                      "from_to":msg.from_to,
+-                                                     "msg_type":msg_type
++                                                     "event_date":str(msg.event_date)[:19],
++                                                     "msg_type":msg_type,
++                                                     "line1":"Pax 350-450 Package NVS Rev:5-5100",
++                                                     "line2":"Source:Wedwise",
++                                                     
++                                                     
+                                                      })
+             if from_to=="v2c":
+                 if msg.customer.pk not in listed:
+@@ -284,7 +289,10 @@ class Messages(models.Model):
+                                                      "identifier":msg.customer.identifier,
+                                                      "msg_time":str(msg.msg_time)[:19] ,
+                                                      "from_to":msg.from_to,
+-                                                     "msg_type":msg_type
++                                                     "msg_type":msg_type,
++                                                     "event_date":str(msg.event_date)[:19],
++                                                     "line1":"Pax 350-450 Package NVS Rev:5-5100",
++                                                     "line2":"Source:Wedwise",
+                                                      })                
+ 
+         
+
+commit e1c6fc470b34a468a80482447f4c7a19efa2b3e8
+Author: nishants <nisants@PRINHYLTPAP0219.local>
+Date:   Fri Jul 10 22:16:00 2015 +0530
+
+    msg_type added
+
+diff --git a/wedwise_messages/models.py b/wedwise_messages/models.py
+index 6806daf..aca1b7a 100644
+--- a/wedwise_messages/models.py
++++ b/wedwise_messages/models.py
+@@ -163,6 +163,7 @@ class Messages(models.Model):
+     def details(cls,
+                request, 
+                ):
++        msg_type=request.POST.get('msg_type')
+         receiver_email = request.POST.get('receiver_email').strip().lower()
+         from_to = request.POST.get('from_to').strip().lower()
+         identifier = request.POST.get('identifier')
+@@ -209,6 +210,7 @@ class Messages(models.Model):
+         msgs= Messages.objects.filter(
+                vendor=vendor,
+                 customer=customer,
++                msg_type=msg_type
+                 ).order_by('msg_time')
+                 
+         if from_to=="c2v":       
+@@ -218,7 +220,8 @@ class Messages(models.Model):
+                                                       "vendor_name":msg.vendor.name,
+                                                      "identifier":identifier,
+                                                      "msg_time":str(msg.msg_time)[:19],
+-                                                     "from_to":msg.from_to
++                                                     "from_to":msg.from_to,
++                                                     "msg_type":msg_type
+                                                     } for msg in msgs]) 
+         elif from_to=="v2c": 
+             return gs("POST",req_dict(request.POST),[{"id":msg.id,
+@@ -227,7 +230,8 @@ class Messages(models.Model):
+                                                       "vendor_name":msg.customer.bride_name + " vs " + msg.customer.groom_name ,
+                                                      "identifier":identifier,
+                                                      "msg_time":str(msg.msg_time)[:19],
+-                                                     "from_to":msg.from_to
++                                                     "from_to":msg.from_to,
++                                                     "msg_type":msg_type
+                                                     } for msg in msgs])
+ 
+     @classmethod
+
+commit 49186b4c35a465af89f3e1de1152641c32a13f4c
+Author: nishants <nisants@PRINHYLTPAP0219.local>
+Date:   Fri Jul 10 22:06:59 2015 +0530
+
+    message filter on bid | book | message
+
+diff --git a/wedwise_messages/models.py b/wedwise_messages/models.py
+index 327f8b1..6806daf 100644
+--- a/wedwise_messages/models.py
++++ b/wedwise_messages/models.py
+@@ -240,7 +240,7 @@ class Messages(models.Model):
+             sender = Customer.objects.filter(identifier=identifier)
+         elif from_to=="v2c":
+             sender = Vendor.objects.filter(identifier=identifier)
+-            
++        msg_type=request.POST.get('msg_type')
+         if not sender:
+             return ge("POST",req_dict(request.POST),"Sender unauthorized", error_fields=['identifier'],
+                       code_string="SENDER_NOT_EXIST")
+@@ -249,11 +249,11 @@ class Messages(models.Model):
+             
+         if from_to=="c2v":
+             all_msgs= Messages.objects.filter(
+-                    customer=sender,
++                    customer=sender,msg_type=msg_type
+                     ).order_by('-msg_time')
+         elif from_to=="v2c":
+             all_msgs= Messages.objects.filter(
+-                    vendor=sender,
++                    vendor=sender,msg_type=msg_type
+                     ).order_by('-msg_time')            
+         
+         
+@@ -268,7 +268,8 @@ class Messages(models.Model):
+                                                      "receiver_name":msg.vendor.name,
+                                                      "identifier":msg.customer.identifier,
+                                                      "msg_time":str(msg.msg_time)[:19] ,
+-                                                     "from_to":msg.from_to
++                                                     "from_to":msg.from_to,
++                                                     "msg_type":msg_type
+                                                      })
+             if from_to=="v2c":
+                 if msg.customer.pk not in listed:
+@@ -278,7 +279,8 @@ class Messages(models.Model):
+                                                      "receiver_name":msg.customer.groom_name + " vs "+msg.customer.bride_name ,
+                                                      "identifier":msg.customer.identifier,
+                                                      "msg_time":str(msg.msg_time)[:19] ,
+-                                                     "from_to":msg.from_to
++                                                     "from_to":msg.from_to,
++                                                     "msg_type":msg_type
+                                                      })                
+ 
+         
+
+commit e9381d3ccf0a55822e9aaa0aad3e0e97e8610882
+Author: nishants <nisants@PRINHYLTPAP0219.local>
+Date:   Fri Jul 10 02:00:08 2015 +0530
+
+    Bid and book working
+
+diff --git a/wedwise_messages/models.py b/wedwise_messages/models.py
+index 319cffa..327f8b1 100644
+--- a/wedwise_messages/models.py
++++ b/wedwise_messages/models.py
+@@ -18,7 +18,7 @@ class Messages(models.Model):
+     message = models.TextField()
+     msg_time = models.DateTimeField(auto_now_add=True)
+     #
+-    msg_type = models.CharField(max_length=7, choices=MESSAGE_TYPES_CHOICES , default="message")
++    msg_type = models.CharField(max_length=7, choices=MESSAGE_TYPES_CHOICES )
+     
+     book_json = models.CharField(max_length=1024,blank=True,default=None )
+     event_date=models.DateField(blank=True,default=None )
+@@ -35,14 +35,20 @@ class Messages(models.Model):
+     def create(cls,
+                request,
+                ):
++        
+         msg_type=request.POST.get("msg_type")
+         if msg_type not in MESSAGE_TYPES:
+             return ge("POST",req_dict(request.POST),"Invalid message type", error_fields=['msg_type']) 
+- 
++
+         receiver_email = request.POST.get('receiver_email').strip().lower()
+         identifier = request.POST.get('identifier')
+         message = request.POST.get('message')
+         from_to=request.POST.get('from_to')
++        
++        if msg_type in ["bid","book"] and from_to=="v2c":
++            return ge("POST",req_dict(request.POST),"Vendor to Customer create not possible in bid and book", error_fields=['from_to'])
++        
++        
+         f = forms.EmailField()
+         try:
+             f.clean(receiver_email)
+@@ -90,7 +96,7 @@ class Messages(models.Model):
+         event_date =request.POST.get("event_date",None)
+         time_slot = request.POST.get("time_slot",None)
+         bid_json = request.POST.get("bid_json","")
+-        book_json = request.POST.get("bid_json","")
++        book_json = request.POST.get("book_json","")
+         bid_price  =request.POST.get("bid_price","").strip()  
+         bid_quantity  =request.POST.get("bid_quantity","").strip()            
+         if msg_type in ["bid","book"]: 
+@@ -135,6 +141,7 @@ class Messages(models.Model):
+                 book_json =book_json,
+                 bid_price = bid_price,
+                 bid_quantity =bid_quantity,
++                msg_type=msg_type
+                 )
+         msg.save()
+         if from_to=="c2v":
+
+commit ad2bbf5d1d6d62fde862b9e4f3c4b4ef0eeb80c5
+Author: nishants <nisants@PRINHYLTPAP0219.local>
+Date:   Thu Jul 9 23:52:19 2015 +0530
+
+    Message bug fixed to create
+
+diff --git a/wedwise_messages/models.py b/wedwise_messages/models.py
+index 71379d3..319cffa 100644
+--- a/wedwise_messages/models.py
++++ b/wedwise_messages/models.py
+@@ -7,7 +7,8 @@ from django.core.exceptions import ValidationError
+ from api.utils import get_error as ge , get_success as gs ,req_dict
+ from django.contrib.auth.models import User
+ MESSAGE_TYPES=["message","bid","book"]
+-MESSAGE_TYPES_CHOICES=[[e[0],e[0]] for e in MESSAGE_TYPES]
++MESSAGE_TYPES_CHOICES=[  [e,e ] for e in MESSAGE_TYPES]
++print MESSAGE_TYPES_CHOICES
+ import datetime
+ 
+ class Messages(models.Model):
+@@ -17,7 +18,7 @@ class Messages(models.Model):
+     message = models.TextField()
+     msg_time = models.DateTimeField(auto_now_add=True)
+     #
+-    msg_type = models.CharField(max_length=7, choices=MESSAGE_TYPES_CHOICES)
++    msg_type = models.CharField(max_length=7, choices=MESSAGE_TYPES_CHOICES , default="message")
+     
+     book_json = models.CharField(max_length=1024,blank=True,default=None )
+     event_date=models.DateField(blank=True,default=None )
+@@ -117,6 +118,11 @@ class Messages(models.Model):
+                 if not book_json:
+                     return ge("POST",req_dict(request.POST),"No book_json", error_fields=['book_json']) 
+ 
++        
++        if not event_date:
++            event_date=None
++        if not  bid_quantity:
++            bid_quantity=0
+         msg= Messages(
+                vendor=vendor,
+                 customer=customer,
+
+commit c1cf9444b0e9f45c724ae91a745ce3c473c81abf
+Author: nishants <nisants@PRINHYLTPAP0219.local>
+Date:   Thu Jul 9 22:56:33 2015 +0530
+
+    git push origin master
+
+diff --git a/wedwise_messages/models.py b/wedwise_messages/models.py
+index 35a4590..71379d3 100644
+--- a/wedwise_messages/models.py
++++ b/wedwise_messages/models.py
+@@ -6,6 +6,9 @@ from django import forms
+ from django.core.exceptions import ValidationError
+ from api.utils import get_error as ge , get_success as gs ,req_dict
+ from django.contrib.auth.models import User
++MESSAGE_TYPES=["message","bid","book"]
++MESSAGE_TYPES_CHOICES=[[e[0],e[0]] for e in MESSAGE_TYPES]
++import datetime
+ 
+ class Messages(models.Model):
+     vendor = models.ForeignKey(Vendor)
+@@ -13,11 +16,28 @@ class Messages(models.Model):
+     from_to = models.CharField(max_length=3, choices=FROM_TO_CHOICES)
+     message = models.TextField()
+     msg_time = models.DateTimeField(auto_now_add=True)
++    #
++    msg_type = models.CharField(max_length=7, choices=MESSAGE_TYPES_CHOICES)
+     
++    book_json = models.CharField(max_length=1024,blank=True,default=None )
++    event_date=models.DateField(blank=True,default=None )
++    time_slot = models.CharField(max_length=128,blank=True,default=None  ) 
++    bid_json = models.CharField(max_length=1024,blank=True,default=None )
++    bid_price = models.CharField(max_length=100,blank=True,default=None  )    
++    bid_quantity = models.IntegerField(blank=True,default=None  ) 
++    status = models.CharField(max_length=1,blank=True,default=None  ) 
++
++
++
++ 
+     @classmethod
+     def create(cls,
+-               request, 
++               request,
+                ):
++        msg_type=request.POST.get("msg_type")
++        if msg_type not in MESSAGE_TYPES:
++            return ge("POST",req_dict(request.POST),"Invalid message type", error_fields=['msg_type']) 
++ 
+         receiver_email = request.POST.get('receiver_email').strip().lower()
+         identifier = request.POST.get('identifier')
+         message = request.POST.get('message')
+@@ -64,13 +84,51 @@ class Messages(models.Model):
+         else:
+             vendor=sender
+             customer=receiver
++
++
++        event_date =request.POST.get("event_date",None)
++        time_slot = request.POST.get("time_slot",None)
++        bid_json = request.POST.get("bid_json","")
++        book_json = request.POST.get("bid_json","")
++        bid_price  =request.POST.get("bid_price","").strip()  
++        bid_quantity  =request.POST.get("bid_quantity","").strip()            
++        if msg_type in ["bid","book"]: 
+             
+-        
++            try:
++                event_date=datetime.date(*[int(e) for e in event_date.split("-")])
++            except:
++                return ge("POST",req_dict(request.POST),"Invalid event_date", error_fields=['event_date']) 
++
++            if msg_type=="bid":
++                if not bid_json:
++                    return ge("POST",req_dict(request.POST),"No bid_json", error_fields=['bid_json']) 
++                if bid_price:
++                    try:
++                        float(bid_price)
++                    except:
++                        return ge("POST",req_dict(request.POST),"Invalid bid_price", error_fields=['bid_price']) 
++            
++                if bid_quantity:
++                    try:
++                        int(bid_quantity)
++                    except:
++                        return ge("POST",req_dict(request.POST),"Invalid bid_quantity", error_fields=['bid_quantity']) 
++            elif msg_type=="book":
++                if not book_json:
++                    return ge("POST",req_dict(request.POST),"No book_json", error_fields=['book_json']) 
++
+         msg= Messages(
+                vendor=vendor,
+                 customer=customer,
+                 from_to=from_to,
+-                message =message
++                message =message,
++                ## Added for bif and book
++                event_date = event_date,
++                time_slot = time_slot,
++                bid_json = bid_json,
++                book_json =book_json,
++                bid_price = bid_price,
++                bid_quantity =bid_quantity,
+                 )
+         msg.save()
+         if from_to=="c2v":
+@@ -86,6 +144,8 @@ class Messages(models.Model):
+                                                  })
+ 
+ 
++
++
+     @classmethod
+     def details(cls,
+                request, 
+@@ -212,27 +272,4 @@ class Messages(models.Model):
+ 
+         return gs("POST",req_dict(request.POST),msgs) 
+ 
+-class Book(models.Model):
+-    vendor = models.ForeignKey(Vendor)
+-    customer = models.ForeignKey(Customer)
+-    from_to = models.CharField(max_length=3, choices=FROM_TO_CHOICES)
+-    msg_time = models.DateTimeField()
+-    quoted_price_label= models.CharField(max_length=512) 
+-    message = models.TextField()
+-
+-
+-class Bid(models.Model):
+-    vendor = models.ForeignKey(Vendor)
+-    customer = models.ForeignKey(Customer)
+-    from_to = models.CharField(max_length=2, choices=FROM_TO_CHOICES)
+-    message = models.TextField()
+-    msg_time = models.DateTimeField()
+-    event_date=models.DateField()   
+-    quoted_price= models.CharField(max_length=512) 
+-    bid_price= models.FloatField() 
+-    quoted_price_label= models.CharField(max_length=512) 
+-    bid_price_entity= models.FloatField() 
+-    bid_price_entity_label= models.CharField(max_length=512) 
+-
+-#CHOICES_VENDOR_ROLE=[('Admin','Admin'), ('Reception','Reception')] 
+ 
+
+commit 20ac629f01e8ec799834c2bf6f6ffb4eea18fb40
+Author: nishants <nisants@PRINHYLTPAP0219.local>
+Date:   Tue Jul 7 18:53:29 2015 +0530
+
+    cleanupo code changes
+
+diff --git a/wedwise_messages/models.py b/wedwise_messages/models.py
+index 3df90bf..35a4590 100644
+--- a/wedwise_messages/models.py
++++ b/wedwise_messages/models.py
+@@ -41,7 +41,7 @@ class Messages(models.Model):
+ 
+ 
+             
+-        user = User.objects.filter(email=receiver_email)
++        user = User.objects.filter(username=receiver_email)
+         if not user:
+             return ge("POST",req_dict(request.POST),"Receiver unauthorized", error_fields=['receiver_email'],
+                       code_string="RECEIVER_NOT_EXIST")
+@@ -113,7 +113,7 @@ class Messages(models.Model):
+         else:
+             sender=sender[0] 
+             
+-        user = User.objects.filter(email=receiver_email)
++        user = User.objects.filter(username=receiver_email)
+         if not user:
+             return ge("POST",req_dict(request.POST),"Receiver unauthorized", error_fields=['receiver_email'],
+                       code_string="RECEIVER_NOT_EXIST")
+@@ -141,7 +141,7 @@ class Messages(models.Model):
+         if from_to=="c2v":       
+             return gs("POST",req_dict(request.POST),[{"id":msg.id,
+                                                      "message":msg.message,
+-                                                     "receiver_email":msg.vendor.user.email,
++                                                     "receiver_email":msg.vendor.user.username,
+                                                       "vendor_name":msg.vendor.name,
+                                                      "identifier":identifier,
+                                                      "msg_time":str(msg.msg_time)[:19],
+@@ -150,7 +150,7 @@ class Messages(models.Model):
+         elif from_to=="v2c": 
+             return gs("POST",req_dict(request.POST),[{"id":msg.id,
+                                                      "message":msg.message,
+-                                                     "receiver_email":msg.customer.user.email,
++                                                     "receiver_email":msg.customer.user.username,
+                                                       "vendor_name":msg.customer.bride_name + " vs " + msg.customer.groom_name ,
+                                                      "identifier":identifier,
+                                                      "msg_time":str(msg.msg_time)[:19],
+@@ -191,7 +191,7 @@ class Messages(models.Model):
+                 if msg.vendor.pk not in listed:
+                     listed.append(msg.vendor.pk)
+                     msgs.append({"id":msg.id, "message":msg.message,
+-                                                     "receiver_email":msg.vendor.user.email,
++                                                     "receiver_email":msg.vendor.user.username,
+                                                      "receiver_name":msg.vendor.name,
+                                                      "identifier":msg.customer.identifier,
+                                                      "msg_time":str(msg.msg_time)[:19] ,
+@@ -201,7 +201,7 @@ class Messages(models.Model):
+                 if msg.customer.pk not in listed:
+                     listed.append(msg.customer.pk)
+                     msgs.append({"id":msg.id, "message":msg.message,
+-                                                     "receiver_email":msg.customer.user.email,
++                                                     "receiver_email":msg.customer.user.username,
+                                                      "receiver_name":msg.customer.groom_name + " vs "+msg.customer.bride_name ,
+                                                      "identifier":msg.customer.identifier,
+                                                      "msg_time":str(msg.msg_time)[:19] ,
+
+commit 29fa1c7faed185933aac3d98defdb303f17a7b7f
+Author: nishants <nisants@PRINHYLTPAP0219.local>
+Date:   Mon Jul 6 23:53:48 2015 +0530
+
+    fix all messages etc
+
+diff --git a/wedwise_messages/models.py b/wedwise_messages/models.py
+index bd877e6..3df90bf 100644
+--- a/wedwise_messages/models.py
++++ b/wedwise_messages/models.py
+@@ -121,16 +121,16 @@ class Messages(models.Model):
+             user=user[0]
+         
+         if from_to=="c2v":
+-            receiver = Vendor.objects.filter(user=user)
+-            vendor = receiver
++            customer = sender
++            vendor = receiver = Vendor.objects.filter(user=user)
+         elif from_to=="v2c":
+-            receiver = Customer.objects.filter(user=user)
+-            customer=receiver
++            customer = receiver = Customer.objects.filter(user=user)
++            vendor = sender
++            
+         if not receiver:
+             return ge("POST",req_dict(request.POST),"Receiver unauthorized", error_fields=['receiver_email'],
+                       code_string="RECEIVERNOT_EXIST")
+-        else:
+-            receiver=receiver[0]            
++           
+         
+         
+         msgs= Messages.objects.filter(
+@@ -168,7 +168,6 @@ class Messages(models.Model):
+         elif from_to=="v2c":
+             sender = Vendor.objects.filter(identifier=identifier)
+             
+-        
+         if not sender:
+             return ge("POST",req_dict(request.POST),"Sender unauthorized", error_fields=['identifier'],
+                       code_string="SENDER_NOT_EXIST")
+@@ -179,7 +178,7 @@ class Messages(models.Model):
+             all_msgs= Messages.objects.filter(
+                     customer=sender,
+                     ).order_by('-msg_time')
+-        elif from_to=="c2v":
++        elif from_to=="v2c":
+             all_msgs= Messages.objects.filter(
+                     vendor=sender,
+                     ).order_by('-msg_time')            
+@@ -189,8 +188,8 @@ class Messages(models.Model):
+         listed=[]# Which vendor id indexed at which positions
+         for msg in all_msgs:
+             if from_to=="c2v":
+-                if msg.vendor.id not in listed:
+-                    listed.append(msg.vendor.id)
++                if msg.vendor.pk not in listed:
++                    listed.append(msg.vendor.pk)
+                     msgs.append({"id":msg.id, "message":msg.message,
+                                                      "receiver_email":msg.vendor.user.email,
+                                                      "receiver_name":msg.vendor.name,
+@@ -199,8 +198,8 @@ class Messages(models.Model):
+                                                      "from_to":msg.from_to
+                                                      })
+             if from_to=="v2c":
+-                if msg.customer.id not in listed:
+-                    listed.append(msg.customer.id)
++                if msg.customer.pk not in listed:
++                    listed.append(msg.customer.pk)
+                     msgs.append({"id":msg.id, "message":msg.message,
+                                                      "receiver_email":msg.customer.user.email,
+                                                      "receiver_name":msg.customer.groom_name + " vs "+msg.customer.bride_name ,
+
+commit 5b698b1efc6d01166879ab5405efb34dacbbdeb2
+Author: nishants <nisants@PRINHYLTPAP0219.local>
+Date:   Mon Jul 6 23:30:13 2015 +0530
+
+    If works
+
+diff --git a/wedwise_messages/models.py b/wedwise_messages/models.py
+index ffdd4b5..bd877e6 100644
+--- a/wedwise_messages/models.py
++++ b/wedwise_messages/models.py
+@@ -90,78 +90,124 @@ class Messages(models.Model):
+     def details(cls,
+                request, 
+                ):
+-        vendor_email = request.POST.get('vendor_email').strip().lower()
++        receiver_email = request.POST.get('receiver_email').strip().lower()
++        from_to = request.POST.get('from_to').strip().lower()
+         identifier = request.POST.get('identifier')
+         f = forms.EmailField()
+         try:
+-            f.clean(vendor_email)
++            f.clean(receiver_email)
+         except ValidationError:
+-            return ge("POST",req_dict(request.POST),"Invalid vendor email", error_fields=['vendor_email']) 
++            return ge("POST",req_dict(request.POST),"Invalid receiver email", error_fields=['receiver_email']) 
+  
+-        customer = Customer.objects.filter(identifier=identifier)
+-        if not customer:
+-            return ge("POST",req_dict(request.POST),"Customer unauthorized", error_fields=['identifier'],
+-                      code_string="CUSTOMER_NOT_EXIST")
++        if from_to=="c2v":
++            sender = Customer.objects.filter(identifier=identifier)
++        elif from_to=="v2c":
++            sender = Vendor.objects.filter(identifier=identifier)  
++            
++            
++            
++            
++        if not sender:
++            return ge("POST",req_dict(request.POST),"sender unauthorized", error_fields=['identifier'],
++                      code_string="SENDER_NOT_EXIST")
+         else:
+-            customer=customer[0] 
++            sender=sender[0] 
+             
+-        user = User.objects.filter(email=vendor_email)
++        user = User.objects.filter(email=receiver_email)
+         if not user:
+-            return ge("POST",req_dict(request.POST),"Vendor unauthorized", error_fields=['vendor_email'],
+-                      code_string="VENDOR_NOT_EXIST")
++            return ge("POST",req_dict(request.POST),"Receiver unauthorized", error_fields=['receiver_email'],
++                      code_string="RECEIVER_NOT_EXIST")
+         else:
+             user=user[0]
+         
+-        vendor = Vendor.objects.filter(user=user)
+-        if not vendor:
+-            return ge("POST",req_dict(request.POST),"Vendor unauthorized", error_fields=['vendor_email'],
+-                      code_string="VENDOR_NOT_EXIST")
++        if from_to=="c2v":
++            receiver = Vendor.objects.filter(user=user)
++            vendor = receiver
++        elif from_to=="v2c":
++            receiver = Customer.objects.filter(user=user)
++            customer=receiver
++        if not receiver:
++            return ge("POST",req_dict(request.POST),"Receiver unauthorized", error_fields=['receiver_email'],
++                      code_string="RECEIVERNOT_EXIST")
+         else:
+-            vendor=vendor[0]            
++            receiver=receiver[0]            
+         
+         
+         msgs= Messages.objects.filter(
+                vendor=vendor,
+                 customer=customer,
+                 ).order_by('msg_time')
+-        return gs("POST",req_dict(request.POST),[{"id":msg.id,
+-                                                 "message":msg.message,
+-                                                 "vendor_email":msg.vendor.user.email,
+-                                                  "vendor_name":msg.vendor.name,
+-                                                 "identifier":msg.customer.identifier,
+-                                                 "msg_time":str(msg.msg_time)[:19],
+-                                                 "from_to":msg.from_to
+-                                                } for msg in msgs])    
+-
++                
++        if from_to=="c2v":       
++            return gs("POST",req_dict(request.POST),[{"id":msg.id,
++                                                     "message":msg.message,
++                                                     "receiver_email":msg.vendor.user.email,
++                                                      "vendor_name":msg.vendor.name,
++                                                     "identifier":identifier,
++                                                     "msg_time":str(msg.msg_time)[:19],
++                                                     "from_to":msg.from_to
++                                                    } for msg in msgs]) 
++        elif from_to=="v2c": 
++            return gs("POST",req_dict(request.POST),[{"id":msg.id,
++                                                     "message":msg.message,
++                                                     "receiver_email":msg.customer.user.email,
++                                                      "vendor_name":msg.customer.bride_name + " vs " + msg.customer.groom_name ,
++                                                     "identifier":identifier,
++                                                     "msg_time":str(msg.msg_time)[:19],
++                                                     "from_to":msg.from_to
++                                                    } for msg in msgs])
+ 
+     @classmethod
+     def listing(cls,
+                request, 
+                ):
+         identifier = request.POST.get('identifier')
+-        customer = Customer.objects.filter(identifier=identifier)
+-        if not customer:
+-            return ge("POST",req_dict(request.POST),"Customer unauthorized", error_fields=['identifier'],
+-                      code_string="CUSTOMER_NOT_EXIST")
++        from_to=request.POST.get('from_to')
++        if from_to=="c2v":
++            sender = Customer.objects.filter(identifier=identifier)
++        elif from_to=="v2c":
++            sender = Vendor.objects.filter(identifier=identifier)
++            
++        
++        if not sender:
++            return ge("POST",req_dict(request.POST),"Sender unauthorized", error_fields=['identifier'],
++                      code_string="SENDER_NOT_EXIST")
+         else:
+-            customer=customer[0] 
++            sender=sender[0] 
+             
+-        all_msgs= Messages.objects.filter(
+-                customer=customer,
+-                ).order_by('-msg_time')
++        if from_to=="c2v":
++            all_msgs= Messages.objects.filter(
++                    customer=sender,
++                    ).order_by('-msg_time')
++        elif from_to=="c2v":
++            all_msgs= Messages.objects.filter(
++                    vendor=sender,
++                    ).order_by('-msg_time')            
++        
++        
+         msgs=[]
+         listed=[]# Which vendor id indexed at which positions
+         for msg in all_msgs:
+-            if msg.vendor.id not in listed:
+-                listed.append(msg.vendor.id)
+-                msgs.append({"id":msg.id, "message":msg.message,
+-                                                 "vendor_email":msg.vendor.user.email,
+-                                                 "vendor_name":msg.vendor.name,
+-                                                 "identifier":msg.customer.identifier,
+-                                                 "msg_time":str(msg.msg_time)[:19] ,
+-                                                 "from_to":msg.from_to
+-                                                 })
+-                
++            if from_to=="c2v":
++                if msg.vendor.id not in listed:
++                    listed.append(msg.vendor.id)
++                    msgs.append({"id":msg.id, "message":msg.message,
++                                                     "receiver_email":msg.vendor.user.email,
++                                                     "receiver_name":msg.vendor.name,
++                                                     "identifier":msg.customer.identifier,
++                                                     "msg_time":str(msg.msg_time)[:19] ,
++                                                     "from_to":msg.from_to
++                                                     })
++            if from_to=="v2c":
++                if msg.customer.id not in listed:
++                    listed.append(msg.customer.id)
++                    msgs.append({"id":msg.id, "message":msg.message,
++                                                     "receiver_email":msg.customer.user.email,
++                                                     "receiver_name":msg.customer.groom_name + " vs "+msg.customer.bride_name ,
++                                                     "identifier":msg.customer.identifier,
++                                                     "msg_time":str(msg.msg_time)[:19] ,
++                                                     "from_to":msg.from_to
++                                                     })                
+ 
+         
+ 
+
+commit 4fc6d8f398ce76eebe8f0dc91380853af03a20b4
+Author: nishants <nisants@PRINHYLTPAP0219.local>
+Date:   Mon Jul 6 23:03:59 2015 +0530
+
+    customized changes
+
+diff --git a/wedwise_messages/models.py b/wedwise_messages/models.py
+index 2b6eb65..ffdd4b5 100644
+--- a/wedwise_messages/models.py
++++ b/wedwise_messages/models.py
+@@ -80,9 +80,9 @@ class Messages(models.Model):
+         return gs("POST",req_dict(request.POST),{"id":msg.id,
+                                                  "message":msg.message,
+                                                  "receiver_email":receiver_email,
+-                                                  "vendor_name":receiver_name,
++                                                  "receiver_name":receiver_name,
+                                                  "identifier":identifier,
+-                                                 "msg_time":str(msg.msg_time)
++                                                 "msg_time":str(msg.msg_time)[:19]
+                                                  })
+ 
+ 
+@@ -129,7 +129,7 @@ class Messages(models.Model):
+                                                  "vendor_email":msg.vendor.user.email,
+                                                   "vendor_name":msg.vendor.name,
+                                                  "identifier":msg.customer.identifier,
+-                                                 "msg_time":str(msg.msg_time),
++                                                 "msg_time":str(msg.msg_time)[:19],
+                                                  "from_to":msg.from_to
+                                                 } for msg in msgs])    
+ 
+@@ -158,7 +158,7 @@ class Messages(models.Model):
+                                                  "vendor_email":msg.vendor.user.email,
+                                                  "vendor_name":msg.vendor.name,
+                                                  "identifier":msg.customer.identifier,
+-                                                 "msg_time":str(msg.msg_time) ,
++                                                 "msg_time":str(msg.msg_time)[:19] ,
+                                                  "from_to":msg.from_to
+                                                  })
+                 
+
+commit d0d343f3192a53028020df6c512a1898a37a0fb6
+Author: nishants <nisants@PRINHYLTPAP0219.local>
+Date:   Mon Jul 6 22:35:12 2015 +0530
+
+    cerate api done
+
+diff --git a/wedwise_messages/models.py b/wedwise_messages/models.py
+index 485008c..2b6eb65 100644
+--- a/wedwise_messages/models.py
++++ b/wedwise_messages/models.py
+@@ -18,40 +18,53 @@ class Messages(models.Model):
+     def create(cls,
+                request, 
+                ):
+-        vendor_email = request.POST.get('vendor_email').strip().lower()
++        receiver_email = request.POST.get('receiver_email').strip().lower()
+         identifier = request.POST.get('identifier')
+         message = request.POST.get('message')
+-        from_to="c2v"
+-     
+-
++        from_to=request.POST.get('from_to')
+         f = forms.EmailField()
+-        
+         try:
+-            f.clean(vendor_email)
++            f.clean(receiver_email)
+         except ValidationError:
+-            return ge("POST",req_dict(request.POST),"Invalid vendor email", error_fields=['vendor_email']) 
++            return ge("POST",req_dict(request.POST),"Invalid vendor email", error_fields=['receiver_email']) 
+  
+-        customer = Customer.objects.filter(identifier=identifier)
+-        if not customer:
+-            return ge("POST",req_dict(request.POST),"Customer unauthorized", error_fields=['identifier'],
+-                      code_string="CUSTOMER_NOT_EXIST")
++        if from_to =="c2v":
++            sender = Customer.objects.filter(identifier=identifier)
++        elif from_to=="v2c":
++            sender = Vendor.objects.filter(identifier=identifier)
++            
++        if not sender:
++            return ge("POST",req_dict(request.POST),"Sender unauthorized", error_fields=['identifier'],
++                      code_string="SENDER_NOT_EXIST")
+         else:
+-            customer=customer[0] 
++            sender=sender[0] 
++
++
+             
+-        user = User.objects.filter(email=vendor_email)
++        user = User.objects.filter(email=receiver_email)
+         if not user:
+-            return ge("POST",req_dict(request.POST),"Vendor unauthorized", error_fields=['vendor_email'],
+-                      code_string="VENDOR_NOT_EXIST")
++            return ge("POST",req_dict(request.POST),"Receiver unauthorized", error_fields=['receiver_email'],
++                      code_string="RECEIVER_NOT_EXIST")
+         else:
+             user=user[0]
+-        
+-        vendor = Vendor.objects.filter(user=user)
+-        if not vendor:
+-            return ge("POST",req_dict(request.POST),"Vendor unauthorized", error_fields=['vendor_email'],
+-                      code_string="VENDOR_NOT_EXIST")
++        if from_to=="c2v":
++            receiver = Vendor.objects.filter(user=user)
+         else:
+-            vendor=vendor[0]            
++            receiver = Customer.objects.filter(user=user)
++        if not receiver:
++            return ge("POST",req_dict(request.POST),"Receiver unauthorized", error_fields=['receiver_email'],
++                      code_string="RECEIVER_NOT_EXIST")
++        else:
++            receiver=receiver[0]            
+         
++        if from_to=="c2v":
++            vendor=receiver
++            customer=sender
++            
++        else:
++            vendor=sender
++            customer=receiver
++            
+         
+         msg= Messages(
+                vendor=vendor,
+@@ -60,10 +73,14 @@ class Messages(models.Model):
+                 message =message
+                 )
+         msg.save()
++        if from_to=="c2v":
++            receiver_name=msg.vendor.name
++        elif from_to=="v2c":
++            receiver_name=msg.customer.groom_name + " weds " + msg.customer.bride_name 
+         return gs("POST",req_dict(request.POST),{"id":msg.id,
+                                                  "message":msg.message,
+-                                                 "vendor_email":vendor_email,
+-                                                  "vendor_name":msg.vendor.name,
++                                                 "receiver_email":receiver_email,
++                                                  "vendor_name":receiver_name,
+                                                  "identifier":identifier,
+                                                  "msg_time":str(msg.msg_time)
+                                                  })
+
+commit 1836daa663e30dfafa953ae9ce957d2310a933ee
+Author: Prabhattripathi <prabhat.tripathi1@gmail.com>
+Date:   Mon Jul 6 20:50:30 2015 +0530
+
+    from to field
+
+diff --git a/wedwise_messages/models.py b/wedwise_messages/models.py
+index 0bafc69..485008c 100644
+--- a/wedwise_messages/models.py
++++ b/wedwise_messages/models.py
+@@ -112,7 +112,8 @@ class Messages(models.Model):
+                                                  "vendor_email":msg.vendor.user.email,
+                                                   "vendor_name":msg.vendor.name,
+                                                  "identifier":msg.customer.identifier,
+-                                                 "msg_time":str(msg.msg_time)
++                                                 "msg_time":str(msg.msg_time),
++                                                 "from_to":msg.from_to
+                                                 } for msg in msgs])    
+ 
+ 
+
+commit ab1a91535d81ac5bc949efd6e545629faaefbad8
+Author: Prabhattripathi <prabhat.tripathi1@gmail.com>
+Date:   Mon Jul 6 02:25:56 2015 +0530
+
+    message logic done fine
+
+diff --git a/wedwise_messages/models.py b/wedwise_messages/models.py
+index 67a4cfb..0bafc69 100644
+--- a/wedwise_messages/models.py
++++ b/wedwise_messages/models.py
+@@ -130,23 +130,23 @@ class Messages(models.Model):
+             
+         all_msgs= Messages.objects.filter(
+                 customer=customer,
+-                ).order_by('msg_time')
++                ).order_by('-msg_time')
+         msgs=[]
+-        listed={}# Which vendor id indexed at which positions
++        listed=[]# Which vendor id indexed at which positions
+         for msg in all_msgs:
+-            info={"id":msg.id, "message":msg.message,
++            if msg.vendor.id not in listed:
++                listed.append(msg.vendor.id)
++                msgs.append({"id":msg.id, "message":msg.message,
+                                                  "vendor_email":msg.vendor.user.email,
+                                                  "vendor_name":msg.vendor.name,
+                                                  "identifier":msg.customer.identifier,
+-                                                 "msg_time":str(msg.msg_time)
+-                                                 }
+-            if msg.vendor.id not in listed:
+-                msgs.append([info])
++                                                 "msg_time":str(msg.msg_time) ,
++                                                 "from_to":msg.from_to
++                                                 })
+                 
+-                listed = {msg.vendor.id :len(msgs)-1}
+-            else:
+-                msgs[listed[msg.vendor.id]].append(info)
+-         
++
++        
++
+         return gs("POST",req_dict(request.POST),msgs) 
+ 
+ class Book(models.Model):
+
+commit 688589368da1e933401193a629dcfddff832c277
+Author: Prabhattripathi <prabhat.tripathi1@gmail.com>
+Date:   Sun Jul 5 02:48:31 2015 +0530
+
+    message listing page
+
+diff --git a/wedwise_messages/models.py b/wedwise_messages/models.py
+index d6ee0c8..67a4cfb 100644
+--- a/wedwise_messages/models.py
++++ b/wedwise_messages/models.py
+@@ -63,6 +63,7 @@ class Messages(models.Model):
+         return gs("POST",req_dict(request.POST),{"id":msg.id,
+                                                  "message":msg.message,
+                                                  "vendor_email":vendor_email,
++                                                  "vendor_name":msg.vendor.name,
+                                                  "identifier":identifier,
+                                                  "msg_time":str(msg.msg_time)
+                                                  })
+@@ -105,14 +106,49 @@ class Messages(models.Model):
+         msgs= Messages.objects.filter(
+                vendor=vendor,
+                 customer=customer,
+-
+-                )
++                ).order_by('msg_time')
+         return gs("POST",req_dict(request.POST),[{"id":msg.id,
+                                                  "message":msg.message,
+                                                  "vendor_email":msg.vendor.user.email,
++                                                  "vendor_name":msg.vendor.name,
++                                                 "identifier":msg.customer.identifier,
++                                                 "msg_time":str(msg.msg_time)
++                                                } for msg in msgs])    
++
++
++    @classmethod
++    def listing(cls,
++               request, 
++               ):
++        identifier = request.POST.get('identifier')
++        customer = Customer.objects.filter(identifier=identifier)
++        if not customer:
++            return ge("POST",req_dict(request.POST),"Customer unauthorized", error_fields=['identifier'],
++                      code_string="CUSTOMER_NOT_EXIST")
++        else:
++            customer=customer[0] 
++            
++        all_msgs= Messages.objects.filter(
++                customer=customer,
++                ).order_by('msg_time')
++        msgs=[]
++        listed={}# Which vendor id indexed at which positions
++        for msg in all_msgs:
++            info={"id":msg.id, "message":msg.message,
++                                                 "vendor_email":msg.vendor.user.email,
++                                                 "vendor_name":msg.vendor.name,
+                                                  "identifier":msg.customer.identifier,
+                                                  "msg_time":str(msg.msg_time)
+-                                                 } for msg in msgs])    
++                                                 }
++            if msg.vendor.id not in listed:
++                msgs.append([info])
++                
++                listed = {msg.vendor.id :len(msgs)-1}
++            else:
++                msgs[listed[msg.vendor.id]].append(info)
++         
++        return gs("POST",req_dict(request.POST),msgs) 
++
+ class Book(models.Model):
+     vendor = models.ForeignKey(Vendor)
+     customer = models.ForeignKey(Customer)
+
+commit c9f71ba0efac430e3eeecf8896b3fea10dc8012f
+Author: Prabhattripathi <prabhat.tripathi1@gmail.com>
+Date:   Sun Jul 5 02:17:29 2015 +0530
+
+    message detail page
+
+diff --git a/wedwise_messages/models.py b/wedwise_messages/models.py
+index 01ab919..d6ee0c8 100644
+--- a/wedwise_messages/models.py
++++ b/wedwise_messages/models.py
+@@ -68,26 +68,13 @@ class Messages(models.Model):
+                                                  })
+ 
+ 
+-    
+-class Book(models.Model):
+-    vendor = models.ForeignKey(Vendor)
+-    customer = models.ForeignKey(Customer)
+-    from_to = models.CharField(max_length=3, choices=FROM_TO_CHOICES)
+-    msg_time = models.DateTimeField()
+-    quoted_price_label= models.CharField(max_length=512) 
+-    message = models.TextField()
+     @classmethod
+-    def create(cls,
++    def details(cls,
+                request, 
+                ):
+         vendor_email = request.POST.get('vendor_email').strip().lower()
+         identifier = request.POST.get('identifier')
+-        message = request.POST.get('message')
+-        from_to="c2v"
+-     
+-
+         f = forms.EmailField()
+-        
+         try:
+             f.clean(vendor_email)
+         except ValidationError:
+@@ -115,14 +102,24 @@ class Book(models.Model):
+             vendor=vendor[0]            
+         
+         
+-        msg= Messages(
++        msgs= Messages.objects.filter(
+                vendor=vendor,
+                 customer=customer,
+-                from_to=from_to,
+-                message =message
++
+                 )
+-        msg.save()
+-        return gs("POST",req_dict(request.POST),{"message_id":msg.id})
++        return gs("POST",req_dict(request.POST),[{"id":msg.id,
++                                                 "message":msg.message,
++                                                 "vendor_email":msg.vendor.user.email,
++                                                 "identifier":msg.customer.identifier,
++                                                 "msg_time":str(msg.msg_time)
++                                                 } for msg in msgs])    
++class Book(models.Model):
++    vendor = models.ForeignKey(Vendor)
++    customer = models.ForeignKey(Customer)
++    from_to = models.CharField(max_length=3, choices=FROM_TO_CHOICES)
++    msg_time = models.DateTimeField()
++    quoted_price_label= models.CharField(max_length=512) 
++    message = models.TextField()
+ 
+ 
+ class Bid(models.Model):
+
+commit 082a71fbcd4ca085845f45e29b3d7e825fc36ad4
+Author: Prabhattripathi <prabhat.tripathi1@gmail.com>
+Date:   Sun Jul 5 01:46:36 2015 +0530
+
+    new messages
+
+diff --git a/wedwise_messages/models.py b/wedwise_messages/models.py
+new file mode 100644
+index 0000000..01ab919
+--- /dev/null
++++ b/wedwise_messages/models.py
+@@ -0,0 +1,142 @@
++from django.db import models
++from vendor.models import Vendor
++from customer.models import Customer
++FROM_TO_CHOICES=[('v2c','v2c'), ('c2v','c2v')]        
++from django import forms
++from django.core.exceptions import ValidationError
++from api.utils import get_error as ge , get_success as gs ,req_dict
++from django.contrib.auth.models import User
++
++class Messages(models.Model):
++    vendor = models.ForeignKey(Vendor)
++    customer = models.ForeignKey(Customer)
++    from_to = models.CharField(max_length=3, choices=FROM_TO_CHOICES)
++    message = models.TextField()
++    msg_time = models.DateTimeField(auto_now_add=True)
++    
++    @classmethod
++    def create(cls,
++               request, 
++               ):
++        vendor_email = request.POST.get('vendor_email').strip().lower()
++        identifier = request.POST.get('identifier')
++        message = request.POST.get('message')
++        from_to="c2v"
++     
++
++        f = forms.EmailField()
++        
++        try:
++            f.clean(vendor_email)
++        except ValidationError:
++            return ge("POST",req_dict(request.POST),"Invalid vendor email", error_fields=['vendor_email']) 
++ 
++        customer = Customer.objects.filter(identifier=identifier)
++        if not customer:
++            return ge("POST",req_dict(request.POST),"Customer unauthorized", error_fields=['identifier'],
++                      code_string="CUSTOMER_NOT_EXIST")
++        else:
++            customer=customer[0] 
++            
++        user = User.objects.filter(email=vendor_email)
++        if not user:
++            return ge("POST",req_dict(request.POST),"Vendor unauthorized", error_fields=['vendor_email'],
++                      code_string="VENDOR_NOT_EXIST")
++        else:
++            user=user[0]
++        
++        vendor = Vendor.objects.filter(user=user)
++        if not vendor:
++            return ge("POST",req_dict(request.POST),"Vendor unauthorized", error_fields=['vendor_email'],
++                      code_string="VENDOR_NOT_EXIST")
++        else:
++            vendor=vendor[0]            
++        
++        
++        msg= Messages(
++               vendor=vendor,
++                customer=customer,
++                from_to=from_to,
++                message =message
++                )
++        msg.save()
++        return gs("POST",req_dict(request.POST),{"id":msg.id,
++                                                 "message":msg.message,
++                                                 "vendor_email":vendor_email,
++                                                 "identifier":identifier,
++                                                 "msg_time":str(msg.msg_time)
++                                                 })
++
++
++    
++class Book(models.Model):
++    vendor = models.ForeignKey(Vendor)
++    customer = models.ForeignKey(Customer)
++    from_to = models.CharField(max_length=3, choices=FROM_TO_CHOICES)
++    msg_time = models.DateTimeField()
++    quoted_price_label= models.CharField(max_length=512) 
++    message = models.TextField()
++    @classmethod
++    def create(cls,
++               request, 
++               ):
++        vendor_email = request.POST.get('vendor_email').strip().lower()
++        identifier = request.POST.get('identifier')
++        message = request.POST.get('message')
++        from_to="c2v"
++     
++
++        f = forms.EmailField()
++        
++        try:
++            f.clean(vendor_email)
++        except ValidationError:
++            return ge("POST",req_dict(request.POST),"Invalid vendor email", error_fields=['vendor_email']) 
++ 
++        customer = Customer.objects.filter(identifier=identifier)
++        if not customer:
++            return ge("POST",req_dict(request.POST),"Customer unauthorized", error_fields=['identifier'],
++                      code_string="CUSTOMER_NOT_EXIST")
++        else:
++            customer=customer[0] 
++            
++        user = User.objects.filter(email=vendor_email)
++        if not user:
++            return ge("POST",req_dict(request.POST),"Vendor unauthorized", error_fields=['vendor_email'],
++                      code_string="VENDOR_NOT_EXIST")
++        else:
++            user=user[0]
++        
++        vendor = Vendor.objects.filter(user=user)
++        if not vendor:
++            return ge("POST",req_dict(request.POST),"Vendor unauthorized", error_fields=['vendor_email'],
++                      code_string="VENDOR_NOT_EXIST")
++        else:
++            vendor=vendor[0]            
++        
++        
++        msg= Messages(
++               vendor=vendor,
++                customer=customer,
++                from_to=from_to,
++                message =message
++                )
++        msg.save()
++        return gs("POST",req_dict(request.POST),{"message_id":msg.id})
++
++
++class Bid(models.Model):
++    vendor = models.ForeignKey(Vendor)
++    customer = models.ForeignKey(Customer)
++    from_to = models.CharField(max_length=2, choices=FROM_TO_CHOICES)
++    message = models.TextField()
++    msg_time = models.DateTimeField()
++    event_date=models.DateField()   
++    quoted_price= models.CharField(max_length=512) 
++    bid_price= models.FloatField() 
++    quoted_price_label= models.CharField(max_length=512) 
++    bid_price_entity= models.FloatField() 
++    bid_price_entity_label= models.CharField(max_length=512) 
++
++#CHOICES_VENDOR_ROLE=[('Admin','Admin'), ('Reception','Reception')] 
++

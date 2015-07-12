@@ -1,7 +1,7 @@
 from django.db import models
 from api.utils import get_error as ge , get_success as gs ,req_dict
 # Create your models here.
-
+import json
 from django.db import models
 from django.contrib.auth.models import User
 from api.utils import mode_require
@@ -124,12 +124,14 @@ class Vendor(models.Model):
         user=User.objects.filter(username=vendor_email)
         if not user:
             return ge("POST",req_dict(request.POST),"User not exists", error_fields=['vendor_email']) 
-        
+        user=user[0]
+       
         vendor = Vendor.objects.filter(user=user)  
         if not vendor:
             return ge("POST",req_dict(request.POST),"Vendor not exists", error_fields=['vendor_email']) 
-        vendor=vendor[0]   
-        data=\
+        vendor=vendor[0]  
+        data = json.loads(vendor.dynamic_info) 
+        '''data=\
 {
   "bid": {
     "type": "bid",
@@ -441,27 +443,18 @@ class Vendor(models.Model):
       ]
     }
   ]
-}
+}'''
 
         return gs("POST",req_dict(request.POST),{"data":data})
 
 
     @classmethod
     def get_vendor_list(cls,vendor_type,page_no,mode,image_type):
-        """
-        Name , 
-        location, 
-        USP Icons,starting price , 
-        starting price 
-        starting price label,
-        years_in_business
-        others [[k1,v1], [k2,v2],....[kn.vn]]
-        Banquets => min-max cap , veg only, jain only , stay ,alocohol
-        """
         img="/media/apps/{mode}/{image_type}/category/{vendor_type}.jpg".\
                 format(vendor_type=vendor_type,mode=mode,image_type=image_type)
         lst=[]
-        for vendor in Vendor.objects.all() :
+        for vendor in Vendor.objects.filter(vendor_type=Category.objects.get(key=vendor_type)) :
+            
             lst.append(
                 {
                  "vendor_email":vendor.user.username,
