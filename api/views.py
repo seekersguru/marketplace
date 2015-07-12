@@ -7,7 +7,7 @@ from utils import response
 from api.utils import get_error as ge , get_success as gs
 import utils
 from customer.models import Customer
-from vendor.models import Category, VendorLead, Vendor
+from vendor.models import Category, Vendor
 from wedwise_messages.models import Messages
 def check_basic_validations(pattern_name,request,req_type):
     required=patterns[pattern_name].get("required_params",None)
@@ -28,9 +28,10 @@ def check_basic_validations(pattern_name,request,req_type):
 
 def index(request):
     lst=[ (k,v) for k,v in patterns.iteritems()]
+    
     lst=OrderedDict(sorted(lst, key= lambda e:e[1]['order']))
     return TemplateResponse(request,'api/api_index.html',
-                {"patterns":lst})
+                {"patterns":lst, "vendors":Vendor.objects.all(),"customers":Customer.objects.all()})
 
 ########## Customer Login Registration
 @csrf_exempt

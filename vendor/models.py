@@ -460,6 +460,7 @@ class Vendor(models.Model):
                  "vendor_email":vendor.user.username,
                  "image":img,
                  "name":vendor.name ,
+                 #todo make it dynamic
                  "icons":["/media/icons/2x/icon1.png",
                           "/media/icons/2x/ico2.png",
                           "/media/icons/2x/icon3.png",
