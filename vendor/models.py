@@ -482,8 +482,8 @@ class Vendor(models.Model):
         
    
         
-        vendor_type = request.POST.get('vendor_type').strip().lower()
-        if vendor_type not in [v[0] for v in VENDOR_TYPES]:
+        vendor_type = request.POST.get('vendor_type')
+        if vendor_type not in [v[1] for v in VENDOR_TYPES]:
             return ge("POST",req_dict(request.POST),"Invalid vendor type", error_fields=['vendor_type'])
         page_no = request.POST.get('page_no','')
         if not page_no: page_no="1"
