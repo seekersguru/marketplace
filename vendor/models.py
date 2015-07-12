@@ -13,10 +13,6 @@ from django.contrib.auth import authenticate
 
 signer = Signer()
 
-VENDOR_TYPES=[("banquets","Banquets"),("caterers","Caterers"),("decorators","Decorators")
-                                        ,("photographers","Photographers"),("others","Others")]
-
-
 
 class Category(models.Model):
     name = models.CharField(max_length=250)
@@ -51,6 +47,11 @@ class Category(models.Model):
     ## TODO Discuss with Vijendra, all the images to place for now it is 
     ## Also will TODO with DATABASE entries. for all hdmi, 2x, 3x etc. have to create admin.
     
+
+VENDOR_TYPES=[(e.name,e.name) for e in Category.objects.all()]
+
+
+
     
 
 CHOICES_VENDOR_ROLE=[('Admin','Admin'), ('Reception','Reception')]        
@@ -454,15 +455,17 @@ class Vendor(models.Model):
                 format(vendor_type=vendor_type,mode=mode,image_type=image_type)
         lst=[]
         for vendor in Vendor.objects.filter(vendor_type=Category.objects.get(key=vendor_type)) :
-            
             lst.append(
                 {
                  "vendor_email":vendor.user.username,
                  "image":img,
-                 "name":"Name of the vendor" ,
-                 "icons":[],
+                 "name":vendor.name ,
+                 "icons":["/media/icons/2x/icon1.png",
+                          "/media/icons/2x/ico2.png",
+                          "/media/icons/2x/icon3.png",
+                          "/media/icons/2x/icon4.png",],
                  "starting_price":"500",
-                 "starting_rice_labe":"Person",
+                 "starting_rice_label":"Person",
                  "years_in_business":"2 years",
                  "in_favourites":3,
                  "others_two":[["Capacity","200 - 500 peoples"]],
