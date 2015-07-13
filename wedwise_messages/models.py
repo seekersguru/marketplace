@@ -20,10 +20,10 @@ class Messages(models.Model):
     #
     msg_type = models.CharField(max_length=7, choices=MESSAGE_TYPES_CHOICES )
     
-    book_json = models.CharField(max_length=1024,blank=True,default=None )
+    book_json = models.TextField(blank=True,default=None )
     event_date=models.DateField(blank=True,default=None )
     time_slot = models.CharField(max_length=128,blank=True,default=None  ) 
-    bid_json = models.CharField(max_length=1024,blank=True,default=None )
+    bid_json = models.TextField(blank=True,default=None )
     bid_price = models.CharField(max_length=100,blank=True,default=None  )    
     bid_quantity = models.IntegerField(blank=True,default=None  ) 
     status = models.CharField(max_length=1,blank=True,default=None  ) 
