@@ -478,16 +478,18 @@ class Vendor(models.Model):
                      }                    
                 
                  ],
-                 "icons":["/media/icons/2x/icon1.png",
-                          "/media/icons/2x/icon2.png",
-                          "/media/icons/2x/icon3.png",
-                          "/media/icons/2x/icon4.png",],
+                 "icons_line1":[
+                        {"/media/icons/2x/icon1.png":"Alcohol"},
+                        {"/media/icons/2x/icon1.png":"Parking"},               
+                ],
+                 "icons_line2":[
+                        {"/media/icons/2x/icon1.png":"DJ"},
+                        {"/media/icons/2x/icon1.png":"MM"},               
+                ],               
                  "starting_price":"500",
                  "starting_rice_label":"Person",
                  "years_in_business":"2 years",
                  "in_favourites":3,
-                 "others_two":[["Capacity","200 - 500 peoples"]],
-                 "others_one":["Alcohol","Jain Only","Veg Only"],
                  },   
                 )
             
