@@ -464,11 +464,11 @@ class Vendor(models.Model):
                  #todo make it dynamic
                  "icons_line1":[
                         {"/media/icons/2x/icon1.png":"Alcohol"},
-                        {"/media/icons/2x/icon1.png":"Parking"},               
+                        {"/media/icons/2x/icon2.png":"Parking"},               
                 ],
                  "icons_line2":[
-                        {"/media/icons/2x/icon1.png":"DJ"},
-                        {"/media/icons/2x/icon1.png":"MM"},               
+                        {"/media/icons/2x/icon3.png":"DJ"},
+                        {"/media/icons/2x/icon4.png":"MM"},               
                 ],               
                  "starting_price":"500",
                  "starting_rice_label":"Person",
