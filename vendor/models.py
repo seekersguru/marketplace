@@ -504,21 +504,11 @@ class Vendor(models.Model):
             return ge("POST",req_dict(request.POST),"search string too long", error_fields=['page_no'])
         vendor_list=cls.get_vendor_list(vendor_type,page_no,mode,image_type)
         
-        return gs("POST",req_dict(request.POST),{"vendor_list":vendor_list ,                 "filters":[
-                    {"type":"radio" , "kvs":[{"enquiry":"ENQUIRY"},
-                                             {"booking":"BOOKING"},
-                                             ]
-                     },
-                    {"type":"check" , "kvs":[{"morning":"MORNING"},
-                                             {"evening":"EVENING"},
-                                             {"all_dat":"ALL DAY"},
-                                             ]
-                     },
-                    {"type":"radio" , "kvs":[{"event_date":"EVENT DATE"},
-                                             {"booking_date":"BOOKING DATE"},
-                                             ]
-                     }                    
-                
+        return gs("POST",req_dict(request.POST),{"vendor_list":vendor_list ,                 
+                    "filters":[
+                               {"type":"radio" ,"name":"enq_type","values":["ENQUIRY","BOOKING"],},
+                               {"type":"check" ,"name":"dt_type","values":["EVENT DATE","BOOKING DATE"],},
+                               {"type":"radio" ,"name":"time_slot","values":["MORNING","EVENING","ALL DAY"],},                
                  ],})
 
 
