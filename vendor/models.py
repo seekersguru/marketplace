@@ -17,7 +17,7 @@ signer = Signer()
 class Category(models.Model):
     name = models.CharField(max_length=250)
     key = models.CharField(max_length=250)
-    image = models.ImageField(upload_to='media/vendor_image/')
+    #image = models.ImageField(upload_to='media/vendor_image/')
 
     def __unicode__(self):
         return self.name 
