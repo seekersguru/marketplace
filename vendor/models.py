@@ -462,22 +462,6 @@ class Vendor(models.Model):
                  "image":img,
                  "name":vendor.name ,
                  #todo make it dynamic
-                 "filters":[
-                    {"type":"radio" , "kvs":[{"enquiry":"ENQUIRY"},
-                                             {"booking":"BOOKING"},
-                                             ]
-                     },
-                    {"type":"check" , "kvs":[{"morning":"MORNING"},
-                                             {"evening":"EVENING"},
-                                             {"all_dat":"ALL DAY"},
-                                             ]
-                     },
-                    {"type":"radio" , "kvs":[{"event_date":"EVENT DATE"},
-                                             {"booking_date":"BOOKING DATE"},
-                                             ]
-                     }                    
-                
-                 ],
                  "icons_line1":[
                         {"/media/icons/2x/icon1.png":"Alcohol"},
                         {"/media/icons/2x/icon1.png":"Parking"},               
@@ -520,7 +504,22 @@ class Vendor(models.Model):
             return ge("POST",req_dict(request.POST),"search string too long", error_fields=['page_no'])
         vendor_list=cls.get_vendor_list(vendor_type,page_no,mode,image_type)
         
-        return gs("POST",req_dict(request.POST),{"vendor_list":vendor_list})
+        return gs("POST",req_dict(request.POST),{"vendor_list":vendor_list ,                 "filters":[
+                    {"type":"radio" , "kvs":[{"enquiry":"ENQUIRY"},
+                                             {"booking":"BOOKING"},
+                                             ]
+                     },
+                    {"type":"check" , "kvs":[{"morning":"MORNING"},
+                                             {"evening":"EVENING"},
+                                             {"all_dat":"ALL DAY"},
+                                             ]
+                     },
+                    {"type":"radio" , "kvs":[{"event_date":"EVENT DATE"},
+                                             {"booking_date":"BOOKING DATE"},
+                                             ]
+                     }                    
+                
+                 ],})
 
 
     def __unicode__(self):
