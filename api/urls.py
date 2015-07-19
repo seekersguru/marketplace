@@ -204,7 +204,8 @@ patterns = {##"customer_login_registration",
 	 		{
 				"order":22,
 				"type":"POST",
-	 			"params":[]
+	 			"params":["year","month","filter_string"],
+	 			"required_params":[]
 		 	},
 		
 		"vendor_calendar_rates_availability":

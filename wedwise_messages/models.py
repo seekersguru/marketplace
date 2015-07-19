@@ -158,6 +158,15 @@ class Messages(models.Model):
 
 
     @classmethod
+    def number_bookings(cls,request):
+        year=request.POST.get('year')
+        month=request.POST.get('month')
+        filter_string=request.POST.get('filter_string')
+        return  gs("POST",req_dict(request.POST),{"data":{1:5,15:25,16:7},
+                                                  "available_years":[2014,1015]
+                                                  })
+        
+    @classmethod
     def vendor_bid_book_response(cls,request):
         identifier=request.POST.get('identifier')
         msg_id=request.POST.get('msg_id')

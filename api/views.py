@@ -178,9 +178,22 @@ def vendor_forgot_password(request):
 def vendor_reset_password(request):
     return TemplateResponse(request,'api/api.html',{})
 
+# ########## vendor_calendar_screens
+def vendor_calendar_home_available_yaears(request):pass
+#     #TODO Put all in decorators  with csrf 
+#     invalid=check_basic_validations("vendor_registration_login_fb_gm",request,"POST")
+#     if invalid:return response(request,invalid)
+#     if request.method=="POST":
+#         return response(request,Messages.availability(request))
 ########## vendor_calendar_screens
+@csrf_exempt
 def vendor_calendar_home(request):
-    return TemplateResponse(request,'api/api.html',{})
+    #TODO Put all in decorators  with csrf 
+    invalid=check_basic_validations("vendor_calendar_home",request,"POST")
+    if invalid:return response(request,invalid)
+    if request.method=="POST":
+        return response(request,Messages.number_bookings(request))
+
 def vendor_calendar_rates_availability(request):
     return TemplateResponse(request,'api/api.html',{})
 
