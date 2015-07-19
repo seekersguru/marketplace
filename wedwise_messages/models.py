@@ -162,7 +162,21 @@ class Messages(models.Model):
         year=request.POST.get('year')
         month=request.POST.get('month')
         filter_string=request.POST.get('filter_string')
-        return  gs("POST",req_dict(request.POST),{"data":{1:5,15:25,16:7},
+        return  gs("POST",req_dict(request.POST),{"data":
+                                                  [{"count":5,
+                                                    "day":1
+                                                    },
+{"count":15,
+                                                    "day":3
+                                                    },
+{"count":7,
+                                                    "day":16
+                                                    },
+{"count":8,
+                                                    "day":17
+                                                    },
+                                                   ]
+                                                  ,
                                                   "available_years":[2014,1015]
                                                   })
         

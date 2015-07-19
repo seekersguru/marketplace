@@ -202,7 +202,7 @@ patterns = {##"customer_login_registration",
 	
 	 	"vendor_calendar_home":
 	 		{
-				"order":22,
+				"order":-222,
 				"type":"POST",
 	 			"params":["year","month","filter_string"],
 	 			"required_params":[]
@@ -210,9 +210,9 @@ patterns = {##"customer_login_registration",
 		
 		"vendor_calendar_rates_availability":
 			{
-				"order":23,
+				"order":-223,
 				"type":"POST",
-	 			"params":[]
+	 			"params":["year","month","packages","dates"],
 		 	}, 
 		"vendor_bid_book_detail":
 			{
