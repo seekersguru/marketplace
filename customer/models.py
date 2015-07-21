@@ -25,6 +25,7 @@ class Customer(models.Model):
     bride_name = models.CharField(max_length=100)
     contact_number = models.CharField(max_length=20)
     identifier = models.CharField(max_length=512)
+    tentative_wedding_date = models.CharField(max_length=20)
     fbid = models.CharField(max_length=1024,default="")
     gid =models.CharField(max_length=1024,default="")
     
@@ -34,13 +35,40 @@ class Customer(models.Model):
                request, 
                ):
         email = request.POST.get('email').strip().lower()
+        identifier =  request.POST.get('identifier').strip().lower()
+        operation =  request.POST.get('operation').strip().lower()
         password = request.POST.get('password')
         groom_name = request.POST.get('groom_name')
         bride_name = request.POST.get('bride_name')
+        tentative_wedding_date = request.POST.get('tentative_wedding_date')
         contact_number = request.POST.get('contact_number').strip()
         fbid = request.POST.get("fbid","").strip()
         gid = request.POST.get("gid","").strip()
         
+
+        ##### Get and update logic starts
+        if identifier:
+            customer=Customer.objects.filter(identifier=identifier)[0]
+            if  operation not in ["update","get"]:
+                return ge("POST",req_dict(request.POST),"Operation update or get", error_fields=['operation']) 
+            if operation =="update":
+                customer.groom_name=groom_name
+                customer.bride_name=bride_name
+                customer.contact_number=contact_number
+                customer.tentative_wedding_date=tentative_wedding_date
+                customer.save()
+
+            return gs("POST",req_dict(request.POST),{"profile":{"email":customer.user.email,
+                    "groom_name":customer.groom_name,
+                    "bride_name":customer.bride_name,
+                    "contact_number":customer.contact_number,
+                    "tentative_wedding_date":str(customer.tentative_wedding_date),
+                    
+                    }})                 
+                
+         
+        
+        ####### Get and update logic ends
 
         f = forms.EmailField()
         try:

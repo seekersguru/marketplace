@@ -21,8 +21,9 @@ patterns = {##"customer_login_registration",
 	 		{
 				"type":"POST",
 				"order":1,
-	 			"params":["email","password","groom_name","bride_name","contact_number","fbid","gid"],
-	 			"required_params":["email","password","groom_name","bride_name","contact_number"]
+	 			"params":["email","password","groom_name","bride_name","contact_number","fbid","gid","identifier","operation",
+						"tentative_wedding_date"],
+	 			"required_params":["email","password","groom_name","bride_name","contact_number","tentative_wedding_date"]
 		 	},
 		"customer_login":
 			{
