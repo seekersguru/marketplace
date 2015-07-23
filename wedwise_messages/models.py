@@ -161,25 +161,26 @@ class Messages(models.Model):
     def number_bookings(cls,request):
         year=request.POST.get('year')
         month=request.POST.get('month')
+        year_month="%s-%s"%(year,month)
         filter_string=request.POST.get('filter_string')
+        identifier=request.POST.get('identifier')
+        vendor=Vendor.objects.filter(identifier=identifier)[0]
+        messages=Messages.objects.filter(vendor=vendor)
+        messages= [msg.event_date.day for msg in messages if msg.msg_type in ["bid","book"] and msg.event_date
+                   and str(msg.event_date).startswith(year_month)
+                   ]
+        from collections import Counter
+        msg_counts=dict(Counter(messages))
+        day_counts=[]
+        for day,count in msg_counts.iteritems():
+            day_counts.append({"count":count,
+                                                    "day":day
+                                                    })
+        
         return  gs("POST",req_dict(request.POST),{"data":
-                                                  [{"count":5,
-                                                    "day":1
-                                                    },
-{"count":15,
-                                                    "day":3
-                                                    },
-{"count":7,
-                                                    "day":16
-                                                    },
-{"count":8,
-                                                    "day":17
-                                                    },
-                                                   ]
-                                                  ,
+                                                  day_counts,
                                                   "available_years":[2014,1015]
                                                   })
-        
     @classmethod
     def vendor_bid_book_response(cls,request):
         identifier=request.POST.get('identifier')

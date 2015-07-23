@@ -207,16 +207,18 @@ patterns = {##"customer_login_registration",
 	 		{
 				"order":-222,
 				"type":"POST",
-	 			"params":["year","month","filter_string"],
-	 			"required_params":[]
+	 			"params":["year","month","filter_string","identifier"],
+	 			"required_params":["identifier"],
+	 			"selects":{"identifier":identifiers },
+	 			"help":{"filter_string":"k1=v1&k2=v21,v22,v23&k3=v3  | date='yyyy-mm-dd'"}
 		 	},
-		
-		"vendor_calendar_rates_availability":
-			{
-				"order":-223,
-				"type":"POST",
-	 			"params":["year","month","packages","dates"],
-		 	}, 
+# 		
+# 		"vendor_calendar_rates_availability":
+# 			{
+# 				"order":-223,
+# 				"type":"POST",
+# 	 			"params":["year","month","packages","dates"],
+# 		 	}, 
 		"vendor_bid_book_detail":
 			{
 				"order":-110,
