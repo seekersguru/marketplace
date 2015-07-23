@@ -45,10 +45,12 @@ class Messages(models.Model):
         identifier = request.POST.get('identifier')
         message = request.POST.get('message')
         from_to=request.POST.get('from_to')
-        
-        if msg_type =="bid" and from_to=="v2c":
-            return ge("POST",req_dict(request.POST),"Vendor to Customer create not possible in bid", error_fields=['from_to'])
-
+        if from_to=="v2c":
+            if msg_type =="bid" :
+                return ge("POST",req_dict(request.POST),"Vendor to Customer create not possible in bid", error_fields=['from_to'])
+            elif  msg_type =="book":
+                receiver_email=identifier.split(":")[0]
+                 
         
         f = forms.EmailField()
         try:
@@ -81,8 +83,11 @@ class Messages(models.Model):
             user=user[0]
         if from_to=="c2v":
             receiver = Vendor.objects.filter(user=user)
-        else:
-            receiver = Customer.objects.filter(user=user)
+        else: #v2c
+            if msg_type=="book":
+                receiver = Vendor.objects.filter(user=user)
+            else:
+                receiver = Customer.objects.filter(user=user)
         if not receiver:
             return ge("POST",req_dict(request.POST),"Receiver unauthorized", error_fields=['receiver_email'],
                       code_string="RECEIVER_NOT_EXIST")
@@ -134,6 +139,8 @@ class Messages(models.Model):
             event_date=None
         if not  bid_quantity:
             bid_quantity=0
+        if from_to=="v2c" and msg_type=="book":
+            customer=Customer.objects.get(user=User.objects.filter(username="dummy_customer@wedwise.in")[0])
         msg= Messages(
                vendor=vendor,
                 customer=customer,
