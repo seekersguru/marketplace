@@ -27,6 +27,7 @@ class Messages(models.Model):
     bid_price = models.CharField(max_length=100,blank=True,default=None  )    
     bid_quantity = models.IntegerField(blank=True,default=None  ) 
     status = models.CharField(max_length=1,blank=True,default=None  ) 
+    self_booking = models.CharField(max_length=1,blank=True,default=None  ) 
 
 
 
@@ -45,9 +46,9 @@ class Messages(models.Model):
         message = request.POST.get('message')
         from_to=request.POST.get('from_to')
         
-        if msg_type in ["bid","book"] and from_to=="v2c":
-            return ge("POST",req_dict(request.POST),"Vendor to Customer create not possible in bid and book", error_fields=['from_to'])
-        
+        if msg_type =="bid" and from_to=="v2c":
+            return ge("POST",req_dict(request.POST),"Vendor to Customer create not possible in bid", error_fields=['from_to'])
+
         
         f = forms.EmailField()
         try:
@@ -66,9 +67,13 @@ class Messages(models.Model):
         else:
             sender=sender[0] 
 
-
-            
-        user = User.objects.filter(username=receiver_email)
+        self_booking="0"
+        if  msg_type=="book" and from_to=="v2c"  :
+            #Special case
+            user = sender.user
+            self_booking="1"
+        else:
+            user = User.objects.filter(username=receiver_email)
         if not user:
             return ge("POST",req_dict(request.POST),"Receiver unauthorized", error_fields=['receiver_email'],
                       code_string="RECEIVER_NOT_EXIST")
@@ -141,7 +146,8 @@ class Messages(models.Model):
                 book_json =book_json,
                 bid_price = bid_price,
                 bid_quantity =bid_quantity,
-                msg_type=msg_type
+                msg_type=msg_type,
+                self_booking=self_booking
                 )
         msg.save()
         if from_to=="c2v":
@@ -179,7 +185,29 @@ class Messages(models.Model):
         
         return  gs("POST",req_dict(request.POST),{"data":
                                                   day_counts,
-                                                  "available_years":[2014,2015]
+                                                  "available_years":[2014,2015],
+                                                  "book": {
+                                                           "event_date": 1,
+                                                           "time_slot": {
+                                                                         "name": "Time Slot",
+                                                                         "value": [
+                                                                                   [
+                                                                                    "morning",
+                                                                                    "Morning"
+                                                                                    ],
+                                                                                   [
+                                                                                    "evening",
+                                                                                    "Evening"
+                                                                                    ]
+                                                                                   ]
+                                                                         },
+                                                "package": {
+                                                  "name": "Package",
+                                                  "value": "500 Rs per plate minimum 100 persons required"
+                                                },
+    "button": "BOOK"
+  },
+  
                                                   })
     @classmethod
     def vendor_bid_book_response(cls,request):
@@ -290,8 +318,15 @@ class Messages(models.Model):
             customer = sender
             vendor = receiver = Vendor.objects.filter(user=user)
         elif from_to=="v2c":
-            customer = receiver = Customer.objects.filter(user=user)
-            vendor = sender
+            
+            if msg_type=="book":
+                vendor = receiver = Vendor.objects.filter(user=user)
+                customer=None
+            else:
+                customer = receiver = Customer.objects.filter(user=user)
+                vendor = sender
+
+                
             
         if not receiver:
             return ge("POST",req_dict(request.POST),"Receiver unauthorized", error_fields=['receiver_email'],
