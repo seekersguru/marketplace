@@ -179,7 +179,7 @@ class Messages(models.Model):
         
         return  gs("POST",req_dict(request.POST),{"data":
                                                   day_counts,
-                                                  "available_years":[2014,1015]
+                                                  "available_years":[2014,2015]
                                                   })
     @classmethod
     def vendor_bid_book_response(cls,request):
