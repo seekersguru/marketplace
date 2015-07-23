@@ -70,7 +70,7 @@ class Messages(models.Model):
         self_booking="0"
         if  msg_type=="book" and from_to=="v2c"  :
             #Special case
-            user = sender.user
+            user = [sender.user]
             self_booking="1"
         else:
             user = User.objects.filter(username=receiver_email)
