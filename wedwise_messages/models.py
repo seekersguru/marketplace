@@ -184,15 +184,18 @@ class Messages(models.Model):
         return  gs("POST",req_dict(request.POST),{"data":
                                                   [{"color":"FFA500",
                                                     "day":2,
-                                                    "cover":"top"
+                                                    "cover":"top",
+                                                    "img":"/media/images/availability/code1.png"
                                                     },
                                                    {"color":"78AB46",
                                                     "day":5,
-                                                    "cover":"bottom"
+                                                    "cover":"bottom",
+                                                    "img":"/media/images/availability/code2.png"
                                                     },
                                                    {"color":"ff3232",
                                                     "day":15,
-                                                    "cover":"full"
+                                                    "cover":"full",
+                                                    "img":"/media/images/availability/code3.png"
                                                     },                                                   
                                                    ],
                                                   "available_years":[2014,2015],
