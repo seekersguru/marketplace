@@ -222,11 +222,12 @@ patterns = {##"customer_login_registration",
 	 		{
 				"order":-222,
 				"type":"POST",
-	 			"params":["year","month","time_slot","avail_type","identifier"],
+	 			"params":["year","month","time_slot","avail_type","identifier","dates"],
 	 			"required_params":["year","month","identifier"],
 	 			"selects":{"identifier":identifiers },
 	 			"help":{"time_slot":"morning | evening | all_day",
-						"avail_type":"available (green) | ongoing_enquiry (orange) | booked (red)"
+						"avail_type":"available (green) | ongoing_enquiry (orange) | booked (red)",
+						"dates":"yyyy-mm-dd,yyyy-mm-dd,yyyy-mm-dd"
 						}
 		 	},
 

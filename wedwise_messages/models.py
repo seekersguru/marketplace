@@ -178,8 +178,8 @@ class Messages(models.Model):
         time_slot=request.POST.get('time_slot')
         avail_type=request.POST.get('avail_type')
         identifier=request.POST.get('identifier')
-        year=request.POST.get('year')
-        month=request.POST.get('month')
+        dates=request.POST.get('dates')
+        
         vendor=Vendor.objects.filter(identifier=identifier)[0]
         return  gs("POST",req_dict(request.POST),{"data":
                                                   [{"color":"FFA500",
