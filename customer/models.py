@@ -124,7 +124,32 @@ class Customer(models.Model):
         vendor.forgot_code=str(num)
         vendor.save()
         return gs("POST",req_dict(request.POST),{"num":num,"message":"A code is sent to your mail"})         
-
+    @classmethod
+    def reset_pwd(cls,request):
+        email = request.POST.get('email').strip().lower()
+        code = request.POST.get('code').strip().lower()
+        password = request.POST.get('password') 
+        confirm_password = request.POST.get('confirm_password') 
+        
+        user = User.objects.filter(username=email)
+        if not user:
+            return ge("POST",req_dict(request.POST),"Invalid username or password", error_fields=['email','password'])
+            
+        try:
+            customer = Customer.objects.get(user=user)
+        except:
+            return ge("POST",req_dict(request.POST),"User is present but problem", 
+                      error_fields=['email','password'])  
+            
+        if str(customer.forgot_code) != str(code).strip():
+            return ge("POST",req_dict(request.POST),"Code mismatch", 
+                      error_fields=['code',]) 
+        if password !=confirm_password:
+            return ge("POST",req_dict(request.POST),"Password and confor==irm password mismatch", 
+                      error_fields=['email','password']) 
+        user.set_password(password)
+        user.save()
+        return gs("POST",req_dict(request.POST),{"message":"Password reset succesful"})   
     @classmethod
     def login(cls,
                request, 

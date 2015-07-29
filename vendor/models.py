@@ -132,8 +132,9 @@ class Vendor(models.Model):
         if password !=confirm_password:
             return ge("POST",req_dict(request.POST),"Password and confor==irm password mismatch", 
                       error_fields=['email','password']) 
-        
-        return gs("POST",req_dict(request.POST),{"num":num,"message":"A code is sent to your mail"})    
+        user.set_password(password)
+        user.save()
+        return gs("POST",req_dict(request.POST),{"message":"Password reset succesful"})    
     @classmethod
     def login_fb_gm(cls,
                request, 
