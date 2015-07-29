@@ -171,6 +171,36 @@ class Messages(models.Model):
 
 
     @classmethod
+    def availability(cls,request):
+        year=request.POST.get('year')
+        month=request.POST.get('month')
+        year_month="%s-%s"%(year,month)
+        time_slot=request.POST.get('time_slot')
+        avail_type=request.POST.get('avail_type')
+        identifier=request.POST.get('identifier')
+        year=request.POST.get('year')
+        month=request.POST.get('month')
+        vendor=Vendor.objects.filter(identifier=identifier)[0]
+        return  gs("POST",req_dict(request.POST),{"data":
+                                                  [{"color":"FFA500",
+                                                    "day":2,
+                                                    "cover":"top"
+                                                    },
+                                                   {"color":"78AB46",
+                                                    "day":5,
+                                                    "cover":"bottom"
+                                                    },
+                                                   {"color":"ff3232",
+                                                    "day":15,
+                                                    "cover":"full"
+                                                    },                                                   
+                                                   ],
+                                                  "available_years":[2014,2015],
+  
+                                                  })
+
+
+    @classmethod
     def number_bookings(cls,request):
         year=request.POST.get('year')
         month=request.POST.get('month')

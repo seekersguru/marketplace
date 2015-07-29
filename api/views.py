@@ -216,6 +216,14 @@ def vendor_calendar_home(request):
     if invalid:return response(request,invalid)
     if request.method=="POST":
         return response(request,Messages.number_bookings(request))
+@csrf_exempt
+def vendor_calendar_availability(request):
+    #TODO Put all in decorators  with csrf 
+    invalid=check_basic_validations("vendor_calendar_availability",request,"POST")
+    if invalid:return response(request,invalid)
+    if request.method=="POST":
+        return response(request,Messages.availability(request))
+
 
 def vendor_calendar_rates_availability(request):
     return TemplateResponse(request,'api/api.html',{})

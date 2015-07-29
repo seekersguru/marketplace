@@ -218,6 +218,18 @@ patterns = {##"customer_login_registration",
 	 			"selects":{"identifier":identifiers },
 	 			"help":{"filter_string":"k1=v1&k2=v21,v22,v23&k3=v3  | date='yyyy-mm-dd'"}
 		 	},
+	 	"vendor_calendar_availability":
+	 		{
+				"order":-222,
+				"type":"POST",
+	 			"params":["year","month","time_slot","avail_type","identifier"],
+	 			"required_params":["year","month","identifier"],
+	 			"selects":{"identifier":identifiers },
+	 			"help":{"time_slot":"morning | evening | all_day",
+						"avail_type":"available (green) | ongoing_enquiry (orange) | booked (red)"
+						}
+		 	},
+
 # 		
 # 		"vendor_calendar_rates_availability":
 # 			{
