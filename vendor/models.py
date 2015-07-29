@@ -10,7 +10,7 @@ from django.core.exceptions import ValidationError
 from django.db import transaction
 from django.core.signing import Signer
 from django.contrib.auth import authenticate
-
+import random
 signer = Signer()
 
 
@@ -67,6 +67,7 @@ class Vendor(models.Model):
     gid =models.CharField(max_length=1024,default="")
 
     dynamic_info = models.TextField()
+    forgot_code =models.CharField(max_length=50,null=1)
 
     @classmethod
     def login(cls,
@@ -91,6 +92,48 @@ class Vendor(models.Model):
             return ge("POST",req_dict(request.POST),"User is present but problem", 
                       error_fields=['email','password'])
 
+    @classmethod
+    def forgot_pwd(cls,request):
+        email = request.POST.get('email').strip().lower()
+        user = User.objects.filter(username=email)
+        if not user:
+            return ge("POST",req_dict(request.POST),"Invalid username or password", error_fields=['email','password'])
+            
+        try:
+            vendor = Vendor.objects.get(user=user)
+        except:
+            return ge("POST",req_dict(request.POST),"User is present but problem", 
+                      error_fields=['email','password'])           
+        num=random.randint(10000,1000000)
+        vendor.forgot_code=str(num)
+        vendor.save()
+        return gs("POST",req_dict(request.POST),{"num":num,"message":"A code is sent to your mail"})
+
+    @classmethod
+    def reset_pwd(cls,request):
+        email = request.POST.get('email').strip().lower()
+        code = request.POST.get('code').strip().lower()
+        password = request.POST.get('password') 
+        confirm_password = request.POST.get('confirm_password') 
+        
+        user = User.objects.filter(username=email)
+        if not user:
+            return ge("POST",req_dict(request.POST),"Invalid username or password", error_fields=['email','password'])
+            
+        try:
+            vendor = Vendor.objects.get(user=user)
+        except:
+            return ge("POST",req_dict(request.POST),"User is present but problem", 
+                      error_fields=['email','password'])  
+            
+        if str(vendor.forgot_code) != str(code).strip():
+            return ge("POST",req_dict(request.POST),"Code mismatch", 
+                      error_fields=['code',]) 
+        if password !=confirm_password:
+            return ge("POST",req_dict(request.POST),"Password and confor==irm password mismatch", 
+                      error_fields=['email','password']) 
+        
+        return gs("POST",req_dict(request.POST),{"num":num,"message":"A code is sent to your mail"})    
     @classmethod
     def login_fb_gm(cls,
                request, 
@@ -132,319 +175,6 @@ class Vendor(models.Model):
             return ge("POST",req_dict(request.POST),"Vendor not exists", error_fields=['vendor_email']) 
         vendor=vendor[0]  
         data = json.loads(vendor.dynamic_info) 
-        '''data=\
-{
-  "bid": {
-    "type": "bid",
-    "event_date": 1,
-    "time_slot": {
-      "name": "Time Slot",
-      "value": [
-        [
-          "morning",
-          "Morning"
-        ],
-        [
-          "evening",
-          "Evening"
-        ]
-      ]
-    },
-    "package": {
-      "name": "Package",
-      "value": "500 Rs per plate minimum 100 persons required"
-    },
-    "quoted": {
-      "name": "Package",
-      "value": "450 Rs per plate minimum 100 persons required"
-    },
-    "bid_options": {
-      "name": "Bid Price",
-      "min_per_unit": 430.5,
-      "quantity": {
-        "label": "Persons",
-        "min": {
-          "value": 50,
-          "message": "Book for least 50 people"
-        },
-        "max": 1500
-      },
-      "item": {
-        "label": "Per plate",
-        "min": 400,
-        "max": 500
-      }
-    },
-    "text": "Some terms and conditions text at the end",
-    "button": "BID"
-  },
-  "book": {
-    "type": "book",
-    "event_date": 1,
-    "time_slot": {
-      "name": "Time Slot",
-      "value": [
-        [
-          "morning",
-          "Morning"
-        ],
-        [
-          "evening",
-          "Evening"
-        ]
-      ]
-    },
-    "package": {
-      "name": "Package",
-      "value": "500 Rs per plate minimum 100 persons required"
-    },
-    "button": "BOOK"
-  },
-  "info": {
-    "contact": "23715656",
-    "starting_price": "300 /-",
-    "top_name": "Jafer Bhai's Delhi Darbar",
-    "hero_imgs": [
-      "/media/apps/ios/2x/category/banquets.jpg",
-      "/media/apps/ios/2x/category/decorators.jpg",
-      "/media/apps/ios/2x/category/others.jpg"
-    ],
-    "360_imgs": [
-      "/media/apps/ios/2x/category/banquets.jpg",
-      "/media/apps/ios/2x/category/decorators.jpg",
-      "/media/apps/ios/2x/category/others.jpg"
-    ],
-    "top_address": "Noor Baug",
-    "video_links": [
-      "https://www.youtube.com/watch?v=75xp_31ET-U",
-      "https://www.youtube.com/watch?v=HwYKxmxU5NA"
-    ],
-    "email": "jaffer@wedwise.com",
-    "name": "Jafer Bhai's Delhi Darbar"
-  },
-  "sections": [
-    {
-      "heading": "Basic Info",
-      "data_display": [
-        {
-          "type": "key_value",
-          "key_values": [
-            {
-              "Veg": "YES"
-            },
-            {
-              "Jain only": "YES"
-            },
-            {
-              "Non-Veg": "YES"
-            }
-          ],
-          "read_more": [
-            {
-              "heading": "Basic Info",
-              "data_display": [
-                {
-                  "type": "key_value",
-                  "key_values": [
-                    {
-                      "Name": "Jafer Bhai's Delhi Darbar"
-                    },
-                    {
-                      "Address": "Noor Baug"
-                    },
-                    {
-                      "Phone": 23715656
-                    },
-                    {
-                      "Veg": "YES"
-                    },
-                    {
-                      "Jain only": "YES"
-                    },
-                    {
-                      "Non-Veg": "YES"
-                    },
-                    {
-                      "Speciliaty Cuisine": "Moughlai, Indian"
-                    },
-                    {
-                      "Years in Business": "35"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "heading": "Locate us on map",
-      "data_display": [
-        {
-          "android_lat": "28.613939",
-          "android_lang": "77.209021",
-          
-          "lat": [
-            "75",
-            "58",
-            "E"
-          ],
-          "type": "map",
-          "long": [
-            "20",
-            "15",
-            "N"
-          ]
-        },
-        {
-          "text": "Description how to reach",
-          "type": "para"
-        }
-      ]
-    },
-
-    {
-      "heading": "Food Packages",
-      "data_display": [
-        {
-          "type": "key_value",
-          "key_values": [
-            {
-              "Package 1 (Lunch)": "600 /- per plate"
-            },
-            {
-              "Package 2 (Dinner)": "900 /- per plate"
-            },
-            {
-              "Package 3 (Lunch/Dinner)": "1100 /- per plate minimum 300 peoples"
-            }
-          ],
-          "read_more": [
-            {
-              "heading": "Food Packages",
-              "data_display": [
-                {
-                  "type": "packages",
-                  "Lunch": {
-                    "package_values": [
-                      {
-                        "quoted": {
-                          "Quoted Price": "1200"
-                        },
-                        "minimum": {
-                          "Minimum Price": "1100"
-                        },
-                        "label": "Veg Package 1 ( 600 /- per plate)",
-                        "options": [
-                          {
-                            "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
-                          },
-                          {
-                            "Cold Drink (Any 2)": "Pepsi / Coke / Jaljeera /"
-                          }
-                        ]
-                      },
-                      {
-                        "quoted": {
-                          "Quoted Price": "1200"
-                        },
-                        "minimum": {
-                          "Minimum Price": "1100"
-                        },
-                        "label": "Veg Package 1 ( 600 /- per plate)",
-                        "options": [
-                          {
-                            "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
-                          },
-                          {
-                            "Cold Drink (Any 2)": "Pepsi / Coke / Jaljeera /"
-                          }
-                        ]
-                      },
-                      {
-                        "quoted": {
-                          "Quoted Price": "1200"
-                        },
-                        "minimum": {
-                          "Minimum Price": "1100"
-                        },
-                        "label": "Veg Package 1 ( 600 /- per plate)",
-                        "options": [
-                          {
-                            "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
-                          },
-                          {
-                            "Cold Drink (Any 2)": "Pepsi / Coke / Jaljeera /"
-                          }
-                        ]
-                      }
-                    ]
-                  },
-                  "Dinner": {
-                    "package_values": [
-                      {
-                        "quoted": {
-                          "Quoted Price": "1200"
-                        },
-                        "minimum": {
-                          "Minimum Price": "1100"
-                        },
-                        "label": "Veg Package 1 ( 600 /- per plate)",
-                        "options": [
-                          {
-                            "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
-                          },
-                          {
-                            "Cold Drink (Any 2)": "Pepsi / Coke / Jaljeera /"
-                          }
-                        ]
-                      },
-                      {
-                        "quoted": {
-                          "Quoted Price": "1200"
-                        },
-                        "minimum": {
-                          "Minimum Price": "1100"
-                        },
-                        "label": "Veg Package 1 ( 600 /- per plate)",
-                        "options": [
-                          {
-                            "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
-                          },
-                          {
-                            "Cold Drink (Any 2)": "Pepsi / Coke / Jaljeera /"
-                          }
-                        ]
-                      },
-                      {
-                        "quoted": {
-                          "Quoted Price": "1200"
-                        },
-                        "minimum": {
-                          "Minimum Price": "1100"
-                        },
-                        "label": "Veg Package 1 ( 600 /- per plate)",
-                        "options": [
-                          {
-                            "Starters (Any 2)": "Veg manchurian / Hara bhara kabab / paneer pakoda"
-                          },
-                          {
-                            "Cold Drink (Any 2)": "Pepsi / Coke / Jaljeera /"
-                          }
-                        ]
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
-}'''
 
         return gs("POST",req_dict(request.POST),{"data":data})
 

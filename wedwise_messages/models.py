@@ -180,7 +180,7 @@ class Messages(models.Model):
         vendor=Vendor.objects.filter(identifier=identifier)[0]
         messages=Messages.objects.filter(vendor=vendor)
         messages= [msg.event_date.day for msg in messages if msg.msg_type in ["bid","book"] and msg.event_date
-                   and str(msg.event_date).startswith(year_month)
+and str(msg.event_date).startswith(year_month)
                    ]
         from collections import Counter
         msg_counts=dict(Counter(messages))

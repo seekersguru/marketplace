@@ -15,6 +15,7 @@ committed to the database. If there is an exception, the changes are rolled back
 """
 from django.core.signing import Signer
 signer = Signer()
+import random
 #value = signer.sign('My string')
 #original = signer.unsign(value)
 #Here create Banquet Model
@@ -28,6 +29,7 @@ class Customer(models.Model):
     tentative_wedding_date = models.CharField(max_length=20)
     fbid = models.CharField(max_length=1024,default="")
     gid =models.CharField(max_length=1024,default="")
+    forgot_code =models.CharField(max_length=50,null=1)
     
     @classmethod
     @transaction.atomic # @Nishant see if its effect speed @Amit dash 
@@ -106,7 +108,22 @@ class Customer(models.Model):
         
         return gs("POST",req_dict(request.POST),{"identifier":customer.identifier})
     
-         
+    @classmethod
+    def forgot_pwd(cls,request):
+        email = request.POST.get('email').strip().lower()
+        user = User.objects.filter(username=email)
+        if not user:
+            return ge("POST",req_dict(request.POST),"Invalid username or password", error_fields=['email','password'])
+            
+        try:
+            vendor = Customer.objects.get(user=user)
+        except:
+            return ge("POST",req_dict(request.POST),"User is present but problem", 
+                      error_fields=['email','password'])           
+        num=random.randint(10000,1000000)
+        vendor.forgot_code=str(num)
+        vendor.save()
+        return gs("POST",req_dict(request.POST),{"num":num,"message":"A code is sent to your mail"})         
 
     @classmethod
     def login(cls,

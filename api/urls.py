@@ -47,14 +47,17 @@ patterns = {##"customer_login_registration",
 	 		{
 				"type":"POST",
 				"order":5,
-	 			"params":[]
+	 			"params":["email",	],
+	 			"required_params":["email",	]
 		 	}, 
 		 	
 		"customer_reset_password":
 			{
 				"type":"POST",
 				"order":6,
-	 			"params":[]
+	 			"params":["email","code","password","confirm_password"],
+	 			"required_params":["email","code","password","confirm_password"],
+	 			
 		 	},
 	#Make it simple some how. according to version replace existing default 
 	##and add new some how
@@ -191,15 +194,18 @@ patterns = {##"customer_login_registration",
 		 	{
 				"order":20,
 				"type":"POST",
-	 			"params":[]
+	 			"params":["email",	],
+	 			"required_params":["email",	]
 		 	}, 
 		 	
 		"vendor_reset_password":
 			{
-				"order":21,
 				"type":"POST",
-	 			"params":[]
-		 	}, 
+				"order":6,
+	 			"params":["email","code","password","confirm_password"],
+	 			"required_params":["email","code","password","confirm_password"],
+	 			
+		 	},
 
 	##"vendor_calendar_screens",
 	

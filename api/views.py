@@ -69,10 +69,22 @@ def customer_registration_login_fb_gm(request):
     if request.method=="POST":
         return response(request,Customer.login_fb_gm(request))
 
+@csrf_exempt
 def customer_forgot_password(request):
-    return TemplateResponse(request,'api/api.html',{})
+    #TODO Put all in decorators  with csrf 
+    invalid=check_basic_validations("customer_forgot_password",request,"POST")
+    if invalid:return response(request,invalid)
+    if request.method=="POST":
+        return response(request,Customer.forgot_pwd(request))
+
+
+@csrf_exempt
 def customer_reset_password(request):
-    return TemplateResponse(request,'api/api.html',{})
+    #TODO Put all in decorators  with csrf 
+    invalid=check_basic_validations("customer_reset_password",request,"POST")
+    if invalid:return response(request,invalid)
+    if request.method=="POST":
+        return response(request,Customer.reset_pwd(request))
 
 
 
@@ -173,11 +185,21 @@ def vendor_registration_login_fb_gm(request):
     if invalid:return response(request,invalid)
     if request.method=="POST":
         return response(request,Vendor.login_fb_gm(request))
-
+@csrf_exempt
 def vendor_forgot_password(request):
-    return TemplateResponse(request,'api/api.html',{})
+    #TODO Put all in decorators  with csrf 
+    invalid=check_basic_validations("vendor_forgot_password",request,"POST")
+    if invalid:return response(request,invalid)
+    if request.method=="POST":
+        return response(request,Vendor.forgot_pwd(request))
+
+@csrf_exempt
 def vendor_reset_password(request):
-    return TemplateResponse(request,'api/api.html',{})
+    #TODO Put all in decorators  with csrf 
+    invalid=check_basic_validations("vendor_reset_password",request,"POST")
+    if invalid:return response(request,invalid)
+    if request.method=="POST":
+        return response(request,Vendor.reset_pwd(request))
 
 # ########## vendor_calendar_screens
 def vendor_calendar_home_available_yaears(request):pass
