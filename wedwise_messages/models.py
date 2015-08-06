@@ -407,6 +407,8 @@ and str(msg.event_date).startswith(year_month)
                ):
         identifier = request.POST.get('identifier')
         from_to=request.POST.get('from_to')
+        min=request.POST.get('min')
+        max=request.POST.get('max')
         if from_to=="c2v":
             sender = Customer.objects.filter(identifier=identifier)
         elif from_to=="v2c":
@@ -425,7 +427,14 @@ and str(msg.event_date).startswith(year_month)
         elif from_to=="v2c":
             all_msgs= Messages.objects.filter(
                     vendor=sender,msg_type=msg_type
-                    ).order_by('-msg_time')            
+                    ).order_by('-msg_time')
+        
+        if min:
+            all_msgs=all_msgs.filter(id__lte=int(min))           
+        if max:
+            all_msgs=all_msgs.filter(id__gte=int(max)) 
+        
+        all_msgs=all_msgs[:5]         
         
         def get_status(msg):
             if str(msg.status)=="0":
