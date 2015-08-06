@@ -438,36 +438,51 @@ and str(msg.event_date).startswith(year_month)
         msgs=[]
         listed=[]# Which vendor id indexed at which positions
         for msg in all_msgs:
+            event_date=str(msg.event_date)[:19]
+            inquiry_date=str(msg.msg_time)[:19]
+            
+            if msg_type=="bid":
+                inq_data=eval(msg.bid_json)
+                pkg=inq_data['quoted']['value']
+                line2="Pax: " + str(msg.bid_quantity)+"| Package: "+ pkg
+            elif msg_type=="book":
+                inq_data=eval(msg.book_json)
+                pkg=inq_data['quoted']['value']
+                line2="Package: "+ pkg
+                
             if from_to=="c2v":
+                line1=msg.vendor.name + "  " +event_date + "  " + inquiry_date
                 if msg.vendor.pk not in listed:
                     listed.append(msg.vendor.pk)
                     msgs.append({"id":msg.id, "message":msg.message,
                                                      "receiver_email":msg.vendor.user.username,
                                                      "receiver_name":msg.vendor.name,
                                                      "identifier":msg.customer.identifier,
-                                                     "msg_time":str(msg.msg_time)[:19] ,
+                                                     "msg_time":inquiry_date ,
                                                      "from_to":msg.from_to,
-                                                     "event_date":str(msg.event_date)[:19],
+                                                     "event_date":event_date,
                                                      "msg_type":msg_type,
-                                                     "line1":"Pax 350-450 Package NVS Rev:5-5100",
-                                                     "line2":"Source:Wedwise",
+                                                     "line1":line1,
+                                                     "line2":line2,
                                                      "status":get_status(msg),
                                                      
                                                      
                                                      })
             if from_to=="v2c":
+                line1=msg.customer.groom_name + " & "+msg.customer.bride_name + "  " +event_date + "  " + inquiry_date
+                
                 if msg.customer.pk not in listed:
                     listed.append(msg.customer.pk)
                     msgs.append({"id":msg.id, "message":msg.message,
                                                      "receiver_email":msg.customer.user.username,
-                                                     "receiver_name":msg.customer.groom_name + " vs "+msg.customer.bride_name ,
+                                                     "receiver_name":msg.customer.groom_name + " & "+msg.customer.bride_name ,
                                                      "identifier":msg.customer.identifier,
-                                                     "msg_time":str(msg.msg_time)[:19] ,
+                                                     "msg_time":inquiry_date ,
                                                      "from_to":msg.from_to,
                                                      "msg_type":msg_type,
-                                                     "event_date":str(msg.event_date)[:19],
-                                                     "line1":"Pax 350-450 Package NVS Rev:5-5100",
-                                                     "line2":"Source:Wedwise",
+                                                     "event_date":event_date,
+                                                     "line1":line1,
+                                                     "line2":line2,
                                                      "status":get_status(msg),
                                                      })                
 
