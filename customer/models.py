@@ -6,7 +6,7 @@ from django.db import transaction
 from django import forms
 from django.core.exceptions import ValidationError
 from django.contrib.auth import authenticate
-
+import urllib
 """
 https://docs.djangoproject.com/en/1.8/topics/db/transactions/
 Atomicity is the defining property of database transactions. atomic allows us to create a block of code within 
@@ -38,6 +38,8 @@ class Customer(models.Model):
                ):
         email = request.POST.get('email').strip().lower()
         identifier =  request.POST.get('identifier').strip().lower()
+        if identifier:
+            identifier=urllib.unquote(identifier)
         operation =  request.POST.get('operation').strip().lower()
         password = request.POST.get('password')
         groom_name = request.POST.get('groom_name')
