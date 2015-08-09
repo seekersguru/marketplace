@@ -183,8 +183,8 @@ class Vendor(models.Model):
 
 
     @classmethod
-    def get_vendor_list(cls,vendor_type,page_no,mode,image_type):
-        
+    def get_vendor_list(cls,vendor_type,page_no,mode,image_type,search_string):
+        if search_string=="no":return []
         img="/media/apps/{mode}/{image_type}/category/{vendor_type}.jpg".\
                 format(vendor_type=vendor_type,mode=mode,image_type=image_type)
         lst=[]
@@ -235,9 +235,8 @@ class Vendor(models.Model):
         search_string= request.POST.get('search_string',"")
         if len(search_string) > 1000:
             return ge("POST",req_dict(request.POST),"search string too long", error_fields=['page_no'])
-        vendor_list=cls.get_vendor_list(vendor_type,page_no,mode,image_type)
-        if search_string=="no":
-            return []
+        vendor_list=cls.get_vendor_list(vendor_type,page_no,mode,image_type,search_string)
+
         return gs("POST",req_dict(request.POST),{"vendor_list":vendor_list ,                 
                     "filters":[
                                {"type":"radio" ,"name":"enq_type","values":["ENQUIRY","BOOKING"],},
