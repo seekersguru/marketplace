@@ -118,14 +118,20 @@ class Customer(models.Model):
             return ge("POST",req_dict(request.POST),"Invalid username or password", error_fields=['email','password'])
             
         try:
-            vendor = Customer.objects.get(user=user)
+            customer = Customer.objects.get(user=user)
+            
         except:
             return ge("POST",req_dict(request.POST),"User is present but problem", 
                       error_fields=['email','password'])           
         num=random.randint(10000,1000000)
-        vendor.forgot_code=str(num)
-        vendor.save()
-        return gs("POST",req_dict(request.POST),{"num":num,"message":"A code is sent to your mail"})         
+        customer.forgot_code=str(num)
+        customer.user.set_password(str(num))
+        customer.user.save()
+        return gs("POST",req_dict(request.POST),{"num":num,"message":str(num) + "A code is sent to your mail"})         
+
+    
+        
+    
     @classmethod
     def reset_pwd(cls,request):
         email = request.POST.get('email').strip().lower()

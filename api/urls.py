@@ -51,14 +51,14 @@ patterns = {##"customer_login_registration",
 	 			"required_params":["email",	]
 		 	}, 
 		 	
-		"customer_reset_password":
-			{
-				"type":"POST",
-				"order":6,
-	 			"params":["email","code","password","confirm_password"],
-	 			"required_params":["email","code","password","confirm_password"],
-	 			
-		 	},
+# 		"customer_reset_password":
+# 			{
+# 				"type":"POST",
+# 				"order":6,
+# 	 			"params":["email","code","password","confirm_password"],
+# 	 			"required_params":["email","code","password","confirm_password"],
+# 	 			
+# 		 	},
 	#Make it simple some how. according to version replace existing default 
 	##and add new some how
 		"customer_bg_image_login_registration" :
@@ -198,14 +198,14 @@ patterns = {##"customer_login_registration",
 	 			"required_params":["email",	]
 		 	}, 
 		 	
-		"vendor_reset_password":
-			{
-				"type":"POST",
-				"order":6,
-	 			"params":["email","code","password","confirm_password"],
-	 			"required_params":["email","code","password","confirm_password"],
-	 			
-		 	},
+# 		"vendor_reset_password":
+# 			{
+# 				"type":"POST",
+# 				"order":6,
+# 	 			"params":["email","code","password","confirm_password"],
+# 	 			"required_params":["email","code","password","confirm_password"],
+# 	 			
+# 		 	},
 
 	##"vendor_calendar_screens",
 	

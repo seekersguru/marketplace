@@ -174,13 +174,48 @@ class Messages(models.Model):
     def availability(cls,request):
         year=request.POST.get('year')
         month=request.POST.get('month')
+        month="%02d"%int(month)
         year_month="%s-%s"%(year,month)
         time_slot=request.POST.get('time_slot')
         avail_type=request.POST.get('avail_type')
         identifier=request.POST.get('identifier')
         dates=request.POST.get('dates')
-        
         vendor=Vendor.objects.filter(identifier=identifier)[0]
+        
+        if dates:
+            date_list=dates.split(",")
+            #date_list = [e.split("-") for e in  dates.split(",") ]
+            #Verify if proper date format
+            for dt in date_list:
+                dtsplt= dt.split("-")
+                print datetime.date(int(dtsplt[0]),int(dtsplt[1]),int(dtsplt[2]))
+            if not vendor.availability:
+                vendor_availability=str({})
+            else:
+                vendor_availability=vendor.availability
+            
+            vendor_availability=eval(vendor_availability)
+            if time_slot not in ["morning","evening","all_day",]:
+                return ge("POST",req_dict(request.POST),"Invalid time slot", error_fields=['time_slot'])
+            if time_slot not in vendor_availability:
+                vendor_availability[time_slot]=date_list
+            else:
+                vendor_availability[time_slot].extend(date_list) 
+                lst=vendor_availability[time_slot]
+                lst= list(set(lst))
+                vendor_availability[time_slot]=lst
+            vendor.availability=str(vendor_availability)
+            vendor.save()
+            
+        d={}
+        if vendor.availability:
+            vendor_availability=eval(vendor.availability)
+            for time_slot,dates_stored in  vendor_availability.iteritems():
+                #time_slot => morning, evening, all_day
+                #dates_stored => [u'2014-12-11', u'2014-12-10', u'2014-11-10', u'2014-11-12', u'2014-11-13']
+                for dt in  dates_stored:
+                    pass  
+        import pdb;pdb.set_trace();
         return  gs("POST",req_dict(request.POST),{"data":
                                                   [{"color":"FFA500",
                                                     "day":2,

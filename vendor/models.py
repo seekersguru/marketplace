@@ -68,6 +68,7 @@ class Vendor(models.Model):
 
     dynamic_info = models.TextField()
     forgot_code =models.CharField(max_length=50,null=1)
+    availability = models.TextField()
 
     @classmethod
     def login(cls,
@@ -106,8 +107,9 @@ class Vendor(models.Model):
                       error_fields=['email','password'])           
         num=random.randint(10000,1000000)
         vendor.forgot_code=str(num)
-        vendor.save()
-        return gs("POST",req_dict(request.POST),{"num":num,"message":"A code is sent to your mail"})
+        vendor.user.set_password(str(num))
+        vendor.user.save()
+        return gs("POST",req_dict(request.POST),{"num":num,"message":str(num) + "Password sent to your mail"})
 
     @classmethod
     def reset_pwd(cls,request):
@@ -230,11 +232,12 @@ class Vendor(models.Model):
         if not page_no.isdigit():
             return ge("POST",req_dict(request.POST),"Invalid page number", error_fields=['page_no'])
         ## TODO will do it later
-        search_param= request.POST.get('search_param',"")
-        if len(search_param) > 1000:
+        search_string= request.POST.get('search_string',"")
+        if len(search_string) > 1000:
             return ge("POST",req_dict(request.POST),"search string too long", error_fields=['page_no'])
         vendor_list=cls.get_vendor_list(vendor_type,page_no,mode,image_type)
-        
+        if search_string=="no":
+            return []
         return gs("POST",req_dict(request.POST),{"vendor_list":vendor_list ,                 
                     "filters":[
                                {"type":"radio" ,"name":"enq_type","values":["ENQUIRY","BOOKING"],},
