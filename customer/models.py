@@ -214,5 +214,40 @@ class Customer(models.Model):
             
             
             
+from vendor.models import Vendor          
+class Favorites(models.Model):
+    customer=models.ForeignKey(Customer)
+    vendor=models.ForeignKey(Vendor)
+    favorite=models.CharField(max_length=2)
+    @classmethod
+    def change_value(cls,
+               request, 
+               ):
+        identifier = request.POST.get('identifier').strip().lower()
+        vendor_email = request.POST.get('vendor_email').strip().lower()
+        favorite = request.POST.get('favorite').strip().lower()
+        print 1111
+        print favorite 
+        if favorite not in ["1","-1"]:
+            return ge("POST",req_dict(request.POST),
+                      "Favorite invalid value", 
+                      error_fields=['favorite',])    
+        if identifier:
+            identifier=urllib.unquote(identifier)
+        customer=Customer.objects.filter(identifier=identifier)[0] 
+        vendor=Vendor.objects.get(user=User.objects.get(username=vendor_email))
+        fav=Favorites.objects.filter(customer=customer,vendor=vendor)     
+        if not fav:
+            fv=Favorites(customer=customer,vendor=vendor,favorite=favorite)
+            fv.save()
+        else:
+            fv=fav[0]
+            fv.favorite=favorite
+            fv.save()
+        return gs("POST",req_dict(request.POST),{"favorite":fv.favorite})
             
             
+        
+         
+         
+        

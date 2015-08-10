@@ -6,7 +6,7 @@ from utils import response
 
 from api.utils import get_error as ge , get_success as gs
 import utils
-from customer.models import Customer
+from customer.models import Customer, Favorites
 from vendor.models import Category, Vendor
 from wedwise_messages.models import Messages
 def check_basic_validations(pattern_name,request,req_type):
@@ -108,6 +108,13 @@ def customer_vendor_list_and_search(request):
     invalid=check_basic_validations("customer_vendor_list_and_search",request,"POST")
     if invalid:return response(request,invalid) 
     return response(request,Vendor.get_listing(request))
+@csrf_exempt
+def add_favorite(request):
+    #TODO Put all in decorators  with csrf 
+    invalid=check_basic_validations("add_favorite",request,"POST")
+    if invalid:return response(request,invalid) 
+    return response(request,Favorites.change_value(request)) 
+
     
 @csrf_exempt
 def customer_vendor_detail(request):
