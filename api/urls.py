@@ -16,6 +16,8 @@ vendor_emails=[ [e.user.username,e.user.username, ] for e in Vendor.objects.all(
 from wedwise_messages.models import MESSAGE_TYPES_CHOICES
 from vendor.models import VENDOR_TYPES
 patterns = {##"customer_login_registration",
+
+
 	
 		"customer_registration":
 	 		{
@@ -96,6 +98,16 @@ patterns = {##"customer_login_registration",
 						+ "<br/>For ios allowed :"+str(ALLOWED_IOS_IMAGE_TYPE)}, 
 	 			# Better pick from DB
 	 			"selects":{"vendor_type":VENDOR_TYPES}
+
+		 	},
+		"add_favorite":
+	 		{
+				"type":"POST",
+				"order":8,
+	 			"params":["identifier","vendor_email","favorite"],
+	 			"required_params":["identifier","vendor_email","favorite"],
+	 			"help":{}, 
+
 
 		 	},
 		"customer_vendor_detail":
@@ -222,14 +234,19 @@ patterns = {##"customer_login_registration",
 	 		{
 				"order":-222,
 				"type":"POST",
-	 			"params":["year","month","time_slot","avail_type","identifier","dates"],
-	 			"required_params":["year","month","identifier"],
+	 			"params":["year","month","time_slot","avail_type","identifier","dates","mode","image_type"],
+	 			"required_params":["year","month","identifier","mode","image_type"],
 	 			"selects":{"identifier":identifiers },
 	 			"help":{"time_slot":"morning | evening | all_day",
 						"avail_type":"available (green) | ongoing_enquiry (orange) | booked (red)",
-						"dates":"yyyy-mm-dd,yyyy-mm-dd,yyyy-mm-dd"
+						"dates":"yyyy-mm-dd,yyyy-mm-dd,yyyy-mm-dd",
+						"mode":"Possible values 'android' or 'ios'",
+						"image_type":"For android allowed: " + str(ALLOWED_ANDRIOD_IMAGE_TYPE)\
+						+ "<br/>For ios allowed :"+str(ALLOWED_IOS_IMAGE_TYPE)
 						}
 		 	},
+
+
 
 # 		
 # 		"vendor_calendar_rates_availability":
