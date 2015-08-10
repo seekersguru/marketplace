@@ -183,6 +183,10 @@ class Messages(models.Model):
         vendor=Vendor.objects.filter(identifier=identifier)[0]
         
         if dates:
+            if time_slot not in ["morning","evening","all_day",]:
+                return ge("POST",req_dict(request.POST),"Invalid time slot", error_fields=['time_slot'])
+            if avail_type not in ["available","ongoing_enquiry","booked",]:
+                return ge("POST",req_dict(request.POST),"Invalid time slot", error_fields=['time_slot'])
             date_list=dates.split(",")
             #date_list = [e.split("-") for e in  dates.split(",") ]
             #Verify if proper date format
@@ -195,44 +199,20 @@ class Messages(models.Model):
                 vendor_availability=vendor.availability
             
             vendor_availability=eval(vendor_availability)
-            if time_slot not in ["morning","evening","all_day",]:
-                return ge("POST",req_dict(request.POST),"Invalid time slot", error_fields=['time_slot'])
-            if time_slot not in vendor_availability:
-                vendor_availability[time_slot]=date_list
-            else:
-                vendor_availability[time_slot].extend(date_list) 
-                lst=vendor_availability[time_slot]
-                lst= list(set(lst))
-                vendor_availability[time_slot]=lst
+            for dt in date_list:
+                vendor_availability[dt]=avail_type + "_"+time_slot
             vendor.availability=str(vendor_availability)
             vendor.save()
             
-        d={}
+        data_list=[]
         if vendor.availability:
             vendor_availability=eval(vendor.availability)
-            for time_slot,dates_stored in  vendor_availability.iteritems():
-                #time_slot => morning, evening, all_day
-                #dates_stored => [u'2014-12-11', u'2014-12-10', u'2014-11-10', u'2014-11-12', u'2014-11-13']
-                for dt in  dates_stored:
-                    pass  
-        import pdb;pdb.set_trace();
+            for dt, status in vendor_availability.iteritems():
+                d=dt.split("-")
+                if d[0] ==year and d[1]==month:
+                    data_list.append({"day":d[2] , "img" :"/media/images/availability/"+status+".png"})
         return  gs("POST",req_dict(request.POST),{"data":
-                                                  [{"color":"FFA500",
-                                                    "day":2,
-                                                    "cover":"top",
-                                                    "img":"/media/images/availability/code1.png"
-                                                    },
-                                                   {"color":"78AB46",
-                                                    "day":5,
-                                                    "cover":"bottom",
-                                                    "img":"/media/images/availability/code2.png"
-                                                    },
-                                                   {"color":"ff3232",
-                                                    "day":15,
-                                                    "cover":"full",
-                                                    "img":"/media/images/availability/code3.png"
-                                                    },                                                   
-                                                   ],
+                                                  data_list,
                                                   "available_years":[2014,2015],
   
                                                   })
