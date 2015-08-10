@@ -493,6 +493,8 @@ and str(msg.event_date).startswith(year_month)
                 inq_data=eval(msg.book_json)
                 pkg=inq_data['quoted']['value']
                 line2="Package: "+ pkg
+            elif msg_type=="message":
+                line2=None
                 
             if from_to=="c2v":
                 line1=msg.vendor.name + "  " +event_date + "  " + inquiry_date
