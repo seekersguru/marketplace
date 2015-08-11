@@ -92,7 +92,7 @@ patterns = {##"customer_login_registration",
 				"type":"POST",
 				"order":8,
 	 			"params":["mode","image_type","vendor_type","page_no","search_string","favorites","identifier"],
-	 			"required_params":["mode","image_type","vendor_type"],
+	 			"required_params":["mode","image_type"],
 	 			"help":{"mode":"Possible values 'android' or 'ios'",
 						"image_type":"For android allowed: " + str(ALLOWED_ANDRIOD_IMAGE_TYPE)\
 						+ "<br/>For ios allowed :"+str(ALLOWED_IOS_IMAGE_TYPE)}, 
