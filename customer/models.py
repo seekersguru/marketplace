@@ -226,8 +226,6 @@ class Favorites(models.Model):
         identifier = request.POST.get('identifier').strip().lower()
         vendor_email = request.POST.get('vendor_email').strip().lower()
         favorite = request.POST.get('favorite').strip().lower()
-        print 1111
-        print favorite 
         if favorite not in ["1","-1"]:
             return ge("POST",req_dict(request.POST),
                       "Favorite invalid value", 

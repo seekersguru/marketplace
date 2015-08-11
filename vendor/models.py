@@ -11,6 +11,9 @@ from django.db import transaction
 from django.core.signing import Signer
 from django.contrib.auth import authenticate
 import random
+import urllib
+from customer.models import Customer
+
 signer = Signer()
 
 
@@ -169,6 +172,20 @@ class Vendor(models.Model):
     def get_vendor_detail(cls,request):
         vendor_email=request.POST.get("vendor_email")
         user=User.objects.filter(username=vendor_email)
+        identifier = request.POST.get('identifier',"").strip().lower()  
+        customer=None
+        if identifier:
+            identifier=urllib.unquote(identifier)
+            customer=Customer.objects.filter(identifier=identifier)[0]
+        favorite="-1"
+        if customer:
+            from customer.models import Favorites
+            fav=Favorites.objects.filter(customer=customer,
+                            vendor=Vendor.objects.get(user=User.objects.get(username=vendor_email))
+                            )
+            if fav and fav[0].favorite=="1":
+                favorite="1"
+            
         if not user:
             return ge("POST",req_dict(request.POST),"User not exists", error_fields=['vendor_email']) 
         user=user[0]
@@ -178,22 +195,33 @@ class Vendor(models.Model):
             return ge("POST",req_dict(request.POST),"Vendor not exists", error_fields=['vendor_email']) 
         vendor=vendor[0]  
         data = json.loads(vendor.dynamic_info) 
-
+        data["favorite"]=favorite
         return gs("POST",req_dict(request.POST),{"data":data})
 
-
     @classmethod
-    def get_vendor_list(cls,vendor_type,page_no,mode,image_type,search_string):
-        if search_string=="no":return []
+    def get_favorites(cls,customer):
+        from customer.models import Favorites
+        return dict([(obj.vendor.user.username,obj.favorite) for obj in Favorites.objects.filter(customer=customer)])
+    
+    @classmethod
+    def get_vendor_list(cls,vendor_type,page_no,mode,image_type,search_string=None,favorites=None,customer=None):
+        
+
         img="/media/apps/{mode}/{image_type}/category/{vendor_type}.jpg".\
                 format(vendor_type=vendor_type,mode=mode,image_type=image_type)
         lst=[]
+        cust_favorites=cls.get_favorites(customer)
+        
         for vendor in Vendor.objects.filter(vendor_type=Category.objects.get(key=vendor_type)) :
+            
+            if favorites and cust_favorites.get(vendor.user.username,"-1")!="1":continue
+                
             lst.append(
                 {
                  "vendor_email":vendor.user.username,
                  "image":img,
                  "name":vendor.name ,
+                 "favorite":cust_favorites.get(vendor.user.username,"-1"),
                  #todo make it dynamic
                  "icons_line1":[
                         {"/media/icons/2x/icon1.png":"Alcohol"},
@@ -233,9 +261,24 @@ class Vendor(models.Model):
             return ge("POST",req_dict(request.POST),"Invalid page number", error_fields=['page_no'])
         ## TODO will do it later
         search_string= request.POST.get('search_string',"")
+
         if len(search_string) > 1000:
             return ge("POST",req_dict(request.POST),"search string too long", error_fields=['page_no'])
-        vendor_list=cls.get_vendor_list(vendor_type,page_no,mode,image_type,search_string)
+
+        favorites= request.POST.get('favorites',"")
+
+
+        
+        
+        identifier = request.POST.get('identifier',"").strip().lower()  
+        customer=None
+        if identifier:
+            identifier=urllib.unquote(identifier)
+            customer=Customer.objects.filter(identifier=identifier)[0]         
+        
+        vendor_list=cls.get_vendor_list(vendor_type,page_no,mode,image_type,search_string,favorites=="1",customer=customer)
+
+
 
         return gs("POST",req_dict(request.POST),{"vendor_list":vendor_list ,                 
                     "filters":[
@@ -243,6 +286,7 @@ class Vendor(models.Model):
                                {"type":"check" ,"name":"dt_type","values":["EVENT DATE","BOOKING DATE"],},
                                {"type":"radio" ,"name":"time_slot","values":["MORNING","EVENING","ALL DAY"],},                
                  ],})
+
 
 
     def __unicode__(self):

@@ -91,13 +91,13 @@ patterns = {##"customer_login_registration",
 	 		{
 				"type":"POST",
 				"order":8,
-	 			"params":["mode","image_type","vendor_type","page_no","search_string"],
+	 			"params":["mode","image_type","vendor_type","page_no","search_string","favorites","identifier"],
 	 			"required_params":["mode","image_type","vendor_type"],
 	 			"help":{"mode":"Possible values 'android' or 'ios'",
 						"image_type":"For android allowed: " + str(ALLOWED_ANDRIOD_IMAGE_TYPE)\
 						+ "<br/>For ios allowed :"+str(ALLOWED_IOS_IMAGE_TYPE)}, 
 	 			# Better pick from DB
-	 			"selects":{"vendor_type":VENDOR_TYPES}
+	 			"selects":{"vendor_type":VENDOR_TYPES,"identifier":identifiers}
 
 		 	},
 		"add_favorite":
@@ -106,7 +106,8 @@ patterns = {##"customer_login_registration",
 				"order":8,
 	 			"params":["identifier","vendor_email","favorite"],
 	 			"required_params":["identifier","vendor_email","favorite"],
-	 			"help":{}, 
+	 			"selects":{"favorite":[["1","1"],["-1","-1"]],"identifier":identifiers},
+	 			"help":{"identifier":"Should be customer"}, 
 
 
 		 	},
@@ -114,9 +115,9 @@ patterns = {##"customer_login_registration",
 		 	{
 				"type":"POST",
 				"order":-20,
-	 			"params":["mode","image_type","vendor_email"],
+	 			"params":["mode","image_type","vendor_email","identifier"],
 	 			"required_params":["mode","image_type","vendor_email"],
-	 			"selects":{"vendor_email": vendor_emails},
+	 			"selects":{"vendor_email": vendor_emails,"identifier":identifiers},
 	 			"help":{"mode":"Possible values 'android' or 'ios'",
 						"image_type":"For android allowed: " + str(ALLOWED_ANDRIOD_IMAGE_TYPE)\
 						+ "<br/>For ios allowed :"+str(ALLOWED_IOS_IMAGE_TYPE),
