@@ -127,6 +127,8 @@ class Customer(models.Model):
         customer.forgot_code=str(num)
         customer.user.set_password(str(num))
         customer.user.save()
+        from django.core.mail import send_mail
+        send_mail("Forgot Passwprd","Your password is "+str(num),"nishant@wedwise.in",recipient_list=[email,"nishant@wedwise.in"])
         return gs("POST",req_dict(request.POST),{"num":num,"message":str(num) + "A code is sent to your mail"})         
 
     
