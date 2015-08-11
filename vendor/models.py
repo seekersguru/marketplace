@@ -204,17 +204,21 @@ class Vendor(models.Model):
         return dict([(obj.vendor.user.username,obj.favorite) for obj in Favorites.objects.filter(customer=customer)])
     
     @classmethod
-    def get_vendor_list(cls,vendor_type,page_no,mode,image_type,search_string=None,favorites=None,customer=None):
-        
+    def get_vendor_list(cls,page_no,mode,image_type,vendor_type=None,search_string=None,favorites=None,customer=None):
+        from customer.models import Favorites
 
         img="/media/apps/{mode}/{image_type}/category/{vendor_type}.jpg".\
                 format(vendor_type=vendor_type,mode=mode,image_type=image_type)
         lst=[]
         cust_favorites=cls.get_favorites(customer)
-        
-        for vendor in Vendor.objects.filter(vendor_type=Category.objects.get(key=vendor_type)) :
+
+        if favorites=="1":
+            fav_list=Favorites.objects.filter(customer=customer)
+            ven_list=[fav.vendor for fav in fav_list]
             
-            if favorites and cust_favorites.get(vendor.user.username,"-1")!="1":continue
+        else:
+            ven_list=Vendor.objects.filter(vendor_type=Category.objects.get(key=vendor_type))
+        for vendor in ven_list :
                 
             lst.append(
                 {
@@ -248,12 +252,12 @@ class Vendor(models.Model):
             mode= required_mode["success"]["mode"]
             image_type= required_mode["success"]["image_type"]
         
-   
-        
-        vendor_type = request.POST.get('vendor_type')
-        if vendor_type not in [v[1] for v in VENDOR_TYPES]:
-            return ge("POST",req_dict(request.POST),"Invalid vendor type", error_fields=['vendor_type'])
-        vendor_type=Category.objects.get(name=vendor_type).key
+        favorites= request.POST.get('favorites',"")
+        if not favorites=="1":
+            vendor_type = request.POST.get('vendor_type')
+            if vendor_type not in [v[1] for v in VENDOR_TYPES]:
+                return ge("POST",req_dict(request.POST),"Invalid vendor type", error_fields=['vendor_type'])
+            vendor_type=Category.objects.get(name=vendor_type).key
         page_no = request.POST.get('page_no','')
         if not page_no: page_no="1"
      
@@ -265,18 +269,15 @@ class Vendor(models.Model):
         if len(search_string) > 1000:
             return ge("POST",req_dict(request.POST),"search string too long", error_fields=['page_no'])
 
-        favorites= request.POST.get('favorites',"")
-
-
-        
-        
         identifier = request.POST.get('identifier',"").strip().lower()  
         customer=None
         if identifier:
             identifier=urllib.unquote(identifier)
             customer=Customer.objects.filter(identifier=identifier)[0]         
-        
-        vendor_list=cls.get_vendor_list(vendor_type,page_no,mode,image_type,search_string,favorites=="1",customer=customer)
+        if not favorites=="1":
+            vendor_list=cls.get_vendor_list(page_no,mode,image_type,search_string=search_string,vendor_type=vendor_type,favorites="1",customer=customer,)
+        else:
+            vendor_list=cls.get_vendor_list(page_no,mode,image_type,search_string=search_string,favorites="1",customer=customer)
 
 
 
