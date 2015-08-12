@@ -52,6 +52,7 @@ class Customer(models.Model):
 
         ##### Get and update logic starts
         if identifier:
+            identifier=urllib.unquote(identifier)
             customer=Customer.objects.filter(identifier=identifier)[0]
             if  operation not in ["update","get"]:
                 return ge("POST",req_dict(request.POST),"Operation update or get", error_fields=['operation']) 

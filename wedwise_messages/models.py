@@ -8,7 +8,7 @@ from api.utils import get_error as ge , get_success as gs ,req_dict
 from django.contrib.auth.models import User
 MESSAGE_TYPES=["message","bid","book"]
 MESSAGE_TYPES_CHOICES=[  [e,e ] for e in MESSAGE_TYPES]
-print MESSAGE_TYPES_CHOICES
+import urllib
 import datetime
 
 class Messages(models.Model):
@@ -43,6 +43,8 @@ class Messages(models.Model):
 
         receiver_email = request.POST.get('receiver_email').strip().lower()
         identifier = request.POST.get('identifier')
+        if identifier:
+            identifier=urllib.unquote(identifier)
         message = request.POST.get('message')
         from_to=request.POST.get('from_to')
         if from_to=="v2c":
@@ -181,7 +183,8 @@ class Messages(models.Model):
         identifier=request.POST.get('identifier')
         dates=request.POST.get('dates')
         vendor=Vendor.objects.filter(identifier=identifier)[0]
-        
+        if identifier:
+            identifier=urllib.unquote(identifier)        
         if dates:
             if time_slot not in ["morning","evening","all_day",]:
                 return ge("POST",req_dict(request.POST),"Invalid time slot", error_fields=['time_slot'])
@@ -230,6 +233,8 @@ class Messages(models.Model):
         messages= [msg.event_date.day for msg in messages if msg.msg_type in ["bid","book"] and msg.event_date
 and str(msg.event_date).startswith(year_month)
                    ]
+        if identifier:
+            identifier=urllib.unquote(identifier)
         from collections import Counter
         msg_counts=dict(Counter(messages))
         day_counts=[]
@@ -267,6 +272,8 @@ and str(msg.event_date).startswith(year_month)
     @classmethod
     def vendor_bid_book_response(cls,request):
         identifier=request.POST.get('identifier')
+        if identifier:
+            identifier=urllib.unquote(identifier)
         msg_id=request.POST.get('msg_id')
         status=request.POST.get('status')
         vendor = Vendor.objects.filter(identifier=identifier)
@@ -290,6 +297,8 @@ and str(msg.event_date).startswith(year_month)
         msg_type=request.POST.get('msg_type')
         msg_id=request.POST.get('msg_id')
         identifier=request.POST.get('identifier')
+        if identifier:
+            identifier=urllib.unquote(identifier)
         if msg_type not in ["bid","book"]:
             return ge("POST",req_dict(request.POST),"msg_type can be bid / book", error_fields=['msg_type']) 
         
@@ -342,6 +351,8 @@ and str(msg.event_date).startswith(year_month)
         receiver_email = request.POST.get('receiver_email').strip().lower()
         from_to = request.POST.get('from_to').strip().lower()
         identifier = request.POST.get('identifier')
+        if identifier:
+            identifier=urllib.unquote(identifier)
         f = forms.EmailField()
         try:
             f.clean(receiver_email)
@@ -421,6 +432,8 @@ and str(msg.event_date).startswith(year_month)
                request, 
                ):
         identifier = request.POST.get('identifier')
+        if identifier:
+            identifier=urllib.unquote(identifier)
         from_to=request.POST.get('from_to')
         min=request.POST.get('min')
         max=request.POST.get('max')

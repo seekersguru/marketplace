@@ -219,7 +219,9 @@ class Vendor(models.Model):
             
         else:
             ven_list=Vendor.objects.filter(vendor_type=Category.objects.get(key=vendor_type))
-            
+        if search_string:
+            ven_list=[e for e in ven_list if search_string.lower() in e.dynamic_info.lower()] 
+          
         for vendor in ven_list :
                 
             lst.append(
