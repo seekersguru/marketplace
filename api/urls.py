@@ -97,7 +97,7 @@ patterns = {##"customer_login_registration",
 						"image_type":"For android allowed: " + str(ALLOWED_ANDRIOD_IMAGE_TYPE)\
 						+ "<br/>For ios allowed :"+str(ALLOWED_IOS_IMAGE_TYPE)}, 
 	 			# Better pick from DB
-	 			"selects":{"vendor_type":VENDOR_TYPES,"identifier":identifiers}
+	 			"selects":{"vendor_type":VENDOR_TYPES}
 
 		 	},
 		"add_favorite":
