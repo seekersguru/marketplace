@@ -486,7 +486,10 @@ and str(msg.event_date).startswith(year_month)
                     pkg="DCR"
                 line2="Pax: " + str(msg.bid_quantity)+"| Package: "+ pkg
             elif msg_type=="book":
-                inq_data=eval(msg.book_json)
+                try:
+                    inq_data=eval(msg.book_json)
+                except:
+                    inq_data={"quoted":{"value":"Not parsed!"}}
                 try:
                     pkg=inq_data['quoted']['value']
                 except:
