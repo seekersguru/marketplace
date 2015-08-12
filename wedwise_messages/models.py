@@ -480,11 +480,17 @@ and str(msg.event_date).startswith(year_month)
             
             if msg_type=="bid":
                 inq_data=eval(msg.bid_json)
-                pkg=inq_data['quoted']['value']
+                try:
+                    pkg=inq_data['quoted']['value']
+                except:
+                    pkg="DCR"
                 line2="Pax: " + str(msg.bid_quantity)+"| Package: "+ pkg
             elif msg_type=="book":
                 inq_data=eval(msg.book_json)
-                pkg=inq_data['quoted']['value']
+                try:
+                    pkg=inq_data['quoted']['value']
+                except:
+                    pkg="DCR"
                 line2="Package: "+ pkg
             elif msg_type=="message":
                 line2=None
