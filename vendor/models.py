@@ -201,6 +201,7 @@ class Vendor(models.Model):
     @classmethod
     def get_favorites(cls,customer):
         from customer.models import Favorites
+        
         return dict([(obj.vendor.user.username,obj.favorite) for obj in Favorites.objects.filter(customer=customer)])
     
     @classmethod
@@ -218,6 +219,7 @@ class Vendor(models.Model):
             
         else:
             ven_list=Vendor.objects.filter(vendor_type=Category.objects.get(key=vendor_type))
+            
         for vendor in ven_list :
                 
             lst.append(
@@ -275,7 +277,7 @@ class Vendor(models.Model):
             identifier=urllib.unquote(identifier)
             customer=Customer.objects.filter(identifier=identifier)[0]         
         if not favorites=="1":
-            vendor_list=cls.get_vendor_list(page_no,mode,image_type,search_string=search_string,vendor_type=vendor_type,favorites="1",customer=customer,)
+            vendor_list=cls.get_vendor_list(page_no,mode,image_type,search_string=search_string,vendor_type=vendor_type,favorites=favorites,customer=customer,)
         else:
             vendor_list=cls.get_vendor_list(page_no,mode,image_type,search_string=search_string,favorites="1",customer=customer)
 
