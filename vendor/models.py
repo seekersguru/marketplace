@@ -76,7 +76,7 @@ class Vendor(models.Model):
     availability = models.TextField(null=True, blank=True)
     active = models.BooleanField(default=1)
     
-    object = models.Manager()
+    objects = models.Manager()
     active_object = VendorManager()
 
     @classmethod
@@ -103,7 +103,7 @@ class Vendor(models.Model):
             ## Case 2 : User Could not register, some error user registered but problem
             ## Critical error must be addressed TODO 
             ## Add critical error code for such situations and normal error code for all 
-            return ge("POST",req_dict(request.POST),"User is present but problem", 
+            return ge("POST",req_dict(request.POST),"User is present but problem1", 
                       error_fields=['email','password'])
 
     @classmethod
@@ -116,7 +116,7 @@ class Vendor(models.Model):
         try:
             vendor = Vendor.active_object.get(user=user)
         except:
-            return ge("POST",req_dict(request.POST),"User is present but problem", 
+            return ge("POST",req_dict(request.POST),"User is present but problem2", 
                       error_fields=['email','password'])           
         num=random.randint(10000,1000000)
         vendor.forgot_code=str(num)
@@ -138,7 +138,7 @@ class Vendor(models.Model):
         try:
             vendor = Vendor.object.get(user=user)
         except:
-            return ge("POST",req_dict(request.POST),"User is present but problem", 
+            return ge("POST",req_dict(request.POST),"User is present but problem3", 
                       error_fields=['email','password'])  
             
         if str(vendor.forgot_code) != str(code).strip():
