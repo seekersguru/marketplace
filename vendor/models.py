@@ -13,6 +13,8 @@ from django.contrib.auth import authenticate
 import random
 import urllib
 from customer.models import Customer
+from django.template.defaultfilters import default
+from manager import VendorManager
 
 signer = Signer()
 
@@ -70,8 +72,12 @@ class Vendor(models.Model):
     gid =models.CharField(max_length=1024,default="")
 
     dynamic_info = models.TextField()
-    forgot_code =models.CharField(max_length=50,null=1)
-    availability = models.TextField()
+    forgot_code =models.CharField(max_length=50,null=0)
+    availability = models.TextField(null=True, blank=True)
+    active = models.BooleanField(default=1)
+    
+    object = models.Manager()
+    active_object = VendorManager()
 
     @classmethod
     def login(cls,
@@ -84,9 +90,13 @@ class Vendor(models.Model):
             return ge("POST",req_dict(request.POST),"Invalid username or password", error_fields=['email','password'])
             
         try:
-            vendor = Vendor.objects.get(user=user)
-            return gs("POST",req_dict(request.POST),{"identifier":vendor.identifier})
-
+            if Vendor.objects.get(user=user):
+                try:    
+                    vendor = Vendor.active_object.get(user=user)
+                    return gs("POST",req_dict(request.POST),{"identifier":vendor.identifier})
+                except: 
+                    return ge("POST",req_dict(request.POST),"Please wait for admin to approve.", 
+                              error_fields=['email','password'])
         except:
             ## TODO Proper error handling 
             ## Case 1: USer is Vendor 
@@ -104,7 +114,7 @@ class Vendor(models.Model):
             return ge("POST",req_dict(request.POST),"Invalid username or password", error_fields=['email','password'])
             
         try:
-            vendor = Vendor.objects.get(user=user)
+            vendor = Vendor.active_object.get(user=user)
         except:
             return ge("POST",req_dict(request.POST),"User is present but problem", 
                       error_fields=['email','password'])           
@@ -126,7 +136,7 @@ class Vendor(models.Model):
             return ge("POST",req_dict(request.POST),"Invalid username or password", error_fields=['email','password'])
             
         try:
-            vendor = Vendor.objects.get(user=user)
+            vendor = Vendor.object.get(user=user)
         except:
             return ge("POST",req_dict(request.POST),"User is present but problem", 
                       error_fields=['email','password'])  
@@ -181,7 +191,7 @@ class Vendor(models.Model):
         if customer:
             from customer.models import Favorites
             fav=Favorites.objects.filter(customer=customer,
-                            vendor=Vendor.objects.get(user=User.objects.get(username=vendor_email))
+                            vendor=Vendor.active_object.get(user=User.objects.get(username=vendor_email))
                             )
             if fav and fav[0].favorite=="1":
                 favorite="1"
@@ -190,7 +200,7 @@ class Vendor(models.Model):
             return ge("POST",req_dict(request.POST),"User not exists", error_fields=['vendor_email']) 
         user=user[0]
        
-        vendor = Vendor.objects.filter(user=user)  
+        vendor = Vendor.active_object.filter(user=user)  
         if not vendor:
             return ge("POST",req_dict(request.POST),"Vendor not exists", error_fields=['vendor_email']) 
         vendor=vendor[0]  
@@ -218,7 +228,7 @@ class Vendor(models.Model):
             ven_list=[fav.vendor for fav in fav_list]
             
         else:
-            ven_list=Vendor.objects.filter(vendor_type=Category.objects.get(key=vendor_type))
+            ven_list=Vendor.active_object.filter(vendor_type=Category.objects.get(key=vendor_type))
         if search_string:
             ven_list=[e for e in ven_list if search_string.lower() in e.dynamic_info.lower()] 
           
@@ -305,7 +315,7 @@ class Vendor(models.Model):
         try:
             email = request.POST.get('email').strip().lower()
             user=User.objects.get(username=email)
-            vendor = Vendor.objects.get(user=user)
+            vendor = Vendor.active_object.get(user=user)
             vendor_type = request.POST.get('vendor_type').strip()
             vendor.category=Category.objects.get(key=vendor_type)
             vendor.name = request.POST.get('name').strip()

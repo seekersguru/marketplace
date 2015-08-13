@@ -27,7 +27,7 @@ class CategoryResource(ModelResource):
 
 class VendorResource(ModelResource):
     class Meta:
-        queryset = Vendor.objects.all()
+        queryset = Vendor.active_object.all()
         resource_name = 'vendor'
         allowed_methods = ['get', 'post', 'delete', 'put']
         authorization = Authorization()

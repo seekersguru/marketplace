@@ -236,7 +236,7 @@ class Favorites(models.Model):
         if identifier:
             identifier=urllib.unquote(identifier)
         customer=Customer.objects.filter(identifier=identifier)[0] 
-        vendor=Vendor.objects.get(user=User.objects.get(username=vendor_email))
+        vendor=Vendor.active_object.get(user=User.objects.get(username=vendor_email))
         fav=Favorites.objects.filter(customer=customer,vendor=vendor)     
         if not fav:
             fv=Favorites(customer=customer,vendor=vendor,favorite=favorite)

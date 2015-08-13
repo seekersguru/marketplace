@@ -8,11 +8,11 @@ urlpatterns = [
 ]
 from vendor.models import Vendor
 from customer.models import Customer
-vendor_identfiers=[ [e.identifier,e.identifier ] for e in Vendor.objects.all()]
+vendor_identfiers=[ [e.identifier,e.identifier ] for e in Vendor.active_object.all()]
 customer_identfiers=[[e.identifier,e.identifier ] for e in Customer.objects.all()]
 vendor_identfiers.extend(customer_identfiers)
 identifiers=vendor_identfiers
-vendor_emails=[ [e.user.username,e.user.username, ] for e in Vendor.objects.all()]
+vendor_emails=[ [e.user.username,e.user.username, ] for e in Vendor.active_object.all()]
 from wedwise_messages.models import MESSAGE_TYPES_CHOICES
 from vendor.models import VENDOR_TYPES
 patterns = {##"customer_login_registration",
@@ -25,7 +25,7 @@ patterns = {##"customer_login_registration",
 				"order":1,
 	 			"params":["email","password","groom_name","bride_name","contact_number","fbid","gid","identifier","operation",
 						"tentative_wedding_date"],
-	 			"required_params":["email","password","groom_name","bride_name","contact_number","tentative_wedding_date"],
+	 			"required_params":["email","password","groom_name","bride_name","contact_number"],
 	 			"help":{"operation":"get or update","identifier":"When get or update"},
 	 			
 		 	},

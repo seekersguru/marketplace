@@ -31,7 +31,7 @@ def index(request):
     
     lst=OrderedDict(sorted(lst, key= lambda e:e[1]['order']))
     return TemplateResponse(request,'api/api_index.html',
-                {"patterns":lst, "vendors":Vendor.objects.all(),"customers":Customer.objects.all()})
+                {"patterns":lst, "vendors":Vendor.active_object.all(),"customers":Customer.objects.all()})
 
 ########## Customer Login Registration
 @csrf_exempt

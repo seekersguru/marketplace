@@ -63,7 +63,7 @@ class Messages(models.Model):
         if from_to =="c2v":
             sender = Customer.objects.filter(identifier=identifier)
         elif from_to=="v2c":
-            sender = Vendor.objects.filter(identifier=identifier)
+            sender = Vendor.active_object.filter(identifier=identifier)
             
         if not sender:
             return ge("POST",req_dict(request.POST),"Sender unauthorized", error_fields=['identifier'],
@@ -84,10 +84,10 @@ class Messages(models.Model):
         else:
             user=user[0]
         if from_to=="c2v":
-            receiver = Vendor.objects.filter(user=user)
+            receiver = Vendor.active_object.filter(user=user)
         else: #v2c
             if msg_type=="book":
-                receiver = Vendor.objects.filter(user=user)
+                receiver = Vendor.active_object.filter(user=user)
             else:
                 receiver = Customer.objects.filter(user=user)
         if not receiver:
@@ -182,7 +182,7 @@ class Messages(models.Model):
         avail_type=request.POST.get('avail_type')
         identifier=request.POST.get('identifier')
         dates=request.POST.get('dates')
-        vendor=Vendor.objects.filter(identifier=identifier)[0]
+        vendor=Vendor.active_object.filter(identifier=identifier)[0]
         if identifier:
             identifier=urllib.unquote(identifier)        
         if dates:
@@ -228,7 +228,7 @@ class Messages(models.Model):
         year_month="%s-%s"%(year,month)
         filter_string=request.POST.get('filter_string')
         identifier=request.POST.get('identifier')
-        vendor=Vendor.objects.filter(identifier=identifier)[0]
+        vendor=Vendor.active_object.filter(identifier=identifier)[0]
         messages=Messages.objects.filter(vendor=vendor)
         messages= [msg.event_date.day for msg in messages if msg.msg_type in ["bid","book"] and msg.event_date
 and str(msg.event_date).startswith(year_month)
@@ -276,7 +276,7 @@ and str(msg.event_date).startswith(year_month)
             identifier=urllib.unquote(identifier)
         msg_id=request.POST.get('msg_id')
         status=request.POST.get('status')
-        vendor = Vendor.objects.filter(identifier=identifier)
+        vendor = Vendor.active_object.filter(identifier=identifier)
         if not vendor:
             return ge("POST",req_dict(request.POST),"no message exist", error_fields=['msg_id'])
         else:
@@ -302,7 +302,7 @@ and str(msg.event_date).startswith(year_month)
         if msg_type not in ["bid","book"]:
             return ge("POST",req_dict(request.POST),"msg_type can be bid / book", error_fields=['msg_type']) 
         
-        vendor = Vendor.objects.filter(identifier=identifier)
+        vendor = Vendor.active_object.filter(identifier=identifier)
         if not vendor:
             return ge("POST",req_dict(request.POST),"no message exist", error_fields=['msg_id'])
         else:
@@ -362,7 +362,7 @@ and str(msg.event_date).startswith(year_month)
         if from_to=="c2v":
             sender = Customer.objects.filter(identifier=identifier)
         elif from_to=="v2c":
-            sender = Vendor.objects.filter(identifier=identifier)  
+            sender = Vendor.active_object.filter(identifier=identifier)  
             
             
             
@@ -382,11 +382,11 @@ and str(msg.event_date).startswith(year_month)
         
         if from_to=="c2v":
             customer = sender
-            vendor = receiver = Vendor.objects.filter(user=user)
+            vendor = receiver = Vendor.active_object.filter(user=user)
         elif from_to=="v2c":
             
             if msg_type=="book":
-                vendor = receiver = Vendor.objects.filter(user=user)
+                vendor = receiver = Vendor.active_object.filter(user=user)
                 customer=None
             else:
                 customer = receiver = Customer.objects.filter(user=user)
@@ -440,7 +440,7 @@ and str(msg.event_date).startswith(year_month)
         if from_to=="c2v":
             sender = Customer.objects.filter(identifier=identifier)
         elif from_to=="v2c":
-            sender = Vendor.objects.filter(identifier=identifier)
+            sender = Vendor.active_object.filter(identifier=identifier)
         msg_type=request.POST.get('msg_type')
         if not sender:
             return ge("POST",req_dict(request.POST),"Sender unauthorized", error_fields=['identifier'],
