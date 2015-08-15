@@ -126,7 +126,17 @@ patterns = {##"customer_login_registration",
 				
 		 	},
 	
-	 			
+
+		"schedule_visit":
+			{
+				"order":-1111,
+				"type":"POST",
+	 			"params":[
+							"vendor_email","identifier","time",
+						],
+	 			"required_params":["vendor_email","identifier","time",],
+	 			"selects":{"identifier":identifiers},
+		 	},	 			
 	 					
 		"customer_vendor_message_create":
 			{

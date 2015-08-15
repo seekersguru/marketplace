@@ -11,6 +11,44 @@ MESSAGE_TYPES_CHOICES=[  [e,e ] for e in MESSAGE_TYPES]
 import urllib
 import datetime
 
+
+class Schedulevisit(models.Model):
+    vendor = models.ForeignKey(Vendor)
+    customer = models.ForeignKey(Customer)
+    time = models.DateTimeField()
+    history = models.TextField(default="[]")
+    
+    
+    
+    @classmethod
+    def create_update(cls,
+               request,
+               ):
+        
+
+        vendor_email = request.POST.get('vendor_email').strip().lower()
+        identifier = request.POST.get('identifier')
+        time = request.POST.get('time')
+        if identifier:
+            identifier=urllib.unquote(identifier)
+        customer=Customer.objects.filter(identifier=identifier)[0]
+        vendor=Vendor.objects.filter(user=User.objects.get(username=vendor_email))[0]
+        sv=Schedulevisit.objects.filter(customer=customer,vendor=vendor)
+        if not sv:
+            history=[str(time)]
+            svobj=Schedulevisit(customer=customer,vendor=vendor,time=time,history=str(history))
+        else:
+            svobj=sv[0]
+            svobj.time=time
+            svobj_history=eval(svobj.history)
+            svobj_history.append(str(time))
+            svobj.history=str(list(set(svobj_history)))
+        svobj.save()
+            
+
+
+        return gs("POST",req_dict(request.POST),{"id":str(svobj.time), })  
+
 class Messages(models.Model):
     vendor = models.ForeignKey(Vendor)
     customer = models.ForeignKey(Customer)

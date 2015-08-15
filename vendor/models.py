@@ -72,7 +72,7 @@ class Vendor(models.Model):
     gid =models.CharField(max_length=1024,default="")
 
     dynamic_info = models.TextField()
-    forgot_code =models.CharField(max_length=50,null=0)
+    forgot_code =models.CharField(max_length=50,blank=True, null=True)
     availability = models.TextField(null=True, blank=True)
     active = models.BooleanField(default=1)
     

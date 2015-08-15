@@ -29,7 +29,8 @@ class Customer(models.Model):
     tentative_wedding_date = models.CharField(max_length=20)
     fbid = models.CharField(max_length=1024,default="")
     gid =models.CharField(max_length=1024,default="")
-    forgot_code =models.CharField(max_length=50,null=1)
+    forgot_code =models.CharField(max_length=50,blank=True, null=True)
+    #blank=True, null=True, related_name='location_parent'
     
     @classmethod
     @transaction.atomic # @Nishant see if its effect speed @Amit dash 

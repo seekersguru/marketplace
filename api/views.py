@@ -8,7 +8,7 @@ from api.utils import get_error as ge , get_success as gs
 import utils
 from customer.models import Customer, Favorites
 from vendor.models import Category, Vendor
-from wedwise_messages.models import Messages
+from wedwise_messages.models import Messages, Schedulevisit
 def check_basic_validations(pattern_name,request,req_type):
     required=patterns[pattern_name].get("required_params",None)
     if req_type =="POST":
@@ -154,6 +154,14 @@ def vendor_bid_book_response(request):
     if invalid:return response(request,invalid) 
 
     return response(request,Messages.vendor_bid_book_response(request))
+
+@csrf_exempt
+def schedule_visit(request):
+    #TODO Put all in decorators  with csrf 
+    invalid=check_basic_validations("schedule_visit",request,"POST")
+    if invalid:return response(request,invalid) 
+
+    return response(request,Schedulevisit.create_update(request))
 
 @csrf_exempt
 def customer_vendor_message_list(request):
