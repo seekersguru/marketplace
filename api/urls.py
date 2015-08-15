@@ -262,7 +262,7 @@ patterns = {##"customer_login_registration",
 				"type":"POST",
 	 			"params":["identifier","msg_id","msg_type",],
 	 			"required_params":["identifier","msg_id","msg_type"],
-	 			"selects":{"msg_type":[["bid","Bid"],["book","Book"]] ,"identifier":identifiers }
+	 			"selects":{"msg_type":[["bid","Bid"]] ,"identifier":identifiers }
 		 	},	
 		"vendor_bid_book_response":
 			{

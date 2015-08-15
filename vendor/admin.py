@@ -9,7 +9,7 @@ class VendorAdmin(admin.ModelAdmin):
     fields = ('vendor_type', 'user', 'name', 'dynamic_info', 'availability',)
     model = Vendor
     list_display = ('vendor_type','name','active')
-    readonly_fields=('vendor_type', 'user', 'name', 'dynamic_info', 'availability',)
+    #readonly_fields=('vendor_type', 'user', 'name', 'dynamic_info', 'availability',)
     list_filter = ('active',)
 class CategoryAdmin(admin.ModelAdmin):
     model = Category 

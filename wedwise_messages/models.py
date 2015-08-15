@@ -299,8 +299,8 @@ and str(msg.event_date).startswith(year_month)
         identifier=request.POST.get('identifier')
         if identifier:
             identifier=urllib.unquote(identifier)
-        if msg_type not in ["bid","book"]:
-            return ge("POST",req_dict(request.POST),"msg_type can be bid / book", error_fields=['msg_type']) 
+        if msg_type not in ["bid",]:
+            return ge("POST",req_dict(request.POST),"msg_type can be bid ", error_fields=['msg_type']) 
         
         vendor = Vendor.active_object.filter(identifier=identifier)
         if not vendor:
@@ -308,7 +308,7 @@ and str(msg.event_date).startswith(year_month)
         else:
             vendor=vendor[0]
             
-        msg =Messages.objects.filter(id=msg_id)
+        msg =Messages.objects.filter(id=msg_id,vendor=vendor)
         if not ["msg"]:
             return ge("POST",req_dict(request.POST),"no message exist", error_fields=['msg_id'])
         else:
@@ -317,8 +317,32 @@ and str(msg.event_date).startswith(year_month)
             status = "Rejected"
         elif str(msg.status)=="1":
             status = "Accepted" 
+        if str(msg.status)=="2":
+            status = "On Hold"
+        elif str(msg.status)=="1":
+            status = "Accepted" 
         else:
-            status = "Pending"       
+            status = "Pending" 
+            
+
+        """
+        Contact Name
+        Bride Name 
+        Groom Name 
+        Inquiry Date 
+        Even Date 
+        Time Slot 
+        
+        ## Event Type 
+        ## Package Selected
+        # of Pax 
+        Potential Rev (Package Pricing)
+        @Mailed to Dharam : 
+   For all Vendor types 
+1) Value for Event type 
+2) Which fields will be hidden for which vendors.      
+        
+        """      
         return  gs("POST",req_dict(request.POST),{"label":"Enquiry Detail",
                 "table":[{"Event Date":str(msg.event_date)},
                          {"Revenue Potential":"630++"},
@@ -337,7 +361,7 @@ and str(msg.event_date).startswith(year_month)
                          {"Groom's Name":"Suresh"},
                          {"Bride Name":"Supriya"},                         
                          ],
-                "buttons":[["0","Accept"],["1","Reject"]],
+                "buttons":[["0","Accept"],["2","On Hold"],["1","Reject"]],
                 "status":status
                 })
         
