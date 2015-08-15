@@ -79,6 +79,44 @@ class Vendor(models.Model):
     objects = models.Manager()
     active_object = VendorManager()
 
+
+
+
+    
+    @classmethod
+    def check_availability(cls,
+               request,
+               ):
+        
+
+        vendor_email = request.POST.get('vendor_email').strip().lower()
+        identifier = request.POST.get('identifier')
+        time_slot = request.POST.get('time_slot')
+        event_date = request.POST.get('event_date')
+        
+
+        if identifier:
+            identifier=urllib.unquote(identifier)
+        customer=Customer.objects.filter(identifier=identifier)[0]
+        vendor=Vendor.objects.filter(user=User.objects.get(username=vendor_email))[0]
+        try:
+            availability=eval(vendor.availability).get(str(event_date))
+        except:
+            availability=None
+        if availability \
+            and availability.startswith("booked_"):
+
+            ts_stored=availability.split("booked_")[1]
+            available=1
+            if ts_stored=="all_day":
+                available=0 
+            if ts_stored==time_slot:
+                available=0
+            if available ==0:
+                return ge("POST",req_dict(request.POST),"Time slot not available", error_fields=['time_slot'])
+        
+        return gs("POST",req_dict(request.POST),{"id":"", })  
+    
     @classmethod
     def login(cls,
                request, 

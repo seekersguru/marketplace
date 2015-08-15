@@ -138,7 +138,17 @@ patterns = {##"customer_login_registration",
 	 			"selects":{"identifier":identifiers},
 	 			"help":{"time":"yyyy-mm-dd hh:mm"}
 		 	},	 			
-	 					
+		"check_availability": 
+			{
+				"order":-1111,
+				"type":"POST",
+	 			"params":[
+							"vendor_email","identifier","time_slot","event_date"
+						],
+	 			"required_params":["vendor_email","identifier","time_slot","event_date"],
+	 			"selects":{"identifier":identifiers},
+	 			"help":{"time":"yyyy-mm-dd hh:mm"}
+		 	},	 		 					
 		"customer_vendor_message_create":
 			{
 				"order":-11,
