@@ -142,7 +142,7 @@ patterns = {##"customer_login_registration",
 			{
 				"order":-1111,
 				"type":"POST",
-	 			"params":["device_id"],
+	 			"params":["match_string"],
 	 			"required_params":[],
 		 	},	
 		"check_availability": 
