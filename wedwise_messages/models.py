@@ -140,7 +140,7 @@ class Messages(models.Model):
         time_slot = request.POST.get("time_slot",None)
         bid_json = request.POST.get("bid_json","")
         package =request.POST.get("package",None)
-        num_guests = request.POST.get("num_guests",-1)
+        num_guests = request.POST.get("num_guests","")
         notes = request.POST.get("notes","")    
         status = request.POST.get("status","") 
                     
@@ -160,7 +160,7 @@ class Messages(models.Model):
             event_date=None
         if from_to=="v2c" and msg_type=="book":
             customer=Customer.objects.get(user=User.objects.filter(username="dummy_customer@wedwise.in")[0])
-        if not num_guests.strip():
+        if not num_guests:
             num_guests=-1
         msg= Messages(
                vendor=vendor,
