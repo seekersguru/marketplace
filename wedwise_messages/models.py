@@ -17,19 +17,17 @@ class Schedulevisit(models.Model):
     time = models.DateTimeField()
     history = models.TextField(default="[]")
     
-     @classmethod
+    @classmethod
     def listing(cls,
                request,
                ):
         
 
-        vendor_email = request.POST.get('vendor_email').strip().lower()
         identifier = request.POST.get('identifier')
         time = request.POST.get('time')
         if identifier:
             identifier=urllib.unquote(identifier)
         customer=Customer.objects.filter(identifier=identifier)[0]
-        vendor=Vendor.objects.filter(user=User.objects.get(username=vendor_email))[0]
         sv=Schedulevisit.objects.filter(customer=customer)
         l = [ {"vendor":sv.vendor.vendor_name,
                 "time":str(sv.time)

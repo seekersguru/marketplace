@@ -162,10 +162,10 @@ def schedule_visit(request):
     if invalid:return response(request,invalid) 
 
     return response(request,Schedulevisit.create_update(request))
-
+@csrf_exempt
 def schedule_list(request):
     #TODO Put all in decorators  with csrf 
-    invalid=check_basic_validations("schedule_visit",request,"POST")
+    invalid=check_basic_validations("schedule_list",request,"POST")
     if invalid:return response(request,invalid) 
 
     return response(request,Schedulevisit.listing(request))    
