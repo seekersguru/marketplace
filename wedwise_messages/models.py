@@ -513,6 +513,8 @@ and str(msg.event_date).startswith(year_month)
                 status = "Rejected"
             elif str(msg.status)=="1":
                 status = "Accepted" 
+            elif str(msg.status)=="2":
+                status = "On Hold" 
             else:
                 status = "Pending" 
             return status
@@ -523,17 +525,25 @@ and str(msg.event_date).startswith(year_month)
             inquiry_date=str(msg.msg_time)[:19]
             
             if msg_type=="bid":
+                line1=msg.vendor.name + "  " +event_date + "  " + inquiry_date
                 inq_data=eval(msg.bid_json)
+                num_guests=str(msg.num_guests)
                 try:
-                    pkg=inq_data['quoted']['value']
+                    package=inq_data["package"]["package_list"][msg.package]['select_val']
                 except:
-                    pkg="DCR"
-                line2="Pax: " + str(msg.bid_quantity)+"| Package: "+ pkg
+                    package="Not specified"
+                time_slot=[ e[1] for e in inq_data['time_slot']["value"] if e[0]==msg.time_slot ][0]
+                line1=package
+                line2=time_slot
+                if num_guests:
+                    line2 = line2+ " #guests: " + num_guests
+                line2=line2+get_status[msg]
             elif msg_type=="message":
+                line1=None
                 line2=None
                 
             if from_to=="c2v":
-                line1=msg.vendor.name + "  " +event_date + "  " + inquiry_date
+                
                 if msg.vendor.pk not in listed:
                     listed.append(msg.vendor.pk)
                     msgs.append({"id":msg.id, "message":msg.message,
