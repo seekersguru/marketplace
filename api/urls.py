@@ -138,6 +138,17 @@ patterns = {##"customer_login_registration",
 	 			"selects":{"identifier":identifiers},
 	 			"help":{"time":"yyyy-mm-dd hh:mm"}
 		 	},	
+		"schedule_list":
+			{
+				"order":-1111,
+				"type":"POST",
+	 			"params":[
+							"identifier"
+						],
+	 			"required_params":["identifier"],
+	 			"selects":{"identifier":identifiers},
+	 			"help":{"time":"yyyy-mm-dd hh:mm"}
+		 	},	
 		"locations": 
 			{
 				"order":-1111,
