@@ -322,7 +322,6 @@ and str(msg.event_date).startswith(year_month)
             vendor=vendor[0]
             
         msg =Messages.objects.filter(id=msg_id)
-        import pdb;pdb.set_trace();
         if not msg:
             return ge("POST",req_dict(request.POST),"no message exist2", error_fields=['msg_id'])
         else:
