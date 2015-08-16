@@ -8,7 +8,9 @@ class ApiMiddleware:
             for each in request_post:
                 req_post_copy[each]=urllib.unquote(request_post[each])
             request.POST=req_post_copy
-	    print "POST Modified",request.path, dict(request.POST)
+        print "POST Modified",request.path
+        for k,v in  dict(request.POST).iteritems():
+            print k , v 
         else:
             request.is_api=False
             
