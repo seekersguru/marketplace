@@ -127,9 +127,9 @@ class Vendor(models.Model):
             if ts_stored==time_slot:
                 available=0
             if available ==0:
-                return ge("POST",req_dict(request.POST),"Time slot not available", error_fields=['time_slot'])
+                return gs("POST",req_dict(request.POST),{"available":0, })  
         
-        return gs("POST",req_dict(request.POST),{"id":"", })  
+        return gs("POST",req_dict(request.POST),{"available":1, })  
     
     @classmethod
     def login(cls,
