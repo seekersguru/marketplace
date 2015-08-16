@@ -470,11 +470,15 @@ and str(msg.event_date).startswith(year_month)
                 msg_type=msg_type
                 ).order_by('msg_time')
         if min:
-            msgs=msgs.filter(id__lte=int(min))           
+            msgs=msgs.filter(id__lt=int(min))           
         if max:
-            msgs=msgs.filter(id__gte=int(max)) 
+            msgs=msgs.filter(id__gt=int(max)) 
+        #
+        msgs = [e for e in msgs][-5:]
+
         
-        msgs=msgs[:5]                     
+        
+                         
         if from_to=="c2v":       
             return gs("POST",req_dict(request.POST),[{"id":msg.id,
                                                      "message":msg.message,
@@ -527,12 +531,12 @@ and str(msg.event_date).startswith(year_month)
                     ).order_by('-msg_time')
         
         if min:
-            all_msgs=all_msgs.filter(id__lte=int(min))           
+            all_msgs=all_msgs.filter(id__lt=int(min))           
         if max:
-            all_msgs=all_msgs.filter(id__gte=int(max)) 
+            all_msgs=all_msgs.filter(id__gt=int(max)) 
         
-        all_msgs=all_msgs[:5]         
-        
+        all_msgs=all_msgs[-5:]         
+
         def get_status(msg):
             if str(msg.status)=="0":
                 status = "Rejected"

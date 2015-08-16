@@ -222,7 +222,7 @@ patterns = {##"customer_login_registration",
 			{
 				"order":-10,
 				"type":"POST",
-	 			"params":["identifier","receiver_email","page_no","from_to","msg_type"],
+	 			"params":["identifier","receiver_email","page_no","from_to","msg_type","min","max"],
 	 			"required_params":["identifier","receiver_email","from_to","msg_type"],
 	 			"selects":{"from_to": FROM_TO_CHOICES,"msg_type":MESSAGE_TYPES_CHOICES ,"identifier":identifiers }
 		 	},
