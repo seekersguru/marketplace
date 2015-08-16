@@ -324,7 +324,7 @@ and str(msg.event_date).startswith(year_month)
             return ge("POST",req_dict(request.POST),"msg_type can be bid ", error_fields=['msg_type']) 
         if from_to=="v2c":
             identified = Vendor.active_object.filter(identifier=identifier)
-        elif from_to=="v2c":
+        elif from_to=="c2v":
             identified = Customer.objects.filter(identifier=identifier)
 
         if not identified:
@@ -332,9 +332,9 @@ and str(msg.event_date).startswith(year_month)
         else:
             identified=identified[0]
         if from_to=="c2v":
-            msg =Messages.objects.filter(id=msg_id,vendor=identified)
-        elif from_to=="v2c":
             msg =Messages.objects.filter(id=msg_id,customer=identified)
+        elif from_to=="v2c":
+            msg =Messages.objects.filter(id=msg_id,vendor=identified)
             
         if not ["msg"]:
             return ge("POST",req_dict(request.POST),"no message exist4", error_fields=['msg_id'])
