@@ -348,11 +348,38 @@ class Vendor(models.Model):
 
 
         return gs("POST",req_dict(request.POST),{"vendor_list":vendor_list ,                 
-                    "filters":[
-                               {"type":"radio" ,"name":"enq_type","values":["ENQUIRY","BOOKING"],},
-                               {"type":"check" ,"name":"dt_type","values":["EVENT DATE","BOOKING DATE"],},
-                               {"type":"radio" ,"name":"time_slot","values":["MORNING","EVENING","ALL DAY"],},                
-                 ],})
+                    "advance_filter":[
+    {
+        "name": "Venue Type",
+        "value": [
+            [
+                "hotel",
+                "Hotel"
+            ],
+            [
+                "banquet",
+                "Banquet"
+            ],
+        ]
+    },
+    {
+        "name": "Price Range",
+        "value": [
+            [
+                "<200",
+                "Less than 00 Rs."
+            ],
+            [
+                "200-500",
+                "200-500 Rs"
+            ],
+            [
+                ">500",
+                "More than 500 Rs"
+            ],
+        ]
+    },
+],})
 
 
 
