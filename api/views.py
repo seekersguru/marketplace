@@ -171,6 +171,15 @@ def check_availability(request):
 
     return response(request,Vendor.check_availability(request))
 
+@csrf_exempt
+def locations(request):
+    #TODO Put all in decorators  with csrf 
+    invalid=check_basic_validations("check_availability",request,"POST")
+    if invalid:return response(request,invalid) 
+
+    return response(request,Vendor.locations(request))
+
+
 
 @csrf_exempt
 def customer_vendor_message_list(request):

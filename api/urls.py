@@ -137,7 +137,14 @@ patterns = {##"customer_login_registration",
 	 			"required_params":["vendor_email","identifier","time",],
 	 			"selects":{"identifier":identifiers},
 	 			"help":{"time":"yyyy-mm-dd hh:mm"}
-		 	},	 			
+		 	},	
+		"locations": 
+			{
+				"order":-1111,
+				"type":"POST",
+	 			"params":[],
+	 			"required_params":[],
+		 	},	
 		"check_availability": 
 			{
 				"order":-1111,
