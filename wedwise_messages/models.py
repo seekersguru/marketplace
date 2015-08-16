@@ -6,7 +6,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from api.utils import get_error as ge , get_success as gs ,req_dict
 from django.contrib.auth.models import User
-MESSAGE_TYPES=["message","bid","book"]
+MESSAGE_TYPES=["message","bid"]
 MESSAGE_TYPES_CHOICES=[  [e,e ] for e in MESSAGE_TYPES]
 import urllib
 import datetime
@@ -85,11 +85,9 @@ class Messages(models.Model):
             identifier=urllib.unquote(identifier)
         message = request.POST.get('message')
         from_to=request.POST.get('from_to')
-        if from_to=="v2c":
-            if msg_type =="bid" :
-                return ge("POST",req_dict(request.POST),"Vendor to Customer create not possible in bid", error_fields=['from_to'])
-            elif  msg_type =="book":
-                receiver_email=identifier.split(":")[0]
+#         if from_to=="v2c":
+#             if msg_type =="bid" :
+#                 return ge("POST",req_dict(request.POST),"Vendor to Customer create not possible in bid", error_fields=['from_to'])
                  
         
         f = forms.EmailField()
@@ -110,12 +108,7 @@ class Messages(models.Model):
             sender=sender[0] 
 
         self_booking="0"
-        if  msg_type=="book" and from_to=="v2c"  :
-            #Special case
-            user = [sender.user]
-            self_booking="1"
-        else:
-            user = User.objects.filter(username=receiver_email)
+        user = User.objects.filter(username=receiver_email)
         if not user:
             return ge("POST",req_dict(request.POST),"Receiver unauthorized", error_fields=['receiver_email'],
                       code_string="RECEIVER_NOT_EXIST")
@@ -124,10 +117,8 @@ class Messages(models.Model):
         if from_to=="c2v":
             receiver = Vendor.active_object.filter(user=user)
         else: #v2c
-            if msg_type=="book":
-                receiver = Vendor.active_object.filter(user=user)
-            else:
-                receiver = Customer.objects.filter(user=user)
+            receiver = Customer.objects.filter(user=user)
+            
         if not receiver:
             return ge("POST",req_dict(request.POST),"Receiver unauthorized", error_fields=['receiver_email'],
                       code_string="RECEIVER_NOT_EXIST")

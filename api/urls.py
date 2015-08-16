@@ -144,7 +144,14 @@ patterns = {##"customer_login_registration",
 				"type":"POST",
 	 			"params":["match_string"],
 	 			"required_params":[],
-		 	},	
+		 	},
+		"get_locations_version": 
+			{
+				"order":-1111,
+				"type":"POST",
+	 			"params":["current_version"],
+	 			"required_params":[],
+		 	},		
 		"check_availability": 
 			{
 				"order":-1111,
@@ -155,29 +162,48 @@ patterns = {##"customer_login_registration",
 	 			"required_params":["vendor_email","identifier","time_slot","event_date"],
 	 			"selects":{"identifier":identifiers},
 	 			"help":{"time":"yyyy-mm-dd hh:mm"}
-		 	},	 		 					
+		 	},	
+
+# identifier [required]
+# receiver_email 
+# event_date  [required] 
+# time_slot   [required]
+# bid_json (not correct , convert to string and send)
+# push_data = bid | message
+# package [required]
+# num_guests [Optional]
+# notes [optional]
+
+		 					
 		"customer_vendor_message_create":
 			{
 				"order":-11,
 				"type":"POST",
 	 			"params":[
-							"mode","device_id","push_data","identifier","receiver_email","message","from_to",
-							"msg_type","bid_json","book_json","event_date","time_slot",
-							"bid_price","bid_quantity"
+							"identifier",
+							"receiver_email",
+							"from_to", #c2v | v2c
+							"message", # Dummy for bid (IOS creating bid)
+							"msg_type",# bid | message
+							"event_date",# for bid yyyy-mm-dd
+							"time_slot", # morning | evening | all_day
+							"package",
+							"bid_json",# In case of bid
+							"num_guests",# Optional | number
+							"notes" # OPtional number
+							
 						],
-	 			"required_params":["device_id","push_data","identifier","receiver_email","message","from_to"],
+	 			"required_params":["identifier","receiver_email","from_to","message","msg_type"],
 	 			"selects":{"from_to": FROM_TO_CHOICES,"msg_type":MESSAGE_TYPES_CHOICES,"identifier":identifiers},
 	 			"help":{
 						"fom_to":"(Also not for bid and book only c2v.)",
-						"mode":"Possible values 'android' or 'ios'",
-						"device_id":"Id of the device.",
-						"push_data":"Data to be pushed as notification and parsed on other client's side",
+						"msg_type":"bid | message",
+						"message":"Dummy for bid (e.g. IOS creating bid)",
 						"bid_json":"'bid' value from vendor detail page, used to render bid page",
-						"event_date":"required for bid/book and format is yyyy-mm-dd",
-						"book_json":"'book' value from vendor detail page, used to render book page",
-						"bid_price":"(float value) Required in bid",
-						"bid_quantity":"(int value) Optional in bid, if provided from vendor detail json",
-						"time_slot":"required in bid and book and must be from one of the values from 'time_slot' from vendor detail response"
+						"event_date":"required for bid and format is yyyy-mm-dd",
+						"time_slot":"required in bid and must be from one of the values from 'time_slot' from vendor detail response",
+						"num_guests":"Optional number",
+						"notes":"Optional text", # OPtional 
 						},
 	 			 
 		 	},

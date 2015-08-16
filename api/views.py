@@ -179,6 +179,13 @@ def locations(request):
 
     return response(request,Vendor.locations(request))
 
+@csrf_exempt
+def get_locations_version(request):
+    #TODO Put all in decorators  with csrf 
+    invalid=check_basic_validations("get_locations_version",request,"POST")
+    if invalid:return response(request,invalid) 
+
+    return response(request,Vendor.get_locations_version(request))
 
 
 @csrf_exempt
