@@ -1,8 +1,14 @@
+import urllib
 class ApiMiddleware:
     def process_request(self,request):
         if request.path.startswith("/api/"):
             request.is_api=True
             print "do common stuff in request "
+            request_post=request.POST
+            req_post_copy=request_post.copy()
+            for each in request_post:
+                req_post_copy[each]=urllib.unquote(request_post[each])
+            request.POST=req_post_copy
         else:
             request.is_api=False
             
