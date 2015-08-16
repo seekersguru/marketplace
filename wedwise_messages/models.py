@@ -50,23 +50,25 @@ class Schedulevisit(models.Model):
         return gs("POST",req_dict(request.POST),{"id":str(svobj.time), })  
 
 class Messages(models.Model):
+    msg_time = models.DateTimeField(auto_now_add=True)
     vendor = models.ForeignKey(Vendor)
     customer = models.ForeignKey(Customer)
     from_to = models.CharField(max_length=3, choices=FROM_TO_CHOICES)
     message = models.TextField()
-    msg_time = models.DateTimeField(auto_now_add=True)
-    #
     msg_type = models.CharField(max_length=7, choices=MESSAGE_TYPES_CHOICES )
-    
-    book_json = models.TextField(blank=True,default=None )
     event_date=models.DateField(blank=True,default=None )
-    time_slot = models.CharField(max_length=128,blank=True,default=None  ) 
+    time_slot = models.CharField(max_length=128,blank=True,default=None  )
+    package = models.CharField(max_length=256,blank=True,default=None )
     bid_json = models.TextField(blank=True,default=None )
-    bid_price = models.CharField(max_length=100,blank=True,default=None  )    
-    bid_quantity = models.IntegerField(blank=True,default=None  ) 
-    status = models.CharField(max_length=1,blank=True,default=None  ) 
-    self_booking = models.CharField(max_length=1,blank=True,default=None  ) 
-
+    num_guests = models.IntegerField(blank=True,default=None  )
+    notes = models.TextField(blank=True,default=None )
+    status = models.CharField(max_length=1,blank=True,default=None  )
+    self_booking = models.CharField(max_length=1,blank=True,default=None  )
+    
+    #DELETE # bid_price*** | bid_quantity*** | book_json***
+    #AFTER# status
+    # ADD # package*** | num_guests*** | notes
+    
 
 
  
@@ -137,9 +139,11 @@ class Messages(models.Model):
         event_date =request.POST.get("event_date",None)
         time_slot = request.POST.get("time_slot",None)
         bid_json = request.POST.get("bid_json","")
-        book_json = request.POST.get("book_json","")
-        bid_price  =request.POST.get("bid_price","").strip()  
-        bid_quantity  =request.POST.get("bid_quantity","").strip()            
+        package =request.POST.get("package",None)
+        num_guests = request.POST.get("num_guests",None)
+        notes = request.POST.get("notes","")    
+        status = request.POST.get("status","") 
+                    
         if msg_type in ["bid","book"]: 
             
             try:
@@ -150,26 +154,10 @@ class Messages(models.Model):
             if msg_type=="bid":
                 if not bid_json:
                     return ge("POST",req_dict(request.POST),"No bid_json", error_fields=['bid_json']) 
-                if bid_price:
-                    try:
-                        float(bid_price)
-                    except:
-                        return ge("POST",req_dict(request.POST),"Invalid bid_price", error_fields=['bid_price']) 
             
-                if bid_quantity:
-                    try:
-                        int(bid_quantity)
-                    except:
-                        return ge("POST",req_dict(request.POST),"Invalid bid_quantity", error_fields=['bid_quantity']) 
-            elif msg_type=="book":
-                if not book_json:
-                    return ge("POST",req_dict(request.POST),"No book_json", error_fields=['book_json']) 
-
         
         if not event_date:
             event_date=None
-        if not  bid_quantity:
-            bid_quantity=0
         if from_to=="v2c" and msg_type=="book":
             customer=Customer.objects.get(user=User.objects.filter(username="dummy_customer@wedwise.in")[0])
         msg= Messages(
@@ -181,11 +169,12 @@ class Messages(models.Model):
                 event_date = event_date,
                 time_slot = time_slot,
                 bid_json = bid_json,
-                book_json =book_json,
-                bid_price = bid_price,
-                bid_quantity =bid_quantity,
                 msg_type=msg_type,
-                self_booking=self_booking
+                self_booking=self_booking,
+                package=package,
+                num_guests=num_guests,
+                notes=notes,
+                status=status
                 )
         msg.save()
         if from_to=="c2v":
