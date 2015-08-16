@@ -413,6 +413,8 @@ and str(msg.event_date).startswith(year_month)
         receiver_email = request.POST.get('receiver_email').strip().lower()
         from_to = request.POST.get('from_to').strip().lower()
         identifier = request.POST.get('identifier')
+        min=request.POST.get('min')
+        max=request.POST.get('max')        
         if identifier:
             identifier=urllib.unquote(identifier)
         f = forms.EmailField()
@@ -467,7 +469,12 @@ and str(msg.event_date).startswith(year_month)
                 customer=customer,
                 msg_type=msg_type
                 ).order_by('msg_time')
-                
+        if min:
+            all_msgs=msgs.filter(id__lte=int(min))           
+        if max:
+            all_msgs=msgs.filter(id__gte=int(max)) 
+        
+        all_msgs=all_msgs[:5]                     
         if from_to=="c2v":       
             return gs("POST",req_dict(request.POST),[{"id":msg.id,
                                                      "message":msg.message,
