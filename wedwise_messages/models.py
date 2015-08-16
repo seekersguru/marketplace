@@ -346,47 +346,39 @@ and str(msg.event_date).startswith(year_month)
             status = "Accepted" 
         if str(msg.status)=="2":
             status = "On Hold"
-        elif str(msg.status)=="1":
-            status = "Accepted" 
         else:
             status = "Pending" 
             
 
-        """
-        Contact Name
-        Bride Name 
-        Groom Name 
-        Inquiry Date 
-        Even Date 
-        Time Slot 
+
+        inq_data=eval(msg.bid_json)
+        num_guests=str(msg.num_guests)
+        package=inq_data["package"]["package_list"][msg.package]['select_val']
+        time_slot=[ e[1] for e in inq_data['time_slot']["value"] if e[0]==msg.time_slot ][0]
+        if from_to=="c2v":
+            sender_val ={"Vendor Name":msg.vendor.name}
+            contact_number=msg.vendor.contact_number
+
+        if from_to=="v2c":
+            sender_val ={"Customer Name":msg.customer.contact_name}
+            contact_number=msg.customer.contact_number
+
         
-        ## Event Type 
-        ## Package Selected
-        # of Pax 
-        Potential Rev (Package Pricing)
-        @Mailed to Dharam : 
-   For all Vendor types 
-1) Value for Event type 
-2) Which fields will be hidden for which vendors.      
-        
-        """      
         return  gs("POST",req_dict(request.POST),{"label":"Enquiry Detail",
-                "table":[{"Event Date":str(msg.event_date)},
-                         {"Revenue Potential":"630++"},
-                         {"Groom's Name":"Suresh"},
-                         {"Bride Name":"Supriya"},
-                         {"Event Date":str(msg.event_date)},
-                         {"Revenue Potential":"630++"},
-                         {"Groom's Name":"Suresh"},
-                         {"Bride Name":"Supriya"},
-                         {"Event Date":str(msg.event_date)},
-                         {"Revenue Potential":"630++"},
-                         {"Groom's Name":"Suresh"},
-                         {"Bride Name":"Supriya"},
-                         {"Event Date":str(msg.event_date)},
-                         {"Revenue Potential":"630++"},
-                         {"Groom's Name":"Suresh"},
-                         {"Bride Name":"Supriya"},                         
+                
+
+            
+                "contact_number":contact_number,
+                "table":[#{"Event Date":str(msg.event_date)},
+                         sender_val,
+                         {"Groom's Name":msg.customer.groom_name},
+                         {"Bride Name":msg.customer.bride_name},
+                         {"Inquiry Date":str(msg.msg_time)},
+                         {"Event Date":str(msg.event_date)}, 
+                         {"Package":package},
+                         {"Time slot":time_slot},
+                         {"# Of Guests":num_guests},
+
                          ],
                 "buttons":[["0","Accept"],["2","On Hold"],["1","Reject"]],
                 "status":status
