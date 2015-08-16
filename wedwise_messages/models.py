@@ -320,7 +320,7 @@ and str(msg.event_date).startswith(year_month)
             return ge("POST",req_dict(request.POST),"no message exist1", error_fields=['msg_id'])
         else:
             vendor=vendor[0]
-            
+        
         msg =Messages.objects.filter(id=msg_id)
         if not msg:
             return ge("POST",req_dict(request.POST),"no message exist2", error_fields=['msg_id'])
@@ -538,6 +538,7 @@ and str(msg.event_date).startswith(year_month)
             return status
         msgs=[]
         listed=[]# Which vendor id indexed at which positions
+        print "Length od all_msgs ", len(all_msgs)
         for msg in all_msgs:
             event_date=str(msg.event_date)[:19]
             inquiry_date=str(msg.msg_time)[:19]
@@ -562,7 +563,7 @@ and str(msg.event_date).startswith(year_month)
                 
             if from_to=="c2v":
                 
-                if msg.vendor.pk not in listed:
+                if (msg.vendor.pk not in listed) or msg_type=="bid":
                     listed.append(msg.vendor.pk)
                     msgs.append({"id":msg.id, "message":msg.message,
                                                      "receiver_email":msg.vendor.user.username,
@@ -581,7 +582,7 @@ and str(msg.event_date).startswith(year_month)
             if from_to=="v2c":
                 line1=msg.customer.groom_name + " & "+msg.customer.bride_name + "  " +event_date + "  " + inquiry_date
                 
-                if msg.customer.pk not in listed:
+                if msg.customer.pk not in listed or msg_type=="bid":
                     listed.append(msg.customer.pk)
                     msgs.append({"id":msg.id, "message":msg.message,
                                                      "receiver_email":msg.customer.user.username,
