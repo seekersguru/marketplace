@@ -5,14 +5,13 @@ from models import Messages
 
 class MessagesAdmin(admin.ModelAdmin):
     fields = ('vendor', 'customer', 'from_to', 'message', 'msg_type',
-              'book_json', 'event_date', 'time_slot','bid_json',
-              'bid_price','bid_quantity','status','self_booking',
+               'event_date', 'time_slot','bid_json',
+              'status','self_booking',
               )
     model = Messages
     list_display = ('vendor', 'customer', 'from_to', 'message', 'msg_type')
-    readonly_fields=('vendor', 'customer', 'from_to', 'message', 'msg_type',
-              'book_json', 'event_date', 'time_slot','bid_json',
-              'bid_price','bid_quantity','status','self_booking',
+    readonly_fields=("msg_time","vendor","customer","from_to","message","msg_type",
+                     "event_date","time_slot","package","bid_json","num_guests","notes","status","self_booking",
               )
     list_filter = ('msg_type','status')
     
