@@ -314,8 +314,8 @@ patterns = {##"customer_login_registration",
 			{
 				"order":-110,
 				"type":"POST",
-	 			"params":["identifier","msg_id","msg_type",],
-	 			"required_params":["identifier","msg_id","msg_type"],
+	 			"params":["identifier","msg_id","msg_type","from_to"],
+	 			"required_params":["identifier","msg_id","msg_type","from_to"],
 	 			"selects":{"msg_type":[["bid","Bid"]] ,"identifier":identifiers }
 		 	},	
 		"vendor_bid_book_response":

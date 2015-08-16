@@ -11,7 +11,6 @@ MESSAGE_TYPES_CHOICES=[  [e,e ] for e in MESSAGE_TYPES]
 import urllib
 import datetime
 
-
 class Schedulevisit(models.Model):
     vendor = models.ForeignKey(Vendor)
     customer = models.ForeignKey(Customer)
@@ -298,13 +297,14 @@ and str(msg.event_date).startswith(year_month)
         status=request.POST.get('status')
         vendor = Vendor.active_object.filter(identifier=identifier)
         if not vendor:
-            return ge("POST",req_dict(request.POST),"no message exist", error_fields=['msg_id'])
+            return ge("POST",req_dict(request.POST),"no message exist1", error_fields=['msg_id'])
         else:
             vendor=vendor[0]
             
         msg =Messages.objects.filter(id=msg_id)
+        import pdb;pdb.set_trace();
         if not msg:
-            return ge("POST",req_dict(request.POST),"no message exist", error_fields=['msg_id'])
+            return ge("POST",req_dict(request.POST),"no message exist2", error_fields=['msg_id'])
         else:
             msg=msg[0] 
         msg.status=status
@@ -317,20 +317,27 @@ and str(msg.event_date).startswith(year_month)
         msg_type=request.POST.get('msg_type')
         msg_id=request.POST.get('msg_id')
         identifier=request.POST.get('identifier')
+        from_to=request.POST.get('from_to')
         if identifier:
             identifier=urllib.unquote(identifier)
         if msg_type not in ["bid",]:
             return ge("POST",req_dict(request.POST),"msg_type can be bid ", error_fields=['msg_type']) 
-        
-        vendor = Vendor.active_object.filter(identifier=identifier)
-        if not vendor:
-            return ge("POST",req_dict(request.POST),"no message exist", error_fields=['msg_id'])
+        if from_to=="v2c":
+            identified = Vendor.active_object.filter(identifier=identifier)
+        elif from_to=="v2c":
+            identified = Customer.objects.filter(identifier=identifier)
+
+        if not identified:
+            return ge("POST",req_dict(request.POST),"no message exist3", error_fields=['msg_id'])
         else:
-            vendor=vendor[0]
+            identified=identified[0]
+        if from_to=="c2v":
+            msg =Messages.objects.filter(id=msg_id,vendor=identified)
+        elif from_to=="v2c":
+            msg =Messages.objects.filter(id=msg_id,customer=identified)
             
-        msg =Messages.objects.filter(id=msg_id,vendor=vendor)
         if not ["msg"]:
-            return ge("POST",req_dict(request.POST),"no message exist", error_fields=['msg_id'])
+            return ge("POST",req_dict(request.POST),"no message exist4", error_fields=['msg_id'])
         else:
             msg=msg[0] 
         if str(msg.status)=="0":
