@@ -23,6 +23,7 @@ class Customer(models.Model):
     #email password
     user = models.OneToOneField(User, primary_key=True)
     groom_name = models.CharField(max_length=100)
+    contact_name = models.CharField(max_length=100)
     bride_name = models.CharField(max_length=100)
     contact_number = models.CharField(max_length=20)
     identifier = models.CharField(max_length=512)
@@ -45,6 +46,7 @@ class Customer(models.Model):
         password = request.POST.get('password')
         groom_name = request.POST.get('groom_name')
         bride_name = request.POST.get('bride_name')
+        contact_name = request.POST.get('contact_name')
         tentative_wedding_date = request.POST.get('tentative_wedding_date')
         contact_number = request.POST.get('contact_number').strip()
         fbid = request.POST.get("fbid","").strip()
@@ -61,7 +63,11 @@ class Customer(models.Model):
                 customer.groom_name=groom_name
                 customer.bride_name=bride_name
                 customer.contact_number=contact_number
+                customer.contact_name=contact_name
                 customer.tentative_wedding_date=tentative_wedding_date
+                if password:
+                    customer.user.set_password(password)
+                    customer.user.save()
                 customer.save()
 
             return gs("POST",req_dict(request.POST),{"profile":{"email":customer.user.email,
