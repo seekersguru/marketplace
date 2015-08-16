@@ -470,11 +470,11 @@ and str(msg.event_date).startswith(year_month)
                 msg_type=msg_type
                 ).order_by('msg_time')
         if min:
-            all_msgs=msgs.filter(id__lte=int(min))           
+            msgs=msgs.filter(id__lte=int(min))           
         if max:
-            all_msgs=msgs.filter(id__gte=int(max)) 
+            msgs=msgs.filter(id__gte=int(max)) 
         
-        all_msgs=all_msgs[:5]                     
+        msgs=msgs[:5]                     
         if from_to=="c2v":       
             return gs("POST",req_dict(request.POST),[{"id":msg.id,
                                                      "message":msg.message,
