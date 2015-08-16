@@ -29,7 +29,7 @@ class Schedulevisit(models.Model):
             identifier=urllib.unquote(identifier)
         customer=Customer.objects.filter(identifier=identifier)[0]
         sv=Schedulevisit.objects.filter(customer=customer)
-        l = [ {"vendor":schedule.vendor.vendor_name,
+        l = [ {"vendor":schedule.vendor.name,
                 "time":str(schedule.time)
             } for schedule in sv]
         
