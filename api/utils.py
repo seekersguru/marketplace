@@ -42,7 +42,7 @@ def get_error(request_type,
             "code_string":code_string
             }
     
-def get_success(request_type,request_data,json_data,code_string=0):
+def get_success(request_type,request_data,json_data,code_string=0,append=0):
     return {
             "message":0,
             "request_type":request_type,
@@ -50,7 +50,8 @@ def get_success(request_type,request_data,json_data,code_string=0):
             "result":"success",
             "json":json_data,
             "error_fields":[],
-             "code_string":code_string
+             "code_string":code_string,
+             "append":append
             }
 
 gs,ge=get_success, get_error

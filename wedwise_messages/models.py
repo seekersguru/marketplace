@@ -460,6 +460,7 @@ and str(msg.event_date).startswith(year_month)
             vendor = receiver = Vendor.active_object.filter(user=user)
         elif from_to=="v2c":
             vendor = sender
+            customer =receiver =Customer.objects.filter(user=User.objects.get(username=receiver_email))[0]
 
                 
             
@@ -494,8 +495,9 @@ and str(msg.event_date).startswith(year_month)
                                                      "identifier":identifier,
                                                      "msg_time":str(msg.msg_time)[:19],
                                                      "from_to":msg.from_to,
-                                                     "msg_type":msg_type
-                                                    } for msg in msgs]) 
+                                                     "msg_type":msg_type,
+                                                     
+                                                    } for msg in msgs],append=1) 
         elif from_to=="v2c": 
             return gs("POST",req_dict(request.POST),[{"id":msg.id,
                                                      "message":msg.message,
@@ -505,7 +507,7 @@ and str(msg.event_date).startswith(year_month)
                                                      "msg_time":str(msg.msg_time)[:19],
                                                      "from_to":msg.from_to,
                                                      "msg_type":msg_type
-                                                    } for msg in msgs])
+                                                    } for msg in msgs],append=-1)
 
     @classmethod
     def listing(cls,
@@ -529,11 +531,11 @@ and str(msg.event_date).startswith(year_month)
             sender=sender[0] 
             
         sort=request.POST.get('sort')  
-        
-        sort_by="-msg_time"
+        sort=max="" 
+        sort_by="msg_time"
         if sort:
             sort_by=sort
-            
+        
         if from_to=="c2v":
             all_msgs= Messages.objects.filter(
                     customer=sender,msg_type=msg_type
@@ -547,7 +549,9 @@ and str(msg.event_date).startswith(year_month)
         if max:
             all_msgs=all_msgs.filter(id__gt=int(max)) 
         
-        all_msgs=[e for e in all_msgs][-2:]         
+        all_msgs=[e for e in all_msgs][-2:]  
+        if msg_type=="bid":
+            all_msgs.reverse()       
 
         def get_status(msg):
             if str(msg.status)=="0":
@@ -605,7 +609,7 @@ and str(msg.event_date).startswith(year_month)
             if from_to=="v2c":
                 line1=msg.customer.groom_name + " & "+msg.customer.bride_name + "  " +event_date + "  " + inquiry_date
                 
-                if msg.customer.pk not in listed or msg_type=="bid":
+                if 1:#msg.customer.pk not in listed or msg_type=="bid":
                     listed.append(msg.customer.pk)
                     msgs.append({"id":msg.id, "message":msg.message,
                                                      "receiver_email":msg.customer.user.username,
@@ -621,7 +625,11 @@ and str(msg.event_date).startswith(year_month)
                                                      })                
 
         
-
-        return gs("POST",req_dict(request.POST),msgs) 
+        if msg_type=="bid":
+            append=1
+        if msg_type=="message":
+            append=-1
+            
+        return gs("POST",req_dict(request.POST),msgs,append=append) 
 
 

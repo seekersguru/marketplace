@@ -9,7 +9,7 @@ class MessagesAdmin(admin.ModelAdmin):
               'status','self_booking',"num_guests","notes","package"
               )
     model = Messages
-    list_display = ('vendor', 'customer', 'from_to', 'message', 'msg_type')
+    list_display = ('vendor', 'customer', 'from_to', 'message', 'msg_type', 'event_date')
     readonly_fields=("msg_time","vendor","customer","from_to","message","msg_type",
                      "event_date","time_slot","package","bid_json","num_guests","notes","status","self_booking",
               )
