@@ -578,7 +578,7 @@ and str(msg.event_date).startswith(year_month)
                     package=inq_data["package"]["package_list"][msg.package]['select_val']
                 except:
                     package="Not specified"
-                time_slot=[ e[1] for e in inq_data['time_slot']["value"] if e[0]==msg.time_slot ][0]
+                time_slot=[ e[1] for e in inq_data['time_slot']["value"] if e[0]==msg.time_slot.replace(" ","").lower() ][0]
                 line1=package
                 line2=time_slot
                 if num_guests:
