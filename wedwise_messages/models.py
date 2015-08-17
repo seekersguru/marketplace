@@ -473,7 +473,7 @@ and str(msg.event_date).startswith(year_month)
                vendor=vendor,
                 customer=customer,
                 msg_type=msg_type
-                ).order_by(sort)
+                ).order_by("msg_time")
         if min:
             msgs=msgs.filter(id__lt=int(min))           
         if max:
