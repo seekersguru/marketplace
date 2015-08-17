@@ -481,7 +481,7 @@ and str(msg.event_date).startswith(year_month)
 #         if not (min or max ):
 #             msgs = [e for e in msgs][-10:-5]
 #         else:
-        msgs = [e for e in msgs][-5:]
+        msgs = [e for e in msgs][-2:]
 
         
         
@@ -547,7 +547,7 @@ and str(msg.event_date).startswith(year_month)
         if max:
             all_msgs=all_msgs.filter(id__gt=int(max)) 
         
-        all_msgs=[e for e in all_msgs][-5:]         
+        all_msgs=[e for e in all_msgs][-2:]         
 
         def get_status(msg):
             if str(msg.status)=="0":
