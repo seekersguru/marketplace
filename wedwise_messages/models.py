@@ -466,10 +466,8 @@ and str(msg.event_date).startswith(year_month)
         if not receiver:
             return ge("POST",req_dict(request.POST),"Receiver unauthorized", error_fields=['receiver_email'],
                       code_string="RECEIVERNOT_EXIST")
-           
+        sort_by="msg_time"  
         if sort :
-            sort_by="msg_time"
-        else:
             sort_by=sort
         msgs= Messages.objects.filter(
                vendor=vendor,
@@ -531,9 +529,9 @@ and str(msg.event_date).startswith(year_month)
             sender=sender[0] 
             
         sort=request.POST.get('sort')  
-        if sort :
-            sort_by="msg_time"
-        else:
+        
+        sort_by="-msg_time"
+        if sort:
             sort_by=sort
             
         if from_to=="c2v":
