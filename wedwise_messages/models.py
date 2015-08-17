@@ -424,7 +424,8 @@ and str(msg.event_date).startswith(year_month)
         from_to = request.POST.get('from_to').strip().lower()
         identifier = request.POST.get('identifier')
         min=request.POST.get('min')
-        max=request.POST.get('max')        
+        max=request.POST.get('max') 
+        sort=request.POST.get('sort')        
         if identifier:
             identifier=urllib.unquote(identifier)
         f = forms.EmailField()
@@ -458,13 +459,7 @@ and str(msg.event_date).startswith(year_month)
             customer = sender
             vendor = receiver = Vendor.active_object.filter(user=user)
         elif from_to=="v2c":
-            
-            if msg_type=="book":
-                vendor = receiver = Vendor.active_object.filter(user=user)
-                customer=None
-            else:
-                customer = receiver = Customer.objects.filter(user=user)
-                vendor = sender
+            vendor = sender
 
                 
             
@@ -472,21 +467,23 @@ and str(msg.event_date).startswith(year_month)
             return ge("POST",req_dict(request.POST),"Receiver unauthorized", error_fields=['receiver_email'],
                       code_string="RECEIVERNOT_EXIST")
            
-        
-        
+        if sort :
+            sort_by="msg_time"
+        else:
+            sort_by=sort
         msgs= Messages.objects.filter(
                vendor=vendor,
                 customer=customer,
                 msg_type=msg_type
-                ).order_by('msg_time')
+                ).order_by(sort)
         if min:
             msgs=msgs.filter(id__lt=int(min))           
         if max:
             msgs=msgs.filter(id__gt=int(max)) 
-        if not (min or max ):
-        	msgs = [e for e in msgs][-10:-5]
-	else:
-		msgs = [e for e in msgs][-5:]
+#         if not (min or max ):
+#             msgs = [e for e in msgs][-10:-5]
+#         else:
+        msgs = [e for e in msgs][-5:]
 
         
         
@@ -533,21 +530,26 @@ and str(msg.event_date).startswith(year_month)
         else:
             sender=sender[0] 
             
+        sort=request.POST.get('sort')  
+        if sort :
+            sort_by="msg_time"
+        else:
+            sort_by=sort
+            
         if from_to=="c2v":
             all_msgs= Messages.objects.filter(
                     customer=sender,msg_type=msg_type
-                    ).order_by('-msg_time')
+                    ).order_by(sort_by)
         elif from_to=="v2c":
             all_msgs= Messages.objects.filter(
                     vendor=sender,msg_type=msg_type
-                    ).order_by('-msg_time')
-        
+                    ).order_by(sort_by)
         if min:
             all_msgs=all_msgs.filter(id__lt=int(min))           
         if max:
             all_msgs=all_msgs.filter(id__gt=int(max)) 
         
-        all_msgs=[e for e in all_msgs][-10:-5]         
+        all_msgs=[e for e in all_msgs][-5:]         
 
         def get_status(msg):
             if str(msg.status)=="0":
@@ -579,14 +581,14 @@ and str(msg.event_date).startswith(year_month)
                 line2=time_slot
                 if num_guests:
                     line2 = line2+ " #guests: " + num_guests
-                line2=line2+get_status(msg)
+                line2=line2 #+get_status(msg)
             elif msg_type=="message":
                 line1=None
                 line2=None
                 
             if from_to=="c2v":
                 
-                if 1: #(msg.vendor.pk not in listed) or msg_type=="bid":
+                if (msg.vendor.pk not in listed) or msg_type=="bid":
                     listed.append(msg.vendor.pk)
                     msgs.append({"id":msg.id, "message":msg.message,
                                                      "receiver_email":msg.vendor.user.username,
@@ -605,7 +607,7 @@ and str(msg.event_date).startswith(year_month)
             if from_to=="v2c":
                 line1=msg.customer.groom_name + " & "+msg.customer.bride_name + "  " +event_date + "  " + inquiry_date
                 
-                if 1: #msg.customer.pk not in listed or msg_type=="bid":
+                if msg.customer.pk not in listed or msg_type=="bid":
                     listed.append(msg.customer.pk)
                     msgs.append({"id":msg.id, "message":msg.message,
                                                      "receiver_email":msg.customer.user.username,
