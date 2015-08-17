@@ -124,6 +124,9 @@ class Vendor(models.Model):
                 available=0
             if available ==0:
                 return gs("POST",req_dict(request.POST),{"available":0, })  
+            if time_slot =="all_day":
+                return gs("POST",req_dict(request.POST),{"available":0, }) 
+                
         
         return gs("POST",req_dict(request.POST),{"available":1, })  
     
