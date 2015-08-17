@@ -204,7 +204,8 @@ patterns = {##"customer_login_registration",
 							"notes" # OPtional number
 							
 						],
-	 			"required_params":["identifier","receiver_email","from_to","message","msg_type"],
+	 			"required_params":["identifier","receiver_email","from_to","message","msg_type"
+								,"time_slot","package","event_date","bid_json"],
 	 			"selects":{"from_to": FROM_TO_CHOICES,"msg_type":MESSAGE_TYPES_CHOICES,"identifier":identifiers},
 	 			"help":{
 						"fom_to":"(Also not for bid and book only c2v.)",
