@@ -6,7 +6,7 @@ from models import Messages
 class MessagesAdmin(admin.ModelAdmin):
     fields = ('vendor', 'customer', 'from_to', 'message', 'msg_type',
                'event_date', 'time_slot','bid_json',
-              'status','self_booking',
+              'status','self_booking',"num_guests","notes","package"
               )
     model = Messages
     list_display = ('vendor', 'customer', 'from_to', 'message', 'msg_type')
