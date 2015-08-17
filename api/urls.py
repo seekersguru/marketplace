@@ -134,7 +134,7 @@ patterns = {##"customer_login_registration",
 	 			"params":[
 							"vendor_email","identifier","time",
 						],
-	 			"required_params":["vendor_email","identifier","time",],
+	 			"required_params":["vendor_email","identifier",],
 	 			"selects":{"identifier":identifiers},
 	 			"help":{"time":"yyyy-mm-dd hh:mm"}
 		 	},	

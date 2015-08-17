@@ -47,13 +47,23 @@ class Schedulevisit(models.Model):
 
         vendor_email = request.POST.get('vendor_email').strip().lower()
         identifier = request.POST.get('identifier')
+        
         time = request.POST.get('time')
+        
+            
         if identifier:
             identifier=urllib.unquote(identifier)
         customer=Customer.objects.filter(identifier=identifier)[0]
         vendor=Vendor.objects.filter(user=User.objects.get(username=vendor_email))[0]
         sv=Schedulevisit.objects.filter(customer=customer,vendor=vendor)
-        if not sv:
+        if not time:
+            svobj=Schedulevisit.objects.filter(customer=customer,vendor=vendor)
+            if svobj:
+                svobj=svobj[0]
+                return gs("POST",req_dict(request.POST),{"id":str(svobj.time), })  
+            else:
+                return gs("POST",req_dict(request.POST),{"id":"", })
+        elif not sv:
             history=[str(time)]
             svobj=Schedulevisit(customer=customer,vendor=vendor,time=time,history=str(history))
         else:
