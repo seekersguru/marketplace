@@ -473,8 +473,10 @@ and str(msg.event_date).startswith(year_month)
             msgs=msgs.filter(id__lt=int(min))           
         if max:
             msgs=msgs.filter(id__gt=int(max)) 
-        #
-        msgs = [e for e in msgs][-5:]
+        if not (min or max ):
+        	msgs = [e for e in msgs][-10:-5]
+	else:
+		msgs = [e for e in msgs][-5:]
 
         
         
@@ -535,7 +537,7 @@ and str(msg.event_date).startswith(year_month)
         if max:
             all_msgs=all_msgs.filter(id__gt=int(max)) 
         
-        all_msgs=[e for e in all_msgs][-5:]         
+        all_msgs=[e for e in all_msgs][-10:-5]         
 
         def get_status(msg):
             if str(msg.status)=="0":
@@ -574,7 +576,7 @@ and str(msg.event_date).startswith(year_month)
                 
             if from_to=="c2v":
                 
-                if (msg.vendor.pk not in listed) or msg_type=="bid":
+                if 1: #(msg.vendor.pk not in listed) or msg_type=="bid":
                     listed.append(msg.vendor.pk)
                     msgs.append({"id":msg.id, "message":msg.message,
                                                      "receiver_email":msg.vendor.user.username,
@@ -584,7 +586,7 @@ and str(msg.event_date).startswith(year_month)
                                                      "from_to":msg.from_to,
                                                      "event_date":event_date,
                                                      "msg_type":msg_type,
-                                                     "line1":line1,
+                                                     "line1":line1 + str(msg.message) + " "+ str(msg.id),
                                                      "line2":line2,
                                                      "status":get_status(msg),
                                                      
@@ -593,7 +595,7 @@ and str(msg.event_date).startswith(year_month)
             if from_to=="v2c":
                 line1=msg.customer.groom_name + " & "+msg.customer.bride_name + "  " +event_date + "  " + inquiry_date
                 
-                if msg.customer.pk not in listed or msg_type=="bid":
+                if 1: #msg.customer.pk not in listed or msg_type=="bid":
                     listed.append(msg.customer.pk)
                     msgs.append({"id":msg.id, "message":msg.message,
                                                      "receiver_email":msg.customer.user.username,
@@ -603,7 +605,7 @@ and str(msg.event_date).startswith(year_month)
                                                      "from_to":msg.from_to,
                                                      "msg_type":msg_type,
                                                      "event_date":event_date,
-                                                     "line1":line1,
+                                                     "line1":line1+ str(msg.message) + " "+ str(msg.id),
                                                      "line2":line2,
                                                      "status":get_status(msg),
                                                      })                
