@@ -581,8 +581,8 @@ and str(msg.event_date).startswith(year_month)
                     line2 = line2+ " #guests: " + num_guests
                 line2=line2 #+get_status(msg)
             elif msg_type=="message":
-                line1=None
-                line2=None
+                line1=""
+                line2=""
                 
             if from_to=="c2v":
                 
