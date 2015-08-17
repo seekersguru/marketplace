@@ -497,7 +497,7 @@ and str(msg.event_date).startswith(year_month)
                                                      "from_to":msg.from_to,
                                                      "msg_type":msg_type,
                                                      
-                                                    } for msg in msgs],append=1) 
+                                                    } for msg in msgs],append="1") 
         elif from_to=="v2c": 
             return gs("POST",req_dict(request.POST),[{"id":msg.id,
                                                      "message":msg.message,
@@ -626,9 +626,9 @@ and str(msg.event_date).startswith(year_month)
 
         
         if msg_type=="bid":
-            append=1
+            append="1"
         if msg_type=="message":
-            append=-1
+            append="-1"
             
         return gs("POST",req_dict(request.POST),msgs,append=append) 
 
