@@ -352,7 +352,7 @@ class Vendor(models.Model):
                             "name": "Venue Type",
                             "value": [
                                 [
-                                    "0",
+                                    "",
                                     "-- Select Venue --"
                                 ],
                                 [
@@ -369,7 +369,7 @@ class Vendor(models.Model):
                         "name": "Price Range",
                         "value": [
                             [
-                                "0",
+                                "",
                                 "-- Select Price Range --"
                             ],
                             [
