@@ -352,6 +352,10 @@ class Vendor(models.Model):
                             "name": "Venue Type",
                             "value": [
                                 [
+                                    "",
+                                    "-- Select Venue --"
+                                ],
+                                [
                                     "hotel",
                                     "Hotel"
                                 ],
@@ -364,6 +368,10 @@ class Vendor(models.Model):
                     "pricing":{
                         "name": "Price Range",
                         "value": [
+                            [
+                                "",
+                                "-- Select Price Range --"
+                            ],
                             [
                                 "<200",
                                 "Less than 00 Rs."
