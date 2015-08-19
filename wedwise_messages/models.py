@@ -30,8 +30,9 @@ class Schedulevisit(models.Model):
         customer=Customer.objects.filter(identifier=identifier)[0]
         sv=Schedulevisit.objects.filter(customer=customer)
         l = [ {"vendor":schedule.vendor.name,
+               "vendor_email":schedule.vendor.user.username,
                 "time":str(schedule.time)
-            } for schedule in sv]
+            } for schedule in sv][:50]
         
 
             
@@ -482,7 +483,7 @@ and str(msg.event_date).startswith(year_month)
 #         if not (min or max ):
 #             msgs = [e for e in msgs][-10:-5]
 #         else:
-        msgs = [e for e in msgs][-2:]
+        msgs = [e for e in msgs][-25:]
 
         
         
@@ -549,7 +550,7 @@ and str(msg.event_date).startswith(year_month)
         if max:
             all_msgs=all_msgs.filter(id__gt=int(max)) 
         
-        all_msgs=[e for e in all_msgs][-2:]  
+        all_msgs=[e for e in all_msgs][-25:]  
         if msg_type=="bid":
             all_msgs.reverse()       
 
