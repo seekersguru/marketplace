@@ -352,14 +352,16 @@ class Vendor(models.Model):
                             "name": "Venue Type",
                             "value": [
                                 [
+                                    "",
+                                    "-- Select Venue --"
+                                ],
+                                [
                                     "hotel",
-                                    "Hotel",
-                                     "-- Select Venue --"
+                                    "Hotel"
                                 ],
                                 [
                                     "banquet",
-                                    "Banquet",
-                                     "-- Select Venue --"
+                                    "Banquet"
                                 ],
                             ]
                         },
@@ -367,19 +369,20 @@ class Vendor(models.Model):
                         "name": "Price Range",
                         "value": [
                             [
-                                "<200",
-                                "Less than 00 Rs.",
+                                "",
                                 "-- Select Price Range --"
+                            ],
+                            [
+                                "<200",
+                                "Less than 00 Rs."
                             ],
                             [
                                 "200-500",
-                                "200-500 Rs",
-                                "-- Select Price Range --"
+                                "200-500 Rs"
                             ],
                             [
                                 ">500",
-                                "More than 500 Rs",
-                                "-- Select Price Range --"
+                                "More than 500 Rs"
                             ],
                         ]
                     },
