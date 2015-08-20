@@ -114,7 +114,10 @@ class Customer(models.Model):
                  contact_number=contact_number,
                  identifier=signer.sign(email),
                  fbid=fbid,
-                 gid=gid)
+                 gid=gid,
+                contact_name=contact_name,
+                tentative_wedding_date =tentative_wedding_date
+                 )
         # do something with the book
         customer.save()
         
