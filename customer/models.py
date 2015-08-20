@@ -75,7 +75,8 @@ class Customer(models.Model):
                     "bride_name":customer.bride_name,
                     "contact_number":customer.contact_number,
                     "tentative_wedding_date":str(customer.tentative_wedding_date),
-                    "contact_name":customer.contact_name
+                    "contact_name":customer.contact_name,
+                    "tentative_wedding_date":tentative_wedding_date
                     
                     }})                 
                 
