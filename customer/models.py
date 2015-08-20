@@ -76,8 +76,6 @@ class Customer(models.Model):
                     "contact_number":customer.contact_number,
                     "tentative_wedding_date":str(customer.tentative_wedding_date),
                     "contact_name":customer.contact_name,
-                    "tentative_wedding_date":tentative_wedding_date
-                    
                     }})                 
                 
          
@@ -107,6 +105,7 @@ class Customer(models.Model):
             
         # As we using transactions, no need to error handle. 
         # In case of error all will revert
+        import pdb;pdb.set_trace()
         if not user:
             user = User.objects.create_user(email, email, password)
         customer=Customer(user=user,groom_name=groom_name,
