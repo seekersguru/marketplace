@@ -610,7 +610,7 @@ and str(msg.event_date).startswith(year_month)
             if from_to=="v2c":
                 line1=msg.customer.groom_name + " & "+msg.customer.bride_name + "  " +event_date + "  " + inquiry_date
                 
-                if 1:#msg.customer.pk not in listed or msg_type=="bid":
+                if msg.customer.pk not in listed or msg_type=="bid":
                     listed.append(msg.customer.pk)
                     msgs.append({"id":msg.id, "message":msg.message,
                                                      "receiver_email":msg.customer.user.username,
