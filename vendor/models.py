@@ -16,7 +16,7 @@ from customer.models import Customer
 from django.template.defaultfilters import default
 from manager import VendorManager
 from __builtin__ import classmethod
-
+import os
 signer = Signer()
 
 
@@ -269,8 +269,7 @@ class Vendor(models.Model):
     def get_vendor_list(cls,page_no,mode,image_type,vendor_type=None,search_string=None,favorites=None,customer=None):
         from customer.models import Favorites
 
-        img="/media/apps/{mode}/{image_type}/category/{vendor_type}.jpg".\
-                format(vendor_type=vendor_type,mode=mode,image_type=image_type)
+
         lst=[]
         cust_favorites=cls.get_favorites(customer)
 
@@ -282,9 +281,18 @@ class Vendor(models.Model):
             ven_list=Vendor.active_object.filter(vendor_type=Category.objects.get(key=vendor_type))
         if search_string:
             ven_list=[e for e in ven_list if search_string.lower() in e.dynamic_info.lower()] 
+        def_img="/media/apps/{mode}/{image_type}/category/{vendor_type}.jpg".\
+                format(vendor_type=vendor_type,mode=mode,image_type=image_type)
           
         for vendor in ven_list :
-                
+
+            ven_img_path="/vendor_image/%s/1.jpg"%str(vendor.id)
+            pth=os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..', 'media'))+ven_img_path
+            if os.path.exists(pth):
+                img="/media%s"%ven_img_path
+            else:
+                img=def_img
+               
             lst.append(
                 {
                  "vendor_email":vendor.user.username,
