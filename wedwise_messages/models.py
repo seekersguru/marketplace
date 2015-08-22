@@ -397,7 +397,7 @@ and str(msg.event_date).startswith(year_month)
                     if msg.package in inq_data["package"]["package_list"] :
                         err =str(inq_data["package"]["package_list"][msg.package]) + ": msg.package"
             package ="Invalid " + err
-            print err 
+            print err  ,msg.package
         time_slot=[ e[1] for e in inq_data['time_slot']["value"] if e[0]==msg.time_slot ][0]
         if from_to=="c2v":
             sender_val ={"Vendor Name":msg.vendor.name}
