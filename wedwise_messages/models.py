@@ -367,8 +367,9 @@ and str(msg.event_date).startswith(year_month)
             msg =Messages.objects.filter(id=msg_id,customer=identified)
         elif from_to=="v2c":
             msg =Messages.objects.filter(id=msg_id,vendor=identified)
-            
-        if not ["msg"]:
+        
+        
+        if not msg:
             return ge("POST",req_dict(request.POST),"no message exist4", error_fields=['msg_id'])
         else:
             msg=msg[0] 
