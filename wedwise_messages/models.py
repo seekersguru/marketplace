@@ -561,8 +561,8 @@ and str(msg.event_date).startswith(year_month)
                     ).order_by(sort_by)
         if min:
             all_msgs=all_msgs.filter(id__lt=int(min))           
-        if max:
-            all_msgs=all_msgs.filter(id__gt=int(max)) 
+#         if max:
+#             all_msgs=all_msgs.filter(id__gt=int(max)) 
         
         all_msgs=[e for e in all_msgs][-100:]  
         if msg_type=="bid":
