@@ -612,6 +612,7 @@ and str(msg.event_date).startswith(year_month)
                                                      "receiver_name":msg.vendor.name,
                                                      "identifier":msg.customer.identifier,
                                                      "msg_time":inquiry_date ,
+                                                     "msg_time_only":inquiry_date.split()[1] ,
                                                      "from_to":msg.from_to,
                                                      "event_date":event_date,
                                                      "msg_type":msg_type,
