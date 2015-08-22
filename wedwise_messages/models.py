@@ -559,8 +559,8 @@ and str(msg.event_date).startswith(year_month)
             all_msgs= Messages.objects.filter(
                     vendor=sender,msg_type=msg_type
                     ).order_by(sort_by)
-        if min:
-            all_msgs=all_msgs.filter(id__lt=int(min))           
+#         if min:
+#             all_msgs=all_msgs.filter(id__lt=int(min))           
 #         if max:
 #             all_msgs=all_msgs.filter(id__gt=int(max)) 
         
