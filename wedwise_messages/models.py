@@ -546,7 +546,7 @@ and str(msg.event_date).startswith(year_month)
             sender=sender[0] 
             
         sort=request.POST.get('sort')  
-        sort=max="" 
+        #sort=max="" 
         sort_by="msg_time"
         if sort:
             sort_by=sort
@@ -564,7 +564,7 @@ and str(msg.event_date).startswith(year_month)
         if max:
             all_msgs=all_msgs.filter(id__gt=int(max)) 
         
-        all_msgs=[e for e in all_msgs][-25:]  
+        all_msgs=[e for e in all_msgs][-100:]  
         if msg_type=="bid":
             all_msgs.reverse()       
 
