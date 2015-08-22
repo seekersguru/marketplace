@@ -175,6 +175,8 @@ class Messages(models.Model):
         status = request.POST.get("status","") 
                     
         if msg_type in ["bid","book"]: 
+            if not (package and num_guests and event_date and  time_slot):
+                return "Package, Time slot , num_guests , event date are required (Server Side Check) "
             
             try:
                 event_date=datetime.date(*[int(e) for e in event_date.split("-")])
