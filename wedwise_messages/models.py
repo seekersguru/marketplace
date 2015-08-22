@@ -391,11 +391,11 @@ and str(msg.event_date).startswith(year_month)
         except:
             err="None"
             if "package" in inq_data:
-                err=inq_data["package"] + ":package"
+                err=str(inq_data["package"]) + ":package"
                 if "package_list" in inq_data["package"]:
-                    err=inq_data["package"]["package_list"]  + " : package_list"
+                    err=str(inq_data["package"]["package_list"])  + " : package_list"
                     if msg.package in inq_data["package"]["package_list"] :
-                        err =inq_data["package"]["package_list"][msg.package] + ": msg.package"
+                        err =str(inq_data["package"]["package_list"][msg.package]) + ": msg.package"
             package ="Invalid " + err
             print err 
         time_slot=[ e[1] for e in inq_data['time_slot']["value"] if e[0]==msg.time_slot ][0]
