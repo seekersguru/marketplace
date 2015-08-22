@@ -6,7 +6,7 @@ from models import Category, Vendor
 
     
 class VendorAdmin(admin.ModelAdmin):
-    fields = ('vendor_type', 'user', 'name', 'dynamic_info', 'availability',)
+    fields = ('vendor_type', 'user', 'name', 'dynamic_info', 'availability','active')
     model = Vendor
     list_display = ('vendor_type','name','active')
     #readonly_fields=('vendor_type', 'user', 'name', 'dynamic_info', 'availability',)
