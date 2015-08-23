@@ -79,7 +79,10 @@ class Customer(models.Model):
                     }})                 
                 
          
-        
+        else:
+            if not password:
+                return ge("POST",req_dict(request.POST),"Required field missing", error_fields=['password'])
+                
         ####### Get and update logic ends
 
         f = forms.EmailField()
@@ -105,7 +108,6 @@ class Customer(models.Model):
             
         # As we using transactions, no need to error handle. 
         # In case of error all will revert
-        import pdb;pdb.set_trace()
         if not user:
             user = User.objects.create_user(email, email, password)
         customer=Customer(user=user,groom_name=groom_name,
