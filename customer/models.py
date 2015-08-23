@@ -32,19 +32,7 @@ class Customer(models.Model):
     gid =models.CharField(max_length=1024,default="")
     forgot_code =models.CharField(max_length=50,blank=True, null=True)
     #blank=True, null=True, related_name='location_parent'
-
-    @classmethod
-    def user_details_success(cls,
-               request,customer 
-               ):    
-        return {"email":customer.user.email,
-                    "identifier":customer.user.identifier,
-                            "groom_name":customer.groom_name,
-                            "bride_name":customer.bride_name,
-                            "contact_number":customer.contact_number,
-                            "tentative_wedding_date":str(customer.tentative_wedding_date),
-                            "contact_name":customer.contact_name,
-                            }     
+    
     @classmethod
     @transaction.atomic # @Nishant see if its effect speed @Amit dash 
     def create(cls,
@@ -82,10 +70,13 @@ class Customer(models.Model):
                     customer.user.save()
                 customer.save()
 
-            return gs("POST",req_dict(request.POST),{"profile":cls.user_details_success(request, customer)})  
-        
-        
-                           
+            return gs("POST",req_dict(request.POST),{"profile":{"email":customer.user.email,
+                    "groom_name":customer.groom_name,
+                    "bride_name":customer.bride_name,
+                    "contact_number":customer.contact_number,
+                    "tentative_wedding_date":str(customer.tentative_wedding_date),
+                    "contact_name":customer.contact_name,
+                    }})                 
                 
          
         else:
@@ -195,8 +186,7 @@ class Customer(models.Model):
             
         try:
             customer = Customer.objects.get(user=user)
-            #return 
-            return gs("POST",req_dict(request.POST),cls.user_details_success(request, customer))
+            return gs("POST",req_dict(request.POST),{"identifier":customer.identifier})
 
         except:
             ## TODO Proper error handling 
@@ -226,9 +216,7 @@ class Customer(models.Model):
             customer= Customer.objects.filter(user=user)
             if customer:
                 customer=customer[0]
-                #return cls.user_details_success(request, customer)
-                #return gs("POST",req_dict(request.POST),{"identifier":customer.identifier})
-                return gs("POST",req_dict(request.POST),cls.user_details_success(request, customer))
+                return gs("POST",req_dict(request.POST),{"identifier":customer.identifier})
             else:
                 ## TODO Log may be user registered and is vendor else even after transaction some problem
                 ## in register customer
