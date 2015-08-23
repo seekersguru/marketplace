@@ -38,6 +38,7 @@ class Customer(models.Model):
                request,customer 
                ):    
         return {"email":customer.user.email,
+                    "identifier":customer.user.identifier,
                             "groom_name":customer.groom_name,
                             "bride_name":customer.bride_name,
                             "contact_number":customer.contact_number,
