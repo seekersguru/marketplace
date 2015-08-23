@@ -440,7 +440,9 @@ and str(msg.event_date).startswith(year_month)
         identifier = request.POST.get('identifier')
         min=request.POST.get('min')
         max=request.POST.get('max') 
-        sort=request.POST.get('sort')        
+        #sort=request.POST.get('sort')
+        #Remove sorting from sevrer side, keep its client side only
+        sort=""        
         if identifier:
             identifier=urllib.unquote(identifier)
         f = forms.EmailField()
@@ -492,12 +494,12 @@ and str(msg.event_date).startswith(year_month)
                 ).order_by("msg_time")
         if min:
             msgs=msgs.filter(id__lt=int(min))           
-        if max:
-            msgs=msgs.filter(id__gt=int(max)) 
+#         if max:
+#             msgs=msgs.filter(id__gt=int(max)) 
 #         if not (min or max ):
 #             msgs = [e for e in msgs][-10:-5]
 #         else:
-        msgs = [e for e in msgs][-25:]
+        msgs = [e for e in msgs][-2:]
 
         
         
@@ -546,7 +548,7 @@ and str(msg.event_date).startswith(year_month)
             sender=sender[0] 
             
         sort=request.POST.get('sort')  
-        #sort=max="" 
+        sort=max="" 
         sort_by="msg_time"
         if sort:
             sort_by=sort
@@ -561,10 +563,10 @@ and str(msg.event_date).startswith(year_month)
                     ).order_by(sort_by)
         if min:
             all_msgs=all_msgs.filter(id__lt=int(min))           
-        if max:
-            all_msgs=all_msgs.filter(id__gt=int(max)) 
+#         if max:
+#             all_msgs=all_msgs.filter(id__gt=int(max)) 
         
-        all_msgs=[e for e in all_msgs][-100:]  
+        all_msgs=[e for e in all_msgs][-2:]  
         if msg_type=="bid":
             all_msgs.reverse()       
 
