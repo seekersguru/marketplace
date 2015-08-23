@@ -25,7 +25,7 @@ patterns = {##"customer_login_registration",
 				"order":1,
 	 			"params":["email","password","groom_name","bride_name","contact_number","fbid","gid","identifier","operation",
 						"tentative_wedding_date","contact_name"],
-	 			"required_params":["email","password","groom_name","bride_name","contact_number","contact_name"],
+	 			"required_params":["email","groom_name","bride_name","contact_number","contact_name"],
 	 			"help":{"operation":"get or update","identifier":"When get or update"},
 	 			
 		 	},
