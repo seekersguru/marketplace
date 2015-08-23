@@ -37,13 +37,13 @@ class Customer(models.Model):
     def user_details_success(cls,
                request,customer 
                ):    
-        return gs("POST",req_dict(request.POST),{"profile":{"email":customer.user.email,
+        return {"email":customer.user.email,
                             "groom_name":customer.groom_name,
                             "bride_name":customer.bride_name,
                             "contact_number":customer.contact_number,
                             "tentative_wedding_date":str(customer.tentative_wedding_date),
                             "contact_name":customer.contact_name,
-                            }})      
+                            }     
     @classmethod
     @transaction.atomic # @Nishant see if its effect speed @Amit dash 
     def create(cls,
@@ -81,7 +81,10 @@ class Customer(models.Model):
                     customer.user.save()
                 customer.save()
 
-            return cls.user_details_success(request, customer)               
+            return gs("POST",req_dict(request.POST),{"profile":cls.user_details_success(request, customer)})  
+        
+        
+                           
                 
          
         else:
@@ -191,8 +194,8 @@ class Customer(models.Model):
             
         try:
             customer = Customer.objects.get(user=user)
-            return cls.user_details_success(request, customer)
-            #return gs("POST",req_dict(request.POST),{"identifier":customer.identifier})
+            #return 
+            return gs("POST",req_dict(request.POST),cls.user_details_success(request, customer))
 
         except:
             ## TODO Proper error handling 
@@ -222,8 +225,9 @@ class Customer(models.Model):
             customer= Customer.objects.filter(user=user)
             if customer:
                 customer=customer[0]
-                return cls.user_details_success(request, customer)
+                #return cls.user_details_success(request, customer)
                 #return gs("POST",req_dict(request.POST),{"identifier":customer.identifier})
+                return gs("POST",req_dict(request.POST),cls.user_details_success(request, customer))
             else:
                 ## TODO Log may be user registered and is vendor else even after transaction some problem
                 ## in register customer
