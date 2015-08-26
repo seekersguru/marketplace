@@ -41,7 +41,7 @@ class Category(models.Model):
         
         data=[[
                each[1],
-               str("/media/apps/%s/%s/category/%s.jpg") %(mode,image_type,each[0])
+               str("/media/apps/%s/%s/category/%s1.jpg") %(mode,image_type,each[0])
                ]
           for each in VENDOR_CATEGORIES ]
         if request.method=="POST":
