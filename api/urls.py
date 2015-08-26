@@ -232,7 +232,7 @@ patterns = {##"customer_login_registration",
 			{
 				"order":-9,
 				"type":"POST",
-	 			"params":["identifier","page_no","from_to","msg_type","min","max","sort"],#["identifier"]
+	 			"params":["identifier","page_no","from_to","msg_type","min","max","sort","date"],#["identifier"]
 	 			"required_params":["identifier","from_to","msg_type"],
 	 			"selects":{"from_to": FROM_TO_CHOICES,"msg_type":MESSAGE_TYPES_CHOICES,"identifier":identifiers },
 	 			"help":{"sort":"msg_time | -msg_time | event_date | -event_date"}

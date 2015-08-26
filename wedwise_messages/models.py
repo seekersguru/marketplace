@@ -407,21 +407,24 @@ and str(msg.event_date).startswith(year_month)
             sender_val ={"Customer Name":msg.customer.contact_name}
             contact_number=msg.customer.contact_number
 
-        
+        msg_time=msg.msg_time
+        msg_time="%s/%s/%s at %s:%s" %(str(msg_time.year),str(msg_time.month).zfill(2)
+                                       ,str(msg_time.day).zfill(2) ,str(msg_time.hour).zfill(2)
+                                       ,str(msg_time.minute).zfill(2))
+        event_date=msg.event_date
+        event_date="%s/%s/%s" %(str(event_date.day).zfill(2),str(event_date.month).zfill(2),str(event_date.year) )
         return  gs("POST",req_dict(request.POST),{"label":"Enquiry Detail",
-                
-
-            
                 "contact_number":contact_number,
                 "table":[#{"Event Date":str(msg.event_date)},
                          sender_val,
                          {"Groom's Name":msg.customer.groom_name},
                          {"Bride Name":msg.customer.bride_name},
-                         {"Inquiry Date":str(msg.msg_time)},
-                         {"Event Date":str(msg.event_date)}, 
+                         {"Inquiry Date":msg_time  },
+                         {"Event Date":event_date}, 
                          {"Package":package},
                          {"Time slot":time_slot},
                          {"# Of Guests":num_guests},
+                         {"Notes ":msg.notes},
 
                          ],
                 "buttons":[["0","Accept"],["2","On Hold"],["1","Reject"]],
@@ -499,7 +502,7 @@ and str(msg.event_date).startswith(year_month)
 #         if not (min or max ):
 #             msgs = [e for e in msgs][-10:-5]
 #         else:
-        msgs = [e for e in msgs][-2:]
+        msgs = [e for e in msgs][-25:]
 
         
         
@@ -574,7 +577,7 @@ and str(msg.event_date).startswith(year_month)
                 ## Exclude the messages already oaded
                 all_msgs = [e for e  in all_msgs if e.vendor.pk not in [i.vendor.pk for i in exclude_msgs]]
                 
-        all_msgs=[e for e in all_msgs][-2:]  
+        all_msgs=[e for e in all_msgs][-25:]  
         if msg_type=="bid":
             all_msgs.reverse()       
 
@@ -612,9 +615,12 @@ and str(msg.event_date).startswith(year_month)
                     revenue="Not good for till time"
 
                 time_slot=[ e[1] for e in inq_data['time_slot']["value"] if e[0]==msg.time_slot.replace(" ","").lower() ][0]
-                line11,line12,line13 = package , " ", time_slot
-                line21,line22,line23= revenue , " ", get_status(msg)
-
+                if from_to=="c2v":
+                    line11,line12,line13 = package , " ", time_slot
+                    line21,line22,line23= revenue , " ", get_status(msg)
+                elif from_to=="v2c":
+                    line11,line12,line13 = package , msg.num_guests,time_slot
+                    line21,line22,line23= revenue , " ", get_status(msg)
             elif msg_type=="message":
                 line11=line12=line13=line21=line22=line23=""
                 
