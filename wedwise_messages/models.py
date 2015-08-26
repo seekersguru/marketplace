@@ -536,6 +536,7 @@ and str(msg.event_date).startswith(year_month)
         from_to=request.POST.get('from_to')
         min=request.POST.get('min')
         max=request.POST.get('max')
+        date=request.POST.get("date")
         if from_to=="c2v":
             sender = Customer.objects.filter(identifier=identifier)
         elif from_to=="v2c":
@@ -553,9 +554,15 @@ and str(msg.event_date).startswith(year_month)
                     customer=sender,msg_type=msg_type
                     ).order_by("msg_time")
         elif from_to=="v2c":
-            all_msgs= Messages.objects.filter(
-                    vendor=sender,msg_type=msg_type
-                    ).order_by("msg_time")
+            if not date:
+                all_msgs= Messages.objects.filter(
+                        vendor=sender,msg_type=msg_type
+                        ).order_by("msg_time")
+            else:
+                all_msgs= Messages.objects.filter(
+                        vendor=sender,msg_type=msg_type,
+                        event_date=datetime.datetime.strptime(date,"%Y-%m-%d")
+                        ).order_by("msg_time")                
         if min and min.isdigit():
             
             if msg_type=="bid":
