@@ -547,25 +547,26 @@ and str(msg.event_date).startswith(year_month)
         else:
             sender=sender[0] 
             
-        sort=request.POST.get('sort')  
-        sort=max="" 
-        sort_by="msg_time"
-        if sort:
-            sort_by=sort
         
         if from_to=="c2v":
             all_msgs= Messages.objects.filter(
                     customer=sender,msg_type=msg_type
-                    ).order_by(sort_by)
+                    ).order_by("msg_time")
         elif from_to=="v2c":
             all_msgs= Messages.objects.filter(
                     vendor=sender,msg_type=msg_type
-                    ).order_by(sort_by)
-        if min:
-            all_msgs=all_msgs.filter(id__lt=int(min))           
-#         if max:
-#             all_msgs=all_msgs.filter(id__gt=int(max)) 
-        
+                    ).order_by("msg_time")
+        if min and min.isdigit():
+            
+            if msg_type=="bid":
+                all_msgs=all_msgs.filter(id__lt=int(min)) 
+            else:  #msg_type=='message'
+                ## TODO Memory leak issue possible here : Consider lacs of messages ) AND OVERALL
+                exclude_msgs=all_msgs.filter(id__gte=int(min)) 
+                all_msgs=all_msgs.filter(id__lt=int(min)) 
+                ## Exclude the messages already oaded
+                all_msgs = [e for e  in all_msgs if e.vendor.pk not in [i.vendor.pk for i in exclude_msgs]]
+                
         all_msgs=[e for e in all_msgs][-2:]  
         if msg_type=="bid":
             all_msgs.reverse()       
@@ -581,72 +582,72 @@ and str(msg.event_date).startswith(year_month)
                 status = "Pending" 
             return status
         msgs=[]
-        listed=[]# Which vendor id indexed at which positions
-        print "Length od all_msgs ", len(all_msgs)
+        vendor_id_index={}
         for msg in all_msgs:
             event_date=str(msg.event_date)[:19]
             inquiry_date=str(msg.msg_time)[:19]
             
             if msg_type=="bid":
-                line1=msg.vendor.name + "  " +event_date + "  " + inquiry_date
                 inq_data=eval(msg.bid_json)
-                num_guests=str(msg.num_guests)
+
                 try:
                     package=inq_data["package"]["package_list"][msg.package]['select_val']
                 except:
                     package="Not specified"
-                time_slot=[ e[1] for e in inq_data['time_slot']["value"] if e[0]==msg.time_slot.replace(" ","").lower() ][0]
-                line1=package
-                line2=time_slot
-                if num_guests:
-                    line2 = line2+ " #guests: " + num_guests
-                line2=line2 #+get_status(msg)
-            elif msg_type=="message":
-                line1=""
-                line2=""
-                
-            if from_to=="c2v":
-                
-                if (msg.vendor.pk not in listed) or msg_type=="bid":
-                    listed.append(msg.vendor.pk)
-                    msgs.append({"id":msg.id, "message":msg.message,
-                                                     "receiver_email":msg.vendor.user.username,
-                                                     "receiver_name":msg.vendor.name,
-                                                     "identifier":msg.customer.identifier,
-                                                     "msg_time":inquiry_date ,
-                                                     "msg_time_only":inquiry_date.split()[1][:5] ,
-                                                     "from_to":msg.from_to,
-                                                     "event_date":event_date,
-                                                     "msg_type":msg_type,
-                                                     "line1":line1 + str(msg.message) + " "+ str(msg.id),
-                                                     "line2":line2,
-                                                     "status":get_status(msg),
-                                                     
-                                                     
-                                                     })
-            if from_to=="v2c":
-                line1=msg.customer.groom_name + " & "+msg.customer.bride_name + "  " +event_date + "  " + inquiry_date
-                
-                if msg.customer.pk not in listed or msg_type=="bid":
-                    listed.append(msg.customer.pk)
-                    msgs.append({"id":msg.id, "message":msg.message,
-                                                     "receiver_email":msg.customer.user.username,
-                                                     "receiver_name":msg.customer.groom_name + " & "+msg.customer.bride_name ,
-                                                     "identifier":msg.customer.identifier,
-                                                     "msg_time":inquiry_date ,
-                                                     "from_to":msg.from_to,
-                                                     "msg_type":msg_type,
-                                                     "event_date":event_date,
-                                                     "line1":line1+ str(msg.message) + " "+ str(msg.id),
-                                                     "line2":line2,
-                                                     "status":get_status(msg),
-                                                     })                
+                    
+                try:
+                    revenue=inq_data["package"]["package_list"][msg.package]["price"]
+                    revenue=float(revenue)
+                    if msg.num_guests:
+                        revenue=revenue.msg.num_guests;
+                except:
+                    revenue="Not good for till time"
 
-        
+                time_slot=[ e[1] for e in inq_data['time_slot']["value"] if e[0]==msg.time_slot.replace(" ","").lower() ][0]
+                line11,line12,line13 = package , " ", time_slot
+                line21,line22,line23= revenue , " ", get_status(msg)
+
+            elif msg_type=="message":
+                line11=line12=line13=line21=line22=line23=""
+                
+                
+            msg_detail = {"id":msg.id, "message":msg.message,
+                                                 "receiver_email":from_to=="c2v" and msg.vendor.user.username or msg.customer.user.username,
+                                                 "receiver_name":from_to=="c2v" and msg.vendor.name or msg.customer.groom_name + " & "+msg.customer.bride_name,
+                                                 "msg_time":inquiry_date ,
+                                                 "msg_time_only":inquiry_date.split()[1][:5] ,
+                                                 "from_to":msg.from_to,
+                                                 "event_date":event_date,
+                                                 "msg_type":msg_type,
+                                                 "line1":line11 + "|"+line12 + line13,
+                                                 "line2":line21 + "|"+line22 + line23,
+                                                 "status":get_status(msg),
+                                                 "line11":line11,
+                                                 "line12":line12,
+                                                 "line13":line13,
+                                                 "line21":line21,
+                                                 "line22":line22,
+                                                 "line23":line23
+                                                 
+                                                 } 
+            if msg_type=="bid"  :
+                
+                
+                msgs.append(msg_detail)
+            else: #msg_type=="message"
+                if msg.vendor.pk not in vendor_id_index:
+                    vendor_id_index[msg.vendor.pk]=len(msgs)
+                    msgs.append(msg_detail) 
+                else:# Retainings
+                    msgs[vendor_id_index[msg.vendor.pk]]=msg_detail
+                    
+
+
         if msg_type=="bid":
             append="1"
         if msg_type=="message":
-            append="-1"
+            append="-1"        
+
             
         return gs("POST",req_dict(request.POST),msgs,append=append) 
 
