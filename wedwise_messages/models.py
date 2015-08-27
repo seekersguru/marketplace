@@ -540,6 +540,10 @@ and str(msg.event_date).startswith(year_month)
         min=request.POST.get('min')
         max=request.POST.get('max')
         date=request.POST.get("date")
+        if date:
+            if len(date.split("-")[0])==2:#dd-mm-yyyy
+                dt=date.split("-")
+                date="%s-%s-%s"%(dt[2],dt[1],dt[0])
         if from_to=="c2v":
             sender = Customer.objects.filter(identifier=identifier)
         elif from_to=="v2c":
