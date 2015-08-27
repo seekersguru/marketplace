@@ -100,7 +100,26 @@ class Messages(models.Model):
     # ADD # package*** | num_guests*** | notes
     
 
-
+    @classmethod
+    def delete_message(cls, request):
+        from_to=request.POST.get('from_to')
+        identifier=request.POST.get('identifier')
+        msg_id=request.POST.get('msg_id')
+        
+        if from_to =="c2v":
+            customer = Customer.objects.filter(identifier=identifier)
+            inst =Messages.objects.filter(id=msg_id,customer=customer)
+        elif from_to=="v2c":
+            vendor= Vendor.active_object.filter(identifier=identifier)
+            inst =Messages.objects.filter(id=msg_id,vendor=vendor)
+        
+        if inst:
+            inst.delete()
+            return gs("POST",req_dict(request.POST),{})
+        else:
+            return ge("POST",req_dict(request.POST),"No such message exist", error_fields=['msg_id'])
+            
+        
  
     @classmethod
     def create(cls,

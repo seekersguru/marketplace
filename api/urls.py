@@ -331,6 +331,14 @@ patterns = {##"customer_login_registration",
 	 			"required_params":["identifier","msg_id","msg_type","from_to"],
 	 			"selects":{"msg_type":[["bid","Bid"]] ,"identifier":identifiers }
 		 	},	
+		"delete_message":
+			{
+				"order":-110,
+				"type":"POST",
+	 			"params":["identifier","msg_id","from_to"],
+	 			"required_params":["identifier","msg_id","from_to"],
+	 			"selects":{"from_to": FROM_TO_CHOICES ,"identifier":identifiers }
+		 	},	
 		"vendor_bid_book_response":
 			{
 				"order":-110,

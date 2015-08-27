@@ -148,6 +148,15 @@ def vendor_bid_book_detail(request):
     return response(request,Messages.vendor_bid_book_page(request))
 
 @csrf_exempt
+def delete_message(request):
+    #TODO Put all in decorators  with csrf 
+    invalid=check_basic_validations("delete_message",request,"POST")
+    if invalid:return response(request,invalid) 
+
+    return response(request,Messages.delete_message(request))
+
+
+@csrf_exempt
 def vendor_bid_book_response(request):
     #TODO Put all in decorators  with csrf 
     invalid=check_basic_validations("vendor_bid_book_response",request,"POST")
