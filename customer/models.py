@@ -43,6 +43,20 @@ class Customer(models.Model):
                             } 
     @classmethod
     @transaction.atomic # @Nishant see if its effect speed @Amit dash 
+    def customer_otp(cls,
+               request, 
+               ):
+        contact_number=request.POST.get("contact_number").strip()
+        if (not contact_number.isdigit() ) or (len(contact_number) != 10):
+            return ge("POST",req_dict(request.POST),"Only 10 digit mobiles please", error_fields=['operation'])
+
+        if str(contact_number)[0]  not in ["7","8","9"]:
+            return ge("POST",req_dict(request.POST),"Invalid mobile number", error_fields=['operation'])        
+
+        return gs("POST",req_dict(request.POST),{"code":random.randint(1001,9999) ,"message":"Please enter otp sent to your mobile."})                 
+                
+    @classmethod
+    @transaction.atomic # @Nishant see if its effect speed @Amit dash 
     def create(cls,
                request, 
                ):

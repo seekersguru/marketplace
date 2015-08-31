@@ -29,6 +29,15 @@ patterns = {##"customer_login_registration",
 	 			"help":{"operation":"get or update","identifier":"When get or update"},
 	 			
 		 	},
+		"customer_otp":
+	 		{
+				"type":"POST",
+				"order":1,
+	 			"params":["contact_number",],
+	 			"required_params":["contact_number",],
+	 			"help":{"contact_number":"Starting with 7,8,9 as per. https://en.wikipedia.org/wiki/Mobile_telephone_numbering_in_India"}
+		 	},
+		
 		"customer_login":
 			{
 			"type":"POST",
