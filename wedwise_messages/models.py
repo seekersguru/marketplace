@@ -600,6 +600,7 @@ and str(msg.event_date).startswith(year_month)
                 ## Exclude the messages already oaded
                 all_msgs = [e for e  in all_msgs if e.vendor.pk not in [i.vendor.pk for i in exclude_msgs]]
                 
+    
         all_msgs=[e for e in all_msgs][-25:]  
         if msg_type=="bid":
             all_msgs.reverse()       
@@ -615,7 +616,7 @@ and str(msg.event_date).startswith(year_month)
                 status = "Pending" 
             return status
         msgs=[]
-        vendor_id_index={}
+        sender_id_index={}
         for msg in all_msgs:
             event_date=str(msg.event_date)[:19]
             inquiry_date=str(msg.msg_time)[:19]
@@ -672,12 +673,17 @@ and str(msg.event_date).startswith(year_month)
                 
                 msgs.append(msg_detail)
             else: #msg_type=="message"
-                if msg.vendor.pk not in vendor_id_index:
-                    vendor_id_index[msg.vendor.pk]=len(msgs)
+                if from_to =="c2v":
+                    sender_id=msg.vendor.pk
+                elif from_to=="v2c":
+                    sender_id=msg.customer.pk
+                
+                if sender_id not in sender_id_index:
+                    sender_id_index[sender_id]=len(msgs)
                     msgs.append(msg_detail) 
                 else:# Retainings
-                    msgs[vendor_id_index[msg.vendor.pk]]=msg_detail
-                    
+                    msgs[sender_id_index[sender_id]]=msg_detail
+                  
 
 
         if msg_type=="bid":
