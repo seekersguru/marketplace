@@ -582,6 +582,8 @@ and str(msg.event_date).startswith(year_month)
         min=request.POST.get('min')
         max=request.POST.get('max')
         date=request.POST.get("date")
+        receiver_emails=request.POST.get("receiver_emails").strip()
+
         if date:
             if len(date.split("-")[0])==2:#dd-mm-yyyy
                 dt=date.split("-")
@@ -622,9 +624,15 @@ and str(msg.event_date).startswith(year_month)
                 all_msgs=all_msgs.filter(id__lt=int(min)) 
                 ## Exclude the messages already oaded
                 all_msgs = [e for e  in all_msgs if e.vendor.pk not in [i.vendor.pk for i in exclude_msgs]]
-                
-    
-        all_msgs=[e for e in all_msgs][-25:]  
+        
+        if receiver_emails:
+            receiver_emails=receiver_emails.split(",")
+            if from_to=="v2c":
+                all_msgs=[e for e in all_msgs if e.customer.user.username not in  receiver_emails][-25:]
+            elif from_to=="c2v":
+                all_msgs=[e for e in all_msgs if e.vendor.user.username not in  receiver_emails ][-25:]
+        else:
+            all_msgs=[e for e in all_msgs][-25:]  
         if msg_type=="bid":
             all_msgs.reverse()       
 
