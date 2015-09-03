@@ -113,22 +113,32 @@ class Vendor(models.Model):
             availability=eval(vendor.availability).get(str(event_date))
         except:
             availability=None
-        if availability \
-            and availability.startswith("booked_"):
 
-            ts_stored=availability.split("booked_")[1]
-            available=1
-            if ts_stored=="all_day":
-                available=0 
-            if ts_stored==time_slot:
-                available=0
-            if available ==0:
-                return gs("POST",req_dict(request.POST),{"available":0, })  
-            if time_slot =="all_day":
-                return gs("POST",req_dict(request.POST),{"available":0, }) 
-                
+        available=1
         
-        return gs("POST",req_dict(request.POST),{"available":1, })  
+        if availability:
+            
+            morning_available=availability.split("-")[1]
+            evening_available=availability.split("-")[3]
+            
+            if time_slot=="morning":
+                if morning_available=="booked":
+                    available=0 
+                if morning_available=="ongoing_enquiry":
+                    available=2 
+            elif time_slot=="evening":
+                if evening_available=="booked":
+                    available=0 
+                if evening_available=="ongoing_enquiry":
+                    available=2 
+            elif time_slot=="all_day":
+                if morning_available=="booked" or evening_available=="booked" :
+                    available=0 
+                elif morning_available=="ongoing_enquiry" or evening_available=="ongoing_enquiry" :
+                    available=2
+            
+        
+        return gs("POST",req_dict(request.POST),{"available":available, })  
     
     @classmethod
     def login(cls,
