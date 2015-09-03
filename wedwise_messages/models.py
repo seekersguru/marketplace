@@ -265,16 +265,39 @@ class Messages(models.Model):
             #date_list = [e.split("-") for e in  dates.split(",") ]
             #Verify if proper date format
             for dt in date_list:
-                dtsplt= dt.split("-")
-                print datetime.date(int(dtsplt[0]),int(dtsplt[1]),int(dtsplt[2]))
+                try:
+                    dtsplt= dt.split("-")
+                    datetime.date(int(dtsplt[0]),int(dtsplt[1]),int(dtsplt[2]))
+                except:
+                    return ge("POST",req_dict(request.POST),"Invalid  dates", error_fields=['dates'])
             if not vendor.availability:
                 vendor_availability=str({})
             else:
                 vendor_availability=vendor.availability
             
             vendor_availability=eval(vendor_availability)
+            blank="blank"
             for dt in date_list:
-                vendor_availability[dt]=avail_type + "_"+time_slot
+                ## 2015-09-17 booked evening
+                ##print "### : ", dt , avail_type , time_slot
+                if dt not in vendor_availability:
+                    if time_slot=="all_day":
+                        ts1,ts2=avail_type,avail_type
+                    if time_slot=="morning":
+                        ts1,ts2=avail_type,blank
+                    if time_slot=="evening":
+                        ts1,ts2=blank,avail_type
+                    vendor_availability[dt]="morning-%s-evening-%s"%(ts1,ts2)
+                else:
+                    cur_status=vendor_availability[dt].split("-")
+                    if time_slot=="all_day":
+                        cur_status[1]=avail_type
+                        cur_status[3]=avail_type
+                    if time_slot=="morning":
+                        cur_status[1]=avail_type
+                    if time_slot=="evening":
+                        cur_status[3]=avail_type
+                    vendor_availability[dt]="-".join(cur_status)
             vendor.availability=str(vendor_availability)
             vendor.save()
             
@@ -284,7 +307,7 @@ class Messages(models.Model):
             for dt, status in vendor_availability.iteritems():
                 d=dt.split("-")
                 if d[0] ==year and d[1]==month:
-                    data_list.append({"day":d[2] , "img" :"/media/images/availability/"+status+".png"})
+                    data_list.append({"day":d[2] , "img" :"/media/images/availability/new/"+status+".png"})
         return  gs("POST",req_dict(request.POST),{"data":
                                                   data_list,
                                                   "available_years":[2014,2015],
