@@ -46,12 +46,36 @@ class Customer(models.Model):
     def customer_otp(cls,
                request, 
                ):
-        contact_number=request.POST.get("contact_number").strip()
+        email = request.POST.get('email').strip().lower()
+        password = request.POST.get('password')
+        
+        contact_number = request.POST.get('contact_number').strip()
+
         if (not contact_number.isdigit() ) or (len(contact_number) != 10):
             return ge("POST",req_dict(request.POST),"Only 10 digit mobiles please", error_fields=['operation'])
 
         if str(contact_number)[0]  not in ["7","8","9"]:
             return ge("POST",req_dict(request.POST),"Invalid mobile number", error_fields=['operation'])        
+        f = forms.EmailField()
+        try:
+            f.clean(email)
+        except ValidationError:
+            return ge("POST",req_dict(request.POST),"Invalid email", error_fields=['email']) 
+ 
+        if len(password)<3:
+            return ge("POST",req_dict(request.POST),"Password too short", error_fields=['password']) 
+        user = User.objects.filter(username=email)
+        if user:
+            user=user[0]
+            customer_exist=Customer.objects.filter(user=user)
+            if customer_exist:
+                return ge("POST",req_dict(request.POST),"Email already exists", error_fields=['email'])
+ 
+        if not contact_number.isdigit() :
+            return ge("POST",req_dict(request.POST),"Invalid mobile number", error_fields=['contact_number'])
+
+        if len(str(int(contact_number))) not in [10,11]:
+            return ge("POST",req_dict(request.POST),"Mobile number should be of 10/11 digits", error_fields=['contact_number'])
 
         return gs("POST",req_dict(request.POST),{"code":random.randint(1001,9999) ,"message":"Please enter otp sent to your mobile."})                 
                 

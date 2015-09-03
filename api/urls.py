@@ -33,8 +33,9 @@ patterns = {##"customer_login_registration",
 	 		{
 				"type":"POST",
 				"order":1,
-	 			"params":["contact_number",],
-	 			"required_params":["contact_number",],
+	 			"params":["email","password","groom_name","bride_name","contact_number","fbid","gid","identifier","operation",
+						"tentative_wedding_date","contact_name"],
+	 			"required_params":["email","groom_name","bride_name","contact_number","contact_name"],
 	 			"help":{"contact_number":"Starting with 7,8,9 as per. https://en.wikipedia.org/wiki/Mobile_telephone_numbering_in_India"}
 		 	},
 		
@@ -61,15 +62,6 @@ patterns = {##"customer_login_registration",
 	 			"params":["email",	],
 	 			"required_params":["email",	]
 		 	}, 
-		 	
-# 		"customer_reset_password":
-# 			{
-# 				"type":"POST",
-# 				"order":6,
-# 	 			"params":["email","code","password","confirm_password"],
-# 	 			"required_params":["email","code","password","confirm_password"],
-# 	 			
-# 		 	},
 	#Make it simple some how. according to version replace existing default 
 	##and add new some how
 		"customer_bg_image_login_registration" :
@@ -183,18 +175,6 @@ patterns = {##"customer_login_registration",
 	 			"selects":{"identifier":identifiers},
 	 			"help":{"time":"yyyy-mm-dd hh:mm"}
 		 	},	
-
-# identifier [required]
-# receiver_email 
-# event_date  [required] 
-# time_slot   [required]
-# bid_json (not correct , convert to string and send)
-# push_data = bid | message
-# package [required]
-# num_guests [Optional]
-# notes [optional]
-
-		 					
 		"customer_vendor_message_create":
 			{
 				"order":-11,
@@ -286,16 +266,6 @@ patterns = {##"customer_login_registration",
 	 			"params":["email",	],
 	 			"required_params":["email",	]
 		 	}, 
-		 	
-# 		"vendor_reset_password":
-# 			{
-# 				"type":"POST",
-# 				"order":6,
-# 	 			"params":["email","code","password","confirm_password"],
-# 	 			"required_params":["email","code","password","confirm_password"],
-# 	 			
-# 		 	},
-
 	##"vendor_calendar_screens",
 	
 	 	"vendor_calendar_home":
@@ -323,15 +293,6 @@ patterns = {##"customer_login_registration",
 						}
 		 	},
 
-
-
-# 		
-# 		"vendor_calendar_rates_availability":
-# 			{
-# 				"order":-223,
-# 				"type":"POST",
-# 	 			"params":["year","month","packages","dates"],
-# 		 	}, 
 		"vendor_bid_book_detail":
 			{
 				"order":-110,
