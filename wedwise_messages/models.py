@@ -582,7 +582,7 @@ and str(msg.event_date).startswith(year_month)
         min=request.POST.get('min')
         max=request.POST.get('max')
         date=request.POST.get("date")
-        receiver_emails=request.POST.get("receiver_emails").strip()
+        receiver_emails=request.POST.get("receiver_emails","").strip()
 
         if date:
             if len(date.split("-")[0])==2:#dd-mm-yyyy
