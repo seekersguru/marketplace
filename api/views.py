@@ -86,16 +86,6 @@ def customer_forgot_password(request):
         return response(request,Customer.forgot_pwd(request))
 
 
-@csrf_exempt
-def customer_reset_password(request):
-    #TODO Put all in decorators  with csrf 
-    invalid=check_basic_validations("customer_reset_password",request,"POST")
-    if invalid:return response(request,invalid)
-    if request.method=="POST":
-        return response(request,Customer.reset_pwd(request))
-
-
-
 ########## Customer vendor listing detail
 @csrf_exempt
 def customer_vendor_category_or_home(request):
@@ -257,22 +247,8 @@ def vendor_forgot_password(request):
     if request.method=="POST":
         return response(request,Vendor.forgot_pwd(request))
 
-@csrf_exempt
-def vendor_reset_password(request):
-    #TODO Put all in decorators  with csrf 
-    invalid=check_basic_validations("vendor_reset_password",request,"POST")
-    if invalid:return response(request,invalid)
-    if request.method=="POST":
-        return response(request,Vendor.reset_pwd(request))
 
-# ########## vendor_calendar_screens
-def vendor_calendar_home_available_yaears(request):pass
-#     #TODO Put all in decorators  with csrf 
-#     invalid=check_basic_validations("vendor_registration_login_fb_gm",request,"POST")
-#     if invalid:return response(request,invalid)
-#     if request.method=="POST":
-#         return response(request,Messages.availability(request))
-########## vendor_calendar_screens
+
 @csrf_exempt
 def vendor_calendar_home(request):
     #TODO Put all in decorators  with csrf 
