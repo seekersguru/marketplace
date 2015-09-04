@@ -544,7 +544,7 @@ and str(msg.event_date).startswith(year_month)
 #         if not (min or max ):
 #             msgs = [e for e in msgs][-10:-5]
 #         else:
-        msgs = [e for e in msgs][-1:]
+        msgs = [e for e in msgs][-25:]
 
         
         
@@ -628,11 +628,11 @@ and str(msg.event_date).startswith(year_month)
         if receiver_emails:
             receiver_emails=receiver_emails.split(",")
             if from_to=="v2c":
-                all_msgs=[e for e in all_msgs if e.customer.user.username not in  receiver_emails][-1:]
+                all_msgs=[e for e in all_msgs if e.customer.user.username not in  receiver_emails][-25:]
             elif from_to=="c2v":
-                all_msgs=[e for e in all_msgs if e.vendor.user.username not in  receiver_emails ][-1:]
+                all_msgs=[e for e in all_msgs if e.vendor.user.username not in  receiver_emails ][-25:]
         else:
-            all_msgs=[e for e in all_msgs][-1:]  
+            all_msgs=[e for e in all_msgs][-25:]  
         if msg_type=="bid":
             all_msgs.reverse()       
 
