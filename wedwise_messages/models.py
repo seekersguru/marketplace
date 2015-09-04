@@ -663,7 +663,7 @@ and str(msg.event_date).startswith(year_month)
                 try:
                     
                     revenue=inq_data["package"]["package_list"][msg.package]["price"]
-                    revenue=float(revenue)
+                    revenue=str(float(revenue))
                     if msg.num_guests:
                         revenue=" Rs." + str(revenue*int(msg.num_guests))  ;
                 except:
@@ -674,7 +674,7 @@ and str(msg.event_date).startswith(year_month)
                     line11,line12,line13 = package , " ", time_slot
                     line21,line22,line23= revenue , " ", get_status(msg)
                 elif from_to=="v2c":
-                    line11,line12,line13 = package , msg.num_guests,time_slot
+                    line11,line12,line13 = package , str(msg.num_guests),time_slot
                     line21,line22,line23= revenue , " ", get_status(msg)
             elif msg_type=="message":
                 line11=line12=line13=line21=line22=line23=""
