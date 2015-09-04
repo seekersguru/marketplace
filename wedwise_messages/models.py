@@ -663,9 +663,10 @@ and str(msg.event_date).startswith(year_month)
                 try:
                     
                     revenue=inq_data["package"]["package_list"][msg.package]["price"]
-                    revenue=str(float(revenue))
+                    #revenue=str(float(revenue))
                     if msg.num_guests:
                         revenue=" Rs." + str(revenue*int(msg.num_guests))  ;
+                    revenue=str(revenue)
                 except:
                     revenue="Not good for till time"
 
