@@ -1,5 +1,6 @@
 import urllib
 from market_place.settings import MEDIA_PATH
+import datetime
 class ApiMiddleware:
     def process_request(self,request):
         if request.path.startswith("/api/"):
@@ -11,7 +12,7 @@ class ApiMiddleware:
             request.POST=req_post_copy
             
             f=open(MEDIA_PATH.replace("media","templates/console.html"),"a")
-            f.write(str(request.path)+"<br>"+"<br/>".join(["%s => %s "%(e,request.POST[e]) for e in request.POST]) + "<hr/>")
+            f.write(str(datetime.datetime.now())[:-7] + " : "+ str(request.path)+"<br>"+"<br/>".join(["%s => %s "%(e,request.POST[e]) for e in request.POST]) + "<hr/>")
             f.close
         print "POST Modified",request.path
         for k,v in  dict(request.POST).iteritems():
