@@ -12,5 +12,8 @@ def clear_console(request,vendor_id=None):
 
 # Create your views here.
 def index(request,vendor_id=None):
-    return TemplateResponse(request, "web/index.html",{"name" "nishant ",})
+    return TemplateResponse(request, "web/index.html",
+                            {"top_header_title" :"Vendor Data ",}
+                            
+                            )
 
