@@ -5,8 +5,9 @@ from api.utils import get_error as ge , get_success as gs ,req_dict
 from django.db import transaction
 from django import forms
 from django.core.exceptions import ValidationError
-from django.contrib.auth import authenticate
 import urllib
+from django.contrib.auth import authenticate, login,logout
+    
 """
 https://docs.djangoproject.com/en/1.8/topics/db/transactions/
 Atomicity is the defining property of database transactions. atomic allows us to create a block of code within 
@@ -220,12 +221,43 @@ class Customer(models.Model):
         user.set_password(password)
         user.save()
         return gs("POST",req_dict(request.POST),{"message":"Password reset succesful"})   
+    
+    @classmethod
+    def web_login(cls,request,email,password):
+        # Should handle session only in case of successful login
+        if request.POST.get("web_site",None):
+            if not request.user.is_authenticated():
+                user = authenticate(username=email, password=password)
+                if user:
+                    login(request, user)
+                    return {"redirect_to":"/home/"}
+
+            else:
+                # user is authenticated
+                if not request.user.username==email:# Other user trying login
+                    logout(request)
+                    user = authenticate(username=email, password=password)
+                    if user:
+                        login(request, user)
+                        return {"redirect_to":"/home/"}
+                else:
+                    #User alreay logged in just redirect him
+                    return {"redirect_to":"/home/"}
+
+    
     @classmethod
     def login(cls,
                request, 
                ):
+        
         email = request.POST.get('email').strip().lower()
-        password = request.POST.get('password')
+        password = request.POST.get('password')  
+
+        if request.POST.get("web_site",None):
+            shoud_redirect=cls.web_login(request,email,password)
+            if shoud_redirect:
+                return gs("POST",req_dict(request.POST),shoud_redirect)
+             
         user = authenticate(username=email, password=password)
         if not user:
             return ge("POST",req_dict(request.POST),"Invalid username or password", error_fields=['email','password'])

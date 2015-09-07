@@ -29,3 +29,14 @@ def index(request):
                              "info_section_sub_heading":"Wedding arangements are fun!"
                              }
                             )
+
+# Create your views here.
+def home(request):    
+    return TemplateResponse(request, "web/home.html",
+                            {"user" :request.user,
+                             "top_header_title" :"Welcome "+str(request.user.customer.contact_name),
+                             "page_title":"Welcome "+str(request.user.customer.contact_name),
+                             "info_section_heading":"Welcome to wedwise",
+                             "info_section_sub_heading":"Wedding arangements are fun!"
+                             }
+                            )

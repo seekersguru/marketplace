@@ -9,10 +9,10 @@
         <link rel="icon" href="img/favicon.ico" type="image/icon" sizes="16x16">
         <script type="text/javascript" src="/media/js/web/jquery-1.11.3.min.js"></script>
         <script type="text/javascript" src="/media/js/web/bootstrap.min.js"></script>
-        {% block vendor_page_css_js %}
-        {% endblock%}
-		<script type="text/javascript" src="/media/js/web/form_handler.js"></script>
-    </head>
+        <script type="text/javascript" src="/media/js/web/all_site/framework.js"></script>
+		{% block vendor_page_css_js %}{% endblock %}
+
+	 </head>
      <body>
      	{% block top_header %}
 		{%include "web/partials/top_header.html"%}
