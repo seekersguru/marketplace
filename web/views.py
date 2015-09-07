@@ -11,16 +11,21 @@ def clear_console(request,vendor_id=None):
     
 
 # Create your views here.
-def vendor_page(request,vendor_id=None):
-    print  "vendor_page called"
+def vendor_page(request,vendor_id=None): 
     return TemplateResponse(request, "web/vendor_page.html",
                             {"top_header_title" :"Vendor Data",
-                             "page_title":"Vendor Form"}
+                             "page_title":"Vendor Form",
+                             "info_section_heading":"Vendor Data",
+                             "info_section_sub_heading":"To insert Vendor data."
+                                
+                             }
                             )
 # Create your views here.
 def index(request):
-    print  "index called"
     return TemplateResponse(request, "web/index.html",
                             {"top_header_title" :"Home",
-                             "page_title":"Web Home"}
+                             "page_title":"Web Home",
+                             "info_section_heading":"Welcome to wedwise",
+                             "info_section_sub_heading":"Wedding arangements are fun!"
+                             }
                             )

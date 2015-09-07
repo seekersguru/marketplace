@@ -6,12 +6,12 @@
         <link rel="stylesheet" type="text/css" media="all" href="/media/css/web/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="all" href="/media/css/web/bootstrap-theme.min.css">
         <link rel="stylesheet" type="text/css" media="all" href="/media/css/web/main.css">
-        <link rel="stylesheet" type="text/css" media="all" href="/media/css/web/json-form.css">
         <link rel="icon" href="img/favicon.ico" type="image/icon" sizes="16x16">
         <script type="text/javascript" src="/media/js/web/jquery-1.11.3.min.js"></script>
         <script type="text/javascript" src="/media/js/web/bootstrap.min.js"></script>
-        <script type="text/javascript" src="/media/js/web/json-form.js"></script>
-        <script type="text/javascript" src="/media/js/web/index.js"></script>
+        {% block vendor_page_css_js %}
+        {% endblock%}
+		<script type="text/javascript" src="/media/js/web/form_handler.js"></script>
     </head>
      <body>
      	{% block top_header %}

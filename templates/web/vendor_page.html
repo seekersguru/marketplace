@@ -1,0 +1,15 @@
+{% extends "web/base.html" %}
+        {% block vendor_page_css_js %}
+        <!-- Vendor Form css / js starts -->
+        <link rel="stylesheet" type="text/css" media="all" href="/media/css/web/json-form.css">
+        <script type="text/javascript" src="/media/js/web/json-form.js"></script>
+        <script type="text/javascript" src="/media/js/web/index.js"></script>
+        <!-- Vendor Form css / js ends -->
+        {% endblock%}
+                {% block container %}
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="json_form"></div>
+                        </div>
+                    </div>
+                {% endblock %}
