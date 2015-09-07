@@ -37,11 +37,12 @@ def vendor_validation(request,vendor_rule):
               
     return vendor_rule_copy 
 
+
 def add_sample(request,vendor_id=None):
     output={}
     vendor=None
     if vendor_id:
-        vendor = Vendor.objects.get(id=vendor_id)
+        vendor = Vendor.objects.get(id=vendor_id,active=1)
     if request.method=="POST":
         if request.POST.get("edit",None):
             output=Vendor.update(request)
@@ -69,7 +70,7 @@ def add_sample(request,vendor_id=None):
                   {
                     "output" :output,
                     "vendor_types":VENDOR_TYPES,
-                    "vendors":Vendor.objects.all(),
+                    "vendors":Vendor.objects.filter(active=1),
                     "vendor":vendor
                          
                   }

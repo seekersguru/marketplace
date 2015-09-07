@@ -12,6 +12,7 @@ urlpatterns = [
 
 
 
+    url(r'^console/$', TemplateView.as_view(template_name='console.html')),
 #Swagger APIS commented for now
 #    url(r'^test-api/$', TemplateView.as_view(template_name='index.html')),
     url(r'^$', TemplateView.as_view(template_name='home.html')),
@@ -27,11 +28,12 @@ urlpatterns = [
     url(r'^add_sample/$','vendor.views.add_sample', name='add_sample'),
     
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve',{'document_root': MEDIA_PATH}),
-#     url(r'^api/', include(category_resource.urls)),
+    
+    
+    ## Here comes the web views
+    url(r'^web/', "web.views.index",name="web_index"),
+
+
+
 ]
 
-# urlpatterns += patterns(
-#         'django.views.static',
-#         (r'^media/(?P<path>.*)',
-#         'serve',
-#         {'document_root': settings.MEDIA_ROOT}), )
