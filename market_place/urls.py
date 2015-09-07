@@ -11,7 +11,7 @@ urlpatterns = [
     url(r'^api/', include(api_urls)),
 
 
-
+    
     url(r'^console/$', TemplateView.as_view(template_name='console.html')),
 #Swagger APIS commented for now
 #    url(r'^test-api/$', TemplateView.as_view(template_name='index.html')),
@@ -32,6 +32,8 @@ urlpatterns = [
     
     ## Here comes the web views
     url(r'^web/', "web.views.index",name="web_index"),
+    url(r'^clear_console/', "web.views.clear_console",name="web_clear_console"),
+    
 
 
 
