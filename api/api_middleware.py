@@ -12,8 +12,16 @@ class ApiMiddleware:
             request.POST=req_post_copy
             
             f=open(MEDIA_PATH.replace("media","templates/console.html"),"a")
-            f.write(str(datetime.datetime.now())[:-7] + " : "+ str(request.path)+"<br>"+"<br/>".join(["%s => %s "%(e,request.POST[e]) for e in request.POST]) + "<hr/>")
+            data=str(datetime.datetime.now())[:-7] + " : "+ str(request.path)+"<br>"+"<br/>".join(["%s => %s "%(e,request.POST[e]) for e in request.POST]) + "<hr/>" +"\n"
+            f.write(data)
             f.close
+            f=open(MEDIA_PATH.replace("media","templates/console.html"),"r")
+            len_files= len(f.readlines())
+            f.close()
+            if len_files>10000:
+                f=open(MEDIA_PATH.replace("media","templates/console.html"),"w")
+                f.write("""<a href ="/clear_console/"> Clear Console </a> <br/><br/><br/>""" + data)
+                f.close()
         print "POST Modified",request.path
         for k,v in  dict(request.POST).iteritems():
             print k , v 
