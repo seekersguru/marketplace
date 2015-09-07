@@ -31,7 +31,14 @@ urlpatterns = [
     
     
     ## Here comes the web views
+    url(r'^web/vendor-page/', "web.views.vendor_page",name="web_vendor_page"),
     url(r'^web/', "web.views.index",name="web_index"),
+    
+    
+    
+    
+    
+    ## Here is the console for apis. ## TODO move to Apis
     url(r'^clear_console/', "web.views.clear_console",name="web_clear_console"),
     
 

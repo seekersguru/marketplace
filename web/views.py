@@ -11,9 +11,16 @@ def clear_console(request,vendor_id=None):
     
 
 # Create your views here.
-def index(request,vendor_id=None):
-    return TemplateResponse(request, "web/index.html",
-                            {"top_header_title" :"Vendor Data ",}
-                            
+def vendor_page(request,vendor_id=None):
+    print  "vendor_page called"
+    return TemplateResponse(request, "web/vendor_page.html",
+                            {"top_header_title" :"Vendor Data",
+                             "page_title":"Vendor Form"}
                             )
-
+# Create your views here.
+def index(request):
+    print  "index called"
+    return TemplateResponse(request, "web/index.html",
+                            {"top_header_title" :"Home",
+                             "page_title":"Web Home"}
+                            )

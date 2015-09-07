@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>JSON Form</title>
+        <title>{{page_title}}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" media="all" href="/media/css/web/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="all" href="/media/css/web/bootstrap-theme.min.css">
@@ -15,37 +15,22 @@
     </head>
      <body>
      	{% block top_header %}
-		
 		{%include "web/partials/top_header.html"%}
-		
         {% endblock %}
+        
+        
         <section>
-            <div class="header">
-                 <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h1>Vendor Data</h1>
-                                </div>
-                                <div class="col-md-12">
-                                    <p class="sub-header">To insert Vendor data.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        	{% block info_page_section %}
+        	{%include "web/partials/info_page_section.html"%}
+        	{% endblock %}
             <div class="body">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div id="json_form"></div>
-                        </div>
-                    </div>
+                {% block container %}
+                {% endblock %}
                 </div>
             </div>
         </section>
+        
         <footer>
             <div class="footer">
                 <div class="container">
