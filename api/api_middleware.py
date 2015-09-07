@@ -18,7 +18,7 @@ class ApiMiddleware:
             f=open(MEDIA_PATH.replace("media","templates/console.html"),"r")
             len_files= len(f.readlines())
             f.close()
-            if len_files>10000:
+            if len_files>1000:
                 f=open(MEDIA_PATH.replace("media","templates/console.html"),"w")
                 f.write("""<a href ="/clear_console/"> Clear Console </a> <br/><br/><br/>""" + data)
                 f.close()
