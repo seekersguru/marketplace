@@ -1,0 +1,78 @@
+.json-form {
+
+}
+.json-form ul.nav-tabs {
+  margin-bottom: 0px;
+}
+.json-form .render-form, .json-form .package-panel, .json-form .section-panel {
+  background-color: #FFF;
+  padding: 10px;
+  border-top: 0 none;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  position: relative;
+  min-height: 40px;
+}
+.json-form .form-div {
+  padding-bottom: 5px;
+}
+.json-form .form-div h4 {
+  color: #F27364;
+}
+.json-form .checkbox label {
+  margin-right: 10px;
+}
+.json-form .row-form .form-group{
+  position: relative;
+}
+.json-form .row-form .form-group .add-remove-btn {
+  font-size: 20px;
+  position: absolute;
+  top: 6px;
+  right: 5px;
+}
+.json-form .add-more {
+  margin-right: 30px;
+}
+.json-form .glyphicon-minus-sign {
+  color: #d9534f;
+}
+.json-form .glyphicon-plus-sign {
+  color: #3e8f3e;
+}
+.json-form .footer-bar {
+  padding: 10px;
+  border-top: 0 none;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  overflow: hidden;
+}
+.json-form .footer-bar button {
+  float:right;
+}
+.json-form .footer-bar span, .json-form span.msg{
+  color: #F27364;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 34px;
+}
+.json-form li.pointer a {
+  cursor: pointer!important;
+}
+.json-form a.del-package, .json-form a.del-section {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.json-form .package-panel form {
+  padding-top: 30px;
+}
+.json-form .section-tabs {
+  margin-top: 10px;
+}
+.json-form .key-value-form .form-group {
+  display: block;
+  margin-bottom: 10px;
+}
