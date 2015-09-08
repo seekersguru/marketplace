@@ -17,8 +17,6 @@ from wedwise_messages.models import MESSAGE_TYPES_CHOICES
 from vendor.models import VENDOR_TYPES
 patterns = {##"customer_login_registration",
 
-
-	
 		"customer_registration":
 	 		{
 				"type":"POST",

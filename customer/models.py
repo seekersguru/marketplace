@@ -85,21 +85,21 @@ class Customer(models.Model):
     def create(cls,
                request, 
                ):
+        import pdb;pdb.set_trace()
         email = request.POST.get('email').strip().lower()
-        identifier =  request.POST.get('identifier').strip().lower()
+        identifier =  request.POST.get('identifier','').strip().lower()
         if identifier:
             identifier=urllib.unquote(identifier)
-        operation =  request.POST.get('operation').strip().lower()
+        operation =  request.POST.get('operation',"").strip().lower()
         password = request.POST.get('password')
         groom_name = request.POST.get('groom_name')
         bride_name = request.POST.get('bride_name')
         contact_name = request.POST.get('contact_name')
         tentative_wedding_date = request.POST.get('tentative_wedding_date')
-        contact_number = request.POST.get('contact_number').strip()
+        contact_number = request.POST.get('contact_number',"").strip()
         fbid = request.POST.get("fbid","").strip()
         gid = request.POST.get("gid","").strip()
         
-
         ##### Get and update logic starts
         if identifier:
             identifier=urllib.unquote(identifier)
@@ -131,7 +131,7 @@ class Customer(models.Model):
                 return ge("POST",req_dict(request.POST),"Required field missing", error_fields=['password'])
                 
         ####### Get and update logic ends
-
+        
         f = forms.EmailField()
         try:
             f.clean(email)

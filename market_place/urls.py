@@ -9,8 +9,6 @@ from api import urls as api_urls
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/', include(api_urls)),
-
-
     
     url(r'^console/$', TemplateView.as_view(template_name='console.html')),
 #Swagger APIS commented for now
@@ -29,22 +27,15 @@ urlpatterns = [
     
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve',{'document_root': MEDIA_PATH}),
     
-    
     ## Here comes the web views
     url(r'^web/vendor-page/', "web.views.vendor_page",name="web_vendor_page"),
     url(r'^web/', "web.views.index",name="web_index"),
     url(r'^home/', "web.views.home",name="web_home"),
-    
-    
-    
+    url(r'^logout/', "web.views.web_logout",name="logout"),
     
     ## Here is the console for apis. ## TODO move to Apis
     url(r'^clear_console/', "web.views.clear_console",name="web_clear_console"),
     
-    
-    
-
-
 
 ]
 

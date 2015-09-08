@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.template.response import TemplateResponse
 from django.http.response import HttpResponseRedirect
 from market_place.settings import MEDIA_PATH
+from django.contrib.auth import logout
 
 def clear_console(request,vendor_id=None):
     f=open(MEDIA_PATH.replace("media","templates/console.html"),"w")
@@ -40,3 +41,10 @@ def home(request):
                              "info_section_sub_heading":"Wedding arangements are fun!"
                              }
                             )
+    
+    
+    
+def web_logout(request):
+    logout(request)
+    return HttpResponseRedirect("/web/")
+    

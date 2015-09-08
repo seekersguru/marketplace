@@ -19,9 +19,9 @@ def check_basic_validations(pattern_name,request,req_type):
     for each in required:
         if not data.get(each):
             req_missing.append(each)
-            
+    
     if req_missing:
-        return ge("POST",data,"required fields missing",
+        return ge("POST",data,"Required fields missing",
                   error_fields=req_missing)    
 
     #return TemplateResponse(request,'api/api.html',{"res":res})

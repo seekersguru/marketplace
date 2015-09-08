@@ -1,7 +1,7 @@
 {% extends "web/base.html" %}
                 {% block container %}
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="render-form">
                             	<div class="form-div">
 								<form id="weblogin" action="/api/customer_login/" method="POST">
@@ -16,6 +16,47 @@
                             		<div class="form-group">
                             		<button type="button"  class="btn btn-default form_button" id="weblogin_button">Login</button>
                             		</div>
+                            		</form>
+                            	</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="render-form">
+                            	<div class="form-div">
+								<form id="webregister" action="/api/customer_registration/" method="POST" role="form" data-toggle="validator">
+								{%csrf_token%}
+                            		<h4>Register </h4>
+                            		<div class="form-group">
+                            			<label>Email</label><input type="text" name="email" class="form-control">
+                            		</div>
+                            		<div class="form-group">
+                            			<label>Password</label><input type="password" name="password" class="form-control">
+                            		</div>
+                            		<div class="form-group">
+                            			<label>Groom name</label><input type="text" name="groom_name" class="form-control">
+                            		</div>
+                            		<div class="form-group">
+                            			<label>Bride name</label><input type="text" name="bride_name" class="form-control">
+                            		</div>
+                            		<div class="form-group">
+                            			<label>Contact number</label><input type="text" name="contact_number" class="form-control">
+                            		</div>
+                            		<div class="form-group">
+                            			<label>Tentative Wedding Date</label><input type="text" name="tentative_wedding_date" class="form-control">
+                            		</div>
+                            		<div class="form-group">
+                            			<label>Contact name</label><input type="text" name="contact_name" class="form-control" required>
+                            		</div>
+                            		<div class="form-group">
+                            		<button type="button"  class="btn btn-default form_button" id="webregister_button">Register</button>
+                            		</div>
+                            		
+                            		
+                            		
+                            		
+                            		
+                            		
+                            		
                             		</form>
                             	</div>
                             </div>
