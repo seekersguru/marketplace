@@ -6,3 +6,4 @@ server
 market_place/database_settings.py
 .metadata
 database_settings.py
+templates/console.html
